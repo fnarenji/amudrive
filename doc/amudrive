@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cdm SYSTEM "http://www.devaki.org/nextobjects/dtd/cdm_1_0.dtd">
+<cdm baseClass="org.apache.torque.om.BaseObject"
+    basePeer="org.apache.util.BasePeer" defaultIdMethod="native"
+    id="MODEL_1" name="Model 1" package="org.devaki.nomodels.om">
+    <databaseProperties>
+        <dbType>0</dbType>
+        <databaseHost>127.0.0.1</databaseHost>
+        <createDatabaseUrl>jdbc:postgresql://127.0.0.1/template1</createDatabaseUrl>
+        <buildDatabaseUrl>jdbc:postgresql://127.0.0.1/MODEL_1</buildDatabaseUrl>
+        <schema>public</schema>
+        <databaseUser>postgres</databaseUser>
+        <databasePassword>lol</databasePassword>
+    </databaseProperties>
+    <project>
+        <pomVersion>3</pomVersion>
+        <id>MODEL_1</id>
+        <name>Model 1</name>
+        <groupId>org.devaki</groupId>
+        <currentVersion>0.1</currentVersion>
+        <package>org.devaki.nomodels.om</package>
+        <build>
+            <unitTest>
+                <!--no resources-->
+            </unitTest>
+            <!--no resources-->
+        </build>
+    </project>
+    <modelTitleView height="50" width="250" x="4983" y="2485"/>
+    <entity abstract="false" alias=""
+        baseClass="org.apache.torque.om.BaseObject"
+        basePeer="org.apache.util.BasePeer"
+        description="Un client du site." heavyIndexing="false"
+        height="116" idMethod="native" javaNamingMethod="underscore"
+        name="Client" skipSql="false" width="159" x="5084" y="2600">
+        <code>client</code>
+        <column autoIncrement="false" code="guid" default=""
+            description="" inheritance="false" inputValidator=""
+            javaName="" javaNamingMethod="underscore"
+            javaType="primitive" name="guid" primaryKey="true"
+            required="true" size="" type="INTEGER"/>
+        <column autoIncrement="false" code="firstName" default=""
+            description="" inheritance="false" inputValidator=""
+            javaName="" javaNamingMethod="underscore"
+            javaType="primitive" name="firstName" primaryKey="false"
+            required="true" size="70" type="VARCHAR"/>
+        <column autoIncrement="false" code="lastName" default=""
+            description="" inheritance="false" inputValidator=""
+            javaName="" javaNamingMethod="underscore"
+            javaType="primitive" name="lastName" primaryKey="false"
+            required="true" size="70" type="VARCHAR"/>
+        <column autoIncrement="false" code="address" default=""
+            description="" inheritance="false" inputValidator=""
+            javaName="" javaNamingMethod="underscore"
+            javaType="primitive" name="address" primaryKey="false"
+            required="false" size="255" type="VARCHAR"/>
+        <style adjusted="true" backgroundColor="#b0b0d8" borderColor="#000000"/>
+    </entity>
+</cdm>
