@@ -16,7 +16,7 @@ CREATE TABLE client (
   PRIMARY KEY (idclient));
 
 CREATE TABLE campus (
-  idcampus VARCHAR(20) NOT NULL,
+  idcampus SERIAL,
   address VARCHAR(512) NOT NULL,
   nom VARCHAR(45) NOT NULL,
   PRIMARY KEY (idcampus));
@@ -38,7 +38,7 @@ CREATE TABLE joins (
     ON UPDATE NO ACTION);
 
 CREATE TABLE comment (
-  client_idclient INT  NOT NULL,
+  client_idclient INT NOT NULL,
   carPooling_idCarPooling INT NOT NULL,
   comment VARCHAR(1024) NULL,
   NoteT INT NOT NULL,
