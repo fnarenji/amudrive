@@ -22,7 +22,7 @@ CREATE TABLE campus (
   PRIMARY KEY (idcampus));
 
 CREATE TABLE joins (
-  carPooling_idCarPooling INT NOT NULL,
+  carPooling_idCarPooling SERIAL,
   client_idclient INT NOT NULL,
   accept BOOLEAN NOT NULL,
   PRIMARY KEY (carPooling_idCarPooling, client_idclient),
@@ -46,7 +46,7 @@ CREATE TABLE comment (
   PRIMARY KEY (client_idclient, carPooling_idCarPooling),
   CONSTRAINT fk_joins
     FOREIGN KEY (client_idclient , carPooling_idCarPooling)
-    REFERENCES joins (carPooling_idCarPooling , carPooling_idCarPooling)
+    REFERENCES joins (carPooling_idCarPooling, client_idclient)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -54,7 +54,7 @@ CREATE TABLE comment (
 CREATE TABLE carPooling (
   idCarPooling SERIAL,
   address VARCHAR(512) NOT NULL,
-  campus_idcampus VARCHAR(20) NOT NULL,
+  campus_idcampus SERIAL,
   client_idclient INT  NOT NULL,
   campusToAddress BOOLEAN NOT NULL,
   placeDispo INT NOT NULL,
