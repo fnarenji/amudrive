@@ -21,41 +21,11 @@ CREATE TABLE campus (
   nom VARCHAR(45) NOT NULL,
   PRIMARY KEY (idcampus));
 
-CREATE TABLE joins (
-  carPooling_idCarPooling SERIAL,
-  client_idclient INT NOT NULL,
-  accept BOOLEAN NOT NULL,
-  PRIMARY KEY (carPooling_idCarPooling, client_idclient),
-  CONSTRAINT fk_carPoolnig
-    FOREIGN KEY (carPooling_idCarPooling)
-    REFERENCES carPooling (idCarPooling)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_client
-    FOREIGN KEY (client_idclient)
-    REFERENCES client (idclient)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-CREATE TABLE comment (
-  client_idclient INT NOT NULL,
-  carPooling_idCarPooling INT NOT NULL,
-  comment VARCHAR(1024) NULL,
-  NoteT INT NOT NULL,
-  NoteC INT NULL,
-  PRIMARY KEY (client_idclient, carPooling_idCarPooling),
-  CONSTRAINT fk_joins
-    FOREIGN KEY (client_idclient , carPooling_idCarPooling)
-    REFERENCES joins (carPooling_idCarPooling, client_idclient)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
 CREATE TABLE carPooling (
   idCarPooling SERIAL,
   address VARCHAR(512) NOT NULL,
-  campus_idcampus SERIAL,
-  client_idclient INT  NOT NULL,
+  idcampus SERIAL,
+  idclient INT  NOT NULL,
   campusToAddress BOOLEAN NOT NULL,
   placeDispo INT NOT NULL,
   laggage INT NOT NULL,
@@ -63,16 +33,44 @@ CREATE TABLE carPooling (
   price numeric(5,2) NOT NULL,
   PRIMARY KEY (idCarPooling),
   CONSTRAINT fk_campus
-    FOREIGN KEY (campus_idcampus)
+    FOREIGN KEY (idcampus)
     REFERENCES campus (idcampus)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_client
-    FOREIGN KEY (client_idclient)
+    FOREIGN KEY (idclient)
     REFERENCES client (idclient)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+CREATE TABLE joins (
+  idCarPooling SERIAL ,
+  idclient INT NOT NULL,
+  accept BOOLEAN NOT NULL,
+  PRIMARY KEY (idCarPooling, idclient),
+  CONSTRAINT fk_carPoolnig
+    FOREIGN KEY (idCarPooling)
+    REFERENCES carPooling (idCarPooling)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_client
+    FOREIGN KEY (idclient)
+    REFERENCES client (idclient)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE TABLE comment (
+  idclient INT NOT NULL,
+  idCarPooling INT NOT NULL,
+  comment VARCHAR(1024) NULL,
+  NoteT INT NOT NULL,
+  NoteC INT NULL,
+  PRIMARY KEY (idclient, idCarPooling),
+  CONSTRAINT fk_joins
+    FOREIGN KEY (idclient , idCarPooling)
+    REFERENCES joins (idCarPooling, idclient)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 CREATE TYPE BV AS ENUM ('M', 'A');
 
@@ -93,12 +91,12 @@ CREATE TABLE vehicle (
     ON UPDATE NO ACTION);
 
 
-CREATE INDEX fk_client_idx ON joins(client_idclient ASC);
+CREATE INDEX fk_client_idx ON joins(idclient ASC);
 
-CREATE INDEX fk_carpooling_idx ON joins(carPooling_idCarPooling ASC);
+CREATE INDEX fk_carpooling_idx ON joins(idCarPooling ASC);
 
-CREATE INDEX fk_campus_idx ON carPooling(campus_idcampus ASC);
+CREATE INDEX fk_campus_idx ON carPooling(idcampus ASC);
 
-CREATE INDEX fk_client_carPooling_idx ON carPooling(client_idclient ASC);
+CREATE INDEX fk_client_carPooling_idx ON carPooling(idclient ASC);
 
 CREATE INDEX fk_client_vehicule_idx ON vehicle(idclient ASC);
