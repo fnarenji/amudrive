@@ -238,6 +238,11 @@ section
 	padding-right: 10px;
 }
 
+#adr input
+{
+	font-size: 1.1rem;
+}
+
 #ch1
 {
 	text-align: center;
@@ -257,6 +262,7 @@ section
 	text-align: center;
 	height: 30px;
     width: 200px;
+    outline: none;
 }
 #button
 {
@@ -264,7 +270,6 @@ section
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 15px;
-
 }
 /* It's media queries time ! */
 
@@ -359,7 +364,25 @@ section
 /*  Footer */
 footer
 {
+	display: table;
 	background-color: #45494D;
 	width: 100%;
-	height: 150px;
+	padding-top: 50px;
+}
+
+footer hr 
+{ 
+	display: block; 
+	height: 1px;
+    border: 0; 
+    border-top: 1px solid #5A5E62;
+    width: 75%; 
+    padding: 0; 
+}
+
+footer .copyright
+{
+	display: table;
+	margin-left:auto;
+	margin-right:auto;
 }
