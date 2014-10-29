@@ -52,6 +52,11 @@ table {
 }
 
 
+a
+{
+	text-decoration: none;
+}
+
 /* BEGIN */
 
 body
@@ -125,20 +130,27 @@ nav ul li
 
 nav ul li a
 {
-	text-decoration: none;
 	color: #FFFFFF;
 }
 
 nav #connection_btn
 {
-
- 	padding-left: 30px;
-    padding-top: 1px;
-	position: relative;
 	display: inline-block;
-	background-position: center;
-	background-repeat: no-repeat;
+	width: 120px;
+	height: 40px;
+	margin-left: 20px;
+	text-align: center;
+	line-height: 250%;
+	background-color: #FBBA00;
+	border-radius: 25px;
 } 
+#connection_btn a
+{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	color: #FFFFFF;
+}
 
 /* SECTION SHORT BIO */
 
@@ -172,10 +184,24 @@ section
 #newsletter
 {
 	display: block;
-	padding-top: 18px;
-	width: 250px;
+	width: 150px;
+	height: 50px;
+	text-align: center;
 	margin-left: auto;
-    margin-right: auto
+    margin-right: auto;
+    background-color: #C0C0C0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#newsletter a
+{
+		display: block;
+		width: 100%;
+		height: 100%;
+		color: #45494D;
+		font-size: 1.2rem;
+		line-height: 250%;
 }
 
 /* SECTION CHERCHER TRAJET */
@@ -235,12 +261,69 @@ section
 #button
 {
 	display: table;
-	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+
 }
+/* It's media queries time ! */
+
+@media (max-width: 800px) {
+	#button
+	{
+		width:10%;
+	}
+}
+@media (max-width: 1180px) and (min-width: 880px){
+	#button
+	{
+		width: 50%;
+	}
+}
+
+@media (min-width: 1181px){
+	#button
+	{
+		width: 30%;
+	}
+}
+
+/* See you soon media queries ! */
+
 #bcherche, #bpropose
 {
-	display: table-cell;
-	right: 100px;
+	display: block;
+	margin-top: 15px;
+	width: 170px;
+	height: 40px;
+	border: 1px solid #FFFFFF;
+	border-radius: 30px;
+	text-align: center;
+	line-height: 280%;
+}
+
+#bcherche a, #bpropose a
+{
+	display: inline-block;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	width: 100%;
+	height: 100%;
+}
+
+#bcherche
+{
+	float: left;
+	position: relative;
+	right: 0;
+}
+
+#bpropose
+{
+	float: right;
+	position: relative;
+	left: 0;
 }
 
 

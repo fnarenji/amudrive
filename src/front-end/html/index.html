@@ -16,38 +16,53 @@
 					<li><a href="#">Trajets</a></li>
 					<li><a href="#">Mon compte</a></li>
 				</ul>
-				<a href="#"><img src="../img/connexion.png" id="connection_btn">
-				</img></a>
+				<span id="connection_btn"><a href="#">Connexion</a></span>
 			</nav>
 		</header>
-		<section id='short_bio'>
+
+		<section id="short_bio">
+			
 			<h1> Covoiturage social </h1>
 			<h2> Invitez vos amis sur AMUDrive </h2>
-			<a href="#"><img src="../img/newsletter.png" id="newsletter"></a>
+
+			<div id="newsletter">
+				<a href="#">Newsletter</a>
+			</div>
+		
 		</section>
 		
-		<section id='search'>
+		<section id="search">
+
 			<h1>Chercher un trajet</h1>
+
 			<form name="search" id="adr">
 				<input type="text" name="adr" placeholder="Adresse" id="ch1">
-				<a href='#' > <img src="../img/l_arrow.png" id='larrow'> </a>
-				<a href='#' > <img src="../img/r_arrow.png" id='rarrow'> </a>
+				<img src="../img/l_arrow.png" id="larrow">
+				<img src="../img/r_arrow.png" id="rarrow">
 				<input type="text" name="pole" placeholder="Pôle" id="ch2">
-				<input type="datetime" name="date" id="date">
+				<input type="date" name="date" id="date">
 			</form>
-			<div id='button'>
-				<a href='#' id='bcherche'> <img src="../img/chercher.png" > </a>
-				<a href='#'  id='bpropose'> <img src="../img/proposer.png"> </a>
+
+			<div id="button">
+				<div id="bcherche"><a href="#">Rechercher</a></div>
+				<div id="bpropose"><a href="#">Proposer</a></div>
 			</div>
+
 		</section>
-		<section id='maps'>
-			<a href='#' > <img src="../img/maps.png" id='mapsp'> </a>
-			<div id='perso'>
-				<form id='range'>
-					Rayon de recherche : <input type="range" min="1" max="9" step="1" name="rating"  id='range1'/>
-					Battement horaire : <input type="range" min="1" max="9" step="1" name="rating" id='range2' />
+		<section id="maps">
+			
+			<a href="#" > <img src="../img/maps.png" id="mapsp"> </a>
+			
+			<div id="perso">
+				<form id="range">
+					<label>Rayon de recherche : </label>
+					<input type="range" min="1" max="9" step="1" name="rating"  id="range1"/>
+					
+					<label>Battement horaire : </label>
+					<input type="range" min="1" max="9" step="1" name="rating" id="range2" />
 				</form>
 			</div>
+		
 		</section>
 		<footer>
 			
