@@ -64,6 +64,7 @@ body
 
 header
 {
+		
 	width: 100%;
 	height: 70px;
 	background-color: #45494D;
@@ -96,7 +97,7 @@ nav
 {
 
 	position: absolute;
-	height: 100%;
+	height: 70px;
 	margin-right:0;
 	width: 40%;
 	float: left;
@@ -131,11 +132,151 @@ nav ul li a
 nav #connection_btn
 {
 
- 	border-left-width: 6px;
-    border-top-width: 1px;
+ 	padding-left: 30px;
+    padding-top: 1px;
 	position: relative;
 	display: inline-block;
-	background-image: url('../img/connexion.png');
 	background-position: center;
 	background-repeat: no-repeat;
 } 
+
+/* SECTION SHORT BIO */
+
+section 
+{
+	display:table;
+}
+
+#short_bio
+{
+	width: 100%;
+	height: 200px;	
+}
+
+#short_bio h1
+{
+	padding-top: 30px;
+	color: #0EBFDD;
+	text-align: center;
+	font-size: 50px;
+}
+
+#short_bio h2
+{
+	padding-top: 18px;
+	color: #686B6E;
+	text-align: center;
+	font-size: 20px
+}
+
+#newsletter
+{
+	display: block;
+	padding-top: 18px;
+	width: 250px;
+	margin-left: auto;
+    margin-right: auto
+}
+
+/* SECTION CHERCHER TRAJET */
+
+#search
+{
+	width: 100%;
+	height: 230px;	
+	background-color: #0EBFDD;
+}
+
+#search h1
+{
+	padding-top: 15px;
+	color: white;
+	text-align: center;
+	font-size: 50px;
+}
+#adr
+{
+	display: table;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+ #adr img
+ {
+ 	vertical-align: middle;
+ 	padding-left: 10px;
+ }
+
+#rarrow
+{
+	padding-right: 10px;
+}
+
+#ch1
+{
+	text-align: center;
+	height: 30px;
+    width: 300px;	
+}
+
+#ch2
+{
+	text-align: center;
+	height: 30px;
+    width: 200px;
+}
+
+#date
+{
+	text-align: center;
+	height: 30px;
+    width: 200px;
+}
+#button
+{
+	display: table;
+	margin: auto;
+}
+#bcherche, #bpropose
+{
+	display: table-cell;
+	right: 100px;
+}
+
+
+/* MAPS SECTION */
+
+#maps
+{
+	width: 100%;
+	background-color: white;
+}
+
+#mapsp
+{
+	width: 100%;
+	background-color: white;
+}
+
+#perso
+{
+	text-align: center;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 50px;
+	background-color: #918383;
+}
+#range1
+{
+	margin-top: 20px;
+	margin-right: 50px;
+}
+
+/*  Footer */
+footer
+{
+	background-color: #45494D;
+	width: 100%;
+	height: 150px;
+}
