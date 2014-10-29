@@ -8,7 +8,7 @@
 	<body>
 		<header>
 			<div class="logo">
-				<a href="#">AmuDrive</a>
+				<a href="#">AMUDrive</a>
 			</div>
 			<nav>
 				<ul>
@@ -20,9 +20,37 @@
 				</img></a>
 			</nav>
 		</header>
-
+		<section id='short_bio'>
+			<h1> Covoiturage social </h1>
+			<h2> Invitez vos amis sur AMUDrive </h2>
+			<a href="#"><img src="../img/newsletter.png" id="newsletter"></a>
+		</section>
+		
+		<section id='search'>
+			<h1>Chercher un trajet</h1>
+			<form name="search" id="adr">
+				<input type="text" name="adr" value="Adresse" id="ch1">
+				<a href='#' > <img src="../img/l_arrow.png" id='larrow'> </a>
+				<a href='#' > <img src="../img/r_arrow.png" id='rarrow'> </a>
+				<input type="text" name="pole" value="Pôle" id="ch2">
+				<input type="datetime" name="date" id="date">
+			</form>
+			<div id='button'>
+				<a href='#' > <img src="../img/chercher.png" id='bcherche'> </a>
+				<a href='#' > <img src="../img/proposer.png" id='bpropose'> </a>
+			</div>
+		</section>
+		<section id='maps'>
+			<a href='#' > <img src="../img/maps.png" id='mapsp'> </a>
+			<div id='perso'>
+				<form id='range'>
+					Rayon de recherche : <input type="range" min="1" max="9" step="1" name="rating"  id='range1'/>
+					Battement horaire : <input type="range" min="1" max="9" step="1" name="rating" id='range2' />
+				</form>
+			</div>
+		</section>
 		<footer>
-
+			
 		</footer>
 	</body>
 </html>
