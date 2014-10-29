@@ -1,0 +1,47 @@
+Tous les retours sont en JSON.
+
+/auth
+	/auth/login/{username}/{password_sha512}
+		Authentification de l'utilisateur. Le token retourné est stocké en tant que cookie sur le client, et est vérifié à chaque requête suivante.
+		{username}
+			le nom d'utilisateur
+			
+		{password_sha512}
+			le mot de passe haché par SHA512
+			
+		{returns}
+			token d'authentification au format suivant, cryptographié par clé publique (RSA4096):
+			{user_id}:{timestamp}:{ip}
+
+	/auth/logout
+		Détruit le token d'authentification courant
+
+/profile
+	/profile
+		{returns}
+			le profile complet de l'utilisateur
+
+	[A faire pour chacune des propriétés de la table "client"]
+	/profile/firstName/{firstName}
+		{firstName}
+			le nouveau prénom
+			
+		{returns}
+			true/false
+
+/vehicles
+	/vehicles
+		{returns}
+			Tous les véhicules et leurs caractéristiques
+
+	[A faire pour chacune des propriétés de la table "vehicle"]
+	/vehicles/{idv}/smoking/{smoking}
+		{idv}
+			L'id du véhicule
+		
+		{smoking}
+			Fumeur (booléen)
+		
+		{returns}
+			true/false
+
