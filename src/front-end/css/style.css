@@ -405,6 +405,13 @@ section
 	text-align: center;
 	background-color: #F86E6E;
 }
+#search-panel-delete-btn a
+{
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #FFFFFF;
+}
 /*  Footer */
 footer
 {
