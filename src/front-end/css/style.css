@@ -337,13 +337,6 @@ section
 #maps
 {
 	width: 100%;
-	background-color: white;
-}
-
-#mapsp
-{
-	width: 100%;
-	background-color: white;
 }
 
 #perso
@@ -361,6 +354,57 @@ section
 	margin-right: 50px;
 }
 
+/* Search Panel */
+#search-panel-date
+{
+	display:block;
+	position: absolute;
+	top: 990px;
+	padding: 3px;
+	color: #FFFFFF;
+	background-color: #0EBFDD;
+	border: 2px solid #0EBFDD;
+	font-size: 0.9rem;
+
+}
+
+#search-panel
+{
+	display: table;
+	position: absolute;
+	width: 650px;
+	background-color: #FFFFFF;
+	border: 3px solid #0EBFDD;
+	top: 1010px;
+	padding: 3px;
+	line-height: 150%;
+	font-size: 0.9rem;
+}
+
+#search-panel-photo
+{
+	display:inline-block;
+	background-image: url('../img/profile-picture.png');
+	float:left;
+	width:86px;
+	height:70px;
+	background-repeat: no-repeat;
+}
+
+#search-panel-delete-btn
+{
+	display:inline-block;
+	float:right;
+	width: 100px;
+	height: 30px;
+	color: #FFFFFF;
+	line-height: 210%;
+	text-transform: uppercase;
+	margin-right: 5px;
+	margin-top: 20px;
+	text-align: center;
+	background-color: #F86E6E;
+}
 /*  Footer */
 footer
 {
