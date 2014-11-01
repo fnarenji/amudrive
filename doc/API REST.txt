@@ -8,7 +8,7 @@ Tous les retours sont en JSON.
 			
 		{password_sha512}
 			le mot de passe haché par SHA512
-			
+
 		{returns}
 			token d'authentification au format suivant, cryptographié par clé publique (RSA4096):
 			{user_id}:{timestamp}:{ip}
@@ -45,3 +45,64 @@ Tous les retours sont en JSON.
 		{returns}
 			true/false
 
+/campus
+	/campus
+		{returns}
+			Tous les campus
+
+/carpooling
+	/carpooling/search/{campus}/{address}/{areasize}/{direction}
+		{campus}
+			Id du campus
+		
+		{address}
+			...
+			
+		{areasize}
+			Taille de zone de recherche autour de l'addresse
+		
+		{direction}
+			true: campus -> adresse
+			false: adresse -> campus
+		
+		{returns}
+			gogole
+	
+	/carpooling/{id}/join
+		{id}
+			Id du carpooling
+	
+	/carpooling/{id}/cancel
+		{id}
+			Id du carpoolnig
+	
+	/carpooling/{id}/comments
+		{id}
+			Id du carpooling
+		
+		{returns}
+			Les commentaires associé au profil qui les a posté
+		
+	/carpooling/{id}/comments/{comment}/{marks}
+		{id}
+			Id du carpooling
+			
+		{comment}
+			Contenu du commentaire
+			
+		{marks}
+			Notes sur 5
+		
+		{returns}
+			true/false
+	
+	/carpooling/{id}/comments/reply/{idcomment}/{reply}
+		{id}
+			Id du carpoolnigga
+		
+		{idcomment}
+			Id du commentaire
+		
+		{reply}
+			Contenu de la reponsé
+			
