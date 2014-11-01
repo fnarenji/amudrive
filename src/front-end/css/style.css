@@ -63,6 +63,8 @@ body
 {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 1rem;
+	width: 1180px;
+	margin:auto;
 }
 
 /* Top of the website */
@@ -82,7 +84,7 @@ header .logo
 	display: block;
 	width: 180px;
 	height: 100%;
-	margin-left: 20%;
+	margin-left: 10%;
 	float:left;
 	background-image: url('../img/logo.png');
 	background-color: #FFFFFF;
@@ -346,7 +348,8 @@ section
 	margin-left: auto;
 	margin-right: auto;
 	height: 50px;
-	background-color: #918383;
+	color: #FFFFFF;
+	background-color: #0EBFDD;
 }
 #range1
 {
@@ -416,7 +419,7 @@ section
 footer
 {
 	display: table;
-	background-color: #45494D;
+	background-color: #FFFFFF;
 	width: 100%;
 	padding-top: 50px;
 }
@@ -426,7 +429,7 @@ footer hr
 	display: block; 
 	height: 1px;
     border: 0; 
-    border-top: 1px solid #5A5E62;
+    border-top: 1px solid #666666;
     width: 75%; 
     padding: 0; 
 }
