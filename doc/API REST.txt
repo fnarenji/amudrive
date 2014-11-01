@@ -10,7 +10,7 @@ Tous les retours sont en JSON.
 			le mot de passe haché par SHA512
 
 		{returns}
-			token d'authentification au format suivant, cryptographié par clé publique (RSA4096):
+			token d'authentification au format suivant, cryptographié par clé symétrique (AES256):
 			{user_id}:{timestamp}:{ip}
 
 	/auth/logout
