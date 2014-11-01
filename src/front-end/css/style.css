@@ -243,27 +243,24 @@ section
 	font-size: 1.1rem;
 }
 
-#ch1
+input[type=text], input[type=date]
 {
 	text-align: center;
 	height: 30px;
-    width: 300px;	
+    width: 250px;
+    border:0;
 }
 
-#ch2
+input[type=date]
 {
-	text-align: center;
-	height: 30px;
-    width: 200px;
+	display:inline-block;
+	font-family: Helvetica, Arial, sans-serif;
+	overflow: scroll;
+	-webkit-padding-start: 0;
+	padding: 1px;
+	margin-left: 5px;
 }
 
-#date
-{
-	text-align: center;
-	height: 30px;
-    width: 200px;
-    outline: none;
-}
 #button
 {
 	display: table;
@@ -297,18 +294,22 @@ section
 	height: 100%;
 }
 
+#bcherche, #bpropose
+{
+	position: relative;
+	
+}
 #bcherche
 {
 	float: left;
-	position: relative;
 	right: 0;
+	margin-left: -162px;
 }
-
 #bpropose
 {
 	float: right;
-	position: relative;
 	left: 0;
+	margin-right: -35px;
 }
 
 
