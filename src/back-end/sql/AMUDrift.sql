@@ -1,6 +1,7 @@
 
 CREATE TABLE client (
   idclient SERIAL,
+  userName VARCHAR(30) NOT NULL,
   firstName VARCHAR(30) NOT NULL,
   lastName VARCHAR(50) NOT NULL,
   address VARCHAR(512) NOT NULL,
