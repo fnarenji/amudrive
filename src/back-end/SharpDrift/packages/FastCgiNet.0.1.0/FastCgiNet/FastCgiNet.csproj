@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A0F27C46-BC4E-4611-AF1F-A2B52A3746BD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>FastCgiNet</RootNamespace>
+    <AssemblyName>FastCgiNet</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Records\StdinRecord.cs" />
+    <Compile Include="Records\RecordBase.cs" />
+    <Compile Include="Records\StdoutRecord.cs" />
+    <Compile Include="Records\StderrRecord.cs" />
+    <Compile Include="Exceptions\InsufficientBytesException.cs" />
+    <Compile Include="ByteUtils.cs" />
+    <Compile Include="Streams\RecordContentsStream.cs" />
+    <Compile Include="Records\StreamRecordBase.cs" />
+    <Compile Include="Streams\SocketStream.cs" />
+    <Compile Include="Streams\FastCgiStream.cs" />
+    <Compile Include="Streams\NvpWriter.cs" />
+    <Compile Include="Streams\NvpReader.cs" />
+    <Compile Include="Records\BeginRequest\BeginRequestRecord.cs" />
+    <Compile Include="Records\BeginRequest\Role.cs" />
+    <Compile Include="Records\EndRequest\ProtocolStatus.cs" />
+    <Compile Include="Records\EndRequest\EndRequestRecord.cs" />
+    <Compile Include="Records\RecordType.cs" />
+    <Compile Include="Request\FastCgiRequest.cs" />
+    <Compile Include="Request\ApplicationSocketRequest.cs" />
+    <Compile Include="Request\WebServerSocketRequest.cs" />
+    <Compile Include="Request\SocketRequest.cs" />
+    <Compile Include="Html.cs" />
+    <Compile Include="Nvp\NvpEnumerator.cs" />
+    <Compile Include="Nvp\NvpFactory.cs" />
+    <Compile Include="Nvp\NameValuePair.cs" />
+    <Compile Include="Records\ParamsRecord.cs" />
+    <Compile Include="Records\RecordFactory.cs" />
+    <Compile Include="Records\AbortRequestRecord.cs" />
+    <Compile Include="Records\DataRecord.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Records\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Streams\" />
+    <Folder Include="Request\" />
+    <Folder Include="Records\BeginRequest\" />
+    <Folder Include="Records\EndRequest\" />
+    <Folder Include="Nvp\" />
+  </ItemGroup>
+</Project>

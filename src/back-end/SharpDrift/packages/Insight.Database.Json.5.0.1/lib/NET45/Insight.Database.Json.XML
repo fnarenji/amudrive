@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Insight.Database.Json</name>
+    </assembly>
+    <members>
+        <member name="T:Insight.Database.Json.JsonNetObjectSerializer">
+            <summary>
+            Handles serializing objects to JSON by using the JSON.NET serializer.
+            </summary>
+        </member>
+        <member name="M:Insight.Database.Json.JsonNetObjectSerializer.Initialize">
+            <summary>
+            Initializes the JSON.NET serializer.
+            </summary>
+        </member>
+        <member name="M:Insight.Database.Json.JsonNetObjectSerializer.SerializeObject(System.Type,System.Object)">
+            <summary>
+            Serializes an object to a string.
+            </summary>
+            <param name="type">The type of the object.</param>
+            <param name="value">The object to serialize.</param>
+            <returns>The serialized representation of the object.</returns>
+        </member>
+        <member name="M:Insight.Database.Json.JsonNetObjectSerializer.DeserializeObject(System.Type,System.Object)">
+            <summary>
+            Deserializes an object from a string.
+            </summary>
+            <param name="type">The type of object to deserialize.</param>
+            <param name="encoded">The encoded value of the object.</param>
+            <returns>The deserialized object.</returns>
+        </member>
+    </members>
+</doc>
