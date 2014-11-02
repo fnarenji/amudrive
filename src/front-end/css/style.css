@@ -257,7 +257,6 @@ input[type=date]
 {
 	display:inline-block;
 	font-family: Helvetica, Arial, sans-serif;
-	overflow: scroll;
 	-webkit-padding-start: 0;
 	padding: 1px;
 	margin-left: 5px;
@@ -396,6 +395,12 @@ input[type=date]
 	height: 100%;
 	color: #FFFFFF;
 }
+#map
+{
+	border-right: 2px solid #0EBFDD;
+	border-left: 2px solid #0EBFDD;
+}
+
 /*  Footer */
 footer
 {

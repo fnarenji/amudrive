@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	
 	// Change the google map element take the width of the window
-	$('#map').width($('body').width());
+	$('#map').width($('body').width() - 4);
 
 	// margin:auto for search-panel and search-panel-date
 	var leftMargin = ($(window).width() - $('#search-panel').width()) / 2;
