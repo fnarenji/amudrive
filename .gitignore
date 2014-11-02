@@ -154,3 +154,16 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+/src/back-end/SharpDrift/packages/Owin.1.0
+/src/back-end/SharpDrift/packages/FastCgiNet.0.1.0
+/src/back-end/SharpDrift/packages/Fos.0.1.0
+/src/back-end/SharpDrift/packages/ImpromptuInterface.6.2.2
+/src/back-end/SharpDrift/packages/Insight.Database.5.0.1
+/src/back-end/SharpDrift/packages/Insight.Database.Core.5.0.1
+/src/back-end/SharpDrift/packages/Insight.Database.Json.5.0.1
+/src/back-end/SharpDrift/packages/Insight.Database.Providers.PostgreSQL.5.0.1
+/src/back-end/SharpDrift/packages/Nancy.0.23.2
+/src/back-end/SharpDrift/packages/Nancy.Hosting.Self.0.23.2
+/src/back-end/SharpDrift/packages/Nancy.Owin.0.23.2
+/src/back-end/SharpDrift/packages/Newtonsoft.Json.6.0.6
+/src/back-end/SharpDrift/packages/Npgsql.2.2.2

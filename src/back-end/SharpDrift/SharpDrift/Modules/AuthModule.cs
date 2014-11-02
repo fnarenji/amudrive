@@ -19,7 +19,9 @@ namespace SharpDrift.Modules
 
                 String authenticationString = String.Format("{0}:{1}:{2}", x.username, DateTime.UtcNow.ToBinary(), Request.UserHostAddress);
 
-                return ((Response)"true").WithCookie("authToken", Convert.ToBase64String(await AES.EncryptAsync(authenticationString)));
+                var a = Convert.ToBase64String(await AES.EncryptAsync(authenticationString));
+                Console.WriteLine(a);
+                return ((Response)"true").WithCookie("authToken", a);
             };
         }
     }
