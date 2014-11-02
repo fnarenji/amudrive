@@ -3,6 +3,9 @@ Tous les retours sont en JSON.
 /auth
 	/auth/login/{username}/{password_sha512}
 		Authentification de l'utilisateur. Le token retourné est stocké en tant que cookie sur le client, et est vérifié à chaque requête suivante.
+			token d'authentification au format suivant, cryptographié par clé symétrique (AES256), en base 64:
+			{user_id}:{timestamp}:{ip}
+			
 		{username}
 			le nom d'utilisateur
 			
@@ -10,8 +13,7 @@ Tous les retours sont en JSON.
 			le mot de passe haché par SHA512
 
 		{returns}
-			token d'authentification au format suivant, cryptographié par clé symétrique (AES256):
-			{user_id}:{timestamp}:{ip}
+			true/false
 
 	/auth/logout
 		Détruit le token d'authentification courant
