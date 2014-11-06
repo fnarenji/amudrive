@@ -17,14 +17,14 @@ namespace SharpDrift.Modules
                 {
                     using (var conn = DAL.Conn)
                     {
-                        var valid = conn.SingleSqlAsync<int?>("SELECT idclient FROM client WHERE username = @u AND password = @p",
+                        var idClient = await conn.SingleSqlAsync<int?>("SELECT idclient FROM client WHERE username = @u AND password = @p",
                                                                 new { u = x.username, p = x.password_sha512 });
 
-                        if (valid == null)
+                        if (idClient == null)
                             return "false";
 
                         String authenticationString = String.Format("{0}:{1}:{2}",
-                                                                    x.username,
+                                                                    idClient,
                                                                     DateTime.UtcNow.ToBinary(),
                                                                     Request.UserHostAddress);
 
