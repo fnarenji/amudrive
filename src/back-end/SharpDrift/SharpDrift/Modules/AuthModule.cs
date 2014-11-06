@@ -23,7 +23,7 @@ namespace SharpDrift.Modules
                         if (idClient == null)
                             return "false";
 
-                        String authenticationString = String.Format("{0}:{1}:{2}",
+                        var authenticationString = String.Format("{0}:{1}:{2}",
                                                                     idClient,
                                                                     DateTime.UtcNow.ToBinary(),
                                                                     Request.UserHostAddress);
