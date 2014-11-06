@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using Nancy;
 using Nancy.Bootstrapper;
 using ImpromptuInterface;
@@ -15,21 +16,21 @@ namespace SharpDrift.Utilities
             {
                 if (ctx.Request.Cookies.ContainsKey("authToken"))
                 {
-                    var a = ctx.Request.Cookies["authToken"];
-                    Console.WriteLine(a);
-                    var authToken = AES.Decrypt(Convert.FromBase64String(a));
-
-                    var authTokenPieces = authToken.Split(':');
-                    var userId = authTokenPieces[0];
-                    var tokenCreationDate = DateTime.FromBinary(Int64.Parse(authTokenPieces[1]));
-                    var remoteIp = authTokenPieces[1];
-
-                    if (remoteIp == ctx.Request.UserHostAddress &&
-                        DateTime.UtcNow.Subtract(tokenCreationDate).TotalHours < 48)
+                    try
                     {
-                        ctx.CurrentUser = new {Username = userId}.ActLike<IUserIdentity>();
-                        return ctx.Response;
+                        var a = HttpServerUtility.UrlTokenDecode(ctx.Request.Cookies["authToken"]);
+                        Console.WriteLine(a);
+                        var authToken = AES.Decrypt(a);
+
+                        var authTokenPieces = authToken.Split(':');
+                        var userId = authTokenPieces[0];
+                        var tokenCreationDate = DateTime.FromBinary(Int64.Parse(authTokenPieces[1]));
+                        var remoteIp = authTokenPieces[1];
+
+                        if (remoteIp == ctx.Request.UserHostAddress && DateTime.UtcNow.Subtract(tokenCreationDate).TotalHours < 48)
+                            ctx.CurrentUser = new { Username = userId }.ActLike<IUserIdentity>();
                     }
+                    catch { }
                 }
 
                 return ctx.Response;
