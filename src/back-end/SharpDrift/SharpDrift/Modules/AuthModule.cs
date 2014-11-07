@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Security.Cryptography;
 using System.Text;
@@ -18,17 +19,15 @@ namespace SharpDrift.Modules
                     using (var conn = DAL.Conn)
                     {
                         var idClient = await conn.SingleSqlAsync<int?>("SELECT idclient FROM client WHERE username = @u AND password = @p",
-                                                                new { u = x.username, p = x.password_sha512 });
+                                                                        new { u = x.username, p = x.password_sha512 });
 
                         if (idClient == null)
                             return "false";
 
-                        var authenticationString = String.Format("{0}:{1}:{2}",
-                                                                    idClient,
-                                                                    DateTime.UtcNow.ToBinary(),
-                                                                    Request.UserHostAddress);
+                        var authenticationString = AuthTokenManager.CreateAuthToken(idClient.Value, Request.UserHostAddress);
 
                         var encryptedAuthToken = HttpServerUtility.UrlTokenEncode(await AES.EncryptAsync(authenticationString));
+
                         return ((Response)"true").WithCookie("authToken", encryptedAuthToken);
                     }
                 };

@@ -93,6 +93,7 @@
     <Compile Include="Modules\CampusModule.cs" />
     <Compile Include="Utilities\AES.cs" />
     <Compile Include="Modules\AuthModule.cs" />
+    <Compile Include="Utilities\AuthTokenManager.cs" />
     <Compile Include="Utilities\CheckAuthBeforeRequest.cs" />
     <Compile Include="Utilities\DataAccessLayer.cs" />
     <Compile Include="Utilities\ExtensionMethods.cs" />
