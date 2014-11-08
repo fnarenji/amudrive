@@ -167,3 +167,5 @@ $RECYCLE.BIN/
 /src/back-end/SharpDrift/packages/Nancy.Owin.0.23.2
 /src/back-end/SharpDrift/packages/Newtonsoft.Json.6.0.6
 /src/back-end/SharpDrift/packages/Npgsql.2.2.2
+
+.idea/
