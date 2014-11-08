@@ -342,7 +342,7 @@ input[type=date]
 {
 	display:block;
 	position: absolute;
-	top: 990px;
+	top: 975px;
 	padding: 3px;
 	color: #FFFFFF;
 	background-color: #0EBFDD;
@@ -358,12 +358,14 @@ input[type=date]
 	width: 650px;
 	background-color: #FFFFFF;
 	border: 3px solid #0EBFDD;
-	top: 1010px;
+	top: 995px;
 	padding: 3px;
-	line-height: 150%;
 	font-size: 0.9rem;
 }
-
+#search-panel-info
+{
+    line-height: 150%;
+}
 #search-panel-photo
 {
 	display:inline-block;
@@ -400,7 +402,24 @@ input[type=date]
 	border-right: 2px solid #0EBFDD;
 	border-left: 2px solid #0EBFDD;
 }
-
+#search-panel-select
+{
+    display: table;
+    width: 330px;
+    height: 60px;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top: -40px;
+    border-spacing:5px 0;
+}
+[id^=search-panel-select-]
+{
+    display: table-cell;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+}
 /*  Footer */
 footer
 {
