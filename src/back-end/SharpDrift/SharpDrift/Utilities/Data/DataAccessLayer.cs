@@ -1,9 +1,8 @@
-﻿using System;
-using System.Data.Common;
+﻿using System.Data.Common;
 using Insight.Database;
 using Npgsql;
 
-namespace SharpDrift.Utilities
+namespace SharpDrift.Utilities.Data
 {
     internal static class DAL
     {

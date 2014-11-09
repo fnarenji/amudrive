@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Nancy;
+﻿using Nancy;
 using Insight.Database;
-using Insight.Database.Json;
 using SharpDrift.Utilities;
 using SharpDrift.DataModel;
+using SharpDrift.Utilities.Data;
+using SharpDrift.Utilities.Security;
 
 namespace SharpDrift.Modules
 {
@@ -13,14 +13,17 @@ namespace SharpDrift.Modules
         {
             this.RequiresAuthentication();
             
-            Get["/campus", true] = async (_, ctx) => 
+            Get["/campuses", true] = async (x, ctx) =>
+            {
+                using (var conn = DAL.Conn)
                 {
-                    using (var conn = DAL.Conn)
-                    {
-                        IList<Campus> campus = await conn.QuerySqlAsync<Campus>("SELECT * FROM CAMPUS");
-                        return new JsonNetObjectSerializer().SerializeObject(campus.GetType(), campus);
-                    }
-                };
+                    return new
+                            {
+                                success = true,
+                                campus = await conn.QuerySqlAsync<Campus>("SELECT * FROM CAMPUS")
+                            }.ToJson();
+                }
+            };
         }
     }
 }

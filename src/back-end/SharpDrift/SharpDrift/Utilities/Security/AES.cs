@@ -1,11 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SharpDrift.Utilities
+namespace SharpDrift.Utilities.Security
 {
     static class AES
     {

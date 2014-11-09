@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using ImpromptuInterface;
-using Nancy.Security;
+using System.Collections.Concurrent;
 
-namespace SharpDrift.Utilities
+namespace SharpDrift.Utilities.Security
 {
     static class AuthTokenManager
     {
-        private static readonly HashSet<String> AuthTokens = new HashSet<string>();
+        private static readonly ConcurrentDictionary<int, String> AuthTokens = new ConcurrentDictionary<int, string>();
 
         public static String CreateAuthToken(int userId, string userIP)
         {
@@ -15,8 +13,14 @@ namespace SharpDrift.Utilities
                                                         userId,
                                                         DateTime.UtcNow.ToBinary(),
                                                         userIP);
-            AuthTokens.Add(authenticationString);
+            
+            AuthTokens.TryAdd(authenticationString.GetHashCode(), authenticationString);
             return authenticationString;
+        }
+
+        public static void DeleteAuthToken(string authToken)
+        {
+            AuthTokens.TryRemove(authToken.GetHashCode(), out authToken);
         }
 
         public static bool ValidateAuthToken(String authToken, string userIP)
@@ -28,7 +32,7 @@ namespace SharpDrift.Utilities
 
             Console.WriteLine("Validating authentication token for {0} from {1} since {2}.", userId, remoteIp, tokenCreationDate);
 
-            if (AuthTokens.Contains(authToken))
+            if (AuthTokens.ContainsKey(authToken.GetHashCode()))
             {
                 if (remoteIp == userIP && DateTime.UtcNow.Subtract(tokenCreationDate).TotalHours < 48)
                 {
@@ -36,7 +40,7 @@ namespace SharpDrift.Utilities
                         tokenCreationDate);
                     return true;
                 }
-                AuthTokens.Remove(authToken); // Token exists, but invalid IP or too old.
+                AuthTokens.TryRemove(authToken.GetHashCode(), out authToken); // Token exists, but invalid IP or too old.
             }
 
             Console.WriteLine("Invalid authentication token for {0} from {1} since {2}.", userId, remoteIp);

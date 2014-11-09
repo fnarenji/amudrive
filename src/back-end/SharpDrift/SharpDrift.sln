@@ -5,6 +5,13 @@ VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDrift", "SharpDrift\SharpDrift.csproj", "{7FA87682-393A-4EA2-A312-39D0F7BB729E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{86CE2869-4B85-4A29-A197-320148362CDD}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDrift.Testing", "SharpDrift.Testing\SharpDrift.Testing.csproj", "{8C7C4918-B054-4D30-9E87-4DF025F9CCE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,10 @@ Global
 		{7FA87682-393A-4EA2-A312-39D0F7BB729E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FA87682-393A-4EA2-A312-39D0F7BB729E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FA87682-393A-4EA2-A312-39D0F7BB729E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C7C4918-B054-4D30-9E87-4DF025F9CCE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C7C4918-B054-4D30-9E87-4DF025F9CCE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C7C4918-B054-4D30-9E87-4DF025F9CCE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C7C4918-B054-4D30-9E87-4DF025F9CCE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

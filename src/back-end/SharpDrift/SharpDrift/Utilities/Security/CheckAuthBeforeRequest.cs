@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Web;
-using Nancy;
-using Nancy.Bootstrapper;
 using ImpromptuInterface;
+using Nancy.Bootstrapper;
 using Nancy.Security;
 
-namespace SharpDrift.Utilities
+namespace SharpDrift.Utilities.Security
 {
     public class CheckAuthBeforeRequest : IApplicationStartup 
     {
@@ -17,8 +16,8 @@ namespace SharpDrift.Utilities
                 {
                     try
                     {
-                        var a = HttpServerUtility.UrlTokenDecode(ctx.Request.Cookies["authToken"]);
-                        var authToken = AES.Decrypt(a);
+                        var encryptedAuthToken = HttpServerUtility.UrlTokenDecode(ctx.Request.Cookies["authToken"]);
+                        var authToken = AES.Decrypt(encryptedAuthToken);
 
                         if (AuthTokenManager.ValidateAuthToken(authToken, ctx.Request.UserHostAddress))
                             ctx.CurrentUser = new { UserName = AuthTokenManager.ParseUserId(authToken) }.ActLike<IUserIdentity>();

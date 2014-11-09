@@ -18,13 +18,13 @@ Tous les retours sont en JSON.
 	/auth/logout
 		Détruit le token d'authentification courant
 
-/profile
-	/profile
+/client
+	/client
 		{returns}
-			le profile complet de l'utilisateur
+			le client complet de l'utilisateur
 
 	[A faire pour chacune des propriétés de la table "client"]
-	/profile/firstName/{firstName}
+	/client/firstName/{firstName}
 		{firstName}
 			le nouveau prénom
 			

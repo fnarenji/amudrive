@@ -4,8 +4,8 @@ namespace SharpDrift.DataModel
 {
     public class Campus
     {
-        public int Id { get; set; }
+        public int IdCampus { get; set; }
         public String Address { get; set; }
-        public String Nom { get; set; }
+        public String Name { get; set; }
     }
 }
