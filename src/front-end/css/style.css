@@ -253,7 +253,8 @@ input[type=text], input[type=date]
     border:0;
 }
 
-input[type=date]
+
+#date
 {
 	display:inline-block;
 	font-family: Helvetica, Arial, sans-serif;
@@ -331,10 +332,23 @@ input[type=date]
 	color: #FFFFFF;
 	background-color: #0EBFDD;
 }
-#range1
+#battement, #rayon
 {
+    display: inline-block;
 	margin-top: 20px;
-	margin-right: 50px;
+    width: 300px;
+
+}
+
+#afterR, #beforeB, #afterB
+{
+    width: 55px;
+    color: inherit;
+    background: transparent;
+}
+label
+{
+    font-weight: bold;
 }
 
 /* Search Panel */
@@ -399,8 +413,16 @@ input[type=date]
 }
 #map
 {
+    width:800px;
+    height: 600px;
 	border-right: 2px solid #0EBFDD;
 	border-left: 2px solid #0EBFDD;
+}
+/* Google Maps Markers */
+.infoWindowContent {
+    font-size:  14px;
+    border-top: 1px solid #ccc;
+    padding-top: 2px;
 }
 #search-panel-select
 {

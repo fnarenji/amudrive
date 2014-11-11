@@ -46,4 +46,31 @@ $(document).ready(function() {
 	  	$('#search-panel-date').css('left', (leftMargin + 5));
 
 	});
+
+    $('#date').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+        $('#rayon').slider({
+            range: "min",
+            value:3,
+            min: 0,
+            max: 10,
+            slide : function(event, ui){
+                $('#afterR').val(ui.value + ' km');
+            }
+        });
+        $('#afterR').val($('#rayon').slider('value') + ' km');
+
+    $('#battement').slider({
+        range: true,
+        min: -20,
+        max: 20,
+        values: [-10, 10],
+        slide : function(event, ui){
+            $('#beforeB').val(ui.values[0] + ' min ');
+            $('#afterB').val(ui.values[1] + ' min ');
+        }
+    });
+    $('#beforeB').val($('#battement').slider("values", 0) + ' min ');
+    $('#afterB').val($('#battement').slider("values", 1) + ' min ');
 });
