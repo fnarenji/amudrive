@@ -21,7 +21,7 @@ namespace SharpDrift.Modules
                     return new
                     {
                         success = true,
-                        client = await conn.SingleSqlAsync<Client>("SELECT * FROM CLIENT WHERE idClient = @IdClient;", Context.CurrentUser.UserName)
+                        client = await conn.SingleSqlAsync<Client>("SELECT * FROM CLIENT WHERE idClient = @IdClient", new { IdClient = Int32.Parse(Context.CurrentUser.UserName) })
                     }.ToJson();
             };
 
@@ -30,11 +30,12 @@ namespace SharpDrift.Modules
                 using (var conn = DAL.Conn)
                 {
                     var c = this.Bind<Client>();
+                    c.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+                    
                     await conn.ExecuteSqlAsync(String.Join(" ", "UPDATE CLIENT SET  firstName = @FirstName,",
                                                                                     "lastName = @LastName,",
                                                                                     "address = @Address,",
                                                                                     "mail = @Mail,",
-                                                                                    "password = @Password,",
                                                                                     "registrationTime = @RegistrationTime,",
                                                                                     "messagingParameters = @MessagingParameters,",
                                                                                     "centersOfInterest = @CentersOfInterest,",

@@ -97,6 +97,8 @@
     <ProjectReference Include="..\SharpDrift\SharpDrift.csproj">
       <Project>{7fa87682-393a-4ea2-a312-39d0f7bb729e}</Project>
       <Name>SharpDrift</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

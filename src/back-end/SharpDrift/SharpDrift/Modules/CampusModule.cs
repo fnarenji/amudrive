@@ -20,7 +20,7 @@ namespace SharpDrift.Modules
                     return new
                             {
                                 success = true,
-                                campus = await conn.QuerySqlAsync<Campus>("SELECT * FROM CAMPUS")
+                                campuses = await conn.QuerySqlAsync<Campus>("SELECT * FROM CAMPUS")
                             }.ToJson();
                 }
             };

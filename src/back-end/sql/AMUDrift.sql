@@ -23,8 +23,9 @@ CREATE TABLE campus (
   address VARCHAR(512) NOT NULL,
   name VARCHAR(45) NOT NULL UNIQUE);
 
-INSERT INTO campus VALUES (DEFAULT, '413 avenue Gaston A. Gerbé', 'iuté');
-INSERT INTO campus VALUES (DEFAULT, 'Saint Charles', 'LA FAC LEL');
+INSERT INTO campus VALUES (DEFAULT, '413 avenue Gaston Berger, 13625 Aix-en-Provence', 'IUT Aix-en-Provence');
+INSERT INTO campus VALUES (DEFAULT, '3 avenue Robert Schuman, 13100 Aix-en-Provence', 'Fac de droit d''Aix-en-provence');
+INSERT INTO campus VALUES (DEFAULT, 'Médiathèque d''Arles, 13200 Arles', 'Fac de droit d''Arles');
   
 CREATE TABLE carPooling (
   idCarPooling SERIAL PRIMARY KEY,
