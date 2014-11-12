@@ -38,7 +38,7 @@
 
 			<h1>Chercher un trajet</h1>
 
-			<form name="search" id="adr" ng-controller="SearchForm">
+			<form name="search" id="adr">
 				<input google-places location=location />
 				<a href="#"><img src="../img/l_arrow.png" id="larrow" alt="left arrow"></a>
 				<a href="#"><img src="../img/r_arrow.png" id="rarrow" alt="right arrow"></a>
@@ -54,8 +54,8 @@
 		</section>
 		<section id="maps">
 
-            <div ng-controller="map">
-                <div id="map"></div>
+            <div ng-controller="MapController">
+                <div ng-bind="createMap()" id="map"></div>
             </div>
 
 			<div id="search-panel-date">
