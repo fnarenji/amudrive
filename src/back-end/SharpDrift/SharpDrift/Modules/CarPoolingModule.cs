@@ -18,7 +18,24 @@ namespace SharpDrift.Modules
         {
             this.RequiresAuthentication();
 
-            Post["/carPoolings/search", true] = async (x, ctx) =>
+            Get["/carPoolings", true] = async (x, ctx) =>
+            {
+                using (var conn = DAL.Conn)
+                {
+                    return new 
+                            {
+                                success = true,
+                                joinedCarPoolings = await conn.QuerySqlAsync<CarPooling>("SELECT * FROM carPooling WHERE idCarPooling IN (SELECT idCarPooling FROM joins WHERE idClient = @IdClient AND accept = TRUE)",
+                                                                                            new { IdClient = int.Parse(Context.CurrentUser.UserName) }),
+                                waitingCarPoolings = await conn.QuerySqlAsync<CarPooling>("SELECT * FROM carPooling WHERE idCarPooling IN (SELECT idCarPooling FROM joins WHERE idClient = @IdClient AND accept = FALSE)",
+                                                                                            new { IdClient = int.Parse(Context.CurrentUser.UserName) }),
+                                offeredCarPoolings = await conn.QuerySqlAsync<CarPooling>("SELECT * FROM carPooling WHERE idClient = @IdClient",
+                                                                                            new { IdClient = int.Parse(Context.CurrentUser.UserName) })
+                            }.ToJson();
+                }
+            };
+
+            Get["/carPoolings/search", true] = async (x, ctx) =>
             {
                 using (var conn = DAL.Conn)
                 {
@@ -33,18 +50,16 @@ namespace SharpDrift.Modules
                                                         maxMeetTime = new DateTime()
                                                     });
 
-                    IList<CarPooling> carPoolings = await conn.QuerySqlAsync<CarPooling>(String.Join(" ",
-                                                                                                    "SELECT *",
-                                                                                                    "FROM carPooling",
-                                                                                                    "WHERE pow(@long - long, 2) + pow(@lat - lat, 2) < pow(@radius, 2)",
-                                                                                                    "AND idCampus = @idCampus",
-                                                                                                    "AND campusToAddress = @campusToAddress",
-                                                                                                    "AND meetTime BETWEEN @minMeetTime AND @maxMeetTime"), data);
-
                     return new
                             {
                                 success = true,
-                                carPoolings = carPoolings
+                                carPoolings = await conn.QuerySqlAsync<CarPooling>(String.Join(" ",
+                                                                                                "SELECT *",
+                                                                                                "FROM carPooling",
+                                                                                                "WHERE pow(@long - long, 2) + pow(@lat - lat, 2) < pow(@radius, 2)",
+                                                                                                "AND idCampus = @idCampus",
+                                                                                                "AND campusToAddress = @campusToAddress",
+                                                                                                "AND meetTime BETWEEN @minMeetTime AND @maxMeetTime"), data)
                             }.ToJson();
                 }
             };

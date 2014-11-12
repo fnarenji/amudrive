@@ -230,7 +230,7 @@ namespace SharpDrift.Testing
             var browser = Browser();
             var login = Login();
 
-            var response = browser.Post("/carPoolings/search", with =>
+            var response = browser.Get("/carPoolings/search", with =>
                                                                 {
                                                                     with.Cookie("authToken", login);
                                                                     with.Body(JsonConvert.SerializeObject(new
