@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Insight.Database;
 using Nancy;
-using Nancy.Extensions;
-using Nancy.ModelBinding;
 using SharpDrift.DataModel;
 using SharpDrift.Utilities;
 using SharpDrift.Utilities.Data;

@@ -254,6 +254,7 @@ namespace SharpDrift.Testing
             Assert.True(json.success);
             Assert.NotNull(json.carPoolings);
             Assert.NotEmpty(json.carPoolings);
+            Assert.True(json.carPoolings.Any(c => 1 == c.IdCarPooling && "Gare Saint Charles, Marseille" == c.Address));
         }
     }
 }
