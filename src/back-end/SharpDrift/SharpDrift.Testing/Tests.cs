@@ -223,7 +223,40 @@ namespace SharpDrift.Testing
             Assert.NotEmpty(json.campuses);
             Assert.True(json.campuses.Any(c => 1 == c.IdCampus && "IUT Aix-en-Provence" == c.Name));
         }
-        
+
+        [Fact]
+        public void CarPoolingsSearch()
+        {
+            var browser = Browser();
+            var login = Login();
+
+            var response = browser.Get("/carPoolings/search", with =>
+            {
+                with.Cookie("authToken", login);
+                with.Body(JsonConvert.SerializeObject(new
+                                                        {
+                                                            @long = 30.0,
+                                                            lat = 30.0,
+                                                            radius = 20.0,
+                                                            idCampus = 1,
+                                                            campusToAddress = true,
+                                                            minMeetTime = new DateTime(2014, 12, 12, 7, 55, 0),
+                                                            maxMeetTime = new DateTime(2014, 12, 12, 8, 05, 0)
+                                                        }));
+            }).Body.AsString();
+
+            var json = JsonConvert.DeserializeAnonymousType(response, new
+                                                                        {
+                                                                            success = false,
+                                                                            carPoolings = null as IList<CarPooling>
+                                                                        });
+
+            Assert.True(json.success);
+            Assert.NotNull(json.carPoolings);
+            Assert.NotEmpty(json.carPoolings);
+            Assert.True(json.carPoolings.Any(c => 1 == c.IdCarPooling && "Gare Saint Charles, Marseille" == c.Address));
+        }
+
         [Fact]
         public void GetVehicles()
         {
@@ -234,25 +267,25 @@ namespace SharpDrift.Testing
             var json = JsonConvert.DeserializeAnonymousType(response, new
                                                                         {
                                                                             success = false,
-                                                                            vehicle = null as IList<Vehicle>
+                                                                            vehicles = null as IList<Vehicle>
                                                                         });
 
             Assert.True(json.success);
-            Assert.NotNull(json.vehicle);
-            Assert.True(json.vehicle.Count > 0);
+            Assert.NotNull(json.vehicles);
+            Assert.True(json.vehicles.Count > 0);
 
             var v = new Vehicle
                         {
                             IdClient = 1,
-                            Animals = true,
+                            Animals = false,
                             Eat = false,
                             IdVehicle = 1,
-                            BV = BV.BVM,
-                            Name = "Lambo",
+                            BV = BV.M,
+                            Name = "RENAULT CLIO V12 TWIN TURBO OKLM",
                             Smoking = false
                         };
 
-            var a = json.vehicle.First();
+            var a = json.vehicles.First();
 
             Assert.Equal(v.IdClient , a.IdClient);
             Assert.Equal(v.IdVehicle, a.IdVehicle);
@@ -271,15 +304,15 @@ namespace SharpDrift.Testing
             var v = new Vehicle
                         {
                             IdClient = 1,
-                            Animals = false,
-                            Eat = true,
-                            BV = BV.BVM,
+                            BV = BV.M,
                             IdVehicle = 1,
-                            Name = "206_IZY",
-                            Smoking = false
+                            Name = "RENAULT CLIO V1 TWIN EN PANNE LEL",
+                            Smoking = false,
+                            Animals = false,
+                            Eat = false
                         };
 
-            var response = browser.Patch("/vehicles", with =>
+            var response = browser.Put("/vehicles", with =>
                                                             {
                                                                 with.Cookie("authToken", login);
                                                                 with.JsonBody(v);
@@ -288,12 +321,30 @@ namespace SharpDrift.Testing
             var json = JsonConvert.DeserializeAnonymousType(response, new
                                                                         {
                                                                             success = false,
-                                                                            client = null as Vehicle
+                                                                            vehicle = null as Vehicle
                                                                         });
 
             Assert.True(json.success);
-            Assert.Equal(json.client.Name,"206_IZY");
-            
+            Assert.Equal(json.vehicle.Name, "RENAULT CLIO V1 TWIN EN PANNE LEL");
+
+            v.Name = "RENAULT CLIO V12 TWIN TURBO OKLM";
+
+            response = browser.Put("/vehicles", with =>
+                                                {
+                                                    with.Cookie("authToken", login);
+                                                    with.JsonBody(v);
+                                                }).Body.AsString();
+
+            json = JsonConvert.DeserializeAnonymousType(response, new
+                                                                    {
+                                                                        success = false,
+                                                                        vehicle = null as Vehicle
+                                                                    });
+
+            Assert.True(json.success);
+            Assert.Equal(json.vehicle.Name, "RENAULT CLIO V12 TWIN TURBO OKLM");
+
+
         }
     }
 }

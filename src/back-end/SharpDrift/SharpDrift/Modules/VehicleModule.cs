@@ -21,24 +21,26 @@ namespace SharpDrift.Modules
                     return new
                             {
                                 success = true,
-                                vehicle = await conn.SingleSqlAsync<Vehicle>("SELECT * FROM VEHICLE WHERE idClient = @IdClient",
+                                vehicles = await conn.QuerySqlAsync<Vehicle>("SELECT * FROM VEHICLE WHERE idClient = @IdClient",
                                                                             new { IdClient = Int32.Parse(Context.CurrentUser.UserName) })
                             }.ToJson();
             };
 
-            Patch["/vehicles", true] = async (x, ctx) =>
+            Put["/vehicles", true] = async (x, ctx) =>
             {
                 using (var conn = DAL.Conn)
                 {
                     var v = this.Bind<Vehicle>();
                     v.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+                    var vSerialized = v.Expand();
+                    vSerialized["BV"] = v.BV.ToString()[0];
 
-                    await conn.ExecuteSqlAsync(String.Join(" ", "UPDATE VEHICLE SET name = @name,",
-                                                                                   "bv = @bv,",
-                                                                                   "animals = @animals,",
-                                                                                   "smoking = @smoking,",
-                                                                                   "eat = @eat,",
-                                                                                   "WHERE idClient = @IdClient AND idVehicle = @idVehicle"), v);
+                    await conn.ExecuteSqlAsync(String.Join(" ", "UPDATE VEHICLE SET name = @Name,",
+                                                                                   "bv = @BV,",
+                                                                                   "animals = @Animals,",
+                                                                                   "smoking = @Smoking,",
+                                                                                   "eat = @Eat",
+                                                                                   "WHERE idClient = @IdClient AND idVehicle = @IdVehicle"), v);
 
                       return new
                             {

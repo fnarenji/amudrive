@@ -16,7 +16,6 @@
 
 INSERT INTO client VALUES (DEFAULT, 'aze', 'mdr', 'ptdr', 'swag', 'lel@oklm.kom', 'a48c25f7ec82996486b5a8387cc4e147c628c1f48ae8c868561474fbc5eaf4bec44af63f002681aa8dd32f0dfde1bac24b44d7d6014b73fd26025d94e8f58d3b', DEFAULT, 2, 'lesgroessesqueues', '1337133749', TRUE, TRUE, TRUE);
 INSERT INTO client VALUES (DEFAULT, 'swag', 'hipster', 'wallah', 'oklm', 'trkl@bonbukkake.jap', '1e31d1b64272d08cfa09d838305d9926a0720bf1abe498ed5b9a06df6ffd00304929c212edd3d60e7295965ccbced6120c2a113f0c199840930f47f62aa33a1f', DEFAULT, 2, 'goutugoutu', '1337133749', TRUE, TRUE, TRUE);
-
  
 CREATE TABLE campus (
   idCampus SERIAL PRIMARY KEY,
@@ -39,7 +38,7 @@ CREATE TABLE vehicle (
   eat BOOLEAN NOT NULL,
   PRIMARY KEY(idVehicle, idClient));
   
-INSERT INTO vehicle VALUES (DEFAULT, 2, 'RENAULT CLIO V12 TWIN TURBO OKLM', 'M', false, false, false);
+INSERT INTO vehicle VALUES (DEFAULT, 1, 'RENAULT CLIO V12 TWIN TURBO OKLM', 'M', false, false, false);
   
 CREATE TABLE carPooling (
   idCarPooling SERIAL PRIMARY KEY,
@@ -59,7 +58,7 @@ CREATE TABLE carPooling (
     REFERENCES vehicle (idVehicle, idClient)
     ON DELETE RESTRICT);
   
-INSERT INTO carPooling VALUES (DEFAULT, 'Gare Saint Charles, Marseille', 40.0, 40.0, 1, 2, 1, true, 4, 0, to_timestamp('2014-12-12 07:58:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
+INSERT INTO carPooling VALUES (DEFAULT, 'Gare Saint Charles, Marseille', 40.0, 40.0, 1, 1, 1, true, 4, 0, to_timestamp('2014-12-12 07:58:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
 
 CREATE TABLE joins (
   idCarPooling SERIAL,
