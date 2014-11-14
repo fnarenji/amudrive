@@ -1,4 +1,4 @@
-CREATE TABLE client (
+﻿CREATE TABLE client (
   idClient SERIAL PRIMARY KEY,
   userName VARCHAR(30) NOT NULL,
   firstName VARCHAR(30) NOT NULL,
@@ -68,6 +68,8 @@ CREATE TABLE vehicle (
   smoking BOOLEAN NOT NULL,
   eat BOOLEAN NOT NULL,
   PRIMARY KEY(idVehicle, idClient));
+
+INSERT INTO vehicle VALUES (DEFAULT,1,'Lambo','M',true,false,false);
 
 CREATE INDEX fk_client_idx ON joins(idClient ASC);
 

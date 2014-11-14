@@ -18,6 +18,7 @@ namespace SharpDrift.DataModel
         public bool MailNotifications { get; set; }
         public bool PhoneNotifications { get; set; }
         public bool Newsletter { get; set; }
+
     }
     
 }

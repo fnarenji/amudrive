@@ -224,5 +224,77 @@ namespace SharpDrift.Testing
             Assert.True(json.campuses.Count > 0);
             Assert.True(json.campuses.Any(c => 1 == c.IdCampus && "IUT Aix-en-Provence" == c.Name));
         }
+        
+        [Fact]
+        public void GetVehicles()
+        {
+            var browser = Browser();
+            var login = Login();
+
+            var response = browser.Get("/vehicles", with => with.Cookie("authToken", login)).Body.AsString();
+            var json = JsonConvert.DeserializeAnonymousType(response, new
+                                                                        {
+                                                                            success = false,
+                                                                            vehicle = null as IList<Vehicle>
+                                                                        });
+
+            Assert.True(json.success);
+            Assert.NotNull(json.vehicle);
+            Assert.True(json.vehicle.Count > 0);
+
+            var v = new Vehicle
+                        {
+                            IdClient = 1,
+                            Animals = true,
+                            Eat = false,
+                            IdVehicle = 1,
+                            BV = BV.BVM,
+                            Name = "Lambo",
+                            Smoking = false
+                        };
+
+            var a = json.vehicle.First();
+
+            Assert.Equal(v.IdClient , a.IdClient);
+            Assert.Equal(v.IdVehicle, a.IdVehicle);
+            Assert.Equal(v.Name,a.Name);
+            Assert.Equal(v.Smoking,a.Smoking);
+            Assert.Equal(v.Eat,a.Eat);
+            Assert.Equal(v.Animals,a.Animals);
+        }
+
+        [Fact]
+        public void UpdateVehicle()
+        {
+            var browser = Browser();
+            var login = Login();
+
+            var v = new Vehicle
+                        {
+                            IdClient = 1,
+                            Animals = false,
+                            Eat = true,
+                            BV = BV.BVM,
+                            IdVehicle = 1,
+                            Name = "206_IZY",
+                            Smoking = false
+                        };
+
+            var response = browser.Patch("/vehicles", with =>
+                                                            {
+                                                                with.Cookie("authToken", login);
+                                                                with.JsonBody(v);
+                                                            }).Body.AsString();
+
+            var json = JsonConvert.DeserializeAnonymousType(response, new
+                                                                        {
+                                                                            success = false,
+                                                                            client = null as Vehicle
+                                                                        });
+
+            Assert.True(json.success);
+            Assert.Equal(json.client.Name,"206_IZY");
+            
+        }
     }
 }

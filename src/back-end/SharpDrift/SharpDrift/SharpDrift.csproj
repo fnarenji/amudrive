@@ -73,8 +73,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModel\Campus.cs" />
+    <Compile Include="DataModel\Vehicle.cs" />
     <Compile Include="DataModel\Client.cs" />
     <Compile Include="Modules\CampusModule.cs" />
+    <Compile Include="Modules\VehicleModule.cs" />
     <Compile Include="Modules\ClientModule.cs" />
     <Compile Include="Utilities\Data\CustomJsonSerializer.cs" />
     <Compile Include="Utilities\Security\AES.cs" />
