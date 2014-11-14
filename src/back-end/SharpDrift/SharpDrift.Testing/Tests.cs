@@ -4,7 +4,6 @@ using System.Linq;
 using Nancy;
 using Nancy.Testing;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Xunit;
 using SharpDrift.Utilities;
 using SharpDrift.DataModel;
@@ -33,7 +32,7 @@ namespace SharpDrift.Testing
         {
             var browser = Browser();
 
-            BrowserResponse response = browser.Post("/auth/login", with =>
+            BrowserResponse response = browser.Post("/auth", with =>
                                                         {
                                                             with.FormValue("username", "aze");
                                                             with.FormValue("password_sha512", "a48c25f7ec82996486b5a8387cc4e147c628c1f48ae8c868561474fbc5eaf4bec44af63f002681aa8dd32f0dfde1bac24b44d7d6014b73fd26025d94e8f58d3b");
@@ -60,7 +59,7 @@ namespace SharpDrift.Testing
         {
             var browser = Browser();
             
-            BrowserResponse response = browser.Get("/auth/logout", with => with.Cookie("authToken", Login()));
+            BrowserResponse response = browser.Delete("/auth", with => with.Cookie("authToken", Login()));
 
             var t = response.Body.AsString();
             var json = JsonConvert.DeserializeAnonymousType(t, new
@@ -81,7 +80,7 @@ namespace SharpDrift.Testing
         {
             var browser = Browser();
 
-            BrowserResponse response = browser.Post("/auth/login", with =>
+            BrowserResponse response = browser.Post("/auth", with =>
                                                         {
                                                             with.FormValue("username", "aze");
                                                             with.FormValue("password_sha512", "invalid_sha512_key_lol_87cc4e147c628c1f48ae8c868561474fbc5eaf4bec44af63f002681aa8dd32f0dfde1bac24b44d7d6014b73fd26025d94e8f58d3b");
@@ -170,7 +169,7 @@ namespace SharpDrift.Testing
                 Newsletter = true
             };
 
-            var response = browser.Post("/client", with =>
+            var response = browser.Put("/client", with =>
                                                     {
                                                         with.Cookie("authToken", login);
                                                         with.JsonBody(c);
@@ -187,7 +186,7 @@ namespace SharpDrift.Testing
 
             c.FirstName = "mdr";
 
-            browser.Post("/client", with =>
+            browser.Put("/client", with =>
                                     {
                                         with.Cookie("authToken", login);
                                         with.JsonBody(c);
@@ -221,7 +220,7 @@ namespace SharpDrift.Testing
             
             Assert.True(json.success);
             Assert.NotNull(json.campuses);
-            Assert.True(json.campuses.Count > 0);
+            Assert.NotEmpty(json.campuses);
             Assert.True(json.campuses.Any(c => 1 == c.IdCampus && "IUT Aix-en-Provence" == c.Name));
         }
         

@@ -26,17 +26,40 @@ CREATE TABLE campus (
 INSERT INTO campus VALUES (DEFAULT, '413 avenue Gaston Berger, 13625 Aix-en-Provence', 'IUT Aix-en-Provence');
 INSERT INTO campus VALUES (DEFAULT, '3 avenue Robert Schuman, 13100 Aix-en-Provence', 'Fac de droit d''Aix-en-provence');
 INSERT INTO campus VALUES (DEFAULT, 'Médiathèque d''Arles, 13200 Arles', 'Fac de droit d''Arles');
+
+CREATE TYPE BV AS ENUM ('M', 'A');
+
+CREATE TABLE vehicle (
+  idVehicle SERIAL,
+  idClient INT NOT NULL REFERENCES client ON DELETE RESTRICT,
+  name VARCHAR(60) NOT NULL,
+  bv BV NOT NULL DEFAULT 'M',
+  animals BOOLEAN NOT NULL,
+  smoking BOOLEAN NOT NULL,
+  eat BOOLEAN NOT NULL,
+  PRIMARY KEY(idVehicle, idClient));
+  
+INSERT INTO vehicle VALUES (DEFAULT, 2, 'RENAULT CLIO V12 TWIN TURBO OKLM', 'M', false, false, false);
   
 CREATE TABLE carPooling (
   idCarPooling SERIAL PRIMARY KEY,
   address VARCHAR(512) NOT NULL,
-  idcampus SERIAL REFERENCES campus ON DELETE RESTRICT,
+  long REAL NOT NULL,
+  lat REAL NOT NULL,
+  idCampus SERIAL REFERENCES campus ON DELETE RESTRICT,
   idClient INT NOT NULL REFERENCES client ON DELETE RESTRICT,
+  idVehicle INT NOT NULL,
   campusToAddress BOOLEAN NOT NULL,
   room INT NOT NULL,
   luggage INT NOT NULL,
   meetTime timestamp  NOT NULL,
-  price numeric(5,2) NOT NULL);
+  price numeric(5,2) NOT NULL,
+  CONSTRAINT fk_vehicle
+    FOREIGN KEY (idVehicle, idClient)
+    REFERENCES vehicle (idVehicle, idClient)
+    ON DELETE RESTRICT);
+  
+INSERT INTO carPooling VALUES (DEFAULT, 'Gare Saint Charles, Marseille', 40.0, 40.0, 1, 2, 1, true, 4, 0, to_timestamp('2014-12-12 07:58:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
 
 CREATE TABLE joins (
   idCarPooling SERIAL,
@@ -56,20 +79,6 @@ CREATE TABLE comment (
     FOREIGN KEY (idClient , idCarPooling)
     REFERENCES joins (idCarPooling, idClient)
     ON DELETE RESTRICT);
-
-CREATE TYPE BV AS ENUM ('M', 'A');
-
-CREATE TABLE vehicle (
-  idVehicle SERIAL,
-  idClient INT NOT NULL REFERENCES client ON DELETE RESTRICT,
-  name VARCHAR(60) NOT NULL,
-  bv BV NOT NULL DEFAULT 'M',
-  animals BOOLEAN NOT NULL,
-  smoking BOOLEAN NOT NULL,
-  eat BOOLEAN NOT NULL,
-  PRIMARY KEY(idVehicle, idClient));
-
-INSERT INTO vehicle VALUES (DEFAULT,1,'Lambo','M',true,false,false);
 
 CREATE INDEX fk_client_idx ON joins(idClient ASC);
 

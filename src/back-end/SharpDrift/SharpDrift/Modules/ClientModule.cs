@@ -25,7 +25,7 @@ namespace SharpDrift.Modules
                     }.ToJson();
             };
 
-            Post["/client", true] = async (x, ctx) =>
+            Put["/client", true] = async (x, ctx) =>
             {
                 using (var conn = DAL.Conn)
                 {

@@ -13,7 +13,7 @@ namespace SharpDrift.Modules
         public AuthModule()
         {
             // TODO: Add length to password_sha512 field
-            Post["/auth/login", true] = async (x, ctx) =>
+            Post["/auth", true] = async (x, ctx) =>
             {
                 using (var conn = DAL.Conn)
                 {
@@ -41,7 +41,7 @@ namespace SharpDrift.Modules
                 }
             };
 
-            Get["/auth/logout"] = x =>
+            Delete["/auth"] = x =>
             {
                 if (Request.Cookies.ContainsKey("authToken"))
                     AuthTokenManager.DeleteAuthToken(Request.Cookies["authToken"]);
