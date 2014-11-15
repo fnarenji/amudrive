@@ -256,6 +256,36 @@ namespace SharpDrift.Testing
             Assert.NotEmpty(json.carPoolings);
             Assert.True(json.carPoolings.Any(c => 1 == c.IdCarPooling && "Gare Saint Charles, Marseille" == c.Address));
         }
+        [Fact]
+        public void CarPoolingJoin()
+        {
+            var browser = Browser();
+            var login = Login();
+
+            var j = new Join
+                        {
+                            IdCarPooling = 1,
+                            IdClient = 1,
+                            Accepted = false
+                        };
+
+            var response = browser.Post("/carPoolings/join", with =>
+                                                                {
+                                                                    with.Cookie("authToken", login);
+                                                                    with.JsonBody(j);
+                                                                }).Body.AsString();
+
+            var json = JsonConvert.DeserializeAnonymousType(response, new
+                                                                        {
+                                                                            success = false,
+                                                                            join = null as Join
+                                                                        });
+
+            Assert.True(json.success);
+            Assert.Equal(json.join.IdCarPooling, 1);
+
+
+        }
 
         [Fact]
         public void GetVehicles()
