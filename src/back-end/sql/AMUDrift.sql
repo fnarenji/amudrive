@@ -61,7 +61,7 @@ CREATE TABLE carPooling (
 INSERT INTO carPooling VALUES (DEFAULT, 'Gare Saint Charles, Marseille', 40.0, 40.0, 1, 1, 1, true, 4, 0, to_timestamp('2014-12-12 07:58:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
 
 CREATE TABLE joins (
-  idCarPooling SERIAL,
+  idCarPooling  INT NOT NULL REFERENCES carPooling ON DELETE RESTRICT,
   idClient INT NOT NULL REFERENCES client ON DELETE RESTRICT,
   accept BOOLEAN NOT NULL,
   PRIMARY KEY (idCarPooling, idClient));
