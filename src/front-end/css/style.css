@@ -419,10 +419,18 @@ label
 	border-left: 2px solid #0EBFDD;
 }
 /* Google Maps Markers */
-.infoWindowContent {
-    font-size:  14px;
-    border-top: 1px solid #ccc;
-    padding-top: 2px;
+.infoWindow
+{
+    font-size:  1em;
+    display: block;
+    width: 150px;
+    height: 50px;
+}
+
+.infoWindow h1
+{
+    font-size: 1.2em;
+    font-weight: bold;
 }
 #search-panel-select
 {

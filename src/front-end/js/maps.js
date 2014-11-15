@@ -33,8 +33,8 @@ function mapController ($scope){
     };
 
     $scope.displayMap();
-    /* Ajoute un marqueur sur la map*/
 
+    /* Ajoute un marqueur sur la map*/
     $scope.showMarker = function(){
 
         if($scope.tabMarker.length < 1)
@@ -47,7 +47,14 @@ function mapController ($scope){
             var content = $scope.tabMarker[i];
 
             console.log('loc : ' + loc + ' content : ' + content);
-            var infoWindow = new google.maps.InfoWindow();
+
+            var infoWindowContent = '<div class="infoWindow"><h1>' + content[0] + '</h1>'
+                                    + '<hr/> ' + content[1] + '</div>';
+
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: infoWindowContent
+            });
 
             var marker = new google.maps.Marker({
                 map: $scope.map,
@@ -56,12 +63,12 @@ function mapController ($scope){
                 title: content[0]
             });
 
-            marker.content = '<div class="infoWindowContent">' + content[1] + '</div>';
-
-            google.maps.event.addListener(marker, 'click', function () {
-                infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-                infoWindow.open($scope.map, marker);
-            });
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    infoWindow.setContent(infoWindowContent);
+                    infoWindow.open($scope.map, marker);
+                }
+            })(marker, i));
         }
     };
 
@@ -81,6 +88,29 @@ function mapController ($scope){
     $scope.changeLocation = function(loc) {
         $scope.loc = (loc == undefined) ? $scope.loc : loc;
         $scope.displayMap();
+    };
+
+    $scope.drawCircle = function(loc, radius){
+        $scope.circle = new google.maps.Circle(
+            {
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35,
+                map: $scope.map,
+                center: new google.maps.LatLng(loc[0], loc[1]),
+                radius: radius * 1000
+            }
+        );
+    };
+
+    $scope.changeCircleRadius = function(radius){
+        $scope.circle.setRadius(radius * 1000);
+    };
+
+    $scope.getRadius = function(){
+        return $scope.circle.getRadius();
     };
 }
 
@@ -111,7 +141,10 @@ myApp.directive('googlePlaces', function(){
                     // Chargement de la map
                     $scope.changeLocation(loc);
                     $scope.addMarker(['Bienvenue', 'Bonjour !'], loc);
-                    //$scope.testMarker();
+                    $scope.drawCircle(loc, 3);
+                    console.log($scope.getRadius());
+                    $scope.changeCircleRadius(0.5);
+                    console.log($scope.getRadius());
                     // Applique les modification du scope et recharge les éléments modifiés
                     $scope.$apply();
                 });
