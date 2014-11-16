@@ -271,7 +271,7 @@ namespace SharpDrift.Testing
             var j = new CarPoolingJoin
                         {
                             IdCarPooling = 1,
-                            IdClient = 1,
+                            IdClient = 2,
                             Accepted = false
                         };
 
@@ -303,7 +303,52 @@ namespace SharpDrift.Testing
                                                                     });
 
             Assert.True(json.success);
-            Assert.Equal(json.carPoolingJoin.IdCarPooling, 1);
+            Assert.Equal(json.carPoolingJoin.IdCarPooling,1);
+        }
+
+        [Fact]
+        public void UpdateJoin()
+        {
+            var browser = Browser();
+            var login = Login();
+
+            var j = new CarPoolingJoin
+                        {
+                            IdCarPooling = 1,
+                            IdClient = 1,
+                            Accepted = true
+                        };
+            
+            var response = browser.Put("/carPooling/join", with =>
+                                                                {
+                                                                with.Cookie("authToken", login);
+                                                                with.JsonBody(j);
+                                                            }).Body.AsString();
+
+            var json = JsonConvert.DeserializeAnonymousType(response, new
+                                                                        {
+                                                                            success = false,
+                                                                            carPoolingJoin = null as CarPoolingJoin
+                                                                        });
+            Assert.True(json.success);
+            Assert.Equal(json.carPoolingJoin.Accepted,true);
+
+            j.Accepted = false;
+
+            response = browser.Put("/carPooling/join", with =>
+                                                            {
+                                                                with.Cookie("authToken", login);
+                                                                with.JsonBody(j);
+                                                            }).Body.AsString();
+            json = JsonConvert.DeserializeAnonymousType(response, new
+                                                                    {
+                                                                        success = false,
+                                                                        carPoolingJoin = null as CarPoolingJoin
+                                                                    });
+            Assert.True(json.success);
+            Assert.Equal(json.carPoolingJoin.Accepted,false);
+
+
         }
 
         [Fact]
