@@ -109,7 +109,7 @@ namespace SharpDrift.Modules
                 using (DbConnection conn = DAL.Conn)
                 {
                     FastExpando j = this.Bind<CarPoolingJoin>().Expand();
-                    j.Expand(new { OwnerId = Int32.Parse(Context.CurrentUser.UserName) });
+                    j.Expand(new {OwnerId = Int32.Parse(Context.CurrentUser.UserName)});
 
                     await
                         conn.ExecuteSqlAsync(string.Join(" ",
@@ -123,6 +123,46 @@ namespace SharpDrift.Modules
                     {
                         success = true,
                         carPoolingJoin = j
+                    }.ToJson();
+                }
+            };
+
+            Post["/carPooling/comment", true] = async (x, ctx) =>
+            {
+                using (DbConnection conn = DAL.Conn)
+                {
+                    FastExpando j = this.Bind<Comment>().Expand();
+                    j.Expand(new {OwnerId = Int32.Parse(Context.CurrentUser.UserName)});
+
+                    await
+                        conn.ExecuteSqlAsync(
+                            string.Join(" ", "INSERT INTO comment (idMessage,idClient,idCarPooling,comment,drivermark,poolingmark) VALUES (@idComment,@IdCarPooling,@IdClient,@Message,@DriverMark,@PoolingMark)"),
+                            j);
+
+                    return new
+                    {
+                        success = true,
+                        Comment = j
+                    }.ToJson();
+                }
+            };
+
+            Delete["/carPooling/comment", true] = async (x, ctx) =>
+            {
+                using (DbConnection conn = DAL.Conn)
+                {
+                    FastExpando j = this.Bind<Comment>().Expand();
+                    j.Expand(new { OwnerId = Int32.Parse(Context.CurrentUser.UserName) });
+
+                    await
+                        conn.ExecuteSqlAsync(
+                            string.Join(" ", "DELETE FROM comment WHERE idMessage = @IdComment"),
+                            j);
+
+                    return new
+                    {
+                        success = true,
+                        Comment = j
                     }.ToJson();
                 }
             };

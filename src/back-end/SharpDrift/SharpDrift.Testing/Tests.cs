@@ -538,5 +538,73 @@ namespace SharpDrift.Testing
             Assert.NotEmpty(json.reasons);
             Assert.Null(json.client);
         }
+
+        [Fact]
+        public void Comment()
+        {
+            Browser browser = Browser();
+            string login = Login();
+
+             var a = new CarPoolingJoin
+            {
+                IdCarPooling = 1,
+                IdClient = 2,
+                Accepted = false
+            };
+
+            string res = browser.Post("/carPoolings/join", with =>
+            {
+                with.Cookie("authToken", login);
+                with.JsonBody(a);
+            }).Body.AsString();
+
+
+            var j = new Comment
+                            {
+                                IdCarPooling = 1,
+                                IdClient = 1,
+                                IdComment = 1,
+                                Message = "Op ce carpool",
+                                PoolingMark = 4,
+                                DriverMark = 4
+                            };
+
+            string response = browser.Post("/carPooling/comment", with =>
+            {
+                with.Cookie("authToken", login);
+                with.JsonBody(j);
+            }).Body.AsString();
+
+            var json = JsonConvert.DeserializeAnonymousType(response, new
+            {
+                success = false,
+                Comment = null as Comment
+            });
+
+            Assert.True(json.success);
+            Assert.Equal(json.Comment.IdComment,1);
+            Assert.Equal(json.Comment.Message,j.Message);
+
+            response = browser.Delete("/carPooling/comment", with =>
+            {
+                with.Cookie("authToken", login);
+                with.JsonBody(j);
+            }).Body.AsString();
+
+            json = JsonConvert.DeserializeAnonymousType(response, new
+            {
+                success = false,
+                Comment = null as Comment
+            });
+
+            Assert.True(json.success);
+
+            res = browser.Delete("/carPoolings/join", with =>
+            {
+                with.Cookie("authToken", login);
+                with.JsonBody(a);
+            }).Body.AsString();
+
+        }
     }
 }
