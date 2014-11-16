@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharpDrift.DataModel
 {
     public class CarPooling
     {
         public int IdCarPooling { get; set; }
-        public String Address { get; set; }
+        public string Address { get; set; }
         public float Long { get; set; }
         public float Lat { get; set; }
         public int IdClient { get; set; }

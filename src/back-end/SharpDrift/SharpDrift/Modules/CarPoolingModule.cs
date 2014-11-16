@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
+using System.Data.Common;
 using Insight.Database;
 using Nancy;
 using Nancy.ModelBinding;
@@ -19,20 +18,19 @@ namespace SharpDrift.Modules
 
             Get["/carPoolings", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                 {
                     return new
                     {
                         success = true,
                         joinedCarPoolings = await conn.QuerySqlAsync<CarPooling>(
-                                    "SELECT * FROM carPooling WHERE idCarPooling IN (SELECT idCarPooling FROM joins WHERE idClient = @IdClient AND accept = TRUE)",
-                                    new {IdClient = int.Parse(Context.CurrentUser.UserName)}),
-
+                            "SELECT * FROM carPooling WHERE idCarPooling IN (SELECT idCarPooling FROM joins WHERE idClient = @IdClient AND accept = TRUE)",
+                            new {IdClient = int.Parse(Context.CurrentUser.UserName)}),
                         waitingCarPoolings = await conn.QuerySqlAsync<CarPooling>(
-                                    "SELECT * FROM carPooling WHERE idCarPooling IN (SELECT idCarPooling FROM joins WHERE idClient = @IdClient AND accept = FALSE)",
-                                    new {IdClient = int.Parse(Context.CurrentUser.UserName)}),
-
-                        offeredCarPoolings = await conn.QuerySqlAsync<CarPooling>("SELECT * FROM carPooling WHERE idClient = @IdClient",
+                            "SELECT * FROM carPooling WHERE idCarPooling IN (SELECT idCarPooling FROM joins WHERE idClient = @IdClient AND accept = FALSE)",
+                            new {IdClient = int.Parse(Context.CurrentUser.UserName)}),
+                        offeredCarPoolings =
+                            await conn.QuerySqlAsync<CarPooling>("SELECT * FROM carPooling WHERE idClient = @IdClient",
                                 new {IdClient = int.Parse(Context.CurrentUser.UserName)})
                     }.ToJson();
                 }
@@ -40,7 +38,7 @@ namespace SharpDrift.Modules
 
             Get["/carPoolings/search", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                 {
                     var data = this.BindAnonymous(new
                     {
@@ -56,7 +54,7 @@ namespace SharpDrift.Modules
                     return new
                     {
                         success = true,
-                        carPoolings = await conn.QuerySqlAsync<CarPooling>(String.Join(" ",
+                        carPoolings = await conn.QuerySqlAsync<CarPooling>(string.Join(" ",
                             "SELECT *",
                             "FROM carPooling",
                             "WHERE pow(@long - long, 2) + pow(@lat - lat, 2) < pow(@radius, 2)",
@@ -69,15 +67,14 @@ namespace SharpDrift.Modules
 
             Post["/carPoolings/join", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                 {
                     var c = this.Bind<CarPoolingJoin>();
-                    //Desactivate for testing
-                    //c.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+                    c.IdClient = Int32.Parse(Context.CurrentUser.UserName);
 
                     await
                         conn.ExecuteSqlAsync(
-                            "INSERT INTO carPoolingJoin VALUES ( @IdCarPooling ,@IdClient, @Accepted)", c);
+                            "INSERT INTO carPoolingJoin VALUES (@IdCarPooling, @IdClient, @Accepted)", c);
 
                     return new
                     {
@@ -89,11 +86,10 @@ namespace SharpDrift.Modules
 
             Delete["/carPoolings/join", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                 {
                     var j = this.Bind<CarPoolingJoin>();
-                    //Desactivate for testing
-                    //j.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+                    j.IdClient = Int32.Parse(Context.CurrentUser.UserName);
 
                     await
                         conn.ExecuteSqlAsync(
@@ -109,26 +105,26 @@ namespace SharpDrift.Modules
 
             Put["/carPooling/join", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                 {
-                    var j = this.Bind<CarPoolingJoin>();
-                    //Only the creator of CarPooling can have this option or make a join  or update DB
-                    //prop.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+                    FastExpando j = this.Bind<CarPoolingJoin>().Expand();
+                    j.Expand(new { OwnerId = Int32.Parse(Context.CurrentUser.UserName) });
 
                     await
-                        conn.ExecuteSqlAsync(
-                            "UPDATE carPoolingJoin SET accept = @Accepted WHERE idCarPooling = @IdCarPooling AND idClient = @IdClient",
-                            j);
+                        conn.ExecuteSqlAsync(string.Join(" ",
+                            "UPDATE carPoolingJoin",
+                            "SET accept = @Accepted",
+                            "WHERE idCarPooling = @IdCarPooling",
+                            "AND idClient = @IdClient",
+                            "AND idCarPooling IN (SELECT IdCarPooling FROM carPooling WHERE idClient = @OwnerId)"), j);
 
                     return new
                     {
                         success = true,
                         carPoolingJoin = j
                     }.ToJson();
-
                 }
             };
-
         }
     }
 }

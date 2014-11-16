@@ -1,5 +1,4 @@
 ﻿using System;
-using Insight.Database;
 
 namespace SharpDrift.DataModel
 {
@@ -13,7 +12,7 @@ namespace SharpDrift.DataModel
     {
         public int IdClient { get; set; }
         public int IdVehicle { get; set; }
-        public String Name { get; set; }
+        public string Name { get; set; }
         public BV BV { get; set; }
         public bool Animals { get; set; }
         public bool Smoking { get; set; }

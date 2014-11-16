@@ -6,7 +6,7 @@ using Nancy.Security;
 
 namespace SharpDrift.Utilities.Security
 {
-    public class CheckAuthBeforeRequest : IApplicationStartup 
+    public class CheckAuthBeforeRequest : IApplicationStartup
     {
         public void Initialize(IPipelines pipelines)
         {
@@ -16,11 +16,12 @@ namespace SharpDrift.Utilities.Security
                 {
                     try
                     {
-                        var encryptedAuthToken = HttpServerUtility.UrlTokenDecode(ctx.Request.Cookies["authToken"]);
-                        var authToken = AES.Decrypt(encryptedAuthToken);
+                        byte[] encryptedAuthToken = HttpServerUtility.UrlTokenDecode(ctx.Request.Cookies["authToken"]);
+                        string authToken = AES.Decrypt(encryptedAuthToken);
 
                         if (AuthTokenManager.ValidateAuthToken(authToken, ctx.Request.UserHostAddress))
-                            ctx.CurrentUser = new { UserName = AuthTokenManager.ParseUserId(authToken) }.ActLike<IUserIdentity>();
+                            ctx.CurrentUser =
+                                new {UserName = AuthTokenManager.ParseUserId(authToken)}.ActLike<IUserIdentity>();
                     }
                     catch
                     {

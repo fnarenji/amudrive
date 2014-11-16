@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Common;
 using Insight.Database;
 using Nancy;
 using Nancy.ModelBinding;
@@ -17,34 +18,34 @@ namespace SharpDrift.Modules
 
             Get["/vehicles", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                     return new
-                            {
-                                success = true,
-                                vehicles = await conn.QuerySqlAsync<Vehicle>("SELECT * FROM VEHICLE WHERE idClient = @IdClient",
-                                                                            new { IdClient = Int32.Parse(Context.CurrentUser.UserName) })
-                            }.ToJson();
+                    {
+                        success = true,
+                        vehicles = await conn.QuerySqlAsync<Vehicle>("SELECT * FROM VEHICLE WHERE idClient = @IdClient",
+                            new {IdClient = Int32.Parse(Context.CurrentUser.UserName)})
+                    }.ToJson();
             };
 
             Put["/vehicles", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                 {
                     var v = this.Bind<Vehicle>();
                     v.IdClient = Int32.Parse(Context.CurrentUser.UserName);
 
-                    await conn.ExecuteSqlAsync(String.Join(" ", "UPDATE VEHICLE SET name = @Name,",
-                                                                                   "bv = '" + v.BV.ToString() + "',",
-                                                                                   "animals = @Animals,",
-                                                                                   "smoking = @Smoking,",
-                                                                                   "eat = @Eat",
-                                                                                   "WHERE idClient = @IdClient AND idVehicle = @IdVehicle"), v);
+                    await conn.ExecuteSqlAsync(string.Join(" ", "UPDATE VEHICLE SET name = @Name,",
+                        "bv = '" + v.BV.ToString() + "',",
+                        "animals = @Animals,",
+                        "smoking = @Smoking,",
+                        "eat = @Eat",
+                        "WHERE idClient = @IdClient AND idVehicle = @IdVehicle"), v);
 
-                      return new
-                            {
-                                success = true,
-                                vehicle = v
-                            }.ToJson();
+                    return new
+                    {
+                        success = true,
+                        vehicle = v
+                    }.ToJson();
                 }
             };
         }

@@ -1,7 +1,8 @@
-﻿using Nancy;
+﻿using System.Data.Common;
 using Insight.Database;
-using SharpDrift.Utilities;
+using Nancy;
 using SharpDrift.DataModel;
+using SharpDrift.Utilities;
 using SharpDrift.Utilities.Data;
 using SharpDrift.Utilities.Security;
 
@@ -12,16 +13,16 @@ namespace SharpDrift.Modules
         public CampusModule()
         {
             this.RequiresAuthentication();
-            
+
             Get["/campuses", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                 {
                     return new
-                            {
-                                success = true,
-                                campuses = await conn.QuerySqlAsync<Campus>("SELECT * FROM CAMPUS")
-                            }.ToJson();
+                    {
+                        success = true,
+                        campuses = await conn.QuerySqlAsync<Campus>("SELECT * FROM CAMPUS")
+                    }.ToJson();
                 }
             };
         }

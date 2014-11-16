@@ -3,19 +3,19 @@ using System.Collections.Concurrent;
 
 namespace SharpDrift.Utilities.Security
 {
-    static class AuthTokenManager
+    internal static class AuthTokenManager
     {
-        private static readonly ConcurrentDictionary<int, String> AuthTokens = new ConcurrentDictionary<int, string>();
+        private static readonly ConcurrentDictionary<int, string> AuthTokens = new ConcurrentDictionary<int, string>();
 
-        public static String CreateAuthToken(int userId, string userIP)
+        public static string CreateAuthToken(int userId, string userIP)
         {
-            var authenticationString = String.Format("{0}:{1}:{2}",
-                                                        userId,
-                                                        DateTime.UtcNow.ToBinary(),
-                                                        userIP);
-            
-            AuthTokens.TryAdd(authenticationString.GetHashCode(), authenticationString);
-            return authenticationString;
+            string authenticationstring = string.Format("{0}:{1}:{2}",
+                userId,
+                DateTime.UtcNow.ToBinary(),
+                userIP);
+
+            AuthTokens.TryAdd(authenticationstring.GetHashCode(), authenticationstring);
+            return authenticationstring;
         }
 
         public static void DeleteAuthToken(string authToken)
@@ -23,14 +23,15 @@ namespace SharpDrift.Utilities.Security
             AuthTokens.TryRemove(authToken.GetHashCode(), out authToken);
         }
 
-        public static bool ValidateAuthToken(String authToken, string userIP)
+        public static bool ValidateAuthToken(string authToken, string userIP)
         {
-            var authTokenPieces = authToken.Split(new[] { ':' }, 3);
-            var userId = authTokenPieces[0];
-            var tokenCreationDate = DateTime.FromBinary(Int64.Parse(authTokenPieces[1]));
-            var remoteIp = authTokenPieces[2];
+            string[] authTokenPieces = authToken.Split(new[] {':'}, 3);
+            string userId = authTokenPieces[0];
+            DateTime tokenCreationDate = DateTime.FromBinary(Int64.Parse(authTokenPieces[1]));
+            string remoteIp = authTokenPieces[2];
 
-            Console.WriteLine("Validating authentication token for {0} from {1} since {2}.", userId, remoteIp, tokenCreationDate);
+            Console.WriteLine("Validating authentication token for {0} from {1} since {2}.", userId, remoteIp,
+                tokenCreationDate);
 
             if (AuthTokens.ContainsKey(authToken.GetHashCode()))
             {
@@ -40,16 +41,18 @@ namespace SharpDrift.Utilities.Security
                         tokenCreationDate);
                     return true;
                 }
-                AuthTokens.TryRemove(authToken.GetHashCode(), out authToken); // Token exists, but invalid IP or too old.
+                AuthTokens.TryRemove(authToken.GetHashCode(), out authToken);
+                    // Token exists, but invalid IP or too old.
             }
 
-            Console.WriteLine("Invalid authentication token for {0} from {1} since {2}.", userId, remoteIp, tokenCreationDate);
+            Console.WriteLine("Invalid authentication token for {0} from {1} since {2}.", userId, remoteIp,
+                tokenCreationDate);
             return false;
         }
 
-        public static String ParseUserId(string authToken)
+        public static string ParseUserId(string authToken)
         {
-            return authToken.Split(new[] { ':' }, 3)[0];
+            return authToken.Split(new[] {':'}, 3)[0];
         }
     }
 }

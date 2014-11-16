@@ -2,7 +2,7 @@
 
 namespace SharpDrift.Utilities.Security
 {
-    static class ModuleSecurity
+    internal static class ModuleSecurity
     {
         public static void RequiresAuthentication(this NancyModule module)
         {
@@ -11,13 +11,13 @@ namespace SharpDrift.Utilities.Security
 
         private static Response RequiresAuthentication(NancyContext context)
         {
-            return context.CurrentUser != null ? context.Response
-                                               : new
-                                                {
-                                                    success = false, 
-                                                    reason = "y_u_no_auth?"
-                                                }.ToJson().WithStatusCode(HttpStatusCode.Unauthorized);
+            return context.CurrentUser != null
+                ? context.Response
+                : new
+                {
+                    success = false,
+                    reason = "y_u_no_auth?"
+                }.ToJson().WithStatusCode(HttpStatusCode.Unauthorized);
         }
-
     }
 }

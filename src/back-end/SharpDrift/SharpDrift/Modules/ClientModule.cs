@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Common;
 using Insight.Database;
 using Nancy;
 using Nancy.ModelBinding;
@@ -17,39 +18,42 @@ namespace SharpDrift.Modules
 
             Get["/client", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                     return new
                     {
                         success = true,
-                        client = await conn.SingleSqlAsync<Client>("SELECT * FROM CLIENT WHERE idClient = @IdClient", new { IdClient = Int32.Parse(Context.CurrentUser.UserName) })
+                        client =
+                            await
+                                conn.SingleSqlAsync<Client>("SELECT * FROM CLIENT WHERE idClient = @IdClient",
+                                    new {IdClient = Int32.Parse(Context.CurrentUser.UserName)})
                     }.ToJson();
             };
 
             Put["/client", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                 {
                     var c = this.Bind<Client>();
                     c.IdClient = Int32.Parse(Context.CurrentUser.UserName);
-                    
-                    await conn.ExecuteSqlAsync(String.Join(" ", "UPDATE CLIENT SET  firstName = @FirstName,",
-                                                                                    "lastName = @LastName,",
-                                                                                    "address = @Address,",
-                                                                                    "mail = @Mail,",
-                                                                                    "registrationTime = @RegistrationTime,",
-                                                                                    "messagingParameters = @MessagingParameters,",
-                                                                                    "centersOfInterest = @CentersOfInterest,",
-                                                                                    "phoneNumber = @PhoneNumber,",
-                                                                                    "mailNotifications = @MailNotifications,",
-                                                                                    "phoneNotifications = @PhoneNotifications,",
-                                                                                    "newsletter = @Newsletter",
-                                                                                    "WHERE idClient = @IdClient"), c);
+
+                    await conn.ExecuteSqlAsync(string.Join(" ", "UPDATE CLIENT SET  firstName = @FirstName,",
+                        "lastName = @LastName,",
+                        "address = @Address,",
+                        "mail = @Mail,",
+                        "registrationTime = @RegistrationTime,",
+                        "messagingParameters = @MessagingParameters,",
+                        "centersOfInterest = @CentersOfInterest,",
+                        "phoneNumber = @PhoneNumber,",
+                        "mailNotifications = @MailNotifications,",
+                        "phoneNotifications = @PhoneNotifications,",
+                        "newsletter = @Newsletter",
+                        "WHERE idClient = @IdClient"), c);
 
                     return new
-                            {
-                                success = true,
-                                client = c
-                            }.ToJson();
+                    {
+                        success = true,
+                        client = c
+                    }.ToJson();
                 }
             };
         }

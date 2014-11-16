@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Common;
 using Insight.Database;
 using Nancy;
 using Nancy.ModelBinding;
@@ -18,21 +15,25 @@ namespace SharpDrift.Modules
         {
             Post["/register", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                 {
                     var c = this.Bind<Client>();
 
-                    c = await conn.InsertSqlAsync(String.Join(" ", "INSERT INTO CLIENT SET  firstName = @FirstName,",
-                                                                                            "lastName = @LastName,",
-                                                                                            "address = @Address,",
-                                                                                            "mail = @Mail,",
-                                                                                            "registrationTime = @RegistrationTime,",
-                                                                                            "messagingParameters = @MessagingParameters,",
-                                                                                            "centersOfInterest = @CentersOfInterest,",
-                                                                                            "phoneNumber = @PhoneNumber,",
-                                                                                            "mailNotifications = @MailNotifications,",
-                                                                                            "phoneNotifications = @PhoneNotifications,",
-                                                                                            "newsletter = @Newsletter RETURNING *"), c);
+                    c = await conn.InsertSqlAsync(string.Join(" ",
+                        "INSERT INTO CLIENT VALUES (DEFAULT,",
+                        "@UserName,",
+                        "@FirstName,",
+                        "@LastName,",
+                        "@Address,",
+                        "@Mail,",
+                        "@Password,",
+                        "@RegistrationTime,",
+                        "@MessagingParameters,",
+                        "@CentersOfInterest,",
+                        "@PhoneNumber,",
+                        "@MailNotifications,",
+                        "@PhoneNotifications,",
+                        "@Newsletter) RETURNING *"), c);
 
                     return new
                     {

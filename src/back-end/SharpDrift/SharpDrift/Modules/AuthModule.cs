@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Common;
 using System.Web;
 using Insight.Database;
 using Nancy;
@@ -15,29 +16,34 @@ namespace SharpDrift.Modules
             // TODO: Add length to password_sha512 field
             Post["/auth", true] = async (x, ctx) =>
             {
-                using (var conn = DAL.Conn)
+                using (DbConnection conn = DAL.Conn)
                 {
-                    var idClient = await conn.SingleSqlAsync<int?>("SELECT idclient FROM client WHERE username = @u AND password = @p",
-                                                                    new { u = Request.Form.username, p = Request.Form.password_sha512 });
+                    int? idClient =
+                        await
+                            conn.SingleSqlAsync<int?>(
+                                "SELECT idclient FROM client WHERE username = @u AND password = @p",
+                                new {u = Request.Form.username, p = Request.Form.password_sha512});
 
                     if (idClient == null || Request.UserHostAddress == null)
                         return new
-                                {
-                                    success = false,
-                                    authToken = String.Empty
-                                }.ToJson()
-                                 .WithCookie("authToken", String.Empty, DateTime.UtcNow.AddDays(-2));
+                        {
+                            success = false,
+                            authToken = string.Empty
+                        }.ToJson()
+                            .WithCookie("authToken", string.Empty, DateTime.UtcNow.AddDays(-2));
 
-                    var authenticationString = AuthTokenManager.CreateAuthToken(idClient.Value, Request.UserHostAddress);
+                    string authenticationstring = AuthTokenManager.CreateAuthToken(idClient.Value,
+                        Request.UserHostAddress);
 
-                    var encryptedAuthToken = HttpServerUtility.UrlTokenEncode(await AES.EncryptAsync(authenticationString));
+                    string encryptedAuthToken =
+                        HttpServerUtility.UrlTokenEncode(await AES.EncryptAsync(authenticationstring));
 
                     return new
-                            {
-                                success = true,
-                                authToken = encryptedAuthToken
-                            }.ToJson()
-                             .WithCookie("authToken", encryptedAuthToken, DateTime.UtcNow.AddDays(2));
+                    {
+                        success = true,
+                        authToken = encryptedAuthToken
+                    }.ToJson()
+                        .WithCookie("authToken", encryptedAuthToken, DateTime.UtcNow.AddDays(2));
                 }
             };
 
@@ -47,11 +53,11 @@ namespace SharpDrift.Modules
                     AuthTokenManager.DeleteAuthToken(Request.Cookies["authToken"]);
 
                 return new
-                        {
-                            success = true,
-                            authToken = String.Empty
-                        }.ToJson()
-                         .WithCookie("authToken", String.Empty, DateTime.UtcNow.AddDays(-2));
+                {
+                    success = true,
+                    authToken = string.Empty
+                }.ToJson()
+                    .WithCookie("authToken", string.Empty, DateTime.UtcNow.AddDays(-2));
             };
         }
     }

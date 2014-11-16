@@ -1,10 +1,9 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace SharpDrift.Utilities.Data
 {
-    sealed class CustomJsonSerializer : JsonSerializer
+    internal sealed class CustomJsonSerializer : JsonSerializer
     {
         public CustomJsonSerializer()
         {

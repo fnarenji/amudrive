@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SharpDrift.Utilities.Security
 {
-    static class AES
+    internal static class AES
     {
         private static readonly AesCryptoServiceProvider AESProvider = new AesCryptoServiceProvider();
 
@@ -15,9 +15,9 @@ namespace SharpDrift.Utilities.Security
             AESProvider.GenerateKey();
         }
 
-        public static Task<byte[]> EncryptAsync(String str)
+        public static Task<byte[]> EncryptAsync(string str)
         {
-            var inputBuffer = Encoding.UTF8.GetBytes(str);
+            byte[] inputBuffer = Encoding.UTF8.GetBytes(str);
             return Task.Run(() => AESProvider.CreateEncryptor().TransformFinalBlock(inputBuffer, 0, inputBuffer.Length));
         }
 

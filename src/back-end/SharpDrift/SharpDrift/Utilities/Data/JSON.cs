@@ -1,5 +1,4 @@
 ﻿using System;
-using Nancy;
 using Nancy.Responses;
 using Nancy.Serialization.JsonNet;
 using Newtonsoft.Json;
@@ -13,12 +12,12 @@ namespace SharpDrift.Utilities.Data
             return new JsonResponse(o, new JsonNetSerializer(new CustomJsonSerializer()));
         }
 
-        public static T Deserialize<T>(String s)
+        public static T Deserialize<T>(string s)
         {
             return JsonConvert.DeserializeObject<T>(s);
         }
 
-        public static dynamic Deserialize(String s)
+        public static dynamic Deserialize(string s)
         {
             return JsonConvert.DeserializeObject(s);
         }
