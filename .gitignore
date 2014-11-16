@@ -185,3 +185,6 @@ $RECYCLE.BIN/
 /src/back-end/SharpDrift/packages/Newtonsoft.Json.6.0.6
 /src/back-end/SharpDrift/packages/Npgsql.2.2.2
 /src/back-end/SharpDrift/packages/xunit.2.0.0-beta4-build2738
+/src/back-end/SharpDrift/packages/MailKit.1.0.1.0
+/src/back-end/SharpDrift/packages/MimeKit.1.0.0.0
+/src/back-end/SharpDrift/packages/*

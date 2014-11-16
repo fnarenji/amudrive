@@ -30,7 +30,22 @@ namespace SharpDrift.Modules
                             success = false,
                             authToken = string.Empty
                         }.ToJson()
-                            .WithCookie("authToken", string.Empty, DateTime.UtcNow.AddDays(-2));
+                         .WithCookie("authToken", string.Empty, DateTime.UtcNow.AddDays(-2));
+
+                    int? validMail =
+                        await
+                            conn.SingleSqlAsync<int?>(
+                                "SELECT idClient FROM clientMailValidation WHERE idClient = @IdClient",
+                                new {IdClient = idClient.Value});
+
+                    if (validMail != null)
+                        return new
+                        {
+                            success = false,
+                            reasons = "Merci de valider votre adresse mail.",
+                            authToken = string.Empty,
+                        }.ToJson()
+                         .WithCookie("authToken", string.Empty, DateTime.UtcNow.AddDays(-2));
 
                     string authenticationstring = AuthTokenManager.CreateAuthToken(idClient.Value,
                         Request.UserHostAddress);
@@ -43,7 +58,7 @@ namespace SharpDrift.Modules
                         success = true,
                         authToken = encryptedAuthToken
                     }.ToJson()
-                        .WithCookie("authToken", encryptedAuthToken, DateTime.UtcNow.AddDays(2));
+                     .WithCookie("authToken", encryptedAuthToken, DateTime.UtcNow.AddDays(2));
                 }
             };
 
@@ -57,7 +72,7 @@ namespace SharpDrift.Modules
                     success = true,
                     authToken = string.Empty
                 }.ToJson()
-                    .WithCookie("authToken", string.Empty, DateTime.UtcNow.AddDays(-2));
+                 .WithCookie("authToken", string.Empty, DateTime.UtcNow.AddDays(-2));
             };
         }
     }

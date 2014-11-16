@@ -3,6 +3,7 @@ using System.Data.Common;
 using Insight.Database;
 using Nancy;
 using Nancy.ModelBinding;
+using Npgsql;
 using SharpDrift.DataModel;
 using SharpDrift.Utilities;
 using SharpDrift.Utilities.Data;

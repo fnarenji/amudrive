@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using SharpDrift.DataModel;
 using SharpDrift.Utilities;
 using Xunit;
+using Xunit.Sdk;
 
 namespace SharpDrift.Testing
 {
@@ -462,7 +463,48 @@ namespace SharpDrift.Testing
         {
             Browser browser = Browser();
 
-            string username = Path.GetRandomFileName(),
+            string username = "unitTest_" + Path.GetRandomFileName(),
+                password = string.Join("",
+                    new SHA512CryptoServiceProvider().ComputeHash(Encoding.UTF8.GetBytes(username))
+                        .Select(b => b.ToString("x2")));
+
+            var client = new Client
+            {
+                UserName = username,
+                FirstName = "RANDOM",
+                LastName = "MODNAR",
+                Address = "HERE AND THERE",
+                Mail = username + "@etu.univ-amu.fr",
+                Password = password,
+                RegistrationTime = DateTime.UtcNow,
+                MessagingParameters = 1,
+                CentersOfInterest = "EtudC",
+                PhoneNumber = "0606060606",
+                MailNotifications = true,
+                PhoneNotifications = false,
+                Newsletter = true
+            };
+
+            var response = browser.Post("/register", with => with.JsonBody(client)).Body.AsString();
+            var json = JsonConvert.DeserializeAnonymousType(response, new
+            {
+                success = false,
+                reasons = null as IList<String>,
+                client = null as Client
+            });
+
+            Assert.True(json.success);
+            Assert.Equal(username, json.client.UserName);
+            Assert.Null(json.reasons);
+            Assert.Null(json.client.Password);
+        }
+
+        [Fact]
+        public void RegisterBadMail()
+        {
+            Browser browser = Browser();
+
+            string username = "unitTest_" + Path.GetRandomFileName(),
                 password = string.Join("",
                     new SHA512CryptoServiceProvider().ComputeHash(Encoding.UTF8.GetBytes(username))
                         .Select(b => b.ToString("x2")));
@@ -488,13 +530,13 @@ namespace SharpDrift.Testing
             var json = JsonConvert.DeserializeAnonymousType(response, new
             {
                 success = false,
+                reasons = null as IList<String>,
                 client = null as Client
             });
 
-            Assert.True(json.success);
-            Assert.Equal(username, json.client.UserName);
-
-            
+            Assert.False(json.success);
+            Assert.NotEmpty(json.reasons);
+            Assert.Null(json.client);
         }
     }
 }

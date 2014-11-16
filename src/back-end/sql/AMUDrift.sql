@@ -17,6 +17,10 @@
 INSERT INTO client VALUES (DEFAULT, 'aze', 'mdr', 'ptdr', 'swag', 'lel@oklm.kom', 'a48c25f7ec82996486b5a8387cc4e147c628c1f48ae8c868561474fbc5eaf4bec44af63f002681aa8dd32f0dfde1bac24b44d7d6014b73fd26025d94e8f58d3b', DEFAULT, 2, 'lesgroessesqueues', '1337133749', TRUE, TRUE, TRUE);
 INSERT INTO client VALUES (DEFAULT, 'swag', 'hipster', 'wallah', 'oklm', 'trkl@bonbukkake.jap', '1e31d1b64272d08cfa09d838305d9926a0720bf1abe498ed5b9a06df6ffd00304929c212edd3d60e7295965ccbced6120c2a113f0c199840930f47f62aa33a1f', DEFAULT, 2, 'goutugoutu', '1337133749', TRUE, TRUE, TRUE);
  
+CREATE TABLE clientMailValidation (
+  idClient INT NOT NULL PRIMARY KEY REFERENCES client ON DELETE RESTRICT,
+  validationKey VARCHAR(127) NOT NULL);
+
 CREATE TABLE campus (
   idCampus SERIAL PRIMARY KEY,
   address VARCHAR(512) NOT NULL,
@@ -65,8 +69,6 @@ CREATE TABLE carPoolingJoin (
   idClient INT NOT NULL REFERENCES client ON DELETE RESTRICT,
   accept BOOLEAN NOT NULL,
   PRIMARY KEY (idCarPooling, idClient));
-
-INSERT INTO  carPoolingJoin  VALUES (1,1,false);
 
 CREATE TABLE comment (
   idClient INT NOT NULL REFERENCES client ON DELETE RESTRICT,
