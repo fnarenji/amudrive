@@ -66,8 +66,6 @@ CREATE TABLE carPoolingJoin (
   accept BOOLEAN NOT NULL,
   PRIMARY KEY (idCarPooling, idClient));
 
-INSERT INTO  carPoolingJoin  VALUES (1,1,false);
-
 CREATE TABLE comment (
   idClient INT NOT NULL REFERENCES client ON DELETE RESTRICT,
   idCarPooling INT NOT NULL REFERENCES carPooling ON DELETE RESTRICT,
