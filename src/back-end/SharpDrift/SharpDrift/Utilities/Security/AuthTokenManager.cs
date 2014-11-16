@@ -43,7 +43,7 @@ namespace SharpDrift.Utilities.Security
                 AuthTokens.TryRemove(authToken.GetHashCode(), out authToken); // Token exists, but invalid IP or too old.
             }
 
-            Console.WriteLine("Invalid authentication token for {0} from {1} since {2}.", userId, remoteIp);
+            Console.WriteLine("Invalid authentication token for {0} from {1} since {2}.", userId, remoteIp, tokenCreationDate);
             return false;
         }
 

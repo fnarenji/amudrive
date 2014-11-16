@@ -10,7 +10,7 @@ namespace SharpDrift.DataModel
         public String LastName { get; set; }
         public String Address { get; set; }
         public String Mail { get; set; }
-        private String Password { get; set; }
+        public String Password { get; set; }
         public DateTime RegistrationTime { get; set; }
         public int MessagingParameters { get; set; }
         public String CentersOfInterest { get; set; }
@@ -19,6 +19,10 @@ namespace SharpDrift.DataModel
         public bool PhoneNotifications { get; set; }
         public bool Newsletter { get; set; }
 
+        public bool ShouldSerializePassword()
+        {
+            return false;
+        }
     }
     
 }

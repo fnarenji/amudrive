@@ -32,11 +32,9 @@ namespace SharpDrift.Modules
                 {
                     var v = this.Bind<Vehicle>();
                     v.IdClient = Int32.Parse(Context.CurrentUser.UserName);
-                    var vSerialized = v.Expand();
-                    vSerialized["BV"] = v.BV.ToString()[0];
 
                     await conn.ExecuteSqlAsync(String.Join(" ", "UPDATE VEHICLE SET name = @Name,",
-                                                                                   "bv = @BV,",
+                                                                                   "bv = '" + v.BV.ToString() + "',",
                                                                                    "animals = @Animals,",
                                                                                    "smoking = @Smoking,",
                                                                                    "eat = @Eat",

@@ -73,10 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModel\Campus.cs" />
+    <Compile Include="DataModel\CarPoolingJoin.cs" />
     <Compile Include="DataModel\Vehicle.cs" />
     <Compile Include="DataModel\Client.cs" />
     <Compile Include="DataModel\CarPooling.cs" />
     <Compile Include="Modules\CampusModule.cs" />
+    <Compile Include="Modules\RegistrationModule.cs" />
     <Compile Include="Modules\VehicleModule.cs" />
     <Compile Include="Modules\CarPoolingModule.cs" />
     <Compile Include="Modules\ClientModule.cs" />

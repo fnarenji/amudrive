@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Insight.Database;
 using Nancy;
+using Nancy.ModelBinding;
 using SharpDrift.DataModel;
 using SharpDrift.Utilities;
 using SharpDrift.Utilities.Data;
@@ -60,7 +62,39 @@ namespace SharpDrift.Modules
                 }
             };
 
+            Post["/carPoolings/join", true] = async (x, ctx) =>
+            {
+                using (var conn = DAL.Conn)
+                {
+                    var c = this.Bind<CarPoolingJoin>();
+                    c.IdClient = Int32.Parse(Context.CurrentUser.UserName);
 
+                    await conn.ExecuteSqlAsync("INSERT INTO carPoolingJoin VALUES (@IdClient, @IdCarPooling , @Accepted)", c);
+
+                    return new
+                            {
+                                success = true,
+                                carPoolingJoin = c
+                            }.ToJson();
+                }
+            };
+
+            Delete["/carPoolings/join", true] = async (x, ctx) =>
+            {
+                using (var conn = DAL.Conn)
+                {
+                    var j = this.Bind<CarPoolingJoin>();
+                    j.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+
+                    await conn.ExecuteSqlAsync("DELETE FROM carPoolingJoin WHERE idCarPooling = @IdCarPooling AND idClient = @IdClient", j);
+
+                    return new
+                            {
+                                success = true,
+                                carPoolingJoin = j
+                            }.ToJson();
+                }
+            };
         }
     }
 }

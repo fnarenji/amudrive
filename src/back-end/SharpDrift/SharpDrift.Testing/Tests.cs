@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using Nancy;
 using Nancy.Testing;
 using Newtonsoft.Json;
@@ -122,6 +125,7 @@ namespace SharpDrift.Testing
                 LastName            = "ptdr",
                 Address             = "swag",
                 Mail                = "lel@oklm.kom",
+                Password            = String.Empty,
                 RegistrationTime    = DateTime.Parse("2014-11-09 17:54:28.847"),
                 MessagingParameters = 2,
                 CentersOfInterest   = "lesgroessesqueues",
@@ -137,6 +141,7 @@ namespace SharpDrift.Testing
             Assert.Equal(cRef.LastName,            json.client.LastName);
             Assert.Equal(cRef.Address,             json.client.Address);
             Assert.Equal(cRef.Mail,                json.client.Mail);
+            Assert.Null(json.client.Password);
             Assert.Equal(cRef.RegistrationTime,    json.client.RegistrationTime);
             Assert.Equal(cRef.MessagingParameters, json.client.MessagingParameters);
             Assert.Equal(cRef.CentersOfInterest,   json.client.CentersOfInterest);
@@ -231,19 +236,19 @@ namespace SharpDrift.Testing
             var login = Login();
 
             var response = browser.Get("/carPoolings/search", with =>
-            {
-                with.Cookie("authToken", login);
-                with.Body(JsonConvert.SerializeObject(new
-                                                        {
-                                                            @long = 30.0,
-                                                            lat = 30.0,
-                                                            radius = 20.0,
-                                                            idCampus = 1,
-                                                            campusToAddress = true,
-                                                            minMeetTime = new DateTime(2014, 12, 12, 7, 55, 0),
-                                                            maxMeetTime = new DateTime(2014, 12, 12, 8, 05, 0)
-                                                        }));
-            }).Body.AsString();
+                                                                {
+                                                                    with.Cookie("authToken", login);
+                                                                    with.Body(JsonConvert.SerializeObject(new
+                                                                                                            {
+                                                                                                                @long = 30.0,
+                                                                                                                lat = 30.0,
+                                                                                                                radius = 20.0,
+                                                                                                                idCampus = 1,
+                                                                                                                campusToAddress = true,
+                                                                                                                minMeetTime = new DateTime(2014, 12, 12, 7, 55, 0),
+                                                                                                                maxMeetTime = new DateTime(2014, 12, 12, 8, 05, 0)
+                                                                                                            }));
+                                                                }).Body.AsString();
 
             var json = JsonConvert.DeserializeAnonymousType(response, new
                                                                         {
@@ -256,13 +261,14 @@ namespace SharpDrift.Testing
             Assert.NotEmpty(json.carPoolings);
             Assert.True(json.carPoolings.Any(c => 1 == c.IdCarPooling && "Gare Saint Charles, Marseille" == c.Address));
         }
+
         [Fact]
         public void CarPoolingJoin()
         {
             var browser = Browser();
             var login = Login();
 
-            var j = new Join
+            var j = new CarPoolingJoin
                         {
                             IdCarPooling = 1,
                             IdClient = 1,
@@ -278,13 +284,26 @@ namespace SharpDrift.Testing
             var json = JsonConvert.DeserializeAnonymousType(response, new
                                                                         {
                                                                             success = false,
-                                                                            join = null as Join
+                                                                            carPoolingJoin = null as CarPoolingJoin
                                                                         });
 
             Assert.True(json.success);
-            Assert.Equal(json.join.IdCarPooling, 1);
+            Assert.Equal(json.carPoolingJoin.IdCarPooling, 1);
 
+            response = browser.Delete("/carPoolings/join", with =>
+                                                            {
+                                                                with.Cookie("authToken", login);
+                                                                with.JsonBody(j);
+                                                            }).Body.AsString();
+            
+            json = JsonConvert.DeserializeAnonymousType(response, new
+                                                                    {
+                                                                        success = false,
+                                                                        carPoolingJoin = null as CarPoolingJoin
+                                                                    });
 
+            Assert.True(json.success);
+            Assert.Equal(json.carPoolingJoin.IdCarPooling, 1);
         }
 
         [Fact]
@@ -319,10 +338,10 @@ namespace SharpDrift.Testing
 
             Assert.Equal(v.IdClient , a.IdClient);
             Assert.Equal(v.IdVehicle, a.IdVehicle);
-            Assert.Equal(v.Name,a.Name);
-            Assert.Equal(v.Smoking,a.Smoking);
-            Assert.Equal(v.Eat,a.Eat);
-            Assert.Equal(v.Animals,a.Animals);
+            Assert.Equal(v.Name,      a.Name);
+            Assert.Equal(v.Smoking,   a.Smoking);
+            Assert.Equal(v.Eat,       a.Eat);
+            Assert.Equal(v.Animals,   a.Animals);
         }
 
         [Fact]
@@ -343,10 +362,10 @@ namespace SharpDrift.Testing
                         };
 
             var response = browser.Put("/vehicles", with =>
-                                                            {
-                                                                with.Cookie("authToken", login);
-                                                                with.JsonBody(v);
-                                                            }).Body.AsString();
+                                                        {
+                                                            with.Cookie("authToken", login);
+                                                            with.JsonBody(v);
+                                                        }).Body.AsString();
 
             var json = JsonConvert.DeserializeAnonymousType(response, new
                                                                         {
@@ -373,6 +392,32 @@ namespace SharpDrift.Testing
 
             Assert.True(json.success);
             Assert.Equal(json.vehicle.Name, "RENAULT CLIO V12 TWIN TURBO OKLM");
+        }
+
+        [Fact]
+        public void Register()
+        {
+            var browser = Browser();
+
+            String username = Path.GetRandomFileName(),
+                password = String.Join("", new SHA512CryptoServiceProvider().ComputeHash(Encoding.UTF8.GetBytes(username)).Select(b => b.ToString("x2")));
+
+            var client = new Client
+                            {
+                                UserName = username,
+                                FirstName = "RANDOM",
+                                LastName = "MODNAR",
+                                Address = "HERE AND THERE",
+                                Mail = "AZE@AZEMAIL.MAIL",
+                                RegistrationTime = DateTime.UtcNow,
+                                MessagingParameters = 1,
+                                CentersOfInterest = "EtudC",
+                                PhoneNumber = "0606060606",
+                                MailNotifications = true,
+                                PhoneNotifications = false,
+                                Newsletter = true
+                            };
+
 
 
         }

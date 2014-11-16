@@ -60,7 +60,7 @@ CREATE TABLE carPooling (
   
 INSERT INTO carPooling VALUES (DEFAULT, 'Gare Saint Charles, Marseille', 40.0, 40.0, 1, 1, 1, true, 4, 0, to_timestamp('2014-12-12 07:58:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
 
-CREATE TABLE joins (
+CREATE TABLE carPoolingJoin (
   idCarPooling  INT NOT NULL REFERENCES carPooling ON DELETE RESTRICT,
   idClient INT NOT NULL REFERENCES client ON DELETE RESTRICT,
   accept BOOLEAN NOT NULL,
@@ -74,14 +74,14 @@ CREATE TABLE comment (
   poolingMark INT NOT NULL,
   driverMark INT NOT NULL,
   PRIMARY KEY (idClient, idCarPooling, idMessage),
-  CONSTRAINT fk_joins
+  CONSTRAINT fk_carPoolingJoin
     FOREIGN KEY (idClient , idCarPooling)
-    REFERENCES joins (idCarPooling, idClient)
+    REFERENCES carPoolingJoin (idCarPooling, idClient)
     ON DELETE RESTRICT);
 
-CREATE INDEX fk_client_idx ON joins(idClient ASC);
+CREATE INDEX fk_client_idx ON carPoolingJoin(idClient ASC);
 
-CREATE INDEX fk_carpooling_idx ON joins(idCarPooling ASC);
+CREATE INDEX fk_carpooling_idx ON carPoolingJoin(idCarPooling ASC);
 
 CREATE INDEX fk_campus_idx ON carPooling(idcampus ASC);
 
