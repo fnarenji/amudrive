@@ -245,7 +245,7 @@ section
 	font-size: 1.1rem;
 }
 
-input[type=text], input[type=date]
+input[type=text], input[type=date], input[type=password]
 {
 	text-align: center;
 	height: 30px;
@@ -296,11 +296,6 @@ input[type=text], input[type=date]
 	height: 100%;
 }
 
-#bcherche, #bpropose
-{
-	position: relative;
-	
-}
 #bcherche
 {
 	float: left;
@@ -473,4 +468,55 @@ footer .copyright
 	display: table;
 	margin-left:auto;
 	margin-right:auto;
+}
+
+/* Menu */
+
+.menu
+{
+    position: absolute;
+    z-index: 8;
+    left:7%;
+    top: 5%;
+    width: 85%;
+    height: 85%;
+    background-color: #686B6E;
+    opacity: 0.95;
+}
+
+.menubox
+{
+    width:75%;
+    height: 75%;
+    position: relative;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:5%;
+    background-color:#79b7e7;
+    padding:10px;
+}
+.menubox form
+{
+    display:table;
+    /*width:40%;*/
+    margin:auto;
+
+}
+.menubox input
+{
+    display: block;
+    margin-bottom:15px;
+    margin-top:5px;
+}
+.menubox h2
+{
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.menubox a
+{
+    display:block;
+    color: black;
+    margin-bottom: 4px;
 }

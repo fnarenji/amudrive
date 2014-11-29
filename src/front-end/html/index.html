@@ -7,6 +7,8 @@
         <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
 	</head>
 	<body ng-app="Amudrive">
+    <div ng-controller="AccountController">
+        <div ng-include="currentMenu">{{currentMenu}}</div>
 		<header>
 			<div class="logo">
 				<a href="#">AMUDrive</a>
@@ -14,14 +16,17 @@
 
 			<nav>
 				<ul>
-					<li><a href="#">Recherche</a></li>
-					<li><a href="#">Trajets</a></li>
-					<li><a href="#">Mon compte</a></li>
+					<li ng-repeat-start="elem in menu">
+                        <a ng-click="showMenu(elem.url)">{{elem.name}}</a>
+                    </li>
+                <span ng-repeat-end></span>
 				</ul>
-				<span id="connection_btn"><a href="#">Connexion</a></span>
+				<span id="connection_btn"><a href="" ng-click="showMenu('connection.html')">Connexion</a></span>
 			</nav>
-		
+
 		</header>
+
+    </div>
 
 		<section id="short_bio">
 			
@@ -113,6 +118,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
         <script src="../js/maps.js"></script>
+        <script src="../js/rest.js"></script>
         <script src="../js/main.js"></script>
 
         <script src="../js/jquery-ui.js"></script>
