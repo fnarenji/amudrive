@@ -474,13 +474,13 @@ footer .copyright
 
 .menu
 {
-    position: absolute;
+    position: fixed;
     z-index: 8;
     left:7%;
     top: 5%;
     width: 85%;
     height: 85%;
-    background-color: #686B6E;
+    background-color: transparent;
     opacity: 0.95;
 }
 
@@ -519,4 +519,8 @@ footer .copyright
     display:block;
     color: black;
     margin-bottom: 4px;
+}
+.menubox .closeCross
+{
+    text-align: right;
 }

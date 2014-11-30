@@ -13,6 +13,21 @@ myApp.controller('AccountController', ['$scope', function($scope){
         $scope.currentMenu = url;
     };
 
+    $scope.closeCross = function(){
+        $scope.currentMenu = '';
+    };
     if($scope.currentMenu == undefined)
         $scope.currentMenu = '';
+
+    $scope.connection = function(user){
+        console.log("connection");
+        console.log(user);
+        user.password = CryptoJS.SHA512(user.password);
+        pass = user.password;
+        console.log(pass.toString());
+    };
+
+    $scope.apiConnection = function(){
+
+    };
 }]);

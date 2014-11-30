@@ -1,21 +1,21 @@
 <div class="menu">
     <div class="menubox">
+        <a href="" class="closeCross" ng-click="closeCross()">Fermer</a>
         <h2>Se connecter</h2>
 
-        <form action="">
+        <form novalidate>
 
             <label for="username">Identifiant</label>
-            <input type="text" name="username"/>
+            <input type="text" ng-model="user.name"/>
 
             <label for="password">Mot de passe</label>
-            <input type="password" name="password"/>
+            <input type="password" ng-model="user.password"/>
 
-            <input type="submit" value="Se connecter"/>
+
+            <button ng-click="connection(user)">Se connecter</button>
             <a href="">Mot de passe oublié ?</a>
             <a href="">Pas encore inscrit ?</a>
         </form>
 
     </div>
 </div>
-
-        lol
