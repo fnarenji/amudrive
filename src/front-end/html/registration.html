@@ -1,3 +1,34 @@
-<p>
-    Registration here !
-</p>
+<div class="menu">
+    <div class="menubox">
+        <a href="" class="closeCross" ng-click="closeCross()">Fermer</a>
+        <h2>S'inscrire</h2>
+
+        <form novalidate>
+
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" ng-model="user.username" id="username"/>
+
+            <label for="password">Mot de passe</label>
+            <input type="password" ng-model="user.password" id="password"/>
+
+            <label for="firstname">Prénom</label>
+            <input type="text" ng-model="user.firstname" id="firstname"/>
+
+            <label for="lastname">Nom</label>
+            <input type="text" ng-model="user.lastname" id="lastname"/>
+
+            <label for="address">Adresse</label>
+            <input type="text" ng-model="user.address" id="address"/>
+
+            <label for="mail">Adresse mail (doit se terminer par "univ-amu.fr")</label>
+            <input type="email" ng-model="user.mail" id="mail"/>
+
+            <label for="tel">Numéro de téléphone</label>
+            <input type="tel" ng-model="user.phonenumber" id="tel"/>
+
+            <button ng-click="registration(user)">S'inscrire</button>
+
+        </form>
+
+    </div>
+</div>

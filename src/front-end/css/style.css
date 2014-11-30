@@ -245,7 +245,7 @@ section
 	font-size: 1.1rem;
 }
 
-input[type=text], input[type=date], input[type=password]
+input[type=text], input[type=date], input[type=password], input[type=email], input[type=tel]
 {
 	text-align: center;
 	height: 30px;
@@ -486,14 +486,15 @@ footer .copyright
 
 .menubox
 {
-    width:75%;
-    height: 75%;
+    width:55%;
+    min-height: 45%;
     position: relative;
     margin-left:auto;
     margin-right:auto;
     margin-top:5%;
     background-color:#79b7e7;
     padding:10px;
+    border-radius: 5px;
 }
 .menubox form
 {

@@ -8,7 +8,7 @@
 	</head>
 	<body ng-app="Amudrive">
     <div ng-controller="AccountController">
-        <div ng-include="currentMenu">{{currentMenu}}</div>
+        <div ng-include="currentMenu" ng-cloak>{{currentMenu}}</div>
 		<header>
 			<div class="logo">
 				<a href="#">AMUDrive</a>
@@ -17,7 +17,7 @@
 			<nav>
 				<ul>
 					<li ng-repeat-start="elem in menu">
-                        <a ng-click="showMenu(elem.url)">{{elem.name}}</a>
+                        <a ng-click="showMenu(elem.url)" ng-cloak>{{elem.name}}</a>
                     </li>
                 <span ng-repeat-end></span>
 				</ul>
