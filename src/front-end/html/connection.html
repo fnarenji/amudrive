@@ -6,10 +6,10 @@
         <form novalidate>
 
             <label for="username">Identifiant</label>
-            <input type="text" ng-model="user.name"/>
+            <input type="text" ng-model="user.username" id="username"/>
 
             <label for="password">Mot de passe</label>
-            <input type="password" ng-model="user.password"/>
+            <input type="password" ng-model="user.password_sha512" id="password"/>
 
 
             <button ng-click="connection(user)">Se connecter</button>

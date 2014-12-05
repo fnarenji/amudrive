@@ -2,8 +2,7 @@
  * Created by Thomas on 29/11/2014.
  */
 
-
-myApp.controller('AccountController', ['$scope', function($scope){
+myApp.controller('AccountController', ['$scope', '$http', function($scope, $http){
     $scope.menu =
         [ { "name" : 'Recherche', "url" : 'search.html'},
           { "name" : 'Trajets', "url" : 'path.html'},
@@ -16,18 +15,38 @@ myApp.controller('AccountController', ['$scope', function($scope){
     $scope.closeCross = function(){
         $scope.currentMenu = '';
     };
-    if($scope.currentMenu == undefined)
+
+    if($scope.currentMenu === undefined)
         $scope.currentMenu = '';
 
-    $scope.connection = function(user){
-        console.log("connection");
-        console.log(user);
-        user.password = CryptoJS.SHA512(user.password);
-        pass = user.password;
-        console.log(pass.toString());
+    $scope.REST = function(method, part, data){
+
+        data = $.param(data);
+        return $http({
+            url: 'http://192.168.0.31:8989/' + part,
+            method : method,
+            headers : {'Content-Type': 'application/x-www-form-urlencoded'},
+            data : data
+        });
     };
 
-    $scope.apiConnection = function(){
+    $scope.connection = function(user){
+        user.password_sha512 = CryptoJS.SHA512(user.password_sha512).toString();
 
+        $scope.REST('POST', 'auth', user).success(function(){
+            alert('Connexion réussie ! ');
+        });
+
+        $scope.closeCross();
+    };
+
+    $scope.registration = function(user){
+       user.Password = CryptoJS.SHA512(user.Password).toString();
+
+       $scope.REST('POST', 'register', user).success(function(){
+           alert('Inscription réussie !');
+       });
+
+       $scope.closeCross();
     };
 }]);

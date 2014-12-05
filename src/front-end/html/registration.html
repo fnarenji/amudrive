@@ -6,25 +6,41 @@
         <form novalidate>
 
             <label for="username">Nom d'utilisateur</label>
-            <input type="text" ng-model="user.username" id="username"/>
+            <input type="text" ng-model="user.UserName" id="username"/>
 
             <label for="password">Mot de passe</label>
-            <input type="password" ng-model="user.password" id="password"/>
+            <input type="password" ng-model="user.Password" id="password"/>
 
             <label for="firstname">Prénom</label>
-            <input type="text" ng-model="user.firstname" id="firstname"/>
+            <input type="text" ng-model="user.FirstName" id="firstname"/>
 
             <label for="lastname">Nom</label>
-            <input type="text" ng-model="user.lastname" id="lastname"/>
+            <input type="text" ng-model="user.LastName" id="lastname"/>
 
             <label for="address">Adresse</label>
-            <input type="text" ng-model="user.address" id="address"/>
+            <input type="text" ng-model="user.Address" id="address"/>
 
             <label for="mail">Adresse mail (doit se terminer par "univ-amu.fr")</label>
-            <input type="email" ng-model="user.mail" id="mail"/>
+            <input type="email" ng-model="user.Mail" id="mail"/>
 
             <label for="tel">Numéro de téléphone</label>
-            <input type="tel" ng-model="user.phonenumber" id="tel"/>
+            <input type="tel" ng-model="user.PhoneNumber" id="tel"/>
+
+            <label for="centersofinterest">Centre d'intérêt </label>
+            <input type="text" id="centersofinterest" ng-model="user.centersofinterest" />
+
+            <label for="mailnotifications">Souhaitez-vous recevoir des notifications par mail ?</label>
+            <input type="radio" ng-model="user.mailnotifications" value="true" id="mailnotifications" checked> Oui
+            <input type="radio" ng-model="user.mailnotifications" value="false" id="mailnotifications"> Non
+
+            <label for="phonenotifications">Souhaitez-vous recevoir des notifications sur votre téléphone ?</label>
+            <input type="radio" ng-model="user.phonenotifications" value="true" id="phonenotifications" checked> Oui
+            <input type="radio" ng-model="user.phonenotifications" value="false" id="phonenotifications"> Non
+
+            <label for="newsletter">Souhaitez-vous recevoir notre newsletter ?</label>
+            <input type="radio" ng-model="user.newsletter" value="true" id="newsletter" checked> Oui
+            <input type="radio" ng-model="user.newsletter" value="false" id="newsletter"> Non
+
 
             <button ng-click="registration(user)">S'inscrire</button>
 

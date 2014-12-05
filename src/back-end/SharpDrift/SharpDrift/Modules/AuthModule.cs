@@ -3,6 +3,7 @@ using System.Data.Common;
 using System.Web;
 using Insight.Database;
 using Nancy;
+using Org.BouncyCastle.Utilities.Collections;
 using SharpDrift.Utilities;
 using SharpDrift.Utilities.Data;
 using SharpDrift.Utilities.Security;
@@ -23,7 +24,7 @@ namespace SharpDrift.Modules
                             conn.SingleSqlAsync<int?>(
                                 "SELECT idclient FROM client WHERE username = @u AND password = @p",
                                 new {u = Request.Form.username, p = Request.Form.password_sha512});
-
+ 
                     if (idClient == null || Request.UserHostAddress == null)
                         return new
                         {

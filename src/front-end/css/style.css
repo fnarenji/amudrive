@@ -488,6 +488,7 @@ footer .copyright
 {
     width:55%;
     min-height: 45%;
+    max-height: 80%;
     position: relative;
     margin-left:auto;
     margin-right:auto;
@@ -495,6 +496,7 @@ footer .copyright
     background-color:#79b7e7;
     padding:10px;
     border-radius: 5px;
+    overflow:scroll;
 }
 .menubox form
 {
