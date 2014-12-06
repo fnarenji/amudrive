@@ -8,16 +8,29 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
           { "name" : 'Trajets', "url" : 'path.html'},
           { "name" : 'Mon Compte', "url" : 'account.html'}];
 
+    $scope.menusearch = "search.html";
+    $scope.menupath = "path.html";
+    $scope.menuconnection = "connection.html";
+    $scope.menuaccount = "account.html";
+    $scope.menuregistration = "registration.html";
+    $scope.menuregistrationnext = "registration_next.html";
+    $scope.usersave = '';
+
     $scope.showMenu = function(url){
         $scope.currentMenu = url;
     };
 
+    $scope.registrationNext = function(user){
+      $scope.usersave = user;
+      $scope.showMenu($scope.menuregistrationnext);
+    };
+
     $scope.closeCross = function(){
-        $scope.currentMenu = '';
+        $scope.currentMenu = $scope.menupath;
     };
 
     if($scope.currentMenu === undefined)
-        $scope.currentMenu = '';
+        $scope.currentMenu = $scope.menupath;
 
     $scope.REST = function(method, part, data){
 
@@ -33,11 +46,24 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
     $scope.connection = function(user){
         user.password_sha512 = CryptoJS.SHA512(user.password_sha512).toString();
 
-        $scope.REST('POST', 'auth', user).success(function(){
-            alert('Connexion réussie ! ');
+        $scope.REST('POST', 'auth', user).success(function(data){
+            $.param(data);
+
+            if(data.success == true){
+                alert('Connexion réussie ! ');
+                $scope.closeCross();
+            }
+            else if(data.reasons != undefined)
+            {
+                $scope.message = data.reasons;
+            }
+            else{
+                $scope.message = "Les identifiants saisis sont incorrects ou ce nom d'utilisateur n'existe pas";
+            }
+
         });
 
-        $scope.closeCross();
+
     };
 
     $scope.registration = function(user){

@@ -1,50 +1,26 @@
-<div class="menu">
-    <div class="menubox">
-        <a href="" class="closeCross" ng-click="closeCross()">Fermer</a>
-        <h2>S'inscrire</h2>
 
-        <form novalidate>
+        <h1>Inscription</h1>
+        <div class="form_box">
+            <form novalidate>
 
-            <label for="username">Nom d'utilisateur</label>
-            <input type="text" ng-model="user.UserName" id="username"/>
+                <div class="form_line">
+                    <input type="text" ng-model="user.FirstName" placeholder="Prénom" required/>
+                    <input type="text" ng-model="user.LastName" placeholder="Nom" required/>
+                </div>
+                <div class="form_line">
+                    <input type="text" ng-model="user.Address" placeholder="Adresse" required/>
+                    <input type="email" ng-model="user.Mail" placeholder="Mail (*.univ-amu.fr)" pattern="(\W|^)[\w.+\-]*@[a-zA-Z0-9.]*univ\-amu\.fr(\W|$)" required/>
+                </div>
+                <div class="form_line">
+                    <input type="text" ng-model="user.UserName" placeholder="Nom d'utilisateur" required/>
+                    <input type="password" ng-model="user.Password" placeholder="Mot de passe" required/>
+                </div>
+                <div class="form_line">
+                    <input type="tel" ng-model="user.PhoneNumber" placeholder="Téléphone" required/>
+                    <input type="text" ng-model="user.centersofinterest" placeholder="Centre d'intérêt" required/>
+                </div>
 
-            <label for="password">Mot de passe</label>
-            <input type="password" ng-model="user.Password" id="password"/>
+                <div class="submit"><a href="" ng-click="registrationNext(user)">Étape suivante</a></div>
 
-            <label for="firstname">Prénom</label>
-            <input type="text" ng-model="user.FirstName" id="firstname"/>
-
-            <label for="lastname">Nom</label>
-            <input type="text" ng-model="user.LastName" id="lastname"/>
-
-            <label for="address">Adresse</label>
-            <input type="text" ng-model="user.Address" id="address"/>
-
-            <label for="mail">Adresse mail (doit se terminer par "univ-amu.fr")</label>
-            <input type="email" ng-model="user.Mail" id="mail"/>
-
-            <label for="tel">Numéro de téléphone</label>
-            <input type="tel" ng-model="user.PhoneNumber" id="tel"/>
-
-            <label for="centersofinterest">Centre d'intérêt </label>
-            <input type="text" id="centersofinterest" ng-model="user.centersofinterest" />
-
-            <label for="mailnotifications">Souhaitez-vous recevoir des notifications par mail ?</label>
-            <input type="radio" ng-model="user.mailnotifications" value="true" id="mailnotifications" checked> Oui
-            <input type="radio" ng-model="user.mailnotifications" value="false" id="mailnotifications"> Non
-
-            <label for="phonenotifications">Souhaitez-vous recevoir des notifications sur votre téléphone ?</label>
-            <input type="radio" ng-model="user.phonenotifications" value="true" id="phonenotifications" checked> Oui
-            <input type="radio" ng-model="user.phonenotifications" value="false" id="phonenotifications"> Non
-
-            <label for="newsletter">Souhaitez-vous recevoir notre newsletter ?</label>
-            <input type="radio" ng-model="user.newsletter" value="true" id="newsletter" checked> Oui
-            <input type="radio" ng-model="user.newsletter" value="false" id="newsletter"> Non
-
-
-            <button ng-click="registration(user)">S'inscrire</button>
-
-        </form>
-
-    </div>
-</div>
+            </form>
+        </div>

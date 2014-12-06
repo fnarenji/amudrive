@@ -8,7 +8,7 @@
 	</head>
 	<body ng-app="Amudrive">
     <div ng-controller="AccountController">
-        <div ng-include="currentMenu" ng-cloak>{{currentMenu}}</div>
+
 		<header>
 			<div class="logo">
 				<a href="#">AMUDrive</a>
@@ -17,17 +17,14 @@
 			<nav>
 				<ul>
 					<li ng-repeat-start="elem in menu">
-                        <a ng-click="showMenu(elem.url)" ng-cloak>{{elem.name}}</a>
+                        <a href="#" ng-click="showMenu(elem.url)" ng-cloak>{{elem.name}}</a>
                     </li>
                 <span ng-repeat-end></span>
 				</ul>
-				<span id="connection_btn"><a href="" ng-click="showMenu('connection.html')">Connexion</a></span>
+				<span id="connection_btn"><a href="" ng-click="showMenu(menuconnection)">Connexion</a></span>
 			</nav>
 
 		</header>
-
-    </div>
-
 		<section id="short_bio">
 			
 			<h1> Covoiturage social </h1>
@@ -38,25 +35,10 @@
 			</div>
 		
 		</section>
-		
-		<section id="search">
-
-			<h1>Chercher un trajet</h1>
-
-			<form name="search" id="adr">
-				<input google-places location=location ng-controller="MapController"/>
-				<a href="#"><img src="../img/l_arrow.png" id="larrow" alt="left arrow"></a>
-				<a href="#"><img src="../img/r_arrow.png" id="rarrow" alt="right arrow"></a>
-				<input type="text" name="pole" placeholder="Pôle" id="ch2">
-				<input type="text" name="date" id="date" placeholder="Selectionnez une date ...">
-			</form>
-
-			<div id="button">
-				<div id="bcherche"><a href="#">Rechercher</a></div>
-				<div id="bpropose"><a href="#">Proposer</a></div>
-			</div>
-
-		</section>
+        <section id="search">
+            <div ng-include="currentMenu" ng-cloak>{{currentMenu}}</div>
+        </section>
+        </div>
 		<section id="maps">
 
             <div ng-controller="MapController">
@@ -118,7 +100,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha512.js"></script>
-        <script src="http://cdn.jsdelivr.net/restangular/1.1.3/restangular.min.js"></script>
         <script src="../js/maps.js"></script>
         <script src="../js/rest.js"></script>
         <script src="../js/main.js"></script>

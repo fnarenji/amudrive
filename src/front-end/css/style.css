@@ -218,6 +218,7 @@ section
 #search h1
 {
 	padding-top: 15px;
+    margin-bottom: 10px;
 	color: white;
 	text-align: center;
 	font-size: 50px;
@@ -240,7 +241,7 @@ section
 	padding-right: 10px;
 }
 
-#adr input
+input
 {
 	font-size: 1.1rem;
 }
@@ -263,7 +264,7 @@ input[type=text], input[type=date], input[type=password], input[type=email], inp
 	margin-left: 5px;
 }
 
-#button
+.button
 {
 	display: table;
 	width: 40%;
@@ -272,9 +273,7 @@ input[type=text], input[type=date], input[type=password], input[type=email], inp
 	margin-bottom: 15px;
 }
 
-/* See you soon media queries ! */
-
-#bcherche, #bpropose
+#bcherche, #bpropose, .submit
 {
 	display: block;
 	margin-top: 15px;
@@ -286,7 +285,7 @@ input[type=text], input[type=date], input[type=password], input[type=email], inp
 	line-height: 280%;
 }
 
-#bcherche a, #bpropose a
+#bcherche a, #bpropose a, .submit a
 {
 	display: inline-block;
 	color: #FFFFFF;
@@ -344,6 +343,11 @@ input[type=text], input[type=date], input[type=password], input[type=email], inp
 label
 {
     font-weight: bold;
+    color: #FFF;
+}
+input[type=radio]
+{
+    color: #FFF;
 }
 
 /* Search Panel */
@@ -470,60 +474,71 @@ footer .copyright
 	margin-right:auto;
 }
 
-/* Menu */
-
-.menu
+.form_box
 {
-    position: fixed;
-    z-index: 8;
-    left:7%;
-    top: 5%;
-    width: 85%;
-    height: 85%;
-    background-color: transparent;
-    opacity: 0.95;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.menubox
+.form_box input
 {
-    width:55%;
-    min-height: 45%;
-    max-height: 80%;
-    position: relative;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:5%;
-    background-color:#79b7e7;
-    padding:10px;
-    border-radius: 5px;
-    overflow:scroll;
-}
-.menubox form
-{
-    display:table;
-    /*width:40%;*/
-    margin:auto;
+    display: inline-block;
 
 }
-.menubox input
-{
-    display: block;
-    margin-bottom:15px;
-    margin-top:5px;
-}
-.menubox h2
-{
-    font-size: 1.5rem;
-    text-align: center;
-    margin-bottom: 10px;
-}
-.menubox a
+
+.form_box .submit
 {
     display:block;
-    color: black;
-    margin-bottom: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
 }
-.menubox .closeCross
+
+.form_line
 {
-    text-align: right;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    color: #FFF;
+}
+.form_line input:first-child, .form_line a:first-child
+{
+    margin-right: 5px;
+}
+a:visited
+{
+    color: #FFF;
+}
+.error
+{
+    display: block;
+    margin: auto;
+    color: #cd0a0a;
+}
+.form_line input:focus:invalid
+{
+    outline-style: none;
+    border:1px solid #FF0000;
+    -webkit-box-shadow:  0px 0px 3px  #FF0000;
+    box-shadow:  0px 0px 3px  #FF0000;
+}
+.form_line input:focus:valid
+{
+    outline-style: none;
+    border: 1px solid #56C93F;
+    -webkit-box-shadow:  0px 0px 5px  #56C93F;
+    box-shadow:  0px 0px 5px  #56C93F;
+}
+.form_radio
+{
+    width:100%;
+    color: #FFF;
+    margin-bottom: 10px;
+}
+.form_radio .radio
+{
+   float: right;
+   margin-right: -50px;
 }

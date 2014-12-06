@@ -1,21 +1,20 @@
-<div class="menu">
-    <div class="menubox">
-        <a href="" class="closeCross" ng-click="closeCross()">Fermer</a>
-        <h2>Se connecter</h2>
+        <h1>Se connecter</h1>
+        <div class="form_box">
 
-        <form novalidate>
+            <form novalidate>
+                <div class="error">{{message}}</div>
+                <div class="form_line">
+                    <input type="text" ng-model="user.username" id="username" placeholder="Nom d'utilisateur ..."/>
 
-            <label for="username">Identifiant</label>
-            <input type="text" ng-model="user.username" id="username"/>
+                    <input type="password" ng-model="user.password_sha512" id="password" placeholder="Mot de passe ..."/>
+                </div>
 
-            <label for="password">Mot de passe</label>
-            <input type="password" ng-model="user.password_sha512" id="password"/>
+                <div class="submit"><a href="" ng-click="connection(user)">Se connecter</a></div>
 
+                <div class="form_line">
+                    <a href="">Mot de passe oublié ?</a>
+                    <a href="" ng-click="showMenu(menuregistration)">Pas encore inscrit ?</a>
+                </div>
 
-            <button ng-click="connection(user)">Se connecter</button>
-            <a href="">Mot de passe oublié ?</a>
-            <a href="" ng-click="showMenu('registration.html')">Pas encore inscrit ?</a>
-        </form>
-
-    </div>
-</div>
+            </form>
+        </div>
