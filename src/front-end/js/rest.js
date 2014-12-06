@@ -5,7 +5,7 @@
 myApp.controller('AccountController', ['$scope', '$http', function($scope, $http){
     $scope.menu =
         [ { "name" : 'Recherche', "url" : 'search.html'},
-          { "name" : 'Trajets', "url" : 'path.html'},
+          { "name" : 'Trajets', "url" : 'mycarpoolings.html'},
           { "name" : 'Mon Compte', "url" : 'account.html'}];
 
     $scope.menusearch = "search.html";
