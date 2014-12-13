@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using System.Threading;
 using Insight.Database;
 using Nancy;
 using Nancy.ModelBinding;
@@ -75,7 +76,13 @@ namespace SharpDrift.Modules
                     await conn.ExecuteSqlAsync("INSERT INTO clientMailValidation VALUES (@IdClient, @ValidationKey)",
                                                 new { IdClient = c.IdClient, ValidationKey = validationKey });
 
-                    await Mail.Send(string.Join(" ", c.FirstName, c.LastName), c.Mail, "Activez votre compte AMUDrive !", "http://localhost/validate/" + validationKey);
+                    ThreadPool.QueueUserWorkItem(
+                        async delegate
+                        {
+                            await
+                                Mail.Send(string.Join(" ", c.FirstName, c.LastName), c.Mail,
+                                    "Activez votre compte AMUDrive !", "http://localhost/validate/" + validationKey);
+                        });
 
                     return new
                     {
