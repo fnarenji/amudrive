@@ -12,6 +12,7 @@ lors du retour arrière dans le formulaire ...)
 * **Création d'un itinéraire Google Maps (sans communication utilisateur)**
 * **Autocomplétion pour la recherche de pôle lors de la création d'un itinéraire**
 * **Récupération des clics sur le panel du bas lors de la recherche/création d'un itinéraire dans le javascript pour l'afficher sur la
+* Rendre cliquable le logo pour revenir sur la page original (href ou js ?)
 carte**
 * **Fiche d'un trajet (commentaires, participants ...)**
 * **Sécurisation de toutes les saisies des utilisateurs**
