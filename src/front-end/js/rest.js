@@ -22,7 +22,16 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
 
     $scope.registrationNext = function(user){
       $scope.usersave = user;
-      $scope.showMenu($scope.menuregistrationnext);
+
+        new google.maps.Geocoder().geocode( { 'address': user.Address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                user.Longitude = results[0].geometry.location.lng();
+                user.Latitude = results[0].geometry.location.lat();
+                $scope.showMenu($scope.menuregistrationnext);
+            } else {
+                alert("Votre adresse n'a pas pu être validée: " + status);
+            }
+        });
     };
 
     $scope.closeCross = function(){
@@ -66,13 +75,19 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
 
     };
 
-    $scope.registration = function(user){
-       user.Password = CryptoJS.SHA512(user.Password).toString();
+    $scope.registration = function(user) {
+        $.extend(user, $scope.usersave); // fuuuuu, dirtiest shit ever, where's yo service bitch ?
+        user.Password = CryptoJS.SHA512(user.Password).toString();
 
-       $scope.REST('POST', 'register', user).success(function(){
-           alert('Inscription réussie !');
-       });
+        $scope.REST('POST', 'register', user).success(function(data){
 
-       $scope.closeCross();
+            if (data.success)
+            {
+                $scope.closeCross();
+                return;
+            }
+            alert(data.success + " " + data.reasons);
+        });
+
     };
 }]);

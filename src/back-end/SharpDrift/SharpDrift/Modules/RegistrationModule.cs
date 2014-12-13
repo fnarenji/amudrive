@@ -40,7 +40,7 @@ namespace SharpDrift.Modules
                         || string.IsNullOrEmpty(c.PhoneNumber))
                         reasons.Add("Tous les champs doivent être remplis.");
 
-                    if (!new MailAddress(c.Mail).Host.EndsWith("univ-amu.fr"))
+                    if (c.Mail != null && !new MailAddress(c.Mail).Host.EndsWith("univ-amu.fr"))
                         reasons.Add("Votre adresse email doit être une adresse de l'université Aix-Marseille (de domaine univ-amu.fr)");
 
                     if (reasons.Any())

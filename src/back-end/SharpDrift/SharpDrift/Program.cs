@@ -3,6 +3,7 @@ using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Diagnostics;
 using Nancy.Hosting.Self;
+using Nancy.Responses;
 using Nancy.TinyIoc;
 
 namespace SharpDrift
@@ -17,6 +18,16 @@ namespace SharpDrift
                             .WithHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE")
                             .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type");
 
+            });
+
+            pipelines.OnError.AddItemToEndOfPipeline((ctx, e) =>
+            {
+                ctx.Response = new TextResponse(e.ToString());
+                ctx.Response.WithHeader("Access-Control-Allow-Origin", "*")
+                            .WithHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE")
+                            .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type");
+
+                return ctx.Response;
             });
         }
 

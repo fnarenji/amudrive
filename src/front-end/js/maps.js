@@ -3,7 +3,13 @@
 
 var myApp = angular.module('Amudrive', []);
 
-myApp.controller('MapController', ['$scope', mapController])
+myApp.controller('MapController', ['$scope', mapController]);
+myApp.factory('MapService', function ($rootScope) {
+    var sharedService = {};
+
+    sharedService.message = '';
+    sharedService.addressToCoordRequest
+});
 
 function mapController ($scope){
 
