@@ -117,7 +117,6 @@
     <Compile Include="Modules\VehicleModule.cs" />
     <Compile Include="Modules\CarPoolingModule.cs" />
     <Compile Include="Modules\ClientModule.cs" />
-    <Compile Include="pipelines.cs" />
     <Compile Include="Utilities\Data\CustomJsonSerializer.cs" />
     <Compile Include="Utilities\Mail.cs" />
     <Compile Include="Utilities\Security\AES.cs" />

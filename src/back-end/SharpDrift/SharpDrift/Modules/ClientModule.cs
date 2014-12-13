@@ -48,7 +48,8 @@ namespace SharpDrift.Modules
                         "phoneNumber = @PhoneNumber,",
                         "mailNotifications = @MailNotifications,",
                         "phoneNotifications = @PhoneNotifications,",
-                        "newsletter = @Newsletter",
+                        "newsletter = @Newsletter,",
+                        "favoriteCampus = @FavoriteCampus",
                         "WHERE idClient = @IdClient"), c);
 
                     return new

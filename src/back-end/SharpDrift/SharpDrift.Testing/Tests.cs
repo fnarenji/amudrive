@@ -152,7 +152,8 @@ namespace SharpDrift.Testing
                 PhoneNumber = "1337133749",
                 MailNotifications = true,
                 PhoneNotifications = true,
-                Newsletter = true
+                Newsletter = true,
+                FavoriteCampus = 1
             };
 
             Assert.Equal(cRef.IdClient, json.client.IdClient);
@@ -195,7 +196,8 @@ namespace SharpDrift.Testing
                 PhoneNumber = "1337133749",
                 MailNotifications = true,
                 PhoneNotifications = true,
-                Newsletter = true
+                Newsletter = true,
+                FavoriteCampus = 1
             };
 
             string response = browser.Put("/client", with =>
@@ -490,7 +492,8 @@ namespace SharpDrift.Testing
                 PhoneNumber = "0606060606",
                 MailNotifications = true,
                 PhoneNotifications = false,
-                Newsletter = true
+                Newsletter = true,
+                FavoriteCampus = 2
             };
 
             var response = browser.Post("/register", with => with.JsonBody(client)).Body.AsString();
@@ -533,7 +536,8 @@ namespace SharpDrift.Testing
                 PhoneNumber = "0606060606",
                 MailNotifications = true,
                 PhoneNotifications = false,
-                Newsletter = true
+                Newsletter = true,
+                FavoriteCampus = 2
             };
 
             var response = browser.Post("/register", with => with.JsonBody(client)).Body.AsString();

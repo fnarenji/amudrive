@@ -20,10 +20,11 @@ namespace SharpDrift.DataModel
         public bool MailNotifications { get; set; }
         public bool PhoneNotifications { get; set; }
         public bool Newsletter { get; set; }
+        public int FavoriteCampus { get; set; }
 
         public bool ShouldSerializePassword()
         {
-            return false;
+            return false; // JSON Serializer uses this method to know if it should serialize a certain field :)
         }
     }
 }

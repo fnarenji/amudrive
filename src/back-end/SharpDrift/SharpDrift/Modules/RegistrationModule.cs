@@ -67,7 +67,8 @@ namespace SharpDrift.Modules
                         "@PhoneNumber,",
                         "@MailNotifications,",
                         "@PhoneNotifications,",
-                        "@Newsletter) RETURNING *"), c);
+                        "@Newsletter,",
+                        "@FavoriteCampus) RETURNING *"), c);
 
                     var validationKey = Path.GetRandomFileName() + Path.GetRandomFileName() + Path.GetRandomFileName();
 
