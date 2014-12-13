@@ -39,6 +39,8 @@ namespace SharpDrift.Modules
                     await conn.ExecuteSqlAsync(string.Join(" ", "UPDATE CLIENT SET  firstName = @FirstName,",
                         "lastName = @LastName,",
                         "address = @Address,",
+                        "long = @Long,",
+                        "lat = @Lat,",
                         "mail = @Mail,",
                         "registrationTime = @RegistrationTime,",
                         "messagingParameters = @MessagingParameters,",

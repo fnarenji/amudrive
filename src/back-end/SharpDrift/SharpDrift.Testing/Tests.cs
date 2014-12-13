@@ -142,6 +142,8 @@ namespace SharpDrift.Testing
                 FirstName = "mdr",
                 LastName = "ptdr",
                 Address = "swag",
+                Long = 43.2852755,
+                Lat = 5.3842193,
                 Mail = "lel@oklm.kom",
                 Password = string.Empty,
                 RegistrationTime = DateTime.Parse("2014-11-09 17:54:28.847"),
@@ -158,6 +160,8 @@ namespace SharpDrift.Testing
             Assert.Equal(cRef.FirstName, json.client.FirstName);
             Assert.Equal(cRef.LastName, json.client.LastName);
             Assert.Equal(cRef.Address, json.client.Address);
+            Assert.True(Math.Abs(cRef.Long - json.client.Long) < 0.001);
+            Assert.True(Math.Abs(cRef.Lat - json.client.Lat) < 0.001);
             Assert.Equal(cRef.Mail, json.client.Mail);
             Assert.Null(json.client.Password);
             Assert.Equal(cRef.RegistrationTime, json.client.RegistrationTime);
@@ -182,6 +186,8 @@ namespace SharpDrift.Testing
                 FirstName = "FAKE_FIRSTNAME",
                 LastName = "ptdr",
                 Address = "swag",
+                Long = 43.2852755,
+                Lat = 5.3842193,
                 Mail = "lel@oklm.kom",
                 RegistrationTime = DateTime.Parse("2014-11-09 17:54:28.847"),
                 MessagingParameters = 2,
@@ -474,6 +480,8 @@ namespace SharpDrift.Testing
                 FirstName = "RANDOM",
                 LastName = "MODNAR",
                 Address = "HERE AND THERE",
+                Long = new Random().NextDouble(),
+                Lat = new Random().NextDouble(),
                 Mail = username + "@etu.univ-amu.fr",
                 Password = password,
                 RegistrationTime = DateTime.UtcNow,
@@ -515,6 +523,8 @@ namespace SharpDrift.Testing
                 FirstName = "RANDOM",
                 LastName = "MODNAR",
                 Address = "HERE AND THERE",
+                Long = new Random().NextDouble(),
+                Lat = new Random().NextDouble(),
                 Mail = username + "@AZEMAIL.MAIL",
                 Password = password,
                 RegistrationTime = DateTime.UtcNow,

@@ -5,6 +5,10 @@
   long REAL NOT NULL,
   lat REAL NOT NULL);
   
+INSERT INTO campus VALUES (DEFAULT, '413 avenue Gaston Berger, 13625 Aix-en-Provence', 'IUT Aix-en-Provence', 43.5143078, 5.451476);
+INSERT INTO campus VALUES (DEFAULT, '3 avenue Robert Schuman, 13100 Aix-en-Provence', 'Fac de droit d''Aix-en-provence', 43.5191514, 5.4476824);
+INSERT INTO campus VALUES (DEFAULT, 'Médiathèque d''Arles, 13200 Arles', 'Fac de droit d''Arles', 43.67603, 4.625502);
+
 CREATE TABLE client (
   idClient SERIAL PRIMARY KEY,
   userName VARCHAR(30) NOT NULL,
@@ -24,16 +28,12 @@ CREATE TABLE client (
   newsletter BOOLEAN NOT NULL,
   favoriteCampus INTEGER REFERENCES campus(idCampus) ON DELETE RESTRICT);
 
-INSERT INTO client VALUES (DEFAULT, 'aze', 'mdr', 'ptdr', 'swag', 43.2852755, 5.3842193, 'lel@oklm.kom', 'a48c25f7ec82996486b5a8387cc4e147c628c1f48ae8c868561474fbc5eaf4bec44af63f002681aa8dd32f0dfde1bac24b44d7d6014b73fd26025d94e8f58d3b', DEFAULT, 2, 'lesgroessesqueues', '1337133749', TRUE, TRUE, TRUE);
-INSERT INTO client VALUES (DEFAULT, 'swag', 'hipster', 'wallah', 'oklm', 43.2452355, 5.3442293, 'trkl@bonbukkake.jap', '1e31d1b64272d08cfa09d838305d9926a0720bf1abe498ed5b9a06df6ffd00304929c212edd3d60e7295965ccbced6120c2a113f0c199840930f47f62aa33a1f', DEFAULT, 2, 'goutugoutu', '1337133749', TRUE, TRUE, TRUE);
+INSERT INTO client VALUES (DEFAULT, 'aze', 'mdr', 'ptdr', 'swag', 43.2852755, 5.3842193, 'lel@oklm.kom', 'a48c25f7ec82996486b5a8387cc4e147c628c1f48ae8c868561474fbc5eaf4bec44af63f002681aa8dd32f0dfde1bac24b44d7d6014b73fd26025d94e8f58d3b', DEFAULT, 2, 'lesgroessesqueues', '1337133749', TRUE, TRUE, TRUE, 1);
+INSERT INTO client VALUES (DEFAULT, 'swag', 'hipster', 'wallah', 'oklm', 43.2452355, 5.3442293, 'trkl@bonbukkake.jap', '1e31d1b64272d08cfa09d838305d9926a0720bf1abe498ed5b9a06df6ffd00304929c212edd3d60e7295965ccbced6120c2a113f0c199840930f47f62aa33a1f', DEFAULT, 2, 'goutugoutu', '1337133749', TRUE, TRUE, TRUE, 2);
  
 CREATE TABLE clientMailValidation (
   idClient INT NOT NULL PRIMARY KEY REFERENCES client ON DELETE RESTRICT,
   validationKey VARCHAR(127) NOT NULL);
-
-INSERT INTO campus VALUES (DEFAULT, '413 avenue Gaston Berger, 13625 Aix-en-Provence', 'IUT Aix-en-Provence', 43.5143078, 5.451476);
-INSERT INTO campus VALUES (DEFAULT, '3 avenue Robert Schuman, 13100 Aix-en-Provence', 'Fac de droit d''Aix-en-provence', 43.5191514, 5.4476824);
-INSERT INTO campus VALUES (DEFAULT, 'Médiathèque d''Arles, 13200 Arles', 'Fac de droit d''Arles', 43.67603, 4.625502);
 
 CREATE TYPE BV AS ENUM ('M', 'A');
 

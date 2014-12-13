@@ -31,6 +31,8 @@ namespace SharpDrift.Modules
                         || string.IsNullOrEmpty(c.FirstName)
                         || string.IsNullOrEmpty(c.LastName)
                         || string.IsNullOrEmpty(c.Address)
+                        || Math.Abs(c.Lat) < 0.001
+                        || Math.Abs(c.Long) < 0.001
                         || string.IsNullOrEmpty(c.Mail)
                         || string.IsNullOrEmpty(c.Address)
                         || string.IsNullOrEmpty(c.Password)
@@ -55,6 +57,8 @@ namespace SharpDrift.Modules
                         "@FirstName,",
                         "@LastName,",
                         "@Address,",
+                        "@Long,",
+                        "@Lat,",
                         "@Mail,",
                         "@Password,",
                         "DEFAULT,",
