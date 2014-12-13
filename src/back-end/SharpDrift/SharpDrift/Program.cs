@@ -1,6 +1,7 @@
 ﻿using System;
 using Nancy;
 using Nancy.Bootstrapper;
+using Nancy.Diagnostics;
 using Nancy.Hosting.Self;
 using Nancy.TinyIoc;
 
@@ -17,6 +18,11 @@ namespace SharpDrift
                             .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type");
 
             });
+        }
+
+        protected override DiagnosticsConfiguration DiagnosticsConfiguration
+        {
+            get { return new DiagnosticsConfiguration { Password = @"azerty" }; }
         }
     }
     

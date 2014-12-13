@@ -36,7 +36,7 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
 
         data = $.param(data);
         return $http({
-            url: 'http://192.168.0.31:8989/' + part,
+            url: 'http://localhost:8989/' + part,
             method : method,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'},
             data : data
