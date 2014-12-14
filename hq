@@ -1,0 +1,13 @@
+[1mdiff --git a/src/back-end/SharpDrift/SharpDrift/Modules/CarPoolingModule.cs b/src/back-end/SharpDrift/SharpDrift/Modules/CarPoolingModule.cs[m
+[1mindex e76b8ae..a63a881 100644[m
+[1m--- a/src/back-end/SharpDrift/SharpDrift/Modules/CarPoolingModule.cs[m
+[1m+++ b/src/back-end/SharpDrift/SharpDrift/Modules/CarPoolingModule.cs[m
+[36m@@ -136,7 +136,7 @@[m [mnamespace SharpDrift.Modules[m
+ [m
+                     await[m
+                         conn.ExecuteSqlAsync([m
+[31m-                            string.Join(" ", "INSERT INTO comment (idMessage,idClient,idCarPooling,comment,drivermark,poolingmark) VALUES (@idComment,@IdCarPooling,@IdClient,@Message,@DriverMark,@PoolingMark)"),[m
+[32m+[m[32m                            string.Join(" ", "INSERT INTO comment (idMessage,idClient,idCarPooling,comment,drivermark,poolingmark) VALUES (dComment,@IdCarPooling,@IdClient,@Message,@DriverMark,@PoolingMark)"),[m
+                             j);[m
+ [m
+                     return new[m
