@@ -4,23 +4,20 @@
 
 myApp.controller('AccountController', ['$scope', '$http', function($scope, $http) {
     $scope.menu =
-        [ { "name" : 'Recherche', "url" : 'path.html'},
-          { "name" : 'Trajets', "url" : 'mycarpoolings.html'},
-          { "name" : 'Mon Compte', "url" : 'account.html'}];
+        [ { name : 'Recherche', url : '#/path'},
+          { name : 'Trajets', url : '#/mycarpoolings'},
+          { name : 'Mon Compte', url : '#/account'}];
 
-    $scope.menusearch = "path.html";
+    /*$scope.menusearch = "path.html";
     $scope.menupath = "path.html";
     $scope.menuconnection = "connection.html";
     $scope.menuaccount = "account.html";
     $scope.menuregistration = "registration.html";
-    $scope.menuregistrationnext = "registration_next.html";
-    $scope.authToken = $.cookie('authToken');
-    $scope.connectButton = 'Connexion';
-    $scope.user = {};
+    $scope.menuregistrationnext = "registration_next.html";*/
 
-    $scope.showMenu = function(url){
-        $scope.currentMenu = url;
-    };
+    $scope.authToken = $.cookie('authToken');
+    $scope.connectButton = {name :'Connexion', url: '#/connection'};
+    $scope.user = {};
 
     $scope.registrationNext = function(user){
         new google.maps.Geocoder().geocode( { 'address': $scope.user.Address }, function(results, status) {
@@ -34,12 +31,9 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
         });
     };
 
-    $scope.closeCross = function(){
-        $scope.currentMenu = $scope.menupath;
+    $scope.returnHome = function(){
+        window.location.href = '#/';;
     };
-
-    if($scope.currentMenu === undefined)
-        $scope.currentMenu = $scope.menupath;
 
     $scope.REST = function(method, part, data){
 
@@ -63,7 +57,7 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
                 $scope.authToken = data.authToken;
                 alert('Connexion réussie ! ');
                 $scope.message = ''; // Clear previous error messages
-                $scope.closeCross();
+                $scope.returnHome();
                 $scope.connectButton = 'Deconnexion';
             }
             else if(data.reasons != undefined)
@@ -86,7 +80,7 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
 
             if (data.success)
             {
-                $scope.closeCross();
+                $scope.returnHome();
                 return;
             }
             alert(data.success + " " + data.reasons);

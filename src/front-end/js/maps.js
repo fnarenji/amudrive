@@ -1,7 +1,7 @@
 'use strict';
 
 
-var myApp = angular.module('Amudrive', []);
+var myApp = angular.module('Amudrive', ['ngRoute']);
 
 myApp.controller('MapController', ['$scope', mapController]);
 myApp.factory('MapService', function ($rootScope) {
