@@ -4,20 +4,20 @@
             <form novalidate>
 
                 <div class="form_line">
-                    <input type="text" ng-model="user.FirstName" placeholder="Prénom" required/>
-                    <input type="text" ng-model="user.LastName" placeholder="Nom" required/>
+                    <input type="text" ng-model="user.FirstName" placeholder="Prénom" value="{{user.FirstName}}"required/>
+                    <input type="text" ng-model="user.LastName" placeholder="Nom" value="{{user.LastName}}" required/>
                 </div>
                 <div class="form_line">
-                    <input type="text" ng-model="user.Address" placeholder="Adresse" required/>
-                    <input type="email" ng-model="user.Mail" placeholder="Mail (*.univ-amu.fr)" pattern="(\W|^)[\w.+\-]*@[a-zA-Z0-9.]*univ\-amu\.fr(\W|$)" required/>
+                    <input type="text" ng-model="user.Address" placeholder="Adresse" value="{{user.Address}}" required/>
+                    <input type="email" ng-model="user.Mail" placeholder="Mail (*.univ-amu.fr)" value="{{user.Mail}}" pattern="(\W|^)[\w.+\-]*@[a-zA-Z0-9.]*univ\-amu\.fr(\W|$)" required/>
                 </div>
                 <div class="form_line">
-                    <input type="text" ng-model="user.UserName" placeholder="Nom d'utilisateur" required/>
-                    <input type="password" ng-model="user.Password" placeholder="Mot de passe" required/>
+                    <input type="text" ng-model="user.UserName" placeholder="Nom d'utilisateur" value="{{user.UserName}}" required/>
+                    <input type="password" ng-model="user.Password" placeholder="Mot de passe" value="{{user.Password}}" required/>
                 </div>
                 <div class="form_line">
-                    <input type="tel" ng-model="user.PhoneNumber" placeholder="Téléphone" required/>
-                    <input type="text" ng-model="user.centersofinterest" placeholder="Centre d'intérêt" required/>
+                    <input type="tel" ng-model="user.PhoneNumber" placeholder="Téléphone" value="{{user.PhoneNumber}}" required/>
+                    <input type="text" ng-model="user.centersofinterest" placeholder="Centre d'intérêt" value="{{user.centersofinterest}}" required/>
                 </div>
 
                 <div class="submit"><a href="" ng-click="registrationNext(user)">Étape suivante</a></div>
