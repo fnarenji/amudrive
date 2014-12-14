@@ -3,14 +3,9 @@
  */
 
 myApp.controller('AccountController', ['$scope', 'REST', function($scope, REST) {
-    $scope.menu =
-        [ { name : 'Recherche', url : '#/path'},
-          { name : 'Trajets', url : '#/mycarpoolings'},
-          { name : 'Mon Compte', url : '#/account'}];
 
 
     $scope.authToken = $.cookie('authToken');
-    $scope.connectButton = {name :'Connexion', url: '#/connection'};
     $scope.user = {};
 
     $scope.registrationNext = function(user){

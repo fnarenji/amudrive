@@ -9,14 +9,7 @@ myApp.factory('MapService', function ($rootScope) {
     sharedService.addressToCoordRequest
 });
 function mapController($scope, Map){
-
-    // :'( Angular ...
-    $scope.count = ($scope.count === undefined) ? 0 : $scope.count;
-    if($scope.count === 1){
-        Map.displayMap();
-        $scope.count++;
-    }
-    $scope.count++;
+    Map.displayMap();
 }
 /* Directives */
 
