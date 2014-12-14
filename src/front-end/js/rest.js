@@ -2,7 +2,7 @@
  * Created by Thomas on 29/11/2014.
  */
 
-myApp.controller('AccountController', ['$scope', '$http', function($scope, $http) {
+myApp.controller('AccountController', ['$scope', 'REST', function($scope, REST) {
     $scope.menu =
         [ { name : 'Recherche', url : '#/path'},
           { name : 'Trajets', url : '#/mycarpoolings'},
@@ -29,21 +29,11 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
         window.location.href = '#/';;
     };
 
-    $scope.REST = function(method, part, data){
-
-        data = $.param(data);
-        return $http({
-            url: 'http://localhost:8989/' + part,
-            method : method,
-            headers : {'Content-Type': 'application/x-www-form-urlencoded'},
-            data : data
-        });
-    };
 
     $scope.connection = function(auth){
         auth.password_sha512 = CryptoJS.SHA512(auth.Password).toString();
 
-        $scope.REST('POST', 'auth', auth).success(function(data){
+        REST.REST('POST', 'auth', auth).success(function(data){
             $.param(data);
 
             if(data.success == true){
@@ -70,7 +60,7 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
         $scope.user.FavoriteCampus = 1; // @todo REMOVE
         console.log($scope.user);
         $scope.user.PasswordNoHash = ""; // Erase password
-        $scope.REST('POST', 'register', $scope.user).success(function(data){
+        REST.REST('POST', 'register', $scope.user).success(function(data){
 
             if (data.success)
             {
