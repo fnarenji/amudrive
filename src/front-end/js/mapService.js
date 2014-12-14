@@ -83,12 +83,12 @@ myApp.service('Map', function(){
 
     that.changeZoom = function(zoom){
         that.zoom = (zoom == undefined) ? that.zoom : zoom;
-        that.displayMap();
+        //that.displayMap();
     };
 
     that.changeLocation = function(loc) {
         that.loc = (loc == undefined) ? that.loc : loc;
-        that.displayMap();
+        //that.displayMap();
     };
 
     that.drawCircle = function(loc, radius){

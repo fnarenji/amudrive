@@ -8,12 +8,6 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
           { name : 'Trajets', url : '#/mycarpoolings'},
           { name : 'Mon Compte', url : '#/account'}];
 
-    /*$scope.menusearch = "path.html";
-    $scope.menupath = "path.html";
-    $scope.menuconnection = "connection.html";
-    $scope.menuaccount = "account.html";
-    $scope.menuregistration = "registration.html";
-    $scope.menuregistrationnext = "registration_next.html";*/
 
     $scope.authToken = $.cookie('authToken');
     $scope.connectButton = {name :'Connexion', url: '#/connection'};

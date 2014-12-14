@@ -1,6 +1,6 @@
 'use strict';
 
-myApp.controller('MapController', ['$scope','Map', mapController]);
+myApp.controller('MapController', ['$scope', 'Map', mapController]);
 
 myApp.factory('MapService', function ($rootScope) {
     var sharedService = {};
@@ -9,7 +9,14 @@ myApp.factory('MapService', function ($rootScope) {
     sharedService.addressToCoordRequest
 });
 function mapController($scope, Map){
-    Map.displayMap();
+
+    // :'( Angular ...
+    $scope.count = ($scope.count === undefined) ? 0 : $scope.count;
+    if($scope.count === 1){
+        Map.displayMap();
+        $scope.count++;
+    }
+    $scope.count++;
 }
 /* Directives */
 
