@@ -2,22 +2,24 @@
  * Created by Thomas on 29/11/2014.
  */
 
-myApp.controller('AccountController', ['$scope', 'REST', function($scope, REST) {
+myApp.controller('AccountController', ['$scope', 'REST', 'Map', function($scope, REST, Map) {
 
 
     $scope.authToken = $.cookie('authToken');
     $scope.user = {};
 
     $scope.registrationNext = function(user){
-        new google.maps.Geocoder().geocode( { 'address': $scope.user.Address }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                $scope.user.Long = results[0].geometry.location.lng();
-                $scope.user.Lat = results[0].geometry.location.lat();
-                $scope.showMenu($scope.menuregistrationnext);
-            } else {
-                alert("Votre adresse n'a pas pu être validée: " + status);
-            }
-        });
+        location = Map.addressToCoordinates($scope.user.Address);
+
+        if (location == undefined)
+        {
+            alert('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, le service peut être temporairement indisponible.');
+            return;
+        }
+
+        $scope.user.Long = location.lng();
+        $scope.user.Lat = location.lat();
+        $scope.showMenu($scope.menuregistrationnext);
     };
 
     $scope.returnHome = function(){

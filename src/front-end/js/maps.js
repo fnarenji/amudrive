@@ -2,12 +2,6 @@
 
 myApp.controller('MapController', ['$scope', 'Map', mapController]);
 
-myApp.factory('MapService', function ($rootScope) {
-    var sharedService = {};
-
-    sharedService.message = '';
-    sharedService.addressToCoordRequest
-});
 function mapController($scope, Map){
     Map.displayMap();
 }

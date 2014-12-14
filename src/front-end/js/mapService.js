@@ -135,4 +135,14 @@ myApp.service('Map', function(){
             }
         });
     };
+
+    that.addressToCoordinates = function(address){
+        location = undefined;
+        new google.maps.Geocoder().geocode( { 'address': address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                location = results[0].geometry.location;
+            }
+        });
+        return location;
+    };
 });
