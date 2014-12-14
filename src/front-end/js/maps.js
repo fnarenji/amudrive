@@ -18,6 +18,7 @@ function mapController ($scope){
     $scope.mapTypeId = google.maps.MapTypeId.ROADMAP;
     $scope.defaultLocation = [43.529742, 5.447427];
 
+
     // Coordonnées du point courant
     $scope.loc = ($scope.loc == undefined) ? $scope.defaultLocation : $scope.loc;
 
@@ -36,9 +37,16 @@ function mapController ($scope){
 
         $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+        $scope.directionsDisplay = new google.maps.DirectionsRenderer(
+            {
+                'map' : $scope.map
+            });
+
     };
 
     $scope.displayMap();
+
+    $scope.directionsService = new google.maps.DirectionsService();
 
     /* Ajoute un marqueur sur la map*/
     $scope.showMarker = function(){
@@ -118,6 +126,29 @@ function mapController ($scope){
     $scope.getRadius = function(){
         return $scope.circle.getRadius();
     };
+
+    $scope.computeRoute = function()
+    {
+        var dep = new google.maps.LatLng($scope.loc[0], $scope.loc[1]);
+        var dest = new google.maps.LatLng($scope.defaultLocation[0], $scope.defaultLocation[1]);
+            var request = {
+                origin: dep,
+                destination: dest,
+                travelMode: google.maps.TravelMode.DRIVING,
+                unitSystem: google.maps.UnitSystem.METRIC
+            };
+
+            $scope.directionsService.route(request, function(result, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    $scope.directionsDisplay.setDirections(result);
+                    $scope.directionsDisplay.suppressMarkers = true;
+                    $scope.directionsDisplay.setOptions({
+                            markerOptions : google.maps.Animation.BOUNCE,
+                            preserveViewport : false
+                    });
+                }
+            });
+    };
 }
 
 /* Directives */
@@ -144,13 +175,14 @@ myApp.directive('googlePlaces', function(){
                     // du lieu selectionné (pour pouvoir l'utiliser dans map($scope)
                     var loc = [place.geometry.location.lat(),place.geometry.location.lng()];
 
+
                     // Chargement de la map
                     $scope.changeLocation(loc);
-                    $scope.addMarker(['Bienvenue', 'Bonjour !'], loc);
                     $scope.drawCircle(loc, 3);
                     console.log($scope.getRadius());
                     $scope.changeCircleRadius(0.5);
                     console.log($scope.getRadius());
+                    $scope.computeRoute();
                     // Applique les modification du scope et recharge les éléments modifiés
                     $scope.$apply();
                 });
