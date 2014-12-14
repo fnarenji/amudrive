@@ -72,7 +72,7 @@ body
 
 header
 {
-	height: 70px;
+	height: 60px;
 	background-color: #45494D;
 }
 
@@ -101,8 +101,7 @@ header .logo a
 
 nav
 {
-
-	height: 70px;
+	/*height: 70px;*/
 	margin-left: 472px;
 	width: 400px;
 	float: left;
@@ -355,7 +354,7 @@ input[type=radio]
 {
 	display:block;
 	position: absolute;
-	top: 975px;
+	top: 957px;
 	padding: 3px;
 	color: #FFFFFF;
 	background-color: #0EBFDD;
@@ -371,7 +370,7 @@ input[type=radio]
 	width: 650px;
 	background-color: #FFFFFF;
 	border: 3px solid #0EBFDD;
-	top: 995px;
+	top: 977px;
 	padding: 3px;
 	font-size: 0.9rem;
 }

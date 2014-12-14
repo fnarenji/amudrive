@@ -4,12 +4,12 @@
             <form novalidate>
                 <div class="error">{{message}}</div>
                 <div class="form_line">
-                    <input type="text" ng-model="user.username" id="username" placeholder="Nom d'utilisateur ..."/>
+                    <input type="text" ng-model="auth.UserName" placeholder="Nom d'utilisateur ..."/>
 
-                    <input type="password" ng-model="user.password_sha512" id="password" placeholder="Mot de passe ..."/>
+                    <input type="password" ng-model="auth.Password" placeholder="Mot de passe ..."/>
                 </div>
 
-                <div class="submit"><a href="" ng-click="connection(user)">Se connecter</a></div>
+                <div class="submit"><a href="" ng-click="connection(auth)">Se connecter</a></div>
 
                 <div class="form_line">
                     <a href="">Mot de passe oublié ?</a>

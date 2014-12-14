@@ -2,31 +2,31 @@
  * Created by Thomas on 29/11/2014.
  */
 
-myApp.controller('AccountController', ['$scope', '$http', function($scope, $http){
+myApp.controller('AccountController', ['$scope', '$http', function($scope, $http) {
     $scope.menu =
-        [ { "name" : 'Recherche', "url" : 'search.html'},
+        [ { "name" : 'Recherche', "url" : 'path.html'},
           { "name" : 'Trajets', "url" : 'mycarpoolings.html'},
           { "name" : 'Mon Compte', "url" : 'account.html'}];
 
-    $scope.menusearch = "search.html";
+    $scope.menusearch = "path.html";
     $scope.menupath = "path.html";
     $scope.menuconnection = "connection.html";
     $scope.menuaccount = "account.html";
     $scope.menuregistration = "registration.html";
     $scope.menuregistrationnext = "registration_next.html";
-    $scope.usersave = '';
+    $scope.authToken = $.cookie('authToken');
+    $scope.connectButton = 'Connexion';
+    $scope.user = {};
 
     $scope.showMenu = function(url){
         $scope.currentMenu = url;
     };
 
     $scope.registrationNext = function(user){
-      $scope.usersave = user;
-
-        new google.maps.Geocoder().geocode( { 'address': user.Address }, function(results, status) {
+        new google.maps.Geocoder().geocode( { 'address': $scope.user.Address }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                user.Longitude = results[0].geometry.location.lng();
-                user.Latitude = results[0].geometry.location.lat();
+                $scope.user.Long = results[0].geometry.location.lng();
+                $scope.user.Lat = results[0].geometry.location.lat();
                 $scope.showMenu($scope.menuregistrationnext);
             } else {
                 alert("Votre adresse n'a pas pu être validée: " + status);
@@ -52,15 +52,19 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
         });
     };
 
-    $scope.connection = function(user){
-        user.password_sha512 = CryptoJS.SHA512(user.password_sha512).toString();
+    $scope.connection = function(auth){
+        auth.password_sha512 = CryptoJS.SHA512(auth.password).toString();
 
-        $scope.REST('POST', 'auth', user).success(function(data){
+        $scope.REST('POST', 'auth', auth).success(function(data){
             $.param(data);
 
             if(data.success == true){
+                $.cookie('authToken', data.authToken, { expires: 7 });
+                $scope.authToken = data.authToken;
                 alert('Connexion réussie ! ');
+                $scope.message = ''; // Clear previous error messages
                 $scope.closeCross();
+                $scope.connectButton = 'Deconnexion';
             }
             else if(data.reasons != undefined)
             {
@@ -71,15 +75,14 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
             }
 
         });
-
-
     };
 
     $scope.registration = function(user) {
-        $.extend(user, $scope.usersave); // fuuuuu, dirtiest shit ever, where's yo service bitch ?
-        user.Password = CryptoJS.SHA512(user.Password).toString();
-
-        $scope.REST('POST', 'register', user).success(function(data){
+        $scope.user.Password = CryptoJS.SHA512($scope.user.PasswordNoHash).toString();
+        $scope.user.PasswordNoHash = ""; // Erase password
+        $scope.user.FavoriteCampus = 1; // @todo REMOVE
+        console.log($scope.user);
+        $scope.REST('POST', 'register', $scope.user).success(function(data){
 
             if (data.success)
             {

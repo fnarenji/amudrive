@@ -3,22 +3,22 @@
         <div class="form_radio">
             <label for="mailnotifications">Souhaitez-vous recevoir des notifications par mail ?</label>
             <span class="radio">
-                <input type="radio" ng-model="user.mailnotifications" value="true" name="mailnotifications" checked="checked"> Oui
-                <input type="radio" ng-model="user.mailnotifications" value="false" name="mailnotifications"> Non
+                <input type="radio" ng-model="user.mailnotifications" value="true" checked="checked"> Oui
+                <input type="radio" ng-model="user.mailnotifications" value="false"> Non
             </span>
         </div>
         <div class="form_radio">
             <label for="phonenotifications">Souhaitez-vous recevoir des notifications sur votre téléphone ?</label>
             <span class="radio">
-                <input type="radio" ng-model="user.phonenotifications" value="true" name="phonenotifications" checked> Oui
-                <input type="radio" ng-model="user.phonenotifications" value="false" name="phonenotifications"> Non
+                <input type="radio" ng-model="user.phonenotifications" value="true" checked> Oui
+                <input type="radio" ng-model="user.phonenotifications" value="false"> Non
             </span>
         </div>
         <div class="form_radio">
             <label for="newsletter">Souhaitez-vous recevoir notre newsletter ?</label>
             <span class="radio">
-                <input type="radio" ng-model="user.newsletter" value="true" name="newsletter" checked> Oui
-                <input type="radio" ng-model="user.newsletter" value="false" name="newsletter"> Non
+                <input type="radio" ng-model="user.newsletter" value="true" checked> Oui
+                <input type="radio" ng-model="user.newsletter" value="false"> Non
             </span>
         </div>
         <div class="submit"><a href="" ng-click="registration(user)">Finaliser</a></div>

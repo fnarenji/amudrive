@@ -36,7 +36,7 @@ namespace SharpDrift.Modules
                     var c = this.Bind<Client>();
                     c.IdClient = Int32.Parse(Context.CurrentUser.UserName);
 
-                    await conn.ExecuteSqlAsync(string.Join(" ", "UPDATE CLIENT SET  firstName = @FirstName,",
+                    await conn.ExecuteSqlAsync(string.Join(" ", "UPDATE CLIENT SET firstName = @FirstName,",
                         "lastName = @LastName,",
                         "address = @Address,",
                         "long = @Long,",

@@ -8,6 +8,5 @@
         public string Message { get; set; }
         public int PoolingMark { get; set; }
         public int DriverMark { get; set; }
-
     }
 }

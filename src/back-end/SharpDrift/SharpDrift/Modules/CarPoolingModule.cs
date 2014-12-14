@@ -136,7 +136,7 @@ namespace SharpDrift.Modules
 
                     await
                         conn.ExecuteSqlAsync(
-                            string.Join(" ", "INSERT INTO comment (idMessage,idClient,idCarPooling,comment,drivermark,poolingmark) VALUES (@idComment,@IdCarPooling,@IdClient,@Message,@DriverMark,@PoolingMark)"),
+                            string.Join(" ", "INSERT INTO comment (idMessage,idClient,idCarPooling,comment,drivermark,poolingmark) VALUES (@idComment,@IdCarPooling,@OwnerId,@Message,@DriverMark,@PoolingMark)"),
                             j);
 
                     return new

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading;
+using System.Threading.Tasks;
 using Insight.Database;
 using Nancy;
 using Nancy.ModelBinding;
@@ -52,31 +54,49 @@ namespace SharpDrift.Modules
                         }.ToJson();
                     }
 
-                    c = await conn.InsertSqlAsync(string.Join(" ",
-                        "INSERT INTO CLIENT VALUES (DEFAULT,",
-                        "@UserName,",
-                        "@FirstName,",
-                        "@LastName,",
-                        "@Address,",
-                        "@Long,",
-                        "@Lat,",
-                        "@Mail,",
-                        "@Password,",
-                        "DEFAULT,",
-                        "@MessagingParameters,",
-                        "@CentersOfInterest,",
-                        "@PhoneNumber,",
-                        "@MailNotifications,",
-                        "@PhoneNotifications,",
-                        "@Newsletter,",
-                        "@FavoriteCampus) RETURNING *"), c);
+                    try
+                    {
+                        c = await conn.InsertSqlAsync(string.Join(" ",
+                            "INSERT INTO CLIENT VALUES (DEFAULT,",
+                            "@UserName,",
+                            "@FirstName,",
+                            "@LastName,",
+                            "@Address,",
+                            "@Long,",
+                            "@Lat,",
+                            "@Mail,",
+                            "@Password,",
+                            "DEFAULT,",
+                            "@MessagingParameters,",
+                            "@CentersOfInterest,",
+                            "@PhoneNumber,",
+                            "@MailNotifications,",
+                            "@PhoneNotifications,",
+                            "@Newsletter,",
+                            "@FavoriteCampus) RETURNING *"), c);
+                    }
+                    catch (AggregateException aggregate)
+                    {
+                        reasons.Add(aggregate.InnerException.InnerException.ToString().Contains("mail_unique")
+                            ? "Cette adresse mail est déjà utilisée."
+                            : "Une erreur de données est survenue." + aggregate.ToString()); // @todo REMOVE EXCEPTION DUMPING TO CLIENT. FOR DEBUG PURPOSE ONLY
+                    }
+
+                    if (reasons.Any())
+                    {
+                        return new
+                        {
+                            success = false,
+                            reasons = reasons,
+                        }.ToJson();
+                    }
 
                     var validationKey = Path.GetRandomFileName() + Path.GetRandomFileName() + Path.GetRandomFileName();
 
                     await conn.ExecuteSqlAsync("INSERT INTO clientMailValidation VALUES (@IdClient, @ValidationKey)",
                                                 new { IdClient = c.IdClient, ValidationKey = validationKey });
 
-                    ThreadPool.QueueUserWorkItem(
+                    Task.Run(
                         async delegate
                         {
                             await

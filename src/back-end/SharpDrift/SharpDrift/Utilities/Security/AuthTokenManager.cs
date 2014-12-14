@@ -35,7 +35,7 @@ namespace SharpDrift.Utilities.Security
 
             if (AuthTokens.ContainsKey(authToken.GetHashCode()))
             {
-                if (remoteIp == userIP && DateTime.UtcNow.Subtract(tokenCreationDate).TotalHours < 48)
+                if (remoteIp == userIP && DateTime.UtcNow.Subtract(tokenCreationDate).TotalHours < 7*24)
                 {
                     Console.WriteLine("Valid authentication token for {0} from {1} since {2}.", userId, remoteIp,
                         tokenCreationDate);
