@@ -53,7 +53,7 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
     };
 
     $scope.connection = function(auth){
-        auth.password_sha512 = CryptoJS.SHA512(auth.password).toString();
+        auth.password_sha512 = CryptoJS.SHA512(auth.Password).toString();
 
         $scope.REST('POST', 'auth', auth).success(function(data){
             $.param(data);
@@ -79,9 +79,9 @@ myApp.controller('AccountController', ['$scope', '$http', function($scope, $http
 
     $scope.registration = function(user) {
         $scope.user.Password = CryptoJS.SHA512($scope.user.PasswordNoHash).toString();
-        $scope.user.PasswordNoHash = ""; // Erase password
         $scope.user.FavoriteCampus = 1; // @todo REMOVE
         console.log($scope.user);
+        $scope.user.PasswordNoHash = ""; // Erase password
         $scope.REST('POST', 'register', $scope.user).success(function(data){
 
             if (data.success)
