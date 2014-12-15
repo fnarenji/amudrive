@@ -5,11 +5,8 @@
 ** Les éléments sont mis en valeur en fonction de leur importance dans le projet :) **
 
 * **Intégration gestion utilisateur (modifications informations personnelles, gestion des covoiturages ...)**
-* Amélioration création de compte (retour en arrière, enregistrement en local des informations saisies pour qu'elles s'affichent
-lors du retour arrière dans le formulaire ...)
 * **Affichage d'un message d'erreur (bande rouge "mode hors ligne") si le serveur est injoignable**
 * *Optimisation des requetes GetVehicles & Register (> 1s)*
-* **TO CHECK - Création d'un itinéraire Google Maps (sans communication utilisateur)**
 * **Autocomplétion pour la recherche de pôle lors de la création d'un itinéraire**
 * **Récupération des clics sur le panel du bas lors de la recherche/création d'un itinéraire dans le javascript pour l'afficher sur la carte**
 * Rendre cliquable le logo pour revenir sur la page original (href ou js ?)
@@ -26,5 +23,10 @@ ou un pôle proche)*
 sur un covoiturage nous concernant (créateur ou simple utilisateur)*
 * *Nettoyage du jQuery (des fonctions sont redondantes) et éventuellement Angular JS (utilisation d'une factory/service 
 pour la partie Google Maps :D)*
+### DONE ###
+
+* Création d'un itinéraire Google Maps (sans communication utilisateur)
+* Amélioration création de compte (retour en arrière, enregistrement en local des informations saisies pour qu'elles s'affichent lors du retour arrière dans le formulaire ...)
+
 
 ### Date limite : lundi 22 décembre  ###
