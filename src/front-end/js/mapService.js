@@ -1,4 +1,4 @@
-myApp.service('Map', function(){
+myApp.service('mapService', function(){
     //To avoid this context conflicts
     that = this;
 

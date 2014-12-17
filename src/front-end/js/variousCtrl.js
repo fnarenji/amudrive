@@ -5,5 +5,6 @@ myApp.controller('MenuController', ['$scope', function($scope) {
          {name: 'Trajets', url: '#/mycarpoolings'},
          {name: 'Mon Compte', url: '#/account'}
         ];
+
     $scope.connectButton = {name :'Connexion', url: '#/connection'};
 }]);

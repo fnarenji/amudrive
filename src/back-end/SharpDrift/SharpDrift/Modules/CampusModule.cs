@@ -4,7 +4,6 @@ using Nancy;
 using SharpDrift.DataModel;
 using SharpDrift.Utilities;
 using SharpDrift.Utilities.Data;
-using SharpDrift.Utilities.Security;
 
 namespace SharpDrift.Modules
 {

@@ -1,13 +1,13 @@
 'use strict';
 
-myApp.controller('MapController', ['$scope', 'Map', mapController]);
+myApp.controller('MapController', ['$scope', 'mapService', mapController]);
 
-function mapController($scope, Map){
-    Map.displayMap();
+function mapController($scope, mapService){
+    mapService.displayMap();
 }
 /* Directives */
 
-myApp.directive('googlePlaces', function(Map){
+myApp.directive('googlePlaces', function(mapService){
         return {
 
             // Remplace l'input google-places par un nouveau (dynamique, permettant l'autocomplete)
@@ -32,15 +32,15 @@ myApp.directive('googlePlaces', function(Map){
 
 
                     // Chargement de la map
-                    Map.changeLocation(loc);
-                    Map.drawCircle(loc, 3);
+                    mapService.changeLocation(loc);
+                    mapService.drawCircle(loc, 3);
 
-                    console.log(Map.getRadius());
-                    Map.changeCircleRadius(0.5);
+                    console.log(mapService.getRadius());
+                    mapService.changeCircleRadius(0.5);
 
-                    console.log(Map.getRadius());
-                    Map.computeRoute();
-                    Map.displayMap();
+                    console.log(mapService.getRadius());
+                    mapService.computeRoute();
+                    mapService.displayMap();
                 });
             }
         }

@@ -2,14 +2,14 @@
  * Created by Thomas on 29/11/2014.
  */
 
-myApp.controller('AccountController', ['$scope', 'REST', 'Map', function($scope, REST, Map) {
+myApp.controller('AccountController', ['$scope', 'REST', 'mapService', function($scope, REST, mapService) {
 
 
     $scope.authToken = $.cookie('authToken');
     $scope.user = {};
 
     $scope.registrationNext = function(user){
-        location = Map.addressToCoordinates($scope.user.Address);
+        location = mapService.addressToCoordinates($scope.user.Address);
 
         if (location == undefined)
         {
