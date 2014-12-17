@@ -12,8 +12,6 @@ namespace SharpDrift.Modules
     {
         public CampusModule()
         {
-            this.RequiresAuthentication();
-
             Get["/campuses", true] = async (x, ctx) =>
             {
                 using (DbConnection conn = DAL.Conn)
