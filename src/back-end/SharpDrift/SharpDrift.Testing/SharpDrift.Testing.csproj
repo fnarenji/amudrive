@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\xunit.runner.visualstudio.0.99.9-build1021\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.0.99.9-build1021\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="..\packages\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -12,7 +13,7 @@
     <AssemblyName>SharpDrift.Testing</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>bf82796d</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>3c9b51bf</NuGetPackageImportStamp>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -38,21 +39,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CsQuery.1.3.5-beta5\lib\net40\CsQuery.dll</HintPath>
     </Reference>
-    <Reference Include="Insight.Database">
-      <HintPath>..\packages\Insight.Database.Core.5.1.0\lib\NET45\Insight.Database.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Insight.Database.Configuration, Version=5.1.0.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
+    <Reference Include="Insight.Database, Version=5.1.1.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Insight.Database.5.1.0\lib\NET45\Insight.Database.Configuration.dll</HintPath>
+      <HintPath>..\packages\Insight.Database.Core.5.1.1\lib\NET45\Insight.Database.dll</HintPath>
     </Reference>
-    <Reference Include="Insight.Database.Providers.Default, Version=5.1.0.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
+    <Reference Include="Insight.Database.Configuration, Version=5.1.1.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Insight.Database.5.1.0\lib\NET45\Insight.Database.Providers.Default.dll</HintPath>
+      <HintPath>..\packages\Insight.Database.5.1.1\lib\NET45\Insight.Database.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Insight.Database.Providers.PostgreSQL, Version=5.1.0.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
+    <Reference Include="Insight.Database.Providers.Default, Version=5.1.1.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Insight.Database.Providers.PostgreSQL.5.1.0\lib\NET45\Insight.Database.Providers.PostgreSQL.dll</HintPath>
+      <HintPath>..\packages\Insight.Database.5.1.1\lib\NET45\Insight.Database.Providers.Default.dll</HintPath>
+    </Reference>
+    <Reference Include="Insight.Database.Providers.PostgreSQL, Version=5.1.1.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insight.Database.Providers.PostgreSQL.5.1.1\lib\NET45\Insight.Database.Providers.PostgreSQL.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -91,6 +92,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\xunit.core.2.0.0-beta5-build2785\lib\portable-net45+aspnetcore50+win+wpa81+wp80+monotouch+monoandroid\xunit.core.dll</HintPath>
     </Reference>
+    <Reference Include="xunit.runner.utility, Version=2.0.0.2785, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.runner.utility.2.0.0-beta5-build2785\lib\net35\xunit.runner.utility.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests.cs" />
@@ -118,6 +122,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props'))" />
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.0.99.9-build1021\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.0.99.9-build1021\build\net20\xunit.runner.visualstudio.props'))" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

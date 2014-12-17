@@ -43,21 +43,21 @@
     <Reference Include="ImpromptuInterface">
       <HintPath>..\packages\ImpromptuInterface.6.2.2\lib\net40\ImpromptuInterface.dll</HintPath>
     </Reference>
-    <Reference Include="Insight.Database, Version=5.1.0.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
+    <Reference Include="Insight.Database, Version=5.1.1.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Insight.Database.Core.5.1.0\lib\NET45\Insight.Database.dll</HintPath>
+      <HintPath>..\packages\Insight.Database.Core.5.1.1\lib\NET45\Insight.Database.dll</HintPath>
     </Reference>
-    <Reference Include="Insight.Database.Configuration, Version=5.1.0.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
+    <Reference Include="Insight.Database.Configuration, Version=5.1.1.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Insight.Database.5.1.0\lib\NET45\Insight.Database.Configuration.dll</HintPath>
+      <HintPath>..\packages\Insight.Database.5.1.1\lib\NET45\Insight.Database.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Insight.Database.Providers.Default">
-      <HintPath>..\packages\Insight.Database.5.1.0\lib\NET45\Insight.Database.Providers.Default.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Insight.Database.Providers.PostgreSQL, Version=5.1.0.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
+    <Reference Include="Insight.Database.Providers.Default, Version=5.1.1.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Insight.Database.Providers.PostgreSQL.5.1.0\lib\NET45\Insight.Database.Providers.PostgreSQL.dll</HintPath>
+      <HintPath>..\packages\Insight.Database.5.1.1\lib\NET45\Insight.Database.Providers.Default.dll</HintPath>
+    </Reference>
+    <Reference Include="Insight.Database.Providers.PostgreSQL, Version=5.1.1.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insight.Database.Providers.PostgreSQL.5.1.1\lib\NET45\Insight.Database.Providers.PostgreSQL.dll</HintPath>
     </Reference>
     <Reference Include="MailKit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

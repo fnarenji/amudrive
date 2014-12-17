@@ -54,7 +54,7 @@ namespace SharpDrift.Testing
                 response.Cookies.Any(
                     c =>
                         c.Name == "authToken" &&
-                        c.Expires.Value.Between(DateTime.UtcNow.AddDays(1.99), DateTime.UtcNow.AddDays(2.01))));
+                        c.Expires.Value.Between(DateTime.UtcNow.AddDays(6.99), DateTime.UtcNow.AddDays(7.01))));
 
             Assert.True(json.success);
             Assert.NotNull(json.authToken);
@@ -82,7 +82,7 @@ namespace SharpDrift.Testing
                 response.Cookies.Any(
                     c =>
                         c.Name == "authToken" &&
-                        c.Expires.Value.Between(DateTime.UtcNow.AddDays(-2.01), DateTime.UtcNow.AddDays(-1.99))));
+                        c.Expires.Value.Between(DateTime.UtcNow.AddDays(-7.01), DateTime.UtcNow.AddDays(-6.99))));
 
             Assert.True(json.success);
             Assert.NotNull(json.authToken);
@@ -113,7 +113,7 @@ namespace SharpDrift.Testing
                 response.Cookies.Any(
                     c =>
                         c.Name == "authToken" &&
-                        c.Expires.Value.Between(DateTime.UtcNow.AddDays(-2.01), DateTime.UtcNow.AddDays(-1.99))));
+                        c.Expires.Value.Between(DateTime.UtcNow.AddDays(-7.01), DateTime.UtcNow.AddDays(-6.99))));
 
             Assert.False(json.success);
             Assert.NotNull(json.authToken);
