@@ -39,7 +39,7 @@ myApp.directive('googlePlaces', function(mapService){
                     mapService.changeCircleRadius(0.5);
 
                     console.log(mapService.getRadius());
-                    mapService.computeRoute();
+                    //mapService.computeRoute();
                     mapService.displayMap();
                 });
             }

@@ -4,8 +4,14 @@
         <input google-places location=location/>
         <a href="#"><img src="../img/l_arrow.png" id="larrow" alt="left arrow"></a>
         <a href="#"><img src="../img/r_arrow.png" id="rarrow" alt="right arrow"></a>
-        <input type="text" name="pole" placeholder="Pôle" id="ch2">
-        <input type="text" name="date" id="date" placeholder="Selectionnez une date ...">
+        <span ng-controller="autocompleteController">
+            <!--<input type="text" name="pole" placeholder="Pôle" id="ch2">-->
+            <input type="text" ng-model="selected" typeahead="campus as campus.name for campus in campusesTab|
+                   filter:$viewValue | limitTo:8" class="form-control" placeholder="Rechercher un pôle"
+                   typeahead-on-select="createRoute($item, $model, $label)">
+            <i ng-show="loadingLocations">Chargement ...</i>
+        </span>
+        <input type="text" name="date" id="date" placeholder="Selectionner une date">
     </form>
 
     <div class="button">

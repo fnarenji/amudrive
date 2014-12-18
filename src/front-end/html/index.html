@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>AMUDrive</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
 	</head>
@@ -101,7 +102,9 @@
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.min.js"></script>
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha512.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-        <script>var myApp = angular.module('Amudrive', ['ngRoute']);</script>
+        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+        <!--<script src="../js/bootstrap.min.js"></script>-->
+        <script>var myApp = angular.module('Amudrive', ['ngRoute', 'ui.bootstrap']);</script>
         <script src="../js/mapService.js"></script>
         <script src="../js/restService.js"></script>
         <script src="../js/variousCtrl.js"></script>
@@ -109,7 +112,6 @@
         <script src="../js/rest.js"></script>
         <script src="../js/route.js"></script>
         <script src="../js/main.js"></script>
-
         <script src="../js/jquery-ui.js"></script>
 	</body>
 </html>

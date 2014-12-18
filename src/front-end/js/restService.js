@@ -1,30 +1,23 @@
 myApp.service('REST', function($http) {
 
-    that = this;
+    RestService = new Object();
 
-    that.REST = function(method, part, data){
-        that.testConnect().success(function(){
-            data = $.param(data);
-            alert('bonjour');
-            return $http({
-                url: "http://139.124.187.37:8989/" + part,
-                method: method,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                data: data
-            });
-        }).error(function(){
-            alert('BONJOUR');
+    RestService.url = "http://192.168.0.31:8989/";
+
+    RestService.testConnect = function() {return $http.get('http://192.168.0.31:8989');}
+
+    RestService.REST = function(method, part, data){
+        // Clean parameters
+        data = (data !== undefined) ? $.param(data) : '' ;
+        part = (part !== undefined) ? part : '';
+        method = (method === 'GET' || method === 'POST' || method === 'PUT') ? method : 'GET';
+
+        return $http({
+            url: RestService.url + part,
+            method: method,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: data
         });
     };
-
-    that.testConnect = function() {
-        //alert('lel');
-        return $http({
-            url: "http://192.168.1.3:8989/",
-            method: 'GET',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            data: ' '
-        })
-    }
-
+    return RestService;
 });

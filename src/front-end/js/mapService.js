@@ -1,51 +1,51 @@
 myApp.service('mapService', function(){
     //To avoid this context conflicts
-    that = this;
+    MapService = new Object();
 
     // Informations de bases pour la map (par défaut)
-    that.zoom = 15;
-    that.mapTypeId = google.maps.MapTypeId.ROADMAP;
-    that.defaultLocation = [43.529742, 5.447427];
+    MapService.zoom = 15;
+    MapService.mapTypeId = google.maps.MapTypeId.ROADMAP;
+    MapService.defaultLocation = [43.529742, 5.447427];
 
 
     // Coordonnées du point courant
-    that.loc = (that.loc == undefined) ? that.defaultLocation : that.loc;
+    MapService.loc = (MapService.loc == undefined) ? MapService.defaultLocation : MapService.loc;
 
     // Tableau de marqueurs
-    that.tabMarker = [];
+    MapService.tabMarker = [];
 
 
 
-    that.displayMap = function(){
-        console.log('DisplayMap : ' + that.loc);
+    MapService.displayMap = function(){
+        console.log('DisplayMap : ' + MapService.loc);
         var mapOptions = {
-            zoom: that.zoom,
-            center: new google.maps.LatLng(that.loc[0], that.loc[1]),
-            mapTypeId: that.mapTypeId
+            zoom: MapService.zoom,
+            center: new google.maps.LatLng(MapService.loc[0], MapService.loc[1]),
+            mapTypeId: MapService.mapTypeId
         };
 
-        that.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        MapService.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-        that.directionsDisplay = new google.maps.DirectionsRenderer(
+        MapService.directionsDisplay = new google.maps.DirectionsRenderer(
             {
-                'map' : that.map
+                'map' : MapService.map
             });
 
     };
 
-    that.directionsService = new google.maps.DirectionsService();
+    MapService.directionsService = new google.maps.DirectionsService();
 
     /* Ajoute un marqueur sur la map*/
-    that.showMarker = function(){
+    MapService.showMarker = function(){
 
-        if(that.tabMarker.length < 1)
+        if(MapService.tabMarker.length < 1)
             return false;
 
-        console.log(that.tabMarker);
+        console.log(MapService.tabMarker);
 
-        for(var i = 0; i < that.tabMarker.length; i += 2) {
-            var loc = that.tabMarker[i+1];
-            var content = that.tabMarker[i];
+        for(var i = 0; i < MapService.tabMarker.length; i += 2) {
+            var loc = MapService.tabMarker[i+1];
+            var content = MapService.tabMarker[i];
 
             console.log('loc : ' + loc + ' content : ' + content);
 
@@ -58,7 +58,7 @@ myApp.service('mapService', function(){
             });
 
             var marker = new google.maps.Marker({
-                map: that.map,
+                map: MapService.map,
                 position: new google.maps.LatLng(loc[0], loc[1]),
                 visible: true,
                 title: content[0]
@@ -67,56 +67,57 @@ myApp.service('mapService', function(){
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
                     infoWindow.setContent(infoWindowContent);
-                    infoWindow.open(that.map, marker);
+                    infoWindow.open(MapService.map, marker);
                 }
             })(marker, i));
         }
     };
 
     // Ajoute un marqueur à la liste des marqueurs courant
-    that.addMarker = function(content, loc){
+    MapService.addMarker = function(content, loc){
         if(content != undefined && loc != undefined)
-            that.tabMarker.push(content, loc);
+            MapService.tabMarker.push(content, loc);
 
-        that.showMarker();
+        MapService.showMarker();
     };
 
-    that.changeZoom = function(zoom){
-        that.zoom = (zoom == undefined) ? that.zoom : zoom;
-        //that.displayMap();
+    MapService.changeZoom = function(zoom){
+        MapService.zoom = (zoom == undefined) ? MapService.zoom : zoom;
+        //MapService.displayMap();
     };
 
-    that.changeLocation = function(loc) {
-        that.loc = (loc == undefined) ? that.loc : loc;
-        //that.displayMap();
+    MapService.changeLocation = function(loc) {
+        MapService.loc = (loc == undefined) ? MapService.loc : loc;
+        //MapService.displayMap();
     };
 
-    that.drawCircle = function(loc, radius){
-        that.circle = new google.maps.Circle(
+    MapService.drawCircle = function(loc, radius){
+        MapService.circle = new google.maps.Circle(
             {
                 strokeColor: '#FF0000',
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
                 fillColor: '#FF0000',
                 fillOpacity: 0.35,
-                map: that.map,
+                map: MapService.map,
                 center: new google.maps.LatLng(loc[0], loc[1]),
                 radius: radius * 1000
             }
         );
     };
 
-    that.changeCircleRadius = function(radius){
-        that.circle.setRadius(radius * 1000);
+    MapService.changeCircleRadius = function(radius){
+        MapService.circle.setRadius(radius * 1000);
     };
 
-    that.getRadius = function(){
-        return that.circle.getRadius();
+    MapService.getRadius = function(){
+        return MapService.circle.getRadius();
     };
 
-    that.computeRoute = function(){
-        var dep = new google.maps.LatLng(that.loc[0], that.loc[1]);
-        var dest = new google.maps.LatLng(that.defaultLocation[0], that.defaultLocation[1]);
+    MapService.computeRoute = function(loc){
+        console.log(loc);
+        var dep = new google.maps.LatLng(MapService.loc[0], MapService.loc[1]);
+        var dest = new google.maps.LatLng(loc[0], loc[1]);
         var request = {
             origin: dep,
             destination: dest,
@@ -124,11 +125,11 @@ myApp.service('mapService', function(){
             unitSystem: google.maps.UnitSystem.METRIC
         };
 
-        that.directionsService.route(request, function(result, status) {
+        MapService.directionsService.route(request, function(result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-                that.directionsDisplay.setDirections(result);
-                that.directionsDisplay.suppressMarkers = true;
-                that.directionsDisplay.setOptions({
+                MapService.directionsDisplay.setDirections(result);
+                MapService.directionsDisplay.suppressMarkers = true;
+                MapService.directionsDisplay.setOptions({
                     markerOptions : google.maps.Animation.BOUNCE,
                     preserveViewport : false
                 });
@@ -136,7 +137,7 @@ myApp.service('mapService', function(){
         });
     };
 
-    that.addressToCoordinates = function(address){
+    MapService.addressToCoordinates = function(address){
         location = undefined;
         new google.maps.Geocoder().geocode( { 'address': address }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
@@ -145,4 +146,6 @@ myApp.service('mapService', function(){
         });
         return location;
     };
+
+    return MapService;
 });
