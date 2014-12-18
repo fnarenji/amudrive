@@ -3,15 +3,18 @@
  */
 
 
-myApp.service('sessionService', function () {
-    that = this;
-    var token = '';
+myApp.service('sessionService', function ($cookies) {
+    sessionService = new Object();
 
-    that.setAuthToken = function () {
+    var token = $cookies.authToken;
 
+    sessionService.setAuthToken = function (authToken) {
+        $cookies.authToken = authToken;
     };
 
-    that.getAuthToken = function () {
-
+    sessionService.getAuthToken = function () {
+        return token;
     };
+
+    return sessionService;
 });
