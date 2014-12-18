@@ -3,11 +3,11 @@ myApp.service('REST', function($http) {
     that = this;
 
     that.REST = function(method, part, data){
-        that.testConnect().success(function(){
+        testConnect().success(function(){
             data = $.param(data);
             alert('bonjour');
             return $http({
-                url: "http://139.124.187.37:8989/" + part,
+                url: "http://localhost:8989/" + part,
                 method: method,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 data: data
@@ -17,10 +17,9 @@ myApp.service('REST', function($http) {
         });
     };
 
-    that.testConnect = function() {
-        //alert('lel');
+    var testConnect = function() {
         return $http({
-            url: "http://192.168.1.3:8989/",
+            url: "http://localhost:8989/campuses",
             method: 'GET',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             data: ' '
