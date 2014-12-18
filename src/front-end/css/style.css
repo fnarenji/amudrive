@@ -542,3 +542,19 @@ a:visited
    float: right;
    margin-right: -50px;
 }
+
+/* Page compte */
+
+.profil .vehicles
+{
+	float: right;
+}
+.profil .user
+{
+	float: left
+}
+
+.profil .submit
+{
+	display: inline-block;
+}
