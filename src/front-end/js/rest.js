@@ -11,7 +11,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', function(
     $scope.registrationNext = function(user){
         location = mapService.addressToCoordinates($scope.user.Address);
 
-        if (location == undefined)
+        if (location === undefined)
         {
             alert('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, le service peut être temporairement indisponible.');
             return;
@@ -34,7 +34,8 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', function(
             $.param(data);
 
             if(data.success == true){
-                $.cookie('authToken', data.authToken, { expires: 7 });
+                //$.cookie('authToken', data.authToken, { expires: 7 });
+                sessionService.setAuthToken(data.authToken);
                 $scope.authToken = data.authToken;
                 alert('Connexion réussie ! ');
                 $scope.message = ''; // Clear previous error messages
