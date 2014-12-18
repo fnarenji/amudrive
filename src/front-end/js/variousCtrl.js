@@ -27,3 +27,12 @@ myApp.controller('autocompleteController', function($scope, REST, mapService) {
     };
 
 });
+
+myApp.controller('accountManagerController', function($scope, REST, sessionService){
+    $scope.getInfos = function(){
+            REST.REST('GET', 'client', sessionService.getAuthToken())
+                .success(function(data){
+                   console.log(data);
+                });
+    };
+});
