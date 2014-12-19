@@ -2,28 +2,31 @@
  * Created by Thomas on 29/11/2014.
  */
 
-myApp.controller('AccountController', ['$scope', 'REST', 'mapService', function($scope, REST, mapService) {
+myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionService', function($scope, REST, mapService, sessionService) {
 
 
-    $scope.authToken = $.cookie('authToken');
+    $scope.authToken = sessionService.getAuthToken();
     $scope.user = {};
 
     $scope.registrationNext = function(user){
-        location = mapService.addressToCoordinates($scope.user.Address);
+        var loc = mapService.addressToCoordinates($scope.user.Address);
 
-        if (location === undefined)
+        if (loc === undefined)
         {
             alert('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, le service peut être temporairement indisponible.');
             return;
         }
 
-        $scope.user.Long = location.lng();
-        $scope.user.Lat = location.lat();
-        $scope.showMenu($scope.menuregistrationnext);
+        $scope.user.Long = loc.lng();
+        $scope.user.Lat = loc.lat();
+        $scope.goTo('registrationNext');
     };
 
-    $scope.returnHome = function(){
-        window.location.href = '#/';;
+    $scope.goTo = function(url){
+        urlf = '#/';
+        urlf += (url === undefined) ? '' : url;
+        alert(urlf);
+        window.location.href = urlf;
     };
 
 
@@ -39,7 +42,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', function(
                 $scope.authToken = data.authToken;
                 alert('Connexion réussie ! ');
                 $scope.message = ''; // Clear previous error messages
-                $scope.returnHome();
+                $scope.goTo();
                 $scope.connectButton = 'Deconnexion';
             }
             else if(data.reasons != undefined)
@@ -62,7 +65,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', function(
 
             if (data.success)
             {
-                $scope.returnHome();
+                $scope.goTo();
                 return;
             }
             alert(data.success + " " + data.reasons);

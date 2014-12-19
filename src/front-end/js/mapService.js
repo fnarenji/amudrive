@@ -138,13 +138,13 @@ myApp.service('mapService', function(){
     };
 
     MapService.addressToCoordinates = function(address){
-        location = undefined;
+        loc = undefined;
         new google.maps.Geocoder().geocode( { 'address': address }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                location = results[0].geometry.location;
+                loc = results[0].geometry.loc;
             }
         });
-        return location;
+        return loc;
     };
 
     return MapService;
