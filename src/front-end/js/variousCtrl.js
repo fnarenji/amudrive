@@ -18,7 +18,6 @@ myApp.controller('autocompleteController', function($scope, REST, mapService) {
                 $scope.campusesTab = response.data.campuses;
             })
     }
-
     $scope.getCampuses();
 
     $scope.createRoute = function($item, $model){
@@ -34,14 +33,4 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
                    console.log(data);
                 });
     };
-});
-
-myApp.service('placesService', function(){
-   placesService = new Object();
-   placesService.loc = [];
-
-   placesService.setLoc = function(loc){placesService.loc = loc;};
-   placesService.getLoc = function(){return placesService.loc;};
-
-   return placesService;
 });
