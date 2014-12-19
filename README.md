@@ -5,7 +5,6 @@
 ** Les éléments sont mis en valeur en fonction de leur importance dans le projet :) **
 
 * **Intégration gestion utilisateur (modifications informations personnelles, gestion des covoiturages ...)**
-* **Affichage d'un message d'erreur (bande rouge "mode hors ligne") si le serveur est injoignable**
 * *Optimisation des requetes GetVehicles & Register (> 1s)*
 * **Récupération des clics sur le panel du bas lors de la recherche/création d'un itinéraire dans le javascript pour l'afficher sur la carte**
 * Rendre cliquable le logo pour revenir sur la page original (href ou js ?)
@@ -27,5 +26,6 @@ sur un covoiturage nous concernant (créateur ou simple utilisateur)*
 * L'icône "Discussion" bouge quand on clique dessus (en bas de la map, dans le truc qui affiche les critères de recherche)
 * Service et Factory Angular JS
 * Précocher les cases lors de l'inscription concernant les newsletter etc
+* **Affichage d'un message d'erreur (bande rouge "mode hors ligne") si le serveur est injoignable**
 
 ### Date limite : lundi 22 décembre  ###

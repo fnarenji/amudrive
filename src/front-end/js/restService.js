@@ -11,7 +11,7 @@ myApp.service('REST', function($http, $q, $timeout) {
         }, 500);
 
         var canceler = $q.defer();
-        
+
         $http.get(RestService.url + '/campuses').success(function(data){
             $timeout.cancel(timeoutPromise);
         });
