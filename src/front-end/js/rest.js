@@ -8,27 +8,26 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     $scope.authToken = sessionService.getAuthToken();
     $scope.user = {};
 
-    $scope.registrationLocation = function(loc){
-        $scope.loc = loc;
-    };
+    $scope.registrationLocation = function(loc){$scope.loc = loc;};
 
     $scope.registrationNext = function(user){
         var loc = placesService.getLoc();
 
-        if (loc === undefined)
-        {
-            alert('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, le service peut être temporairement indisponible.');
+        if (loc === undefined){
+            alert('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, ' +
+                  'le service peut être temporairement indisponible.');
             return;
         }
+
 
         $scope.user.Long = loc[0];
         $scope.user.Lat = loc[1];
         $scope.user = user;
-
+        console.log($scope.user);
         // Radio buttons fix
         $scope.user.MailNotifications = $scope.user.PhoneNotifications = $scope.user.Newsletter = "true";
 
-        $scope.goTo('registrationNext');
+        //$scope.goTo('registrationNext');
     };
 
     $scope.goTo = function(url){
@@ -66,7 +65,6 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
 
     $scope.registration = function(user) {
         $scope.user.Password = CryptoJS.SHA512($scope.user.PasswordNoHash).toString();
-        $scope.user.FavoriteCampus = 1; // @todo REMOVE
         console.log($scope.user);
         $scope.user.PasswordNoHash = ""; // Erase password
         REST.REST('POST', 'register', $scope.user).success(function(data){

@@ -24,6 +24,9 @@ myApp.controller('autocompleteController', function($scope, REST, mapService) {
         mapService.computeRoute([$model.long, $model.lat]);
     };
 
+    $scope.saveCampus = function($item, $model, user){
+        user.FavoriteCampus = $model.idCampus;
+    }
 });
 
 myApp.controller('accountManagerController', function($scope, REST, sessionService){

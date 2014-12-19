@@ -21,7 +21,14 @@
                     <input type="tel" ng-model="user.PhoneNumber" placeholder="Téléphone" required/>
                     <input type="text" ng-model="user.CentersOfInterest" placeholder="Centre d'intérêt" required/>
                 </div>
-
+                <div class="form_line">
+                    <span ng-controller="autocompleteController">
+                        <input type="text" ng-model="selected" typeahead="campus as campus.name for campus in campusesTab|
+                               filter:$viewValue | limitTo:8" class="form-control" placeholder="Campus favori"
+                               typeahead-on-select="saveCampus($item, $model, user)">
+                        <i ng-show="loadingLocations">Chargement ...</i>
+                    </span>
+                </div>
                 <div class="submit"><a href="" ng-click="registrationNext(user)">Étape suivante</a></div>
 
             </form>
