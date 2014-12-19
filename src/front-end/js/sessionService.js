@@ -4,17 +4,13 @@
 
 myApp.service('sessionService', function ($cookies) {
     sessionService = new Object();
-
-    sessionService.load = function(){
-      sessionService.authToken = $cookies.authToken;
-    };
+    sessionService.authToken = $cookies.authToken;
 
     sessionService.setAuthToken = function (authToken) {
-        $cookies.authToken = authToken;
+        $.cookie('authToken', authToken, { expires: 7, domain: 'http://localhost:8989/' });
     };
 
     sessionService.getAuthToken = function () {
-        sessionService.load();
         return sessionService.authToken;
     };
 

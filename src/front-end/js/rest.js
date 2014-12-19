@@ -19,7 +19,6 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
             return;
         }
 
-
         $scope.user.Long = loc[0];
         $scope.user.Lat = loc[1];
         $scope.user = user;
