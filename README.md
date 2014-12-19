@@ -9,7 +9,6 @@
 * *Optimisation des requetes GetVehicles & Register (> 1s)*
 * **Récupération des clics sur le panel du bas lors de la recherche/création d'un itinéraire dans le javascript pour l'afficher sur la carte**
 * Rendre cliquable le logo pour revenir sur la page original (href ou js ?)
-* Précocher les cases lors de l'inscription concernant les newsletter etc
 * **Fiche d'un trajet (commentaires, participants ...)**
 * **Sécurisation de toutes les saisies des utilisateurs**
 * Changement valeurs menu header en fonction de l'utilisateur (ne pas afficher se connecter lorsque l'utilisateur est déjà connecté)
@@ -27,5 +26,6 @@ sur un covoiturage nous concernant (créateur ou simple utilisateur)*
 * **Autocomplétion pour la recherche de pôle lors de la création d'un itinéraire**
 * L'icône "Discussion" bouge quand on clique dessus (en bas de la map, dans le truc qui affiche les critères de recherche)
 * Service et Factory Angular JS
+* Précocher les cases lors de l'inscription concernant les newsletter etc
 
 ### Date limite : lundi 22 décembre  ###
