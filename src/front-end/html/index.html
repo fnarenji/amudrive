@@ -39,17 +39,17 @@
                 <div ng-view></div>
             </section>
         </div>
-		<section id="maps">
+		<section id="maps" ng-controller="CarPoolingController">
 
             <div ng-controller="MapController">
                 <div id="map"></div>
             </div>
 
-			<div id="search-panel-date">
+			<div ng-show="isPanelVisible" id="search-panel-date">
 				30/10 10h10
 			</div>
 
-			<div id="search-panel">
+			<div ng-show="isPanelVisible" id="search-panel">
 				<div id="search-panel-info">
                     <span id="search-panel-photo"></span>
                     <span id="search-panel-delete-btn"><a href="#">Supprimer</a></span>
@@ -113,6 +113,7 @@
         <script src="../js/variousCtrl.js"></script>
         <script src="../js/maps.js"></script>
         <script src="../js/rest.js"></script>
+        <script src="../js/carPoolings.js"></script>
         <script src="../js/route.js"></script>
         <script src="../js/main.js"></script>
         <script src="../js/jquery-ui.js"></script>

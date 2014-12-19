@@ -1,4 +1,4 @@
-myApp.service('REST', function($http, sessionService) {
+myApp.service('REST', function($http) {
 
     RestService = new Object();
 
