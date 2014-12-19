@@ -19,13 +19,17 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
 
         $scope.user.Long = loc.lng();
         $scope.user.Lat = loc.lat();
+        $scope.user = user;
+
+        // Radio buttons fix
+        $scope.user.MailNotifications = $scope.user.PhoneNotifications = $scope.user.Newsletter = "true";
+
         $scope.goTo('registrationNext');
     };
 
     $scope.goTo = function(url){
         urlf = '#/';
         urlf += (url === undefined) ? '' : url;
-        alert(urlf);
         window.location.href = urlf;
     };
 
