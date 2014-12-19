@@ -137,15 +137,15 @@ myApp.service('mapService', function(){
         });
     };
 
-    MapService.addressToCoordinates = function(address){
-        loc = undefined;
+    /*MapService.addressToCoordinates = function(address){
         new google.maps.Geocoder().geocode( { 'address': address }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                loc = results[0].geometry.loc;
-            }
+            //if (status == google.maps.GeocoderStatus.OK) {
+                console.log(results);
+                return results[0].geometry.loc;
+            //}
         });
-        return loc;
-    };
+        //return loc;
+    };*/
 
     return MapService;
 });

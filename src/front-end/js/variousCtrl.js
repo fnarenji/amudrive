@@ -36,3 +36,19 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
                 });
     };
 });
+
+myApp.service('placesService', function(){
+   placesService = new Object();
+
+   placesService.loc = [];
+
+   placesService.setLoc = function(loc){
+       placesService.loc = loc;
+   };
+
+   placesService.getLoc = function(){
+        return placesService.loc;
+   };
+
+   return placesService;
+});

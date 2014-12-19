@@ -2,14 +2,18 @@
  * Created by Thomas on 29/11/2014.
  */
 
-myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionService', function($scope, REST, mapService, sessionService) {
+myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionService', 'placesService', function($scope, REST, mapService, sessionService, placesService) {
 
 
     $scope.authToken = sessionService.getAuthToken();
     $scope.user = {};
 
+    $scope.registrationLocation = function(loc){
+        $scope.loc = loc;
+    };
+
     $scope.registrationNext = function(user){
-        var loc = mapService.addressToCoordinates($scope.user.Address);
+        var loc = placesService.getLoc();
 
         if (loc === undefined)
         {
@@ -17,8 +21,8 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
             return;
         }
 
-        $scope.user.Long = loc.lng();
-        $scope.user.Lat = loc.lat();
+        $scope.user.Long = loc[0];
+        $scope.user.Lat = loc[1];
         $scope.user = user;
 
         // Radio buttons fix

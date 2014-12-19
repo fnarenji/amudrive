@@ -4,15 +4,30 @@ myApp.controller('MapController', ['$scope', 'mapService', mapController]);
 
 function mapController($scope, mapService){
     mapService.displayMap();
+
+    $scope.path = function(loc){
+        mapService.changeLocation(loc);
+        mapService.drawCircle(loc, 3);
+
+        console.log(mapService.getRadius());
+        mapService.changeCircleRadius(0.5);
+
+        console.log(mapService.getRadius());
+        //mapService.computeRoute();
+        mapService.displayMap();
+    }
 }
 /* Directives */
 
-myApp.directive('googlePlaces', function(mapService){
+myApp.directive('googlePlaces', function(placesService){
         return {
 
             // Remplace l'input google-places par un nouveau (dynamique, permettant l'autocomplete)
             restrict:'EA',
             replace:true,
+            scope:{
+                'path' : '&gpPath'
+            },
             template: '<input id="google_places_ac" name="google_places_ac" type="text" class="input-block-level searchMap"/>',
             controller: 'MapController',
 
@@ -30,17 +45,10 @@ myApp.directive('googlePlaces', function(mapService){
                     // du lieu selectionné (pour pouvoir l'utiliser dans map($scope)
                     var loc = [place.geometry.location.lat(),place.geometry.location.lng()];
 
-
-                    // Chargement de la map
-                    mapService.changeLocation(loc);
-                    mapService.drawCircle(loc, 3);
-
-                    console.log(mapService.getRadius());
-                    mapService.changeCircleRadius(0.5);
-
-                    console.log(mapService.getRadius());
-                    //mapService.computeRoute();
-                    mapService.displayMap();
+                    if(attrs.gpPath === "path")
+                        $scope.path(loc);
+                    else
+                        placesService.setLoc(loc);
                 });
             }
         }

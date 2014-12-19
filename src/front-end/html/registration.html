@@ -8,7 +8,8 @@
                     <input type="text" ng-model="user.LastName" placeholder="Nom" required/>
                 </div>
                 <div class="form_line">
-                    <input type="text" ng-model="user.Address" placeholder="Adresse" required/>
+                    <!--<input type="text" ng-model="user.Address" placeholder="Adresse" required/>-->
+                    <input google-places gp-path="registration" location=location/>
                     <input type="email" ng-model="user.Mail" placeholder="Mail (*.univ-amu.fr)" pattern="(\W|^)[\w.+\-]*@[a-zA-Z0-9.]*univ\-amu\.fr(\W|$)" required/>
                 </div>
                 <div class="form_line">
