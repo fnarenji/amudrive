@@ -31,9 +31,17 @@ myApp.controller('autocompleteController', function($scope, REST, mapService) {
 
 myApp.controller('accountManagerController', function($scope, REST, sessionService){
     $scope.getInfos = function(){
-            REST.REST('GET', 'client', sessionService.getAuthToken())
+            REST.REST('GET', 'client')
                 .success(function(data){
-                   console.log(data);
+                   $scope.infos = data.client;
+                   $scope.loadPicture();
                 });
+    };
+
+    $scope.getInfos();
+
+    $scope.loadPicture = function(){
+        var hash = CrytoJS.MD5($scope.infos.mail).toString();
+        $scope.user.avatar = hash;
     };
 });

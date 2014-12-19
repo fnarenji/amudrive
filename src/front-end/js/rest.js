@@ -21,12 +21,13 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
 
         $scope.user.Long = loc[0];
         $scope.user.Lat = loc[1];
+        $scope.user.Address = placesService.getAddress();
         $scope.user = user;
         console.log($scope.user);
         // Radio buttons fix
         $scope.user.MailNotifications = $scope.user.PhoneNotifications = $scope.user.Newsletter = "true";
 
-        //$scope.goTo('registrationNext');
+        $scope.goTo('registrationNext');
     };
 
     $scope.goTo = function(url){
@@ -38,10 +39,9 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
 
     $scope.connection = function(auth){
         auth.password_sha512 = CryptoJS.SHA512(auth.Password).toString();
+        auth.Password = undefined;
 
         REST.REST('POST', 'auth', auth).success(function(data){
-            $.param(data);
-
             if(data.success == true){
                 //$.cookie('authToken', data.authToken, { expires: 7 });
                 sessionService.setAuthToken(data.authToken);
@@ -64,12 +64,14 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
 
     $scope.registration = function(user) {
         $scope.user.Password = CryptoJS.SHA512($scope.user.PasswordNoHash).toString();
-        console.log($scope.user);
-        $scope.user.PasswordNoHash = ""; // Erase password
-        REST.REST('POST', 'register', $scope.user).success(function(data){
 
-            if (data.success)
-            {
+        $scope.user.PasswordNoHash = undefined; // Erase password
+        $scope.user.MessagingParameters = 1;
+
+        REST.REST('POST', 'register', $scope.user, 'application/json').success(function(data){
+            if (data.success){
+                alert('Inscription réussie, vous allez bientôt recevoir un mail de validation afin de ' +
+                      'valider votre compte et commencer à utiliser notre site');
                 $scope.goTo();
                 return;
             }

@@ -1,31 +1,31 @@
 		<h1>Compte</h1>
-		<div class="profil" ng-controller="accountManagerController">
-			<!-- Image utilisateur -->
-			<div class ="user">
-				<img src="" alt="Avatar_Utilisateur" />
-				<a ng-click="getInfos()">COUCOU</a>
-			<!-- Informations utilisateur -->
-				<p>Nom_Utilisateur</p>
-				<p>Age_Utilisateur</p>
-		
-			<!-- Sections à cocher -->
-				<p>Confidentialité :</p>
-				<input type="checkbox" name="notification_mail"/> Notifications par mail <br/>
-				<input type="checkbox" name="notification_tel"/> Notifications par téléphone <br/>
-				<input type="checkbox" name="newsletter"/> Newsletter <br/>
+			<div class="profil" ng-controller="accountManagerController">
+				<!-- Image utilisateur -->
+				<div class ="user">
+					<img src="{{user.avatar}}" alt="Avatar_Utilisateur" />
+					<a ng-click="getInfos()">COUCOU</a>
+				<!-- Informations utilisateur -->
+					<p>Nom_Utilisateur</p>
+					<p>Age_Utilisateur</p>
+
+				<!-- Sections à cocher -->
+					<p>Confidentialité :</p>
+					<input type="checkbox" name="notification_mail"/> Notifications par mail <br/>
+					<input type="checkbox" name="notification_tel"/> Notifications par téléphone <br/>
+					<input type="checkbox" name="newsletter"/> Newsletter <br/>
+				</div>
+
+				<!-- Liste véhicules utilisateurs -->
+				<div class = "vehicles">
+					<p>Mes Véhicules </p>
+					<select name="Véhicules">
+						<option> Polo Pauletto </option>
+					</select><br/>
+
+				<!-- Boutons pour gérer les informations de l'utilisateur -->
+					<div class="submit"><a href=""> Ajouter </a></div>
+					<div class="submit"><a href=""> Modifier </a></div>
+					<div class="submit"><a href=""> Supprimer </a></div>
+				</div>
+
 			</div>
-			
-			<!-- Liste véhicules utilisateurs -->
-			<div class = "vehicles">
-				<p>Mes Véhicules </p>
-				<select name="Véhicules">
-					<option> Polo Pauletto </option>
-				</select><br/>
-			
-			<!-- Boutons pour gérer les informations de l'utilisateur -->
-				<div class="submit"><a href=""> Ajouter </a></div>
-				<div class="submit"><a href=""> Modifier </a></div>
-				<div class="submit"><a href=""> Supprimer </a></div>
-			</div>
-		
-		</div>
