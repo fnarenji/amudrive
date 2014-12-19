@@ -1,26 +1,28 @@
 		<h1>Compte</h1>
 			<div class="profil" ng-controller="accountManagerController">
 				<!-- Image utilisateur -->
-				<div class ="user">
+				<div class ="user" ng-cloak>
 					<img src="{{user.avatar}}" alt="Avatar_Utilisateur" />
-					<a ng-click="getInfos()">COUCOU</a>
 				<!-- Informations utilisateur -->
-					<p>Nom_Utilisateur</p>
-					<p>Age_Utilisateur</p>
+					<p>{{user.username}}</p>
+					<input type="text" placeholder="Votre prénom" value="{{user.firstname}}"/>
+					<input type="text" placeholder="Votre nom" value="{{user.lastname}}"/>
+
+					<p>{{user.age}}</p>
 
 				<!-- Sections à cocher -->
 					<p>Confidentialité :</p>
-					<input type="checkbox" name="notification_mail"/> Notifications par mail <br/>
-					<input type="checkbox" name="notification_tel"/> Notifications par téléphone <br/>
-					<input type="checkbox" name="newsletter"/> Newsletter <br/>
+					<input type="checkbox" ng-model="user.mailnotifications" ng-true-value="true" ng-false-value="false"/> Notifications par mail
+					<input type="checkbox" ng-model="user.phonenotifications" ng-true-value="true" ng-false-value="false"/> Notifications par téléphone
+					<input type="checkbox" ng-model="user.newsletter" ng-true-value="true" ng-false-value="false"/> Newsletter
 				</div>
 
 				<!-- Liste véhicules utilisateurs -->
 				<div class = "vehicles">
 					<p>Mes Véhicules </p>
-					<select name="Véhicules">
-						<option> Polo Pauletto </option>
-					</select><br/>
+					<select name="Véhicules" ng-cloak>
+							<option ng-repeat="vehicle in user.vehicles" value="{{vehicle.idVehicle}}">{{vehicle.name}}</option>
+					</select ng-repeat-end><br/>
 
 				<!-- Boutons pour gérer les informations de l'utilisateur -->
 					<div class="submit"><a href=""> Ajouter </a></div>
