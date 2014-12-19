@@ -12,16 +12,18 @@ namespace SharpDrift
     {
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
-            pipelines.AfterRequest.AddItemToEndOfPipeline(ctx => ctx.Response.WithHeader("Access-Control-Allow-Origin", "*")
+            pipelines.AfterRequest.AddItemToEndOfPipeline(ctx => ctx.Response.WithHeader("Access-Control-Allow-Origin", "http://localhost")
                                                                             .WithHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE")
-                                                                            .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type"));
+                                                                            .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type")
+                                                                            .WithHeader("Access-Control-Allow-Credentials", "true"));
 
             pipelines.OnError.AddItemToEndOfPipeline((ctx, e) =>
             {
                 ctx.Response = new TextResponse(e.ToString());
                 ctx.Response.WithHeader("Access-Control-Allow-Origin", "*")
                             .WithHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE")
-                            .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type");
+                            .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type")
+                            .WithHeader("Access-Control-Allow-Credentials", "true");
 
                 return ctx.Response;
             });
