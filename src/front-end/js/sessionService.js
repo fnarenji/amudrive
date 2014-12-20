@@ -7,7 +7,6 @@ myApp.service('sessionService', function ($cookies) {
     sessionService.authToken = $cookies.authToken;
 
     sessionService.setAuthToken = function (authToken) {
-        //$.cookie('authToken', authToken, { expires: 7, domain: 'http://localhost:8989/' });
         $cookies.authToken = authToken;
         sessionService.authToken = authToken;
     };

@@ -11,7 +11,8 @@
                    typeahead-on-select="createRoute($item, $model, $label)">
             <i ng-show="loadingLocations">Chargement ...</i>
         </span>
-        <input type="text" name="date" id="date" placeholder="Selectionner une date">
+        <!--@todo Déplacer les options dans le JS-->
+        <span><input type="text" pick-a-date="date" placeholder="Choisir une date" name="date" id="date"></span>
     </form>
 
     <div class="button">

@@ -53,8 +53,8 @@ $(document).ready(function() {
     });
         $('#rayon').slider({
             range: "min",
-            value:3,
-            min: 0,
+            value: 3,
+            min: 1,
             max: 10,
             slide : function(event, ui){
                 $('#afterR').val(ui.value + ' km');
@@ -74,4 +74,14 @@ $(document).ready(function() {
     });
     $('#beforeB').val($('#battement').slider("values", 0) + ' min ');
     $('#afterB').val($('#battement').slider("values", 1) + ' min ');
+
+    // Datepicker default parameters
+    $.extend($.fn.pickadate.defaults, {
+        monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+        weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        today: 'aujourd\'hui',
+        clear: 'effacer',
+        close: 'fermer',
+        formatSubmit: 'yyyy/mm/dd'
+    })
 });
