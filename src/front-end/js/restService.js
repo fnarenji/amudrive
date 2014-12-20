@@ -8,7 +8,7 @@ myApp.service('REST', function($http, $q, $timeout) {
         var timeoutPromise = $timeout(function() {
             canceler.resolve(); //aborts the request when timed out
             alert("Le serveur n'a pas répondu à temps, veuillez recharger la page ou rééssayer plus tard.");
-        }, 1000);
+        }, 30000);
 
         var canceler = $q.defer();
 
@@ -19,6 +19,9 @@ myApp.service('REST', function($http, $q, $timeout) {
 
     RestService.REST = function(method, part, data, headers){
         RestService.testConnect();
+
+        // Simplify the requests :)
+        headers = (headers === 'json') ? 'application/json' : headers;
 
         // Clean parameters
         data = (data !== undefined) ? data : {} ;
