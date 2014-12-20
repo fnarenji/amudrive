@@ -1,43 +1,53 @@
 		<h1>Compte</h1>
+
 			<div class="profil" ng-controller="accountManagerController" ng-init="checkconnection()">
 				<!-- Image utilisateur -->
-				<div class ="user" ng-cloak>
-					<h2>Vos informations personnelles</h2>
-					<img src="http://www.gravatar.com/avatar/{{user.hash}}" alt="Avatar_Utilisateur" ng-cloak/>
+				<div class="panel">
+					<div class ="user" ng-cloak>
+						<h2>Vos informations personnelles</h2>
+						<img src="http://www.gravatar.com/avatar/{{user.hash}}" alt="Avatar_Utilisateur" ng-cloak/>
 
-				<!-- Informations utilisateur -->
-					<p>Nom d'utilisateur : {{user.username}}</p>
-					<label for="firstname">Prénom</label>
-					<input type="text" name="firstname" id="firstname" ng-model="user.firstName" placeholder="Votre prénom" value="{{user.firstname}}"/>
+						<!-- Informations utilisateur -->
+						<div class="username">{{user.userName}}</div>
+						<label for="firstname">Prénom</label>
+						<input type="text" name="firstname" id="firstname" ng-model="user.firstName" placeholder="Votre prénom" value="{{user.firstname}}"/>
 
-					<label for="lastname">Nom</label>
-					<input type="text" name="lastname" id="lastname" ng-model="user.lastName" placeholder="Votre nom" value="{{user.lastname}}"/>
+						<label for="lastname">Nom</label>
+						<input type="text" name="lastname" id="lastname" ng-model="user.lastName" placeholder="Votre nom" value="{{user.lastname}}"/>
 
-					<p>{{user.age}}</p>
+					<!-- Sections à cocher -->
+						<h3>Confidentialité :</h3>
 
-				<!-- Sections à cocher -->
-					<h3>Confidentialité :</h3>
-					<input type="checkbox" ng-model="user.mailNotifications" ng-true-value="true" ng-false-value="false"/> Notifications par mail
-					<input type="checkbox" ng-model="user.phoneNotifications" ng-true-value="true" ng-false-value="false"/> Notifications par téléphone
-					<input type="checkbox" ng-model="user.newsletter" ng-true-value="true" ng-false-value="false"/> Newsletter
+						<label for="mailnotifications">Notifications par mail</label>
+						<input type="checkbox" ng-model="user.mailNotifications" ng-true-value="true" ng-false-value="false" id="mailnotifications"/> 
+
+						<label for="phonenotifications">Notifications par téléphone</label>
+						<input type="checkbox" ng-model="user.phoneNotifications" ng-true-value="true" ng-false-value="false" id="phonenotifications"/>
+
+						<label for="newsletter">Newsletter</label>
+						<input type="checkbox" ng-model="user.newsletter" ng-true-value="true" ng-false-value="false" name="newsletter"/>
+					</div>
+
+					<!-- Liste véhicules utilisateurs -->
+					<div class = "vehicles">
+
+						<h2>Véhicules </h2>
+						
+						<select name="vehicules" id="vehicules" ng-model="vehiculeSelected">
+
+								<option value="" disabled >Selectionner votre véhicule</option>
+								<option ng-repeat="vehicle in user.vehicles"  value="{{vehicle.idVehicle}}">{{vehicle.name}}</option>
+
+						</select ng-repeat-end><br/>
+
+						<button ng-click="selectVehicle()">Selectionner</button>
+						<button ng-click="addVehicle()">Ajouter</button>
+
+						<div ng-include="vehicleToModify.form" ng-cloak>{{vehicleToModify.form}}</div>
+					</div>
 				</div>
-
-				<!-- Liste véhicules utilisateurs -->
-				<div class = "vehicles">
-					<h3>Véhicules </h3>
-					<label for="vehicules"></label>
-					<select name="vehicules" id="vehicules" ng-model="vehiculeSelected">
-							<option value="" disabled >Selectionner votre véhicule</option>
-							<option ng-repeat="vehicle in user.vehicles"  value="{{vehicle.idVehicle}}">{{vehicle.name}}</option>
-					</select ng-repeat-end><br/>
-					<button ng-click="selectVehicle()">Selectionner</button>
-
-					<div ng-include="vehicleToModify.form" ng-cloak>{{vehicleToModify.form}}</div>
-
 				<!-- Boutons pour gérer les informations de l'utilisateur -->
-					<div class="submit"><a href="">Ajouter</a></div>
-					<div class="submit"><a href="" ng-click="modify()">Modifier</a></div>
-					<div class="submit"><a href="">Supprimer</a></div>
+				<div class="submit_section">
+					<div class="submit_button"><a href="" ng-click="modify()">Mettre à jour</a></div>
 				</div>
-
 			</div>
