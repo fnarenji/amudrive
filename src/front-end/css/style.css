@@ -318,13 +318,19 @@ input[type=text], input[type=date], input[type=password], input[type=email], inp
 
 #perso
 {
-	text-align: center;
+	/*text-align: center;*/
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	height: 50px;
 	color: #FFFFFF;
 	background-color: #0EBFDD;
+}
+
+#perso label
+{
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 #battement, #rayon
@@ -341,14 +347,13 @@ input[type=text], input[type=date], input[type=password], input[type=email], inp
 
 #afterR, #beforeB, #afterB
 {
-    width: 55px;
+    width: 65px;
     color: inherit;
     background: transparent;
 }
 
 #beforeB, #afterB
 {
-	width: 65px;
 	margin-left: 5px;
 }
 
@@ -570,6 +575,11 @@ a:visited
 .profil .submit
 {
 	display: inline-block;
+}
+
+#timepicker
+{
+	width: 80px;
 }
 
 /*!

@@ -92,22 +92,25 @@ myApp.service('mapService', function(){
     };
 
     MapService.drawCircle = function(loc, radius){
+        if (typeof MapService.circle !== 'undefined') // such js
+            MapService.circle.setMap(null); // Remove current circle
+
         MapService.circle = new google.maps.Circle(
             {
-                strokeColor: '#FF0000',
+                strokeColor: '#0000FF',
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
-                fillColor: '#FF0000',
+                fillColor: '#0000FF',
                 fillOpacity: 0.35,
                 map: MapService.map,
                 center: new google.maps.LatLng(loc[0], loc[1]),
-                radius: radius * 1000
+                radius: radius
             }
         );
     };
 
     MapService.changeCircleRadius = function(radius){
-        MapService.circle.setRadius(radius * 1000);
+        MapService.circle.setRadius(radius);
     };
 
     MapService.getRadius = function(){

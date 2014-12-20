@@ -1,7 +1,7 @@
     <h1>Chercher un trajet</h1>
 
     <form name="path" id="adr">
-        <input google-places gp-path="path" location=location />
+        <input google-places gp-path="path" location=location value="Rue Liandier, Marseille, France" />
         <a href="#"><img src="../img/l_arrow.png" id="larrow" alt="left arrow"></a>
         <a href="#"><img src="../img/r_arrow.png" id="rarrow" alt="right arrow"></a>
         <span ng-controller="autocompleteController">
@@ -12,8 +12,8 @@
             <i ng-show="loadingLocations">Chargement ...</i>
         </span>
         <span>
-            <input ng-model="path.Date" type="text" pick-a-date="date" placeholder="Date" name="date" id="date">
-            <input ng-model="path.Time" type="text" pick-a-time="time" pick-a-time-options="{ format: 'HH:i' }" placeholder="Heure" name="hour" id="hour">
+            <input id="datepicker" ng-model="path.Date" type="text" pick-a-date="date" placeholder="Date" name="date" id="date">
+            <input id="timepicker" ng-model="path.Time" type="text" pick-a-time="time" pick-a-time-options="{ format: 'HH:i' }" placeholder="Heure" name="hour" id="hour">
         </span>
         <div class="button">
             <div id="bcherche" class="submit"><a href="" ng-click="search(path)">Rechercher</a></div>

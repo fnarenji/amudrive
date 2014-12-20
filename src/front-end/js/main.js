@@ -50,14 +50,15 @@ $(document).ready(function() {
 
     $('#rayon').slider({
         range: "min",
-        value: 3,
-        min: 1,
-        max: 10,
+        value: 100,
+        min: 100,
+        max: 1500,
+        step: 100,
         slide : function(event, ui){
-            $('#afterR').val(ui.value + ' km');
+            $('#afterR').val(ui.value + ' m');
         }
     });
-    $('#afterR').val($('#rayon').slider('value') + ' km');
+    $('#afterR').val($('#rayon').slider('value') + ' m');
 
     $('#battement').slider({
         range: true,
@@ -65,7 +66,7 @@ $(document).ready(function() {
         max: 20,
         values: [-10, 10],
         slide : function(event, ui){
-            if (ui.values[0] > 0 || ui.values[1] < 0)
+            if (ui.values[0] > -1 || ui.values[1] < 1)
             {
                 event.preventDefault();
                 return;
@@ -85,6 +86,7 @@ $(document).ready(function() {
         today: 'aujourd\'hui',
         clear: 'effacer',
         close: 'fermer',
-        formatSubmit: 'yyyy/mm/dd'
+        format: 'yyyy-mm-dd',
+        min: true
     });
 });

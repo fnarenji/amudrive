@@ -90,13 +90,17 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
 
         $scope.path.Long = loc[0];
         $scope.path.Lat = loc[1];
-        $scope.path.Address = placesService.getAddress();
+        //$scope.path.Address = placesService.getAddress();
         $scope.path.Radius = $('#rayon').slider("option", "value");
         $scope.path.CampusToAddress = true;
-
-        //mapService.drawCircle(loc, $scope.path.Radius);
+        var date = new Date(path.Date + 'T' + path.Time);
+        date.setMinutes(date.getMinutes() - $('#battement').slider("option", "values")[0]);
+        $scope.path.MinMeetTime = date.getMilliseconds();
+        date.setMinutes(date.getMinutes() + $('#battement').slider("option", "values")[1]);
+        $scope.path.MaxMeetTime = date.getMilliseconds();
+        mapService.drawCircle(loc, $scope.path.Radius);
+        $scope.path.Campus = ;
         console.log($scope.path);
-
-
-    }
+        console.log(path);
+    };
 }]);
