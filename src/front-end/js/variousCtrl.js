@@ -5,32 +5,22 @@ myApp.controller('MenuController', ['$scope','sessionService','REST', function($
     $scope.disconnect = function()
     {
         REST.REST('DELETE','auth');
-        sessionService.setAuthToken(undefined);
-        window.location = '#/index.html';
+        sessionService.disconnect();
+        window.location = '#/';
     };
 
-    if (sessionService.getAuthToken() == undefined) {
-
+    if (sessionService.getAuthToken() !== undefined){
         $scope.menu =
             [
-                {name: '    ', url: ''},
-                {name: '    ', url: ''},
-                {name: '    ', url: ''}
-            ]
-        $scope.connectButton = {name: 'Connexion', url: '#/connection'}
-
-
-    }
-    else {
-        $scope.menu =
-            [
-                {name: '', url: ''},
+                {name: 'Recherche', url: '#/path'},
                 {name: 'Mes trajets', url: '#/mycarpoolings'},
                 {name: 'Mon compte', url: '#/account'}
             ]
         $scope.connectButton = {
             name: 'Deconnexion'};
     }
+    else
+        $scope.connectButton = {name: 'Connexion', url: '#/connection'}
 
 }]);
 

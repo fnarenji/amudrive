@@ -33,7 +33,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     $scope.goTo = function(url){
         urlf = '#/';
         urlf += (url === undefined) ? '' : url;
-        window.location.href = urlf;
+        window.location = urlf;
     };
 
 
@@ -48,14 +48,12 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
                 $scope.authToken = data.authToken;
                 alert('Connexion réussie ! ');
                 $scope.message = ''; // Clear previous error messages
+                window.location = ''; // Call to $scope.goTo() doesn't reload the page
             }
             else if(data.reasons != undefined)
-            {
                 $scope.message = data.reasons;
-            }
-            else{
+            else
                 $scope.message = "Les identifiants saisis sont incorrects ou ce nom d'utilisateur n'existe pas";
-            }
 
         });
     };
