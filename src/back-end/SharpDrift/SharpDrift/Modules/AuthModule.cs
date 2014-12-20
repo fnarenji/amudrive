@@ -29,7 +29,10 @@ namespace SharpDrift.Modules
                         return new
                         {
                             success = false,
-                            authToken = string.Empty
+                            authToken = string.Empty, 
+                            Request.Form.username,
+                            Request.Form.password_sha512,
+                            Request.Form
                         }.ToJson()
                          .WithCookie("authToken", string.Empty, DateTime.UtcNow.AddDays(-7));
 
