@@ -86,5 +86,5 @@ $(document).ready(function() {
         clear: 'effacer',
         close: 'fermer',
         formatSubmit: 'yyyy/mm/dd'
-    })
+    });
 });

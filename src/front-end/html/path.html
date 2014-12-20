@@ -1,21 +1,22 @@
     <h1>Chercher un trajet</h1>
 
-    <form name="search" id="adr">
+    <form name="path" id="adr">
         <input google-places gp-path="path" location=location/>
         <a href="#"><img src="../img/l_arrow.png" id="larrow" alt="left arrow"></a>
         <a href="#"><img src="../img/r_arrow.png" id="rarrow" alt="right arrow"></a>
         <span ng-controller="autocompleteController">
             <!--<input type="text" name="pole" placeholder="Pôle" id="ch2">-->
-            <input type="text" ng-model="selected" typeahead="campus as campus.name for campus in campusesTab|
+            <input ng-model="path.CampusName" type="text" ng-model="selected" typeahead="campus as campus.name for campus in campusesTab|
                    filter:$viewValue | limitTo:8" class="form-control" placeholder="Rechercher un pôle"
                    typeahead-on-select="createRoute($item, $model, $label)">
             <i ng-show="loadingLocations">Chargement ...</i>
         </span>
-        <!--@todo Déplacer les options dans le JS-->
-        <span><input type="text" pick-a-date="date" placeholder="Choisir une date" name="date" id="date"></span>
+        <span>
+            <input ng-model="path.Date" type="text" pick-a-date="date" placeholder="Date" name="date" id="date">
+            <input ng-model="path.Time" type="text" pick-a-time="time" pick-a-time-options="{ format: 'HH:i' }" placeholder="Heure" name="hour" id="hour">
+        </span>
+        <div class="button">
+            <div id="bcherche" class="submit"><a href="" ng-click="search(path)">Rechercher</a></div>
+            <div id="bpropose" class="submit"><a href="#">Proposer</a></div>
+        </div>
     </form>
-
-    <div class="button">
-        <div id="bcherche"><a href="#">Rechercher</a></div>
-        <div id="bpropose"><a href="#">Proposer</a></div>
-    </div>

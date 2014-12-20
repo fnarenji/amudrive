@@ -2,11 +2,11 @@
  * Created by Thomas on 29/11/2014.
  */
 
-myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionService', 'placesService', function($scope, REST, mapService, sessionService, placesService) {
-
-
+myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionService', 'placesService', function($scope, REST, mapService, sessionService, placesService)
+{
     $scope.authToken = sessionService.getAuthToken();
     $scope.user = {};
+    $scope.path = {};
 
     $scope.registrationLocation = function(loc){$scope.loc = loc;};
 
@@ -77,6 +77,28 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
             }
             alert(data.success + " " + data.reasons);
         });
-
     };
+
+    $scope.search = function(path) {
+        var loc = placesService.getLoc();
+
+        if (loc === undefined){
+            alert('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, ' +
+            'le service peut être temporairement indisponible.');
+            return;
+        }
+
+        console.log(loc);
+
+        $scope.path.Long = loc[0];
+        $scope.path.Lat = loc[1];
+        $scope.path.Address = placesService.getAddress();
+        $scope.path.Radius = $('#rayon').slider("option", "value");
+        $scope.path.CampusToAddress = true;
+
+        //mapService.drawCircle(loc, $scope.path.Radius);
+        console.log($scope.path);
+
+
+    }
 }]);
