@@ -25,9 +25,14 @@
 				<!-- Liste véhicules utilisateurs -->
 				<div class = "vehicles">
 					<h3>Véhicules </h3>
-					<select name="Véhicules">
-							<option ng-repeat="vehicle in user.vehicles" value="{{vehicle.idVehicle}}">{{vehicle.name}}</option>
+					<label for="vehicules"></label>
+					<select name="vehicules" id="vehicules" ng-model="vehiculeSelected">
+							<option value="" disabled >Selectionner votre véhicule</option>
+							<option ng-repeat="vehicle in user.vehicles"  value="{{vehicle.idVehicle}}">{{vehicle.name}}</option>
 					</select ng-repeat-end><br/>
+					<button ng-click="selectVehicle()">Selectionner</button>
+
+					<div ng-include="vehicleToModify.form" ng-cloak>{{vehicleToModify.form}}</div>
 
 				<!-- Boutons pour gérer les informations de l'utilisateur -->
 					<div class="submit"><a href="">Ajouter</a></div>

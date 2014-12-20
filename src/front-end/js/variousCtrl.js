@@ -62,10 +62,38 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
         if(confirm("Êtes-vous bien sûr de vouloir effectuer ces modifications ?")){
             REST.REST('PUT', 'client', $scope.user, 'json')
                 .success(function(){
-                    alert('Les informations ont bien été modifié');
+                    alert('Les informations ont bien été modifiées');
                 })
         }
     };
+
+    $scope.getVehicles = function(id){
+        for(var i = 0; i < $scope.user.vehicles.length; ++i)
+            if($scope.user.vehicles[i].idVehicle == id)
+                return $scope.user.vehicles[i];
+    };
+
+    $scope.selectVehicle = function(){
+        console.log('hello');
+        console.log($scope.vehiculeSelected);
+        $scope.vehicleToModify = $scope.getVehicles($scope.vehiculeSelected);
+        console.log($scope.vehicleToModify);
+        $scope.vehicleToModify.form = "vehicleForm.html";
+    };
+
+    $scope.modifyVehicle = function(){
+      console.log('modifyVehicle');
+      $scope.vehicleToModify.form = undefined;
+
+      if(confirm("Êtes-vous bien sûr de vouloir effectuer ces modifications ?")){
+          REST.REST('PUT', 'vehicles', $scope.vehicleToModify, 'json')
+              .success(function(){
+                 alert('Les informations ont bien été modifiées');
+              });
+      }
+      console.log($scope.vehicleToModify);
+    };
+
     $scope.getInfos().then(function(){
         console.log($scope.infos);
         $scope.loadInfos();

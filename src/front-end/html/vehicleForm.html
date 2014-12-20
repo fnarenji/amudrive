@@ -1,0 +1,14 @@
+
+    <label for="name">Nom</label>
+    <input type="text" name="name" id="name" ng-model="vehicleToModify.name"/>
+
+    <label for="animals">Autorisez-vous les animaux à bord ?</label>
+    <input type="checkbox" name="animals" id="animals" ng-model="vehicleToModify.animals"/>
+
+    <label for="smoking">Autorisez-vous les personnes à fumer à bord ?</label>
+    <input type="checkbox" name="smoking" id="smoking" ng-model="vehicleToModify.smoking"/>
+
+    <label for="eat">Autorisez-vous les personnes à manger à bord ?</label>
+    <input type="checkbox" name="eat" id="eat" ng-model="vehicleToModify.eat"/>
+
+    <button ng-click="modifyVehicle()">Modifier</button>
