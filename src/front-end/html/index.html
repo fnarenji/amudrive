@@ -13,15 +13,10 @@
 				<a href="#">AMUDrive</a>
 			</div>
 
-			<nav ng-controller="MenuController">
-				<ul>
-					<li ng-repeat-start="elem in menu">
-                        <a href="{{elem.url}}" ng-cloak>{{elem.name}}</a>
-                    </li>
-                <span ng-repeat-end></span>
-				</ul>
-				<span id="connection_btn"><a href="{{connectButton.url}}" >{{connectButton.name}}</a></span>
-			</nav>
+            <div ng-controller="MenuController">
+                <nav ng-include="currentMenu">
+                </nav>
+            </div>
 
 		</header>
 		<section id="short_bio">
