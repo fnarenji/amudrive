@@ -34,12 +34,10 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
     $scope.user = {};
 
     $scope.getInfos = function(){
-            REST.REST('GET', 'client')
+            return REST.REST('GET', 'client')
                 .success(function(data){
                    $scope.infos = data.client;
-                   console.log($scope.infos);
-                    $scope.loadPicture();
-                    $scope.loadInfos();
+
                 });
     };
 
@@ -51,7 +49,6 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
     };
 
     $scope.loadInfos = function(){
-
       var user = {
         'username' : $scope.infos.userName,
         'firstname' : $scope.infos.firstName,
@@ -65,14 +62,13 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
     };
 
     $scope.loadPicture = function(){
-        var hash = CryptoJS.MD5($scope.infos.mail).toString();
-
-        $http.jsonp('http://gravatar.com/' + hash + '.json?callback=JSON_CALLBACK"')
-            .success(function(data){
-                $scope.user.avatar = data.entry[0].photos[0].value;
-            });
+        $scope.user.hash = CryptoJS.MD5($scope.infos.mail).toString();
     };
 
-    $scope.getInfos();
-    $scope.loadVehicles();
+    $scope.getInfos().then(function(){
+        console.log($scope.infos);
+        $scope.loadInfos();
+        $scope.loadPicture();
+        $scope.loadVehicles();
+    });
 });

@@ -2,16 +2,21 @@
 			<div class="profil" ng-controller="accountManagerController">
 				<!-- Image utilisateur -->
 				<div class ="user" ng-cloak>
-					<img src="{{user.avatar}}" alt="Avatar_Utilisateur" />
+					<h2>Vos informations personnelles</h2>
+					<img src="http://www.gravatar.com/avatar/{{user.hash}}" alt="Avatar_Utilisateur" ng-cloak/>
+
 				<!-- Informations utilisateur -->
-					<p>{{user.username}}</p>
-					<input type="text" placeholder="Votre prénom" value="{{user.firstname}}"/>
-					<input type="text" placeholder="Votre nom" value="{{user.lastname}}"/>
+					<p>Nom d'utilisateur : {{user.username}}</p>
+					<label for="firstname">Prénom</label>
+					<input type="text" name="firstname" id="firstname" placeholder="Votre prénom" value="{{user.firstname}}"/>
+
+					<label for="lastname">Nom</label>
+					<input type="text" name="lastname" id="lastname" placeholder="Votre nom" value="{{user.lastname}}"/>
 
 					<p>{{user.age}}</p>
 
 				<!-- Sections à cocher -->
-					<p>Confidentialité :</p>
+					<h3>Confidentialité :</h3>
 					<input type="checkbox" ng-model="user.mailnotifications" ng-true-value="true" ng-false-value="false"/> Notifications par mail
 					<input type="checkbox" ng-model="user.phonenotifications" ng-true-value="true" ng-false-value="false"/> Notifications par téléphone
 					<input type="checkbox" ng-model="user.newsletter" ng-true-value="true" ng-false-value="false"/> Newsletter
@@ -19,8 +24,8 @@
 
 				<!-- Liste véhicules utilisateurs -->
 				<div class = "vehicles">
-					<p>Mes Véhicules </p>
-					<select name="Véhicules" ng-cloak>
+					<h3>Véhicules </h3>
+					<select name="Véhicules">
 							<option ng-repeat="vehicle in user.vehicles" value="{{vehicle.idVehicle}}">{{vehicle.name}}</option>
 					</select ng-repeat-end><br/>
 
