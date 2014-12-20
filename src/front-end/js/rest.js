@@ -86,8 +86,6 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
             return;
         }
 
-        console.log(loc);
-
         $scope.path.Long = loc[0];
         $scope.path.Lat = loc[1];
         $scope.path.Address = placesService.getAddress();

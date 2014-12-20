@@ -45,8 +45,11 @@ myApp.directive('googlePlaces', function(placesService){
                     // du lieu selectionné (pour pouvoir l'utiliser dans map($scope)
                     var loc = [place.geometry.location.lat(),place.geometry.location.lng()];
 
-                    if(attrs.gpPath === "path")
+                    if(attrs.gpPath === "path"){
                         $scope.path(loc);
+                        placesService.setLoc(loc);
+                    }
+
                     else {
                         placesService.setLoc(loc);
                         placesService.setAddress(elm[0].value);
