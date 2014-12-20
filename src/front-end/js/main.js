@@ -48,19 +48,16 @@ $(document).ready(function() {
 
 	});
 
-    $('#date').datepicker({
-        dateFormat: 'dd/mm/yy'
+    $('#rayon').slider({
+        range: "min",
+        value: 3,
+        min: 1,
+        max: 10,
+        slide : function(event, ui){
+            $('#afterR').val(ui.value + ' km');
+        }
     });
-        $('#rayon').slider({
-            range: "min",
-            value: 3,
-            min: 1,
-            max: 10,
-            slide : function(event, ui){
-                $('#afterR').val(ui.value + ' km');
-            }
-        });
-        $('#afterR').val($('#rayon').slider('value') + ' km');
+    $('#afterR').val($('#rayon').slider('value') + ' km');
 
     $('#battement').slider({
         range: true,
@@ -68,12 +65,18 @@ $(document).ready(function() {
         max: 20,
         values: [-10, 10],
         slide : function(event, ui){
+            if (ui.values[0] > 0 || ui.values[1] < 0)
+            {
+                event.preventDefault();
+                return;
+            }
+
             $('#beforeB').val(ui.values[0] + ' min ');
-            $('#afterB').val(ui.values[1] + ' min ');
+            $('#afterB').val('+' + ui.values[1] + ' min ');
         }
     });
     $('#beforeB').val($('#battement').slider("values", 0) + ' min ');
-    $('#afterB').val($('#battement').slider("values", 1) + ' min ');
+    $('#afterB').val('+' + $('#battement').slider("values", 1) + ' min ');
 
     // Datepicker default parameters
     $.extend($.fn.pickadate.defaults, {
