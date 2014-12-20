@@ -1,0 +1,7 @@
+<ul>
+    <li ng-repeat-start="elem in menu">
+        <a href="{{elem.url}}" ng-cloak>{{elem.name}}</a>
+    </li>
+    <span ng-repeat-end></span>
+</ul>
+<span id="connection_btn" ng-click="disconnect()"><a href="{{connectButton.url}}" >{{connectButton.name}}</a></span>

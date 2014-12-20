@@ -1,11 +1,37 @@
-myApp.controller('MenuController', ['$scope', function($scope) {
-    $scope.menu =
-        [
-         {name: 'Recherche', url: '#/path'},
-         {name: 'Trajets', url: '#/mycarpoolings'},
-         {name: 'Mon Compte', url: '#/account'}
-        ];
-    $scope.connectButton = {name :'Connexion', url: '#/connection'};
+myApp.controller('MenuController', ['$scope','sessionService','REST', function($scope,sessionService,REST) {
+
+
+    $scope.currentMenu = 'menu.html';
+    $scope.disconnect = function()
+    {
+        REST.REST('DELETE','auth');
+        sessionService.setAuthToken(undefined);
+        window.location = '#/index.html';
+    };
+
+    if (sessionService.getAuthToken() == undefined) {
+
+        $scope.menu =
+            [
+                {name: '    ', url: ''},
+                {name: '    ', url: ''},
+                {name: '    ', url: ''}
+            ]
+        $scope.connectButton = {name: 'Connexion', url: '#/connection'}
+
+
+    }
+    else {
+        $scope.menu =
+            [
+                {name: '', url: ''},
+                {name: 'Mes trajets', url: '#/mycarpoolings'},
+                {name: 'Mon compte', url: '#/account'}
+            ]
+        $scope.connectButton = {
+            name: 'Deconnexion'};
+    }
+
 }]);
 
 myApp.controller('autocompleteController', function($scope, REST, mapService) {

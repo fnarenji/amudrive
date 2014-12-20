@@ -48,8 +48,6 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
                 $scope.authToken = data.authToken;
                 alert('Connexion réussie ! ');
                 $scope.message = ''; // Clear previous error messages
-                $scope.goTo();
-                $scope.connectButton = 'Deconnexion';
             }
             else if(data.reasons != undefined)
             {
