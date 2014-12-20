@@ -4,10 +4,11 @@
 
 myApp.service('sessionService', function ($cookies) {
     sessionService = new Object();
-    //sessionService.authToken = $cookies.authToken;
+    sessionService.authToken = $cookies.authToken;
 
     sessionService.setAuthToken = function (authToken) {
         //$.cookie('authToken', authToken, { expires: 7, domain: 'http://localhost:8989/' });
+        $cookies.authToken = authToken;
         sessionService.authToken = authToken;
     };
 
@@ -15,5 +16,9 @@ myApp.service('sessionService', function ($cookies) {
         return sessionService.authToken;
     };
 
+    sessionService.checkConnection = function(){
+        if(sessionService.getAuthToken() === undefined)
+            window.location = '#/';
+    }
     return sessionService;
 });

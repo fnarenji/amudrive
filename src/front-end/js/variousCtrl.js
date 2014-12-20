@@ -30,15 +30,16 @@ myApp.controller('autocompleteController', function($scope, REST, mapService) {
 });
 
 myApp.controller('accountManagerController', function($scope, REST, sessionService, $http){
-
+    $scope.checkconnection = function(){
+        sessionService.checkConnection();
+    }
     $scope.user = {};
 
     $scope.getInfos = function(){
-            return REST.REST('GET', 'client')
-                .success(function(data){
-                   $scope.infos = data.client;
-
-                });
+        return REST.REST('GET', 'client')
+            .success(function(data){
+               $scope.infos = data.client;
+            });
     };
 
     $scope.loadVehicles = function(){
@@ -49,26 +50,26 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
     };
 
     $scope.loadInfos = function(){
-      var user = {
-        'username' : $scope.infos.userName,
-        'firstname' : $scope.infos.firstName,
-        'lastname' : $scope.infos.lastName,
-        'mailnotifications' : $scope.infos.mailNotifications,
-        'phonenotifications' : $scope.infos.phoneNotifications,
-        'newsletter' : $scope.infos.newsletter
-      };
+      var user = $scope.infos;
 
       $scope.user = user;
     };
 
-    $scope.loadPicture = function(){
+    $scope.setMailHash = function(){
         $scope.user.hash = CryptoJS.MD5($scope.infos.mail).toString();
     };
-
+    $scope.modify = function(){
+        if(confirm("Êtes-vous bien sûr de vouloir effectuer ces modifications ?")){
+            REST.REST('PUT', 'client', $scope.user, 'json')
+                .success(function(){
+                    alert('Les informations ont bien été modifié');
+                })
+        }
+    };
     $scope.getInfos().then(function(){
         console.log($scope.infos);
         $scope.loadInfos();
-        $scope.loadPicture();
+        $scope.setMailHash();
         $scope.loadVehicles();
     });
 });
