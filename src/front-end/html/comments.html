@@ -1,0 +1,13 @@
+<div id="comment">
+    <label>Adresse du covoiturage : {{carPendingToModify.address}} </label><br>
+    <textarea rows="4" cols="50" ng-model="carPendingToModify.message"/>
+    </textarea>
+
+    <label for="markc">Note co-voiturage : </label>
+    <input type="number" min="0" max="10" name="markc" id="markc" ng-model="carPendingToModify.markc"/>
+
+    <label for="markd">Note co-voiturage : </label>
+    <input type="number" min="0" max="10" name="markd" id="markd" ng-model="carPendingToModify.markd"/>
+
+    <button ng-click="comment(carPendingToModify)">Poster</button>
+</div>

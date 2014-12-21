@@ -132,7 +132,7 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
             {
 
                 if(data.success === true)
-                     alert('vehiclue inserer');
+                     alert('Vehiclue inserer');
                 else
                     alert('Erreur : ' + data.reasons[0]);
             })
@@ -147,10 +147,139 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
                 .success(function(data){
                     console.log(data);
                     if(data.success === true)
-                         alert('vehicule delete ');
+                         alert('Vehicule delete ');
+                    else
+                        alert('Erreur pendant la suppression');
                 }
             )
         }
     }
 
+});
+
+myApp.controller('carpoolingController',function($scope, REST, sessionService)
+{
+    $scope.checkconnection = function(){
+        sessionService.checkConnection();
+    }
+    $scope.user = {};
+
+    $scope.loadMyCarpooling = function(){
+        REST.REST('GET', 'carpoolings')
+            .success(function(data){
+                console.log($scope.user.offeredcarpooling);
+                console.log(data.offeredCarPoolings);
+                $scope.user.offeredcarpooling = data.offeredCarPoolings;
+                console.log($scope.user.offeredcarpooling);
+            });
+        //console.log($scope.user.offerdcarpooling);
+        //console.log(data.offerdcarpooling);
+    };
+
+    $scope.loadMyCarpooling();
+
+    $scope.getCarPooling = function(id){
+        for(var i = 0; i < $scope.user.offeredcarpooling.length; ++i)
+            if($scope.user.offeredcarpooling[i].idCarPooling == id)
+               return $scope.user.offeredcarpooling[i];
+    };
+
+    $scope.selectCarPooling = function(){
+        console.log('hello');
+        console.log($scope.carpoolingSelected);
+        $scope.carPoolingToModify = $scope.getCarPooling($scope.carpoolingSelected);
+        console.log($scope.carPoolingToModify);
+        $scope.carPoolingToModify.form = "carPoolingForm.html";
+    };
+
+    $scope.modifyCarPooling = function (carpooling) {
+        REST.REST('PUT', 'carpoolings',carpooling, 'json')
+            .success(function(data){
+                if(data.success === true)
+                    alert('Opération réussi');
+            })
+    }
+
+    $scope.deleteCarPooling = function(carpooling) {
+        REST.REST('DELETE', 'carpoolings',carpooling, 'json')
+            .success(function(data){
+                if(data.success === true)
+                    alert('Opération réussi');
+            })
+    }
+
+    $scope.loadPendCarpooling = function(){
+        REST.REST('GET', 'carpoolings')
+            .success(function(data){
+                console.log($scope.user.cpending);
+                console.log(data.waitingCarPoolings);
+                $scope.user.cpending = data.waitingCarPoolings;
+                console.log($scope.user.cpending);
+            });
+        //console.log($scope.user.offerdcarpooling);
+        //console.log(data.offerdcarpooling);
+    };
+
+    $scope.loadPendCarpooling();
+
+    $scope.loadValidCarpooling = function(){
+        REST.REST('GET', 'carpoolings')
+            .success(function(data){
+                console.log($scope.user.cvalid);
+                console.log(data.joinedCarPoolings);
+                $scope.user.cvalid = data.joinedCarPoolings;
+                console.log($scope.user.cvalid);
+            });
+        //console.log($scope.user.offerdcarpooling);
+        //console.log(data.offerdcarpooling);
+    };
+
+    $scope.loadValidCarpooling();
+
+    $scope.getPCarPooling = function(id){
+        for(var i = 0; i < $scope.user.cpending.length; ++i)
+            if($scope.user.cpending[i].idCarPooling == id)
+                return $scope.user.cpending[i];
+    };
+
+    $scope.selectp = function(){
+        console.log('hello');
+        console.log($scope.carpooling1Selected);
+        $scope.carPendingToModify = $scope.getPCarPooling($scope.carpooling1Selected);
+        console.log($scope.carPendingToModify);
+        $scope.carPendingToModify.form = "deljoin.html";
+    };
+
+    $scope.delv = function(carpooling){
+        REST.REST('DELETE', 'carPoolings/join',carpooling, 'json')
+            .success(function(data){
+                if(data.success === true)
+                    alert('Opération réussi');
+            })
+    }
+
+    $scope.getVCarPooling = function(id){
+        for(var i = 0; i < $scope.user.cvalid.length; ++i)
+            if($scope.user.cvalid[i].idCarPooling == id)
+                return $scope.user.cvalid[i];
+    };
+
+    $scope.selectv = function(){
+        console.log('hello');
+        console.log($scope.carpooling2Selected);
+        $scope.carPendingToModify = $scope.getVCarPooling($scope.carpooling2Selected);
+        console.log($scope.carPendingToModify);
+        $scope.carPendingToModify.form = "comments.html";
+        $scope.carPendingToModify.message = undefined;
+        $scope.carPendingToModify.markc = 0;
+        $scope.carPendingToModify.markd = 0;
+    };
+
+    $scope.comment = function(comment){
+        REST.REST('POST', 'carPooling/comment',comment, 'json')
+            .success(function(data){
+                if(data.success === true)
+                    alert('Opération réussi');
+            })
+    }
 });

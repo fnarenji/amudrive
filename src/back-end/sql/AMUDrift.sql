@@ -86,7 +86,7 @@ CREATE TABLE comment (
   PRIMARY KEY (idClient, idCarPooling, idMessage),
   CONSTRAINT fk_carPoolingJoin
     FOREIGN KEY (idClient , idCarPooling)
-    REFERENCES carPoolingJoin (idCarPooling, idClient)
+    REFERENCES carPoolingJoin (idClient, idCarPooling)
     ON DELETE RESTRICT);
 
 CREATE INDEX fk_client_idx ON carPoolingJoin(idClient ASC);

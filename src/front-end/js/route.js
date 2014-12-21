@@ -7,5 +7,7 @@ myApp.config(function($routeProvider){
        .when('/registrationNext', {templateUrl: 'registration_next.html'})
        .when('/path', {templateUrl: 'path.html'})
        .when('/account', {templateUrl: 'account.html'})
+       .when('/manage', {templateUrl: 'carPoolingManage.html'})
+       .when('/participate', {templateUrl: 'carPoolingParticipate.html'})
        .otherwise({redirectTo: '/'});
 });

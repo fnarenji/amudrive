@@ -26,14 +26,14 @@ namespace SharpDrift.Modules
                     {
                         success = true,
                         joinedCarPoolings = await conn.QuerySqlAsync<CarPooling>(
-                            "SELECT * FROM carPooling WHERE idCarPooling IN (SELECT idCarPooling FROM joins WHERE idClient = @IdClient AND accept = TRUE)",
-                            new {IdClient = int.Parse(Context.CurrentUser.UserName)}),
+                            "SELECT * FROM carPooling WHERE idCarPooling IN (SELECT idCarPooling FROM carPoolingJoin  WHERE idClient = @IdClient AND accept = TRUE)",
+                            new { IdClient = int.Parse(Context.CurrentUser.UserName) }),
                         waitingCarPoolings = await conn.QuerySqlAsync<CarPooling>(
-                            "SELECT * FROM carPooling WHERE idCarPooling IN (SELECT idCarPooling FROM joins WHERE idClient = @IdClient AND accept = FALSE)",
-                            new {IdClient = int.Parse(Context.CurrentUser.UserName)}),
+                            "SELECT * FROM carPooling WHERE idCarPooling IN (SELECT idCarPooling FROM carPoolingJoin  WHERE idClient = @IdClient AND accept = FALSE)",
+                            new { IdClient = int.Parse(Context.CurrentUser.UserName) }),
                         offeredCarPoolings =
                             await conn.QuerySqlAsync<CarPooling>("SELECT * FROM carPooling WHERE idClient = @IdClient",
-                                new {IdClient = int.Parse(Context.CurrentUser.UserName)})
+                                new { IdClient = int.Parse(Context.CurrentUser.UserName) })
                     }.ToJson();
                 }
             };
@@ -54,6 +54,41 @@ namespace SharpDrift.Modules
                     }.ToJson();
                 }
             };
+
+            Put["/carPoolings", true] = async (x, ctx) =>
+            {
+                using (DbConnection conn = DAL.Conn)
+                {
+                    var carPooling = this.Bind<CarPooling>();
+                    carPooling.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+
+                    await conn.ExecuteSqlAsync("UPDATE carPooling SET room = @Room , Luggage = @Luggage WHERE idCarPooling = @idCarPooling", carPooling);
+
+                    return new
+                    {
+                        success = true,
+                        carPooling = carPooling
+                    }.ToJson();
+                }
+            };
+
+            Delete["/carPoolings", true] = async (x, ctx) =>
+            {
+                using (DbConnection conn = DAL.Conn)
+                {
+                    var carPooling = this.Bind<CarPooling>();
+                    carPooling.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+
+                    await conn.ExecuteSqlAsync("DELETE FROM carPooling WHERE idCarPooling = @IdCarPooling AND idClient = @IdClient", carPooling);
+
+                    return new
+                    {
+                        success = true,
+                        carPooling = carPooling
+                    }.ToJson();
+                }
+            };
+
 
             Post["/carPoolings/search", true] = async (x, ctx) =>
             {
@@ -127,7 +162,7 @@ namespace SharpDrift.Modules
                 using (DbConnection conn = DAL.Conn)
                 {
                     FastExpando j = this.Bind<CarPoolingJoin>().Expand();
-                    j.Expand(new {OwnerId = Int32.Parse(Context.CurrentUser.UserName)});
+                    j.Expand(new { OwnerId = Int32.Parse(Context.CurrentUser.UserName) });
 
                     await
                         conn.ExecuteSqlAsync(string.Join(" ",
@@ -150,10 +185,10 @@ namespace SharpDrift.Modules
                 using (DbConnection conn = DAL.Conn)
                 {
                     FastExpando j = this.Bind<Comment>().Expand();
-                    j.Expand(new {OwnerId = Int32.Parse(Context.CurrentUser.UserName)});
+                    j.Expand(new { OwnerId = Int32.Parse(Context.CurrentUser.UserName) });
 
                     await
-                        conn.ExecuteSqlAsync("INSERT INTO comment (idClient,idCarPooling,comment,drivermark,poolingmark) VALUES (@OwnerId,@IdCarPooling,@OwnerId,@Message,@DriverMark,@PoolingMark)", j);
+                        conn.ExecuteSqlAsync("INSERT INTO comment (idClient,idCarPooling,comment,drivermark,poolingmark) VALUES (@OwnerId,@IdCarPooling,@Message,@DriverMark,@PoolingMark)", j);
 
                     return new
                     {
