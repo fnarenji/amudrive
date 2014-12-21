@@ -73,7 +73,7 @@ namespace SharpDrift.Modules
                     }
 
                     v = await conn.InsertSqlAsync(string.Join(" ",
-                        "INSERT INTO vehicle VALUES (DEFAULT, @IdClient, @name," + v.BV.ToString() + ", @animals , @smoking, @eat) RETURNING *"), v);
+                        "INSERT INTO vehicle VALUES (DEFAULT, @IdClient, @name, '" + v.BV.ToString() + "', @animals , @smoking, @eat) RETURNING *"), v);
                     return new
                     {
                         success = true,
