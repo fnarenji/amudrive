@@ -606,7 +606,10 @@ a:visited
 	width: 175px;
 	height: 175px;
 	float: left;
+	border: 5px solid #0c708a;
+	border-radius: 3px;
 	margin-right: 15px;
+	margin-bottom: 10px;
 }
 .profil label[for="firstname"], .profil label[for="lastname"], label[for="name"]
 {
@@ -678,6 +681,18 @@ a:visited
 	width: 80px;
 }
 
+#confirm_button
+{
+	width:block;
+	margin:auto;
+	margin-bottom: 10px;
+}
+#roomChoice, #luggageChoice
+{
+	display: block;
+	margin-top: 10px;
+	width: 290px;
+}
 /*!
  * Default mobile-first, responsive styling for pickadate.js
  * Demo: http://amsul.github.io/pickadate.js

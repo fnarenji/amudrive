@@ -6,8 +6,7 @@
 
 ### URGENTS ###
 * **Fiche d'un trajet (commentaires, participants ...)**
-* **Recherche d'un covoiturage (interaction front-end/back-end non fonctionnelle)**
-* **Création d'un covoiturage (côté back-end puis côté front-end)**
+* **Recherche d'un covoiturage (Fonctionnelle mais il manque l'affichage des infos sur le panel)**
 
 ### Moins urgents ###
 * *Proposer, sur la page d'accueil, une fois que l'utilisateur est connecté, un trajet "par défaut" de chez lui à son pôle favori,
@@ -18,6 +17,7 @@ sur un covoiturage nous concernant (créateur ou simple utilisateur)*
 
 ### DONE ###
 
+* **Création d'un covoiturage (côté back-end puis côté front-end)**
 * Création d'un itinéraire Google Maps (sans communication utilisateur)
 * Amélioration création de compte (retour en arrière, enregistrement en local des informations saisies pour qu'elles s'affichent lors du retour arrière dans le formulaire ...)
 * **Autocomplétion pour la recherche de pôle lors de la création d'un itinéraire**
