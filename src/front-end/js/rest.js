@@ -133,7 +133,11 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
 
         REST.REST('POST', 'carpoolings', $scope.path, 'json')
             .success(function(data){
-               console.log(data);
+               if(data.success == true){
+                   alert('Le trajet a bien été ajouté');
+                   window.location.reload();
+               }else
+                alert("Une erreur est survenue, veuillez rééssayer.");
             });
 
     };
