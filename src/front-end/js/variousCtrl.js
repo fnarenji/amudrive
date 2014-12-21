@@ -117,13 +117,13 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
     }
 
     $scope.insertInDB = function (vehicle) {
-        console.log(vehicle)
         REST.REST('POST','vehicles',vehicle,'json')
-            .success(function(data)
-            {
+            .success(function(data){
 
-                if(data.success === true)
-                     alert('vehiclue inserer');
+                if(data.success === true){
+                    alert('Véhicule inséré');
+                    window.location.reload();
+                }
                 else
                     alert('Erreur : ' + data.reasons[0]);
             })
@@ -131,14 +131,14 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
 
     $scope.deleteVehicle = function()
     {
-        console.log('Delete vehicle');
-        console.log($scope.vehicleToModify);
         if(confirm("Êtes-vous bien sûr de vouloir effectuer ces modifications ?")){
             REST.REST('DELETE', 'vehicles', $scope.vehicleToModify, 'json')
                 .success(function(data){
-                    console.log(data);
-                    if(data.success === true)
-                         alert('vehicule delete ');
+                    if(data.success === true){
+                        alert('Véhicule supprimé');
+                        window.location.reload();
+                    }
+
                 }
             )
         }
