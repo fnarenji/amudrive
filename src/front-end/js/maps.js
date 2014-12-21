@@ -48,8 +48,8 @@ myApp.directive('googlePlaces', function(placesService){
                     if(attrs.gpPath === "path"){
                         $scope.path(loc);
                         placesService.setLoc(loc);
+                        placesService.setAddress(elm[0].value);
                     }
-
                     else {
                         placesService.setLoc(loc);
                         placesService.setAddress(elm[0].value);

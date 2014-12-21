@@ -52,13 +52,6 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
     }
     $scope.user = {};
 
-    $scope.getInfos = function(){
-        return REST.REST('GET', 'client')
-            .success(function(data){
-               $scope.infos = data.client;
-            });
-    };
-
     $scope.loadVehicles = function(){
         REST.REST('GET', 'vehicles')
             .success(function(data){
@@ -67,13 +60,11 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
     };
 
     $scope.loadInfos = function(){
-      var user = $scope.infos;
-
-      $scope.user = user;
+        $scope.user = sessionService.getInfos();
     };
 
     $scope.setMailHash = function(){
-        $scope.user.hash = CryptoJS.MD5($scope.infos.mail).toString();
+        $scope.user.hash = CryptoJS.MD5(sessionService.getInfos().mail).toString();
     };
     $scope.modify = function(){
         if(confirm("Êtes-vous bien sûr de vouloir effectuer ces modifications ?")){
@@ -111,8 +102,8 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
       console.log($scope.vehicleToModify);
     };
 
-    $scope.getInfos().then(function(){
-        console.log($scope.infos);
+    sessionService.loadInfos().then(function(){
+        console.log(sessionService.getInfos());
         $scope.loadInfos();
         $scope.setMailHash();
         $scope.loadVehicles();

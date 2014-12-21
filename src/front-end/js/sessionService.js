@@ -2,7 +2,7 @@
  * Created by SKNZ on 17/12/2014.
  */
 
-myApp.service('sessionService', function ($cookies) {
+myApp.service('sessionService', function ($cookies, REST) {
     sessionService = new Object();
     sessionService.authToken = $cookies.authToken;
 
@@ -24,5 +24,15 @@ myApp.service('sessionService', function ($cookies) {
         document.cookie = 'authToken=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     };
 
+    sessionService.getInfos = function(){
+        return sessionService.infos;
+    };
+
+    sessionService.loadInfos = function(){
+        return REST.REST('GET', 'client')
+            .success(function(data){
+                sessionService.infos = data.client;
+            });
+    };
     return sessionService;
 });

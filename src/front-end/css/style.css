@@ -678,6 +678,18 @@ a:visited
 	width: 80px;
 }
 
+#confirm_button
+{
+	width:block;
+	margin:auto;
+	margin-bottom: 10px;
+}
+#roomChoice, #luggageChoice
+{
+	display: block;
+	margin-top: 10px;
+	width: 290px;
+}
 /*!
  * Default mobile-first, responsive styling for pickadate.js
  * Demo: http://amsul.github.io/pickadate.js

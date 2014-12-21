@@ -4,6 +4,12 @@
 
 myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionService', 'placesService', function($scope, REST, mapService, sessionService, placesService)
 {
+    // Carpooling creation menu
+    $scope.confirm = true;
+    $scope.vehicleChoice = true;
+    $scope.roomChoice = true;
+    $scope.luggageChoice = true
+
     $scope.authToken = sessionService.getAuthToken();
     $scope.user = {};
     $scope.path = {};
@@ -101,12 +107,93 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
 
         mapService.drawCircle(loc, $scope.path.Radius);
         $scope.path.idCampus = path.CampusName.idCampus;
-        console.log($scope.path);
 
-        console.log(JSON.stringify($scope.path));
+        //console.log(JSON.stringify($scope.path));
         REST.REST('POST', 'carpoolings/search', JSON.stringify($scope.path), 'json')
             .success(function(data){
                console.log(data);
             });
+    };
+
+    $scope.changeCTA = function(value){
+        $scope.path.CampusToAddress = (value === true || value === false) ? value.toString() : "false";
+    };
+
+    $scope.getVehicles = function(id){
+        for(var i = 0; i < $scope.user.vehicles.length; ++i)
+            if($scope.user.vehicles[i].idVehicle == id)
+                return $scope.user.vehicles[i];
+    };
+
+    $scope.proposeNext = function(next){
+        $scope.path.IdVehicle = next.vehiculeSelected;
+        $scope.path.Luggage = next.luggage;
+        $scope.path.Room = next.room;
+
+
+        REST.REST('POST', 'carpoolings', $scope.path, 'json')
+            .success(function(data){
+               console.log(data);
+            });
+
+    };
+
+    $scope.loadVehicles = function(){
+        return REST.REST('GET', 'vehicles')
+            .success(function(data){
+                $scope.user.vehicles = data.vehicles;
+            });
+    };
+
+    $scope.propose = function(path){
+        //INSERT INTO carPooling VALUES (DEFAULT, @Address, @Long, @Lat,
+        // @IdCampus, @IdClient, @IdVehicle, @CampusToAddress, @Room,
+        // @Luggage, @MeetTime, @Price"
+
+        var loc = placesService.getLoc();
+
+        if (loc === undefined){
+            alert('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, ' +
+            'le service peut être temporairement indisponible.');
+            return;
+        }
+
+        console.log(path);
+
+        $scope.path.Price = 0;
+
+        $scope.path.Long = loc[0];
+        $scope.path.Lat = loc[1];
+
+        $scope.path.Address = placesService.getAddress();
+
+        var date = new Date(path.Date + 'T' + path.Time);
+        $scope.path.MeetTime = date.toUTCString();
+
+        if(sessionService.getInfos() === undefined){
+            sessionService.loadInfos().then(function(){
+                $scope.path.IdClient = sessionService.getInfos().idClient;
+            });
+        } else
+            $scope.path.IdClient = sessionService.getInfos().idClient;
+
+
+        $scope.path.IdCampus = path.CampusName.idCampus;
+
+        if($scope.path.CampusToAddress === undefined)
+            $scope.path.CampusToAddress = "false";
+
+        console.log($scope.path);
+
+        $scope.loadVehicles().then(function(){
+           if($scope.user.vehicles.length > 1)
+                $scope.vehicleChoice = false;
+           else
+               $scope.path.IdVehicle = $scope.user.vehicles[0].idVehicle;
+        });
+
+        $scope.roomChoice = false;
+        $scope.luggageChoice = false;
+        $scope.confirm = false;
     };
 }]);
