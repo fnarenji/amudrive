@@ -2,6 +2,7 @@
 using System.Data.Common;
 using Insight.Database;
 using Nancy;
+using Nancy.Extensions;
 using Nancy.ModelBinding;
 using Npgsql;
 using SharpDrift.DataModel;
@@ -37,7 +38,24 @@ namespace SharpDrift.Modules
                 }
             };
 
-            Get["/carPoolings/search", true] = async (x, ctx) =>
+            Post["/carPoolings", true] = async (x, ctx) =>
+            {
+                using (DbConnection conn = DAL.Conn)
+                {
+                    var carPooling = this.Bind<CarPooling>();
+                    carPooling.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+
+                    await conn.ExecuteSqlAsync("INSERT INTO carPooling VALUES (DEFAULT, @Address, @Long, @Lat, @IdCampus, @IdClient, @IdVehicle, @CampusToAddress, @Room, @Luggage, @MeetTime, @Price", carPooling);
+
+                    return new
+                    {
+                        success = true,
+                        carPooling = carPooling
+                    }.ToJson();
+                }
+            };
+
+            Post["/carPoolings/search", true] = async (x, ctx) =>
             {
                 using (DbConnection conn = DAL.Conn)
                 {
@@ -58,7 +76,7 @@ namespace SharpDrift.Modules
                         carPoolings = await conn.QuerySqlAsync<CarPooling>(string.Join(" ",
                             "SELECT *",
                             "FROM carPooling",
-                            "WHERE pow(@long - long, 2) + pow(@lat - lat, 2) < pow(@radius, 2)",
+                            "WHERE pow(@long - long, 2) + pow(@lat - lat, 2) < pow(" + data.radius + ", 2)",
                             "AND idCampus = @idCampus",
                             "AND campusToAddress = @campusToAddress",
                             "AND meetTime BETWEEN @minMeetTime AND @maxMeetTime"), data)
@@ -135,9 +153,7 @@ namespace SharpDrift.Modules
                     j.Expand(new {OwnerId = Int32.Parse(Context.CurrentUser.UserName)});
 
                     await
-                        conn.ExecuteSqlAsync(
-                            string.Join(" ", "INSERT INTO comment (idMessage,idClient,idCarPooling,comment,drivermark,poolingmark) VALUES (@idComment,@IdCarPooling,@OwnerId,@Message,@DriverMark,@PoolingMark)"),
-                            j);
+                        conn.ExecuteSqlAsync("INSERT INTO comment (idClient,idCarPooling,comment,drivermark,poolingmark) VALUES (@OwnerId,@IdCarPooling,@OwnerId,@Message,@DriverMark,@PoolingMark)", j);
 
                     return new
                     {

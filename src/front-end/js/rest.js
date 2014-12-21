@@ -94,27 +94,17 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
 
         var date = new Date(path.Date + 'T' + path.Time);
 
-        console.log(path.Date);
-        var de = path.Date.split("-");
-        var d = new Date(de[0], de[1]-1, de[2], date.getHours()-1, date.getMinutes(),0,0);
-        var timestamp = Math.round(d.getTime() / 1000);
+        date.setMinutes(date.getMinutes() + $('#battement').slider("option", "values")[0]);
+        $scope.path.minMeetTime = date.toUTCString();
+        date.setMinutes(date.getMinutes() -  $('#battement').slider("option", "values")[0] + $('#battement').slider("option", "values")[1]);
+        $scope.path.maxMeetTime = date.toUTCString();
 
-
-        $scope.path.minMeetTime = timestamp + (interval[0] * 60);
-        $scope.path.maxMeetTime = timestamp + (interval[1] * 60);
-
-        //date.setMinutes(date.getMinutes() + $('#battement').slider("option", "values")[1]);
-
-        //$scope.path.MaxMeetTime = date.getMilliseconds();
         mapService.drawCircle(loc, $scope.path.Radius);
         $scope.path.idCampus = path.CampusName.idCampus;
-        //console.log(date);
-        //$scope.path.Campus = ;
         console.log($scope.path);
-       // console.log('path');
-       // console.log(path);
 
-        REST.REST('GET', 'carpoolings/search', $scope.path)
+        console.log(JSON.stringify($scope.path));
+        REST.REST('POST', 'carpoolings/search', JSON.stringify($scope.path), 'json')
             .success(function(data){
                console.log(data);
             });
