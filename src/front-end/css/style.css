@@ -606,7 +606,10 @@ a:visited
 	width: 175px;
 	height: 175px;
 	float: left;
+	border: 5px solid #0c708a;
+	border-radius: 3px;
 	margin-right: 15px;
+	margin-bottom: 10px;
 }
 .profil label[for="firstname"], .profil label[for="lastname"], label[for="name"]
 {
