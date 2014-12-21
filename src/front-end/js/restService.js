@@ -2,7 +2,7 @@ myApp.service('REST', function($http, $q, $timeout) {
 
     RestService = new Object();
 
-    RestService.url = "http://192.168.0.31:8989";
+    RestService.url = "http://localhost:8989";
 
     RestService.testConnect = function() {
         var timeoutPromise = $timeout(function() {
