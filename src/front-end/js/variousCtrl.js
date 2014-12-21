@@ -1,4 +1,4 @@
-myApp.controller('MenuController', ['$scope','sessionService','REST', function($scope,sessionService,REST) {
+myApp.controller('MenuController', ['$scope','sessionService','REST', function($scope, sessionService, REST) {
 
 
     $scope.currentMenu = 'menu.html';
@@ -36,7 +36,7 @@ myApp.controller('autocompleteController', function($scope, REST, mapService) {
     }
     $scope.getCampuses();
 
-    $scope.createRoute = function($item, $model){
+    $scope.createRoute = function($item, $model, $label){
         mapService.computeRoute([$model.long, $model.lat]);
     };
 
@@ -45,7 +45,7 @@ myApp.controller('autocompleteController', function($scope, REST, mapService) {
     }
 });
 
-myApp.controller('accountManagerController', function($scope, REST, sessionService, $http){
+myApp.controller('accountManagerController', function($scope, REST, sessionService){
     $scope.checkconnection = function(){
         sessionService.checkConnection();
     }

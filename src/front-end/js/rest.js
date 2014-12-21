@@ -84,19 +84,39 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
             return;
         }
 
-        $scope.path.Long = loc[0];
-        $scope.path.Lat = loc[1];
-        //$scope.path.Address = placesService.getAddress();
-        $scope.path.Radius = $('#rayon').slider("option", "value");
-        $scope.path.CampusToAddress = true;
+        $scope.path.long = loc[0];
+        $scope.path.lat = loc[1];
+
+        $scope.path.radius = $('#rayon').slider("option", "value");
+        var interval =  $('#battement').slider("option", "values");
+
+        $scope.path.campusToAddress = true;
+
         var date = new Date(path.Date + 'T' + path.Time);
-        date.setMinutes(date.getMinutes() - $('#battement').slider("option", "values")[0]);
-        $scope.path.MinMeetTime = date.getMilliseconds();
-        date.setMinutes(date.getMinutes() + $('#battement').slider("option", "values")[1]);
-        $scope.path.MaxMeetTime = date.getMilliseconds();
+
+        console.log(path.Date);
+        var de = path.Date.split("-");
+        var d = new Date(de[0], de[1]-1, de[2], date.getHours()-1, date.getMinutes(),0,0);
+        var timestamp = Math.round(d.getTime() / 1000);
+
+
+        $scope.path.minMeetTime = timestamp + (interval[0] * 60);
+        $scope.path.maxMeetTime = timestamp + (interval[1] * 60);
+
+        //date.setMinutes(date.getMinutes() + $('#battement').slider("option", "values")[1]);
+
+        //$scope.path.MaxMeetTime = date.getMilliseconds();
         mapService.drawCircle(loc, $scope.path.Radius);
-        $scope.path.Campus = ;
+        $scope.path.idCampus = path.CampusName.idCampus;
+        //console.log(date);
+        //$scope.path.Campus = ;
         console.log($scope.path);
-        console.log(path);
+       // console.log('path');
+       // console.log(path);
+
+        REST.REST('GET', 'carpoolings/search', $scope.path)
+            .success(function(data){
+               console.log(data);
+            });
     };
 }]);
