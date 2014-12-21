@@ -26,7 +26,7 @@ myApp.service('REST', function($http, $q, $timeout) {
         // Clean parameters
         data = (data !== undefined) ? data : {} ;
         part = (part !== undefined) ? part : '';
-        method = (method === 'GET' || method === 'POST' || method === 'PUT') ? method : 'GET';
+        method = (method === 'GET' || method === 'POST' || method === 'PUT' || method === 'DELETE') ? method : 'GET';
         headers = (headers !== undefined) ? headers : "application/x-www-form-urlencoded";
         data = (headers === "application/x-www-form-urlencoded") ? $.param(data) : data;
 

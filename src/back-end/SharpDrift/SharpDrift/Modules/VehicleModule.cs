@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using Insight.Database;
 using Nancy;
 using Nancy.ModelBinding;
@@ -40,6 +42,56 @@ namespace SharpDrift.Modules
                         "smoking = @Smoking,",
                         "eat = @Eat",
                         "WHERE idClient = @IdClient AND idVehicle = @IdVehicle"), v);
+
+                    return new
+                    {
+                        success = true,
+                        vehicle = v
+                    }.ToJson();
+                }
+            };
+
+            Post["/vehicles", true] = async (x, ctx) =>
+            {
+                using (DbConnection conn = DAL.Conn)
+                {
+                    var v = this.Bind<Vehicle>();
+                    v.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+
+                    var reasons = new List<string>();
+
+                    if (string.IsNullOrEmpty(v.Name))
+                        reasons.Add("Tous les champs doivent être remplis.");
+
+                     if (reasons.Any())
+                    {
+                        return new
+                        {
+                            success = false,
+                            reasons = reasons,
+                        }.ToJson();
+                    }
+
+                    v = await conn.InsertSqlAsync(string.Join(" ",
+                        "INSERT INTO vehicle VALUES (DEFAULT, @IdClient, @name," + v.BV.ToString() + ", @animals , @smoking, @eat) RETURNING *"), v);
+                    return new
+                    {
+                        success = true,
+                        vehicle = v
+                    }.ToJson();
+                }
+            };
+
+            Delete["/vehicles", true] = async (x, ctx) =>
+            {
+                using (DbConnection conn = DAL.Conn)
+                {
+                    var v = this.Bind<Vehicle>();
+                    v.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+
+                    await
+                        conn.ExecuteSqlAsync(string.Join(" ",
+                            "DELETE FROM VEHICLE WHERE idClient = @IdClient AND idVehicle = @IdVehicle"), v);
 
                     return new
                     {

@@ -1,0 +1,24 @@
+<div  ng-model="vehicleToAdd">
+    <label for="name">Le nom de votre vehicule</label>
+    <input type="text" name="name" id="name" ng-model="vehicleToAdd.name"/>
+
+    <label for="BV">Quelle transmition</label>
+    <select name="BV" id="BV" ng-model="vehicleToAdd.BV">
+        <option value="M">Manuelle</option>
+        <option value="A">Auto</option>
+    </select>
+
+    <label for="animals">Autorisez-vous les animaux à bord ?</label>
+    <input type="checkbox" name="animals"   id="animals" ng-model="vehicleToAdd.animals" ng-init="vehicleToAdd.animals=false"/>
+
+    <label for="smoking">Autorisez-vous les personnes à fumer à bord ?</label>
+    <input type="checkbox" name="smoking" id="smoking" ng-model="vehicleToAdd.smoking" ng-init="vehicleToAdd.smoking=false"/>
+
+    <label for="eat">Autorisez-vous les personnes à manger à bord ?</label>
+    <input type="checkbox" name="eat" id="eat" ng-model="vehicleToAdd.eat"ng-init="vehicleToAdd.eat=false" />
+
+    <div class="button_group">
+        <button ng-click="insertInDB(vehicleToAdd)">Confirmer</button>
+        <button ng-click="cancel()">Retour</button>
+    </div>
+</div>

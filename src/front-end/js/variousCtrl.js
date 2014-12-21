@@ -27,6 +27,7 @@ myApp.controller('MenuController', ['$scope','sessionService','REST', function($
 myApp.controller('autocompleteController', function($scope, REST, mapService) {
 
     $scope.selected = undefined;
+    $scope.vehicleToModify = {};
 
     $scope.getCampuses = function(){
         return REST.REST('GET', 'campuses')
@@ -116,4 +117,40 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
         $scope.setMailHash();
         $scope.loadVehicles();
     });
+
+    $scope.addVehicle = function()
+    {
+        console.log('add');
+        $scope.vehicleToModify = { form: 'addVehicleForm.html'};
+        console.log($scope.vehicleToModify);
+    }
+
+    $scope.insertInDB = function (vehicle) {
+        console.log(vehicle)
+        REST.REST('POST','vehicles',vehicle,'json')
+            .success(function(data)
+            {
+
+                if(data.success === true)
+                     alert('vehiclue inserer');
+                else
+                    alert('Erreur : ' + data.reasons[0]);
+            })
+    }
+
+    $scope.deleteVehicle = function()
+    {
+        console.log('Delete vehicle');
+        console.log($scope.vehicleToModify);
+        if(confirm("Êtes-vous bien sûr de vouloir effectuer ces modifications ?")){
+            REST.REST('DELETE', 'vehicles', $scope.vehicleToModify, 'json')
+                .success(function(data){
+                    console.log(data);
+                    if(data.success === true)
+                         alert('vehicule delete ');
+                }
+            )
+        }
+    }
+
 });

@@ -42,12 +42,13 @@ CREATE TABLE vehicle (
   idClient INT NOT NULL REFERENCES client ON DELETE RESTRICT,
   name VARCHAR(60) NOT NULL,
   bv BV NOT NULL DEFAULT 'M',
-  animals BOOLEAN NOT NULL,
-  smoking BOOLEAN NOT NULL,
-  eat BOOLEAN NOT NULL,
+  animals BOOLEAN NOT NULL DEFAULT false,
+  smoking BOOLEAN NOT NULL DEFAULT false,
+  eat BOOLEAN NOT NULL DEFAULT false,
   PRIMARY KEY(idVehicle, idClient));
   
 INSERT INTO vehicle VALUES (DEFAULT, 1, 'RENAULT CLIO V12 TWIN TURBO OKLM', 'M', false, false, false);
+
   
 CREATE TABLE carPooling (
   idCarPooling SERIAL PRIMARY KEY,
