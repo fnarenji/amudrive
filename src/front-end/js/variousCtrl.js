@@ -4,7 +4,7 @@ myApp.controller('MenuController', ['$scope','sessionService','REST', function($
     $scope.currentMenu = 'menu.html';
     $scope.disconnect = function()
     {
-        REST.REST('DELETE','auth');
+       	REST.REST('DELETE','auth');
         sessionService.disconnect();
         window.location = '#/';
     };
@@ -150,20 +150,47 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
         sessionService.checkConnection();
     }
     $scope.user = {};
+    $scope.campus = {};
+
+    $scope.checkconnection();
+
+    $scope.loadCampuses = function()
+    {
+        return REST.REST('GET','campuses')
+            .success(function(data)
+            {
+                $scope.campus = data;
+            });
+    };
+
+
 
     $scope.loadMyCarpooling = function(){
-        REST.REST('GET', 'carpoolings')
+       return REST.REST('GET', 'carpoolings')
             .success(function(data){
                 console.log($scope.user.offeredcarpooling);
                 console.log(data.offeredCarPoolings);
                 $scope.user.offeredcarpooling = data.offeredCarPoolings;
                 console.log($scope.user.offeredcarpooling);
+               $scope.user.offeredcarpooling.campus
             });
+
         //console.log($scope.user.offerdcarpooling);
         //console.log(data.offerdcarpooling);
     };
 
     $scope.loadMyCarpooling();
+
+    $scope.loadMyCarpooling().then(function()
+        {
+            console.log($scope.campus);
+            $scope.loadCampuses().then(function()
+            {
+                console.log($scope.campus);
+            });
+
+        }
+    );
 
     $scope.getCarPooling = function(id){
         for(var i = 0; i < $scope.user.offeredcarpooling.length; ++i)
@@ -171,10 +198,22 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
                return $scope.user.offeredcarpooling[i];
     };
 
+    $scope.getCampuses = function (id) {
+        console.log('ANGULAR = PLS');
+        console.log($scope.campus.campuses.length);
+        for(var i = 0; i < $scope.campus.campuses.length; ++i)
+        {
+            if($scope.campus.campuses[i].idCampus === id)
+                return $scope.campus.campuses[i].address;
+        }
+    };
+
+
     $scope.selectCarPooling = function(){
         console.log('hello');
         console.log($scope.carpoolingSelected);
         $scope.carPoolingToModify = $scope.getCarPooling($scope.carpoolingSelected);
+        $scope.carPoolingToModify.adrcampus = $scope.getCampuses($scope.carPoolingToModify.idCampus);
         console.log($scope.carPoolingToModify);
         $scope.carPoolingToModify.form = "carPoolingForm.html";
     };

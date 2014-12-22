@@ -683,7 +683,7 @@ a:visited
 
 #confirm_button
 {
-	width:block;
+	width: block;
 	margin:auto;
 	margin-bottom: 10px;
 }
@@ -708,3 +708,9 @@ a:visited
 	text-align: center;
 	font-weight: normal;
 }
+
+#mycarpooling form
+{
+
+}
+
