@@ -1,27 +1,27 @@
 
-<label for="luggage">Nombre de place disponible : </label>
+<label for="luggage">Nombre de place disponible</label>
 <input type="number" name="luggage" id="luggage" ng-model="carPoolingToModify.luggage"/>
 
-<label for="room">Nombre de bagagage disponible :</label>
-<input type="room" name="room" id="room" ng-model="carPoolingToModify.room"/>
+<label for="room">Nombre de baggage disponible</label>
+<input type="number" name="room" id="room" ng-model="carPoolingToModify.room"/>
 
-<select name="pending" id="pending" ng-model="pending">
+<div class="user_valid">
+	<select name="validate" id="validate" ng-model="validate">
 
-    <option value="" disabled >Personne en attente</option>
-    <option ng-repeat="pending in user.pendingp"  value="{{pending.name}}">{{carpooling.address}}</option>
+	    <option value="" disabled >Personne validée</option>
+	    <option ng-repeat="valid in user.validatedp"  value="{{valid.name}}">{{carpooling.address}}</option>
 
-</select ng-repeat-end><br/>
-<button ng-click="validate(carPoolingToModify)">Selectionner</button>
+	</select ng-repeat-end>
+	<select name="pending" id="pending" ng-model="pending">
 
-<select name="validate" id="validate" ng-model="validate">
+	    <option value="" disabled >Personne en attente</option>
+	    <option ng-repeat="pending in user.pendingp"  value="{{pending.name}}">{{carpooling.address}}</option>
 
-    <option value="" disabled >Personne validée</option>
-    <option ng-repeat="valid in user.validatedp"  value="{{valid.name}}">{{carpooling.address}}</option>
+	</select ng-repeat-end>
+	<button ng-click="validate(carPoolingToModify)">Selectionner</button>
 
-</select ng-repeat-end><br/>
-<button ng-click="validate(carPoolingToModify)">Selectionner</button>
-
-
+	
+</div>
 <div class="button_group">
     <button ng-click="modifyCarPooling(carPoolingToModify)">Enregistrer</button>
     <button ng-click="deleteCarPooling(carPoolingToModify)">Supprimer</button>

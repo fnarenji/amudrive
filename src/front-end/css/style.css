@@ -708,9 +708,52 @@ a:visited
 	text-align: center;
 	font-weight: normal;
 }
-
-#mycarpooling form
+#form
 {
-
+	height:60px;
+}
+#form input[type="submit"]
+{
+	height:50px;
+	cursor: default;
 }
 
+.managingblock
+{
+	display:inline-block;
+	width: 70%;
+	padding-top:10px;
+	margin-left:20px;
+	margin-bottom:20px;
+}
+.managingblock h2
+{
+	margin-bottom: 10px;
+}
+.managingblock h3
+{
+	margin-top:10px;
+}
+
+select
+{
+	display:block;
+}
+.managingblock label, .managingblock input[type="number"]
+{
+	display:block;
+	margin-top: 5px;
+	margin-bottom:5px;
+}
+.user_valid
+{
+	display:inline-block;
+	float:right;
+	margin-top: -170px;
+}
+.user_valid select
+{
+	display:block;
+	margin-bottom:5px;
+	margin-top:10px;
+}
