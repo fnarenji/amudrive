@@ -13,9 +13,9 @@ function mapController($scope, mapService){
         mapService.changeCircleRadius(0.5);
 
         console.log(mapService.getRadius());
-        //mapService.computeRoute();
+        mapService.computeRoute(loc);
         mapService.displayMap();
-    }
+    };
 }
 /* Directives */
 

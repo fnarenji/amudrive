@@ -11,10 +11,9 @@ myApp.service('mapService', function(){
     // Coordonnées du point courant
     MapService.loc = (MapService.loc == undefined) ? MapService.defaultLocation : MapService.loc;
 
+
     // Tableau de marqueurs
     MapService.tabMarker = [];
-
-
 
     MapService.displayMap = function(){
         console.log('DisplayMap : ' + MapService.loc);
@@ -31,6 +30,10 @@ myApp.service('mapService', function(){
                 'map' : MapService.map
             });
 
+    };
+
+    MapService.changeCampus = function(loc){
+      MapService.campus = loc;
     };
 
     MapService.directionsService = new google.maps.DirectionsService();
@@ -95,6 +98,9 @@ myApp.service('mapService', function(){
         if (typeof MapService.circle !== 'undefined') // such js
             MapService.circle.setMap(null); // Remove current circle
 
+        console.log('change circle');
+        console.log(loc);
+        console.log(radius);
         MapService.circle = new google.maps.Circle(
             {
                 strokeColor: '#0000FF',

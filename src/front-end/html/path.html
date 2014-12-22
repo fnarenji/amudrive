@@ -24,6 +24,11 @@
             <div id="bpropose" class="submit"><a href="" ng-click="propose(path)">Proposer</a></div>
         </div>
 
+        <h3>Liste des covoiturages trouvés</h3>
+        <ul ng-hide="carPoolingChoice">
+            <li ng-repeat="carpooling in carPoolingsResults"><a href="" ng-click="join(carpooling)">{{carpooling.address}}</a> ({{carpooling.luggage}} bagage(s) et {{carpooling.room}} place(s))</li>
+        </ul ng-repeat-end>
+
         <select ng-hide="vehicleChoice" name="vehicules" id="vehicules" ng-model="next.vehiculeSelected">
 
             <option value="" disabled>Selectionner votre véhicule</option>

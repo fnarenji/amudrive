@@ -8,7 +8,9 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     $scope.confirm = true;
     $scope.vehicleChoice = true;
     $scope.roomChoice = true;
-    $scope.luggageChoice = true
+    $scope.luggageChoice = true;
+    $scope.carPoolingChoice = true;
+
 
     $scope.authToken = sessionService.getAuthToken();
     $scope.user = {};
@@ -96,8 +98,6 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         $scope.path.radius = $('#rayon').slider("option", "value");
         var interval =  $('#battement').slider("option", "values");
 
-        $scope.path.campusToAddress = true;
-
         var date = new Date(path.Date + 'T' + path.Time);
 
         date.setMinutes(date.getMinutes() + $('#battement').slider("option", "values")[0]);
@@ -112,6 +112,11 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         REST.REST('POST', 'carpoolings/search', JSON.stringify($scope.path), 'json')
             .success(function(data){
                console.log(data);
+                $scope.carPoolingsResults = data.carPoolings;
+
+            }).then(function(){
+                $scope.carPoolingChoice = false;
+                console.log($scope.carPoolingChoice);
             });
     };
 
@@ -200,4 +205,25 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         $scope.luggageChoice = false;
         $scope.confirm = false;
     };
+
+    $scope.join = function(carPooling){
+        //INSERT INTO carPoolingJoin VALUES (@IdCarPooling, @IdClient, @Accepted)
+
+        var req = {};
+        sessionService.loadInfos().then(function(){
+           req.IdClient = sessionService.getInfos().idClient;
+           req.IdCarPooling = carPooling.idCarPooling;
+           req.Accepted = false;
+           REST.REST('POST', 'carpoolings/join', req, 'json')
+               .success(function(){
+                    alert('Votre demande a bien été enregistré, vous serez prévenu une fois que votre participation a été' +
+                            ' validée');
+                    window.location.reload();
+               });
+        });
+
+
+
+    };
+
 }]);
