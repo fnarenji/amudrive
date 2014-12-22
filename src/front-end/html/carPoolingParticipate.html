@@ -7,7 +7,7 @@
         <select name="carpoolingspending" id="carpoolingspending" ng-model="carpooling1Selected">
 
             <option value="" disabled >Selectionner votre co-voiturage</option>
-            <option ng-repeat="cpending in user.cpending"  value="{{cpending.idCarPooling}}">{{cpending.address}}</option>
+            <option ng-repeat="cpending in user.cpending"  value="{{cpending.idCarPooling}}">{{cpending.address}} vers {{cpending.campusName}}</option>
 
         </select ng-repeat-end><br/>
 
@@ -16,10 +16,10 @@
 
     <div>
         <h3>Validé</h3>
-        <select name="carpoolingspending" id="carpoolingspending" ng-model="carpooling2Selected">
+        <select name="carpoolingspending" id="carpoolingsvalid" ng-model="carpooling2Selected">
 
             <option value="" disabled >Selectionner votre co-voiturage</option>
-            <option ng-repeat="cvalid in user.cvalid"  value="{{cvalid.idCarPooling}}">{{cvalid.address}}</option>
+            <option ng-repeat="cvalid in user.cvalid"  value="{{cvalid.idCarPooling}}">{{cvalid.address}} vers {{cvalid.campusName}}</option>
 
         </select ng-repeat-end><br/>
 
