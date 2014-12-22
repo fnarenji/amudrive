@@ -185,6 +185,8 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
                 }
                 console.log($scope.campus);
                 console.log($scope.user);
+                $scope.loadPendCarpooling();
+                $scope.loadValidCarpooling();
             });
         }
     );
@@ -246,7 +248,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
             });
     };
 
-    $scope.loadPendCarpooling();
+
 
     $scope.loadValidCarpooling = function(){
         REST.REST('GET', 'carpoolings')
@@ -254,11 +256,16 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
                 console.log($scope.user.cvalid);
                 console.log(data.joinedCarPoolings);
                 $scope.user.cvalid = data.joinedCarPoolings;
+                for(var i = 0; i < $scope.user.cvalid.length; ++i){
+                    console.log(i);
+                    console.log($scope.user.cvalid[i]);
+                    $scope.user.cvalid[i].campusName = $scope.getCampuses($scope.user.cvalid[i].idCampus);
+                }
                 console.log($scope.user.cvalid);
             });
     };
 
-    $scope.loadValidCarpooling();
+
 
     $scope.getPCarPooling = function(id){
         for(var i = 0; i < $scope.user.cpending.length; ++i)
