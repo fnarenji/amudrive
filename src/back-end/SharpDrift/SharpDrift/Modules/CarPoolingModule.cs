@@ -125,11 +125,31 @@ namespace SharpDrift.Modules
                 {
                     var c = this.Bind<CarPoolingJoin>();
                     c.IdClient = Int32.Parse(Context.CurrentUser.UserName);
+                    
+                    var reasons = new List<string>();
+                    
+                    try
+                    {
+                        await
+                            conn.ExecuteSqlAsync(
+                                "INSERT INTO carPoolingJoin VALUES (@IdCarPooling, @IdClient, @Accepted)", c);
+                    }
+                    catch (AggregateException aggregate)
+                    {
+                        reasons.Add(aggregate.InnerException.InnerException.ToString().Contains("mail_unique")
+                            ? "Cette adresse mail est déjà utilisée."
+                            : "Une erreur de données est survenue." + aggregate.ToString()); // @todo REMOVE EXCEPTION DUMPING TO CLIENT. FOR DEBUG PURPOSE ONLY
+                    }
 
-                    await
-                        conn.ExecuteSqlAsync(
-                            "INSERT INTO carPoolingJoin VALUES (@IdCarPooling, @IdClient, @Accepted)", c);
-
+                    if (reasons.Any())
+                    {
+                        return new
+                        {
+                            success = false,
+                            reasons = reasons,
+                        }.ToJson();
+                    }
+                    
                     return new
                     {
                         success = true,
