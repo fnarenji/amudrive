@@ -62,8 +62,8 @@ $(document).ready(function() {
 
     $('#battement').slider({
         range: true,
-        min: -20,
-        max: 20,
+        min: -30,
+        max: 30,
         values: [-10, 10],
         slide : function(event, ui){
             if (ui.values[0] > -1 || ui.values[1] < 1)

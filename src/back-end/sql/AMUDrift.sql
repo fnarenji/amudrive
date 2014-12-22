@@ -47,7 +47,7 @@ CREATE TABLE vehicle (
   eat BOOLEAN NOT NULL DEFAULT false,
   PRIMARY KEY(idVehicle, idClient));
   
-INSERT INTO vehicle VALUES (DEFAULT, 1, 'RENAULT CLIO V12 TWIN TURBO OKLM', 'M', false, false, false);
+INSERT INTO vehicle VALUES (DEFAULT, 2, 'RENAULT CLIO V12 TWIN TURBO OKLM', 'M', false, false, false);
 
   
 CREATE TABLE carPooling (
@@ -68,7 +68,9 @@ CREATE TABLE carPooling (
     REFERENCES vehicle (idVehicle, idClient)
     ON DELETE RESTRICT);
   
-INSERT INTO carPooling VALUES (DEFAULT, 'Gare Saint Charles, Marseille', 40.0, 40.0, 1, 1, 1, true, 4, 0, to_timestamp('2014-12-12 07:58:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
+INSERT INTO carPooling VALUES (DEFAULT, 'Rue Borde, Marseille', 5.391744199999948, 43.2790537, 1, 2, 1, false, 4, 0, to_timestamp('2014-12-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
+INSERT INTO carPooling VALUES (DEFAULT, 'Rue Sainte-Famille, Marseille', 5.39393819999998, 43.27844049999999, 1, 2, 1, false, 4, 0, to_timestamp('2014-12-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
+INSERT INTO carPooling VALUES (DEFAULT, 'Rue Roger Renzo, Marseille', 5.394131000000016, 43.2779369, 1, 2, 1, false, 4, 0, to_timestamp('2014-12-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
 
 CREATE TABLE carPoolingJoin (
   idCarPooling  INT NOT NULL REFERENCES carPooling ON DELETE RESTRICT,
@@ -86,7 +88,7 @@ CREATE TABLE comment (
   PRIMARY KEY (idClient, idCarPooling, idMessage),
   CONSTRAINT fk_carPoolingJoin
     FOREIGN KEY (idClient , idCarPooling)
-    REFERENCES carPoolingJoin (idClient, idCarPooling)
+    REFERENCES carPoolingJoin (idCarPooling, idClient)
     ON DELETE RESTRICT);
 
 CREATE INDEX fk_client_idx ON carPoolingJoin(idClient ASC);

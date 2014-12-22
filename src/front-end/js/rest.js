@@ -96,7 +96,6 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         $scope.path.lat = loc[1];
 
         $scope.path.radius = $('#rayon').slider("option", "value");
-        var interval =  $('#battement').slider("option", "values");
 
         var date = new Date(path.Date + 'T' + path.Time);
 
@@ -105,19 +104,18 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         date.setMinutes(date.getMinutes() -  $('#battement').slider("option", "values")[0] + $('#battement').slider("option", "values")[1]);
         $scope.path.maxMeetTime = date.toUTCString();
 
-        mapService.drawCircle(loc, $scope.path.Radius);
+        mapService.drawCircle(loc, $scope.path.radius);
         $scope.path.idCampus = path.CampusName.idCampus;
-
-        //console.log(JSON.stringify($scope.path));
+        mapService.clearMarkers();
+        console.log(JSON.stringify($scope.path));
         REST.REST('POST', 'carpoolings/search', JSON.stringify($scope.path), 'json')
             .success(function(data){
                 console.log(data);
                 for (var i = 0; i < data.carPoolings.length; i++) {
                     var datum = data.carPoolings[i];
-                    var loc = new MapService.gm.LatLng( datum.long, datum.lat);
+                    var loc = new MapService.gm.LatLng( datum.lat, datum.long);
                     MapService.addMarker(datum.address,loc);
                 }
-                console.log( MapService.tabMarker);
             }).then(function(){
                 $scope.carPoolingChoice = false;
                 console.log($scope.carPoolingChoice);

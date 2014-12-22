@@ -17,6 +17,8 @@ myApp.service('mapService', function(){
 
     MapService.gm = google.maps;
 
+    var markers = [];
+
     MapService.displayMap = function(){
         console.log('DisplayMap : ' + MapService.loc);
         var mapOptions = {
@@ -50,50 +52,37 @@ myApp.service('mapService', function(){
 
     MapService.directionsService = new google.maps.DirectionsService();
 
-    /* Ajoute un marqueur sur la map*/
-    MapService.showMarker = function(){
-
-        if(MapService.tabMarker.length < 1)
-            return false;
-
-        console.log(MapService.tabMarker);
-
-        for(var i = 0; i < MapService.tabMarker.length; i += 2) {
-            var loc = MapService.tabMarker[i+1];
-            var content = MapService.tabMarker[i];
-
-            console.log('loc : ' + loc + ' content : ' + content);
-
-            var infoWindowContent = '<div class="infoWindow"><h1>' + content[0] + '</h1>'
-                + '<hr/> ' + content[1] + '</div>';
-
-
-            var infoWindow = new google.maps.InfoWindow({
-                content: infoWindowContent
-            });
-
-            var marker = new google.maps.Marker({
-                map: MapService.map,
-                position: new google.maps.LatLng(loc[0], loc[1]),
-                visible: true,
-                title: content[0]
-            });
-
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    infoWindow.setContent(infoWindowContent);
-                    infoWindow.open(MapService.map, marker);
-                }
-            })(marker, i));
-        }
-    };
-
     // Ajoute un marqueur à la liste des marqueurs courant
     MapService.addMarker = function(content, loc){
-        if(content != undefined && loc != undefined)
-            MapService.tabMarker.push(content, loc);
+        var marker = new google.maps.Marker({
+            map: MapService.map,
+            position: loc,
+            title: "SWAG"
+        });
 
-        MapService.showMarker();
+        var infoWindowContent = '<div class="infoWindow"><h1>' + content + '</h1>'
+            + '<hr/> ' + content + '</div>';
+
+
+        var infoWindow = new google.maps.InfoWindow({
+            content: infoWindowContent
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent(infoWindowContent);
+                infoWindow.open(MapService.map, marker);
+            }
+        })(marker, i));
+
+        markers.push(marker);
+    };
+
+    MapService.clearMarkers = function () {
+        for (var i = 0; i < MapService.tabMarker.length; ++i) {
+            markers[i].setMap(null);
+        }
+        markers = [];
     };
 
     MapService.changeZoom = function(zoom){
@@ -110,9 +99,6 @@ myApp.service('mapService', function(){
         if (typeof MapService.circle !== 'undefined') // such js
             MapService.circle.setMap(null); // Remove current circle
 
-        console.log('change circle');
-        console.log(loc);
-        console.log(radius);
         MapService.circle = new google.maps.Circle(
             {
                 strokeColor: '#0000FF',
