@@ -15,6 +15,8 @@ myApp.service('mapService', function(){
     // Tableau de marqueurs
     MapService.tabMarker = [];
 
+    MapService.gm = google.maps;
+
     MapService.displayMap = function(){
         console.log('DisplayMap : ' + MapService.loc);
         var mapOptions = {
@@ -23,12 +25,22 @@ myApp.service('mapService', function(){
             mapTypeId: MapService.mapTypeId
         };
 
-        MapService.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+
+        MapService.map = new MapService.gm.Map(document.getElementById('map'), mapOptions);
 
         MapService.directionsDisplay = new google.maps.DirectionsRenderer(
             {
                 'map' : MapService.map
             });
+
+        MapService.oms = new OverlappingMarkerSpiderfier(MapService.map);
+
+        var iw = new MapService.gm.InfoWindow();
+
+        MapService.oms.addListener('spiderfy', function(markers) {
+            iw.close();
+        });
 
     };
 

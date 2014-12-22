@@ -111,9 +111,13 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         //console.log(JSON.stringify($scope.path));
         REST.REST('POST', 'carpoolings/search', JSON.stringify($scope.path), 'json')
             .success(function(data){
-               console.log(data);
-                $scope.carPoolingsResults = data.carPoolings;
-
+                console.log(data);
+                for (var i = 0; i < data.carPoolings.length; i++) {
+                    var datum = data.carPoolings[i];
+                    var loc = new MapService.gm.LatLng( datum.long, datum.lat);
+                    MapService.addMarker(datum.address,loc);
+                }
+                console.log( MapService.tabMarker);
             }).then(function(){
                 $scope.carPoolingChoice = false;
                 console.log($scope.carPoolingChoice);
