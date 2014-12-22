@@ -212,6 +212,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
         //$scope.carPoolingToModify.adrcampus = $scope.getCampuses($scope.carPoolingToModify.idCampus);
         console.log($scope.carPoolingToModify);
         $scope.carPoolingToModify.form = "carPoolingForm.html";
+        $scope.loadPPeople($scope.carPoolingToModify);
     };
 
     $scope.modifyCarPooling = function (carpooling) {
@@ -297,6 +298,39 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
 
     };
 
+    $scope.getPPeople = function(PCar,idCP,carPoolingToModify)
+    {
+        $scope.PPeople = [];
+        console.log('lsd');
+        console.log(carPoolingToModify);
+        for(var i = 0; i < PCar.length; ++i)
+        {
+            for(var j = 0; j < idCP.length; ++j){
+                if (PCar[i].idClient === idCP[j].idClient && idCP[j].idCarPooling === carPoolingToModify.idCarPooling)
+                {
+                    console.log("omg");
+                    console.log(PCar[i]);
+                    $scope.PPeople.push(PCar[i]);
+                }
+            }
+
+        }
+        return $scope.PPeople;
+    }
+
+    $scope.loadPPeople = function(carPoolingToModify){
+        return REST.REST('GET', 'carpoolings')
+            .success(function(data){
+                console.log('loadPPeople');
+                console.log(data.pendingPCarPoolings);
+                console.log(carPoolingToModify);
+                $scope.user.pendingp = $scope.getPPeople(data.pendingPCarPoolings,data.joinCarPoolings,carPoolingToModify);
+                console.log($scope.user.pendingp);
+            });
+    };
+
+    $scope.loadPPeople();
+
     $scope.selectv = function(){
         console.log('hello');
         console.log($scope.carpooling2Selected);
@@ -321,5 +355,26 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
                 })
 
 
+    };
+
+    $scope.peding = undefined;
+
+    $scope.validate = function(user)
+    {
+        $scope.update = {};
+        $scope.update.idClient = parseInt(user);
+        $scope.update.idCarPooling = $scope.carPoolingToModify.idCarPooling;
+        $scope.update.Accepted = true;
+        console.log( $scope.update);
+        REST.REST('PUT','carPooling/join',$scope.update)
+            .success(function (data) {
+                if(data.success === true)
+                {
+                    alert('Operation faite');
+                }
+            })
     }
+
+
+
 });

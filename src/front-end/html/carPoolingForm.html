@@ -9,16 +9,16 @@
 	<select name="validate" id="validate" ng-model="validate">
 
 	    <option value="" disabled >Personne validée</option>
-	    <option ng-repeat="valid in user.validatedp"  value="{{valid.name}}">{{carpooling.address}}</option>
+	    <option ng-repeat="valid in user.validatedp"  value="{{valid.id}}">{{valid.userName}}</option>
 
 	</select ng-repeat-end>
-	<select name="pending" id="pending" ng-model="pending">
+	<select name="pending" id="pending" ng-model="peding">
 
 	    <option value="" disabled >Personne en attente</option>
-	    <option ng-repeat="pending in user.pendingp"  value="{{pending.name}}">{{carpooling.address}}</option>
+	    <option ng-repeat="pending in user.pendingp"  value="{{pending.idClient}}">{{pending.userName}}</option>
 
 	</select ng-repeat-end>
-	<button ng-click="validate(carPoolingToModify)">Selectionner</button>
+	<button ng-click="validate(peding)">Selectionner</button>
 
 	
 </div>
