@@ -13,12 +13,12 @@ myApp.service('REST', function($http, $q, $timeout) {
         var canceler = $q.defer();
 
         $http.get(RestService.url + '/campuses').success(function(data){
-            $timeout.cancel(timeoutPromise);
+            //$timeout.cancel(timeoutPromise);
         });
     }
 
     RestService.REST = function(method, part, data, headers){
-        RestService.testConnect();
+        //RestService.testConnect();
 
         // Simplify the requests :)
         headers = (headers === 'json') ? 'application/json' : headers;
