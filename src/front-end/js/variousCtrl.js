@@ -247,8 +247,10 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
 
     $scope.getVCarPooling = function(id){
         for(var i = 0; i < $scope.user.cvalid.length; ++i)
-            if($scope.user.cvalid[i].idCarPooling == id)
-                return $scope.user.cvalid[i];
+            if($scope.user.cvalid[i].idCarPooling == id ){
+              return $scope.user.cvalid[i];
+            }
+
     };
 
     $scope.selectv = function(){
@@ -256,17 +258,24 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
         console.log($scope.carpooling2Selected);
         $scope.carPendingToModify = $scope.getVCarPooling($scope.carpooling2Selected);
         console.log($scope.carPendingToModify);
-        $scope.carPendingToModify.form = "comments.html";
-        $scope.carPendingToModify.message = undefined;
-        $scope.carPendingToModify.markc = 0;
-        $scope.carPendingToModify.markd = 0;
+        if(new Date($scope.carPendingToModify.meetTime) < new Date()) {
+            $scope.carPendingToModify.form = "comments.html";
+            $scope.carPendingToModify.message = undefined;
+            $scope.carPendingToModify.markc = 0;
+            $scope.carPendingToModify.markd = 0;
+        }
+        else
+            alert('Vous ne pouvez commenter un co-voiturage non terminé');
     };
 
     $scope.comment = function(comment){
-        REST.REST('POST', 'carPooling/comment',comment, 'json')
-            .success(function(data){
-                if(data.success === true)
-                    alert('Opération réussi');
-            })
+        if(new Date(comment.meetTime) < new Date())
+            REST.REST('POST', 'carPooling/comment',comment, 'json')
+                .success(function(data){
+                    if(data.success === true)
+                        alert('Opération réussi');
+                })
+
+
     }
 });
