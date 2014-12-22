@@ -60,8 +60,7 @@ myApp.service('mapService', function(){
             title: "SWAG"
         });
 
-        var infoWindowContent = '<div class="infoWindow"><h1>' + content + '</h1>'
-            + '<hr/> ' + content + '</div>';
+        var infoWindowContent = '<div class="infoWindow"><h1>' + content + '</h1>' + content + '</div>';
 
 
         var infoWindow = new google.maps.InfoWindow({
