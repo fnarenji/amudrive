@@ -25,3 +25,13 @@
     <button ng-click="modifyCarPooling(carPoolingToModify)">Enregistrer</button>
     <button ng-click="deleteCarPooling(carPoolingToModify)">Supprimer</button>
 </div>
+
+<div class="comments">
+	<h3>Commentaire(s)</h3>
+<p ng-repeat="comment in comments">
+	<span class="line"><b>De : </b> {{comment.username}}</span>
+	<span class="line"><b>Note : </b> {{comment.driverMark}} (conduite)/{{comment.poolingMark}} (covoiturage)</span>
+	<span class="line"><b>Commentaire : </b>{{comment.comment}}</span>
+</p>
+
+</div>

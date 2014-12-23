@@ -145,6 +145,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
     $scope.user = {};
     $scope.campus = {};
     $scope.peding = undefined;
+    $scope.displayComments = true;
 
     $scope.checkconnection();
 
@@ -192,7 +193,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
 
     $scope.selectCarPooling = function(){
         $scope.carPoolingToModify = $scope.getCarPooling($scope.carpoolingSelected);
-
+        $scope.loadComments($scope.carPoolingToModify);
         $scope.carPoolingToModify.form = "carPoolingForm.html";
         $scope.loadPPeople($scope.carPoolingToModify);
         $scope.loadVPeople($scope.carPoolingToModify)
@@ -240,10 +241,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
     };
 
     $scope.selectp = function(){
-        console.log('hello');
-        console.log($scope.carpooling1Selected);
         $scope.carPendingToModify = $scope.getPCarPooling($scope.carpooling1Selected);
-        console.log($scope.carPendingToModify);
         $scope.carPendingToModify.form = "deljoin.html";
     };
 
@@ -263,20 +261,14 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
 
     };
 
-    $scope.getPPeople = function(PCar,idCP,carPoolingToModify)
+    $scope.getPPeople = function(PCar, idCP, carPoolingToModify)
     {
         $scope.PPeople = [];
-        console.log('lsd');
-        console.log(carPoolingToModify);
         for(var i = 0; i < PCar.length; ++i)
         {
             for(var j = 0; j < idCP.length; ++j){
                 if (PCar[i].idClient === idCP[j].idClient && idCP[j].idCarPooling === carPoolingToModify.idCarPooling)
-                {
-                    console.log("omg");
-                    console.log(PCar[i]);
                     $scope.PPeople.push(PCar[i]);
-                }
             }
 
         }
@@ -286,11 +278,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
     $scope.loadPPeople = function(carPoolingToModify){
         return REST.REST('GET', 'carpoolings')
             .success(function(data){
-                console.log('loadPPeople');
-                console.log(data.pendingPCarPoolings);
-                console.log(carPoolingToModify);
                 $scope.user.pendingp = $scope.getPPeople(data.pendingPCarPoolings,data.joinCarPoolings,carPoolingToModify);
-                console.log($scope.user.pendingp);
             });
     };
 
@@ -300,11 +288,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
     $scope.loadVPeople = function(carPoolingToModify){
         return REST.REST('GET', 'carpoolings')
             .success(function(data){
-                console.log('validatedp');
-                console.log(data.validPCarPoolings);
-                console.log(carPoolingToModify);
                 $scope.user.validatedp = $scope.getPPeople(data.validPCarPoolings,data.joinCarPoolings,carPoolingToModify);
-                console.log($scope.user.validatedp);
             });
     };
 
@@ -313,7 +297,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
 
         // Fixe Date() js :)
         var carPoolingDate = new Date($scope.carPendingToModify.meetTime);
-        mt.setHours(mt.getHours() - 1);
+        carPoolingDate.setHours(carPoolingDate.getHours() - 1);
 
         var today = new Date();
         today.setHours(today.getHours() - 1);
@@ -330,14 +314,20 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
     };
 
     $scope.comment = function(comment){
-        if(new Date(comment.meetTime) < new Date())
-            REST.REST('POST', 'carPooling/comment',comment, 'json')
+        if(new Date(comment.meetTime) < new Date()){
+            var newComment = {
+                'OwnerId': comment.idClient,
+                'IdCarPooling': comment.idCarPooling,
+                'comment': comment.message,
+                'driverMark': comment.markd,
+                'poolingMark': comment.markc
+            };
+            REST.REST('POST', 'carPooling/comment', newComment, 'json')
                 .success(function(data){
                     if(data.success === true)
                         alert('Opération réussi');
-                })
-
-
+                    });
+        }
     };
 
 
@@ -368,6 +358,31 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
             })
     }
 
+    $scope.getUserNameById = function(id, user){
+      for(var i = 0; i < user.length; ++i)
+        if(id == user[i].idClient)
+            return user[i].userName;
+    };
 
+    $scope.getCommentsById = function(id, Comments, user){
+        var tabComments = [];
+        console.log('getcomments : ' + id);
+        for(var i = 0; i < Comments.length; ++i){
+            if(Comments[i].idCarPooling == id){
+                tabComments.push(Comments[i]);
+                tabComments[i].username = $scope.getUserNameById(tabComments[i].idClient, user);
+            }
+
+        }
+
+        return tabComments;
+    };
+
+    $scope.loadComments = function(){
+        REST.REST('GET', 'carpooling/comment')
+            .success(function(data){
+                $scope.comments = $scope.getCommentsById($scope.carPoolingToModify.idCarPooling, data.commentsForMe, data.idAssoc)
+            });
+    };
 
 });
