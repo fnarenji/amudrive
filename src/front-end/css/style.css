@@ -708,11 +708,11 @@ a:visited
 	text-align: center;
 	font-weight: normal;
 }
-#form
+.form
 {
 	height:60px;
 }
-#form input[type="submit"]
+.form input[type="submit"]
 {
 	height:50px;
 	cursor: default;

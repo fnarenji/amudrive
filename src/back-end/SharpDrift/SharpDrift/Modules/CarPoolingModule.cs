@@ -252,6 +252,23 @@ namespace SharpDrift.Modules
                     }.ToJson();
                 }
             };
+
+            Get["/carPooling/comment", true] = async(x, ctx) =>
+            {
+                using (DbConnection conn = DAL.Conn)
+                {
+                    var user = new {IdClient = int.Parse(Context.CurrentUser.UserName)};
+                    return new
+                    {
+                        success = true,
+                        commentsByMe = await conn.QuerySqlAsync<Comment>(
+                            "SELECT * FROM comment WHERE idClient = @IdClient", user),
+
+                        commentsForMe = await conn.QuerySqlAsync<Comment>(
+                            "SELECT * FROM comment WHERE idcarpooling IN (SELECT idcarpooling FROM carpooling WHERE idclient = @IdClient)", user)
+                    }.ToJson();
+                }
+            };
         }
     }
 }
