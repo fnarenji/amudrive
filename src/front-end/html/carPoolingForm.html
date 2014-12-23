@@ -12,14 +12,14 @@
 	    <option ng-repeat="valid in user.validatedp"  value="{{valid.idClient}}">{{valid.userName}}</option>
 
 	</select ng-repeat-end>
-	
+
 	<select name="pending" id="pending" ng-model="peding">
 
 	    <option value="" disabled >Personne en attente</option>
 	    <option ng-repeat="pending in user.pendingp"  value="{{pending.idClient}}">{{pending.userName}}</option>
 
 	</select ng-repeat-end>
-	<button ng-click="validate(peding)">Selectionner</button>
+	<button ng-click="validate(peding)">Valider</button>
 
 	
 </div>
