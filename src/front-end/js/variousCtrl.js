@@ -309,11 +309,16 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
     };
 
     $scope.selectv = function(){
-        console.log('hello');
-        console.log($scope.carpooling2Selected);
         $scope.carPendingToModify = $scope.getVCarPooling($scope.carpooling2Selected);
-        console.log($scope.carPendingToModify);
-        if(new Date($scope.carPendingToModify.meetTime) < new Date()){
+
+        // Fixe Date() js :)
+        var carPoolingDate = new Date($scope.carPendingToModify.meetTime);
+        mt.setHours(mt.getHours() - 1);
+
+        var today = new Date();
+        today.setHours(today.getHours() - 1);
+
+        if(carPoolingDate < today){
             $scope.carPendingToModify.form = "comments.html";
             $scope.carPendingToModify.message = undefined;
             $scope.carPendingToModify.markc = 0;
@@ -321,6 +326,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
         }
         else
             alert('Vous ne pouvez commenter un co-voiturage non terminé');
+
     };
 
     $scope.comment = function(comment){
