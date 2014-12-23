@@ -47,6 +47,7 @@ myApp.controller('autocompleteController', function($scope, REST, mapService) {
 });
 
 myApp.controller('accountManagerController', function($scope, REST, sessionService){
+
     $scope.checkconnection = function(){
         sessionService.checkConnection();
     }
@@ -82,24 +83,18 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
     };
 
     $scope.selectVehicle = function(){
-        console.log('hello');
-        console.log($scope.vehiculeSelected);
         $scope.vehicleToModify = $scope.getVehicles($scope.vehiculeSelected);
-        console.log($scope.vehicleToModify);
         $scope.vehicleToModify.form = "vehicleForm.html";
     };
 
     $scope.modifyVehicle = function(){
-      console.log('modifyVehicle');
       $scope.vehicleToModify.form = undefined;
-
       if(confirm("Êtes-vous bien sûr de vouloir effectuer ces modifications ?")){
           REST.REST('PUT', 'vehicles', $scope.vehicleToModify, 'json')
               .success(function(){
                  alert('Les informations ont bien été modifiées');
               });
       }
-      console.log($scope.vehicleToModify);
     };
 
     sessionService.loadInfos().then(function(){
@@ -110,9 +105,7 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
     });
 
     $scope.addVehicle = function(){
-        console.log('add');
         $scope.vehicleToModify = { form: 'addVehicleForm.html'};
-        console.log($scope.vehicleToModify);
     };
 
     $scope.insertInDB = function (vehicle) {
@@ -151,6 +144,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
 
     $scope.user = {};
     $scope.campus = {};
+    $scope.peding = undefined;
 
     $scope.checkconnection();
 
@@ -164,32 +158,23 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
     $scope.loadMyCarpooling = function(){
        return REST.REST('GET', 'carpoolings')
             .success(function(data){
-               console.log('loadMyCarPooling');
-                console.log(data.offeredCarPoolings);
-                $scope.user.offeredcarpooling = data.offeredCarPoolings;
-                console.log($scope.user.offeredcarpooling);
+               $scope.user.offeredcarpooling = data.offeredCarPoolings;
                $scope.user.offeredcarpooling.campus
             });
     };
 
-    $scope.loadMyCarpooling();
+   $scope.loadFirst = function(){
+           $scope.loadMyCarpooling().then(function(){
+                $scope.loadCampuses().then(function(){
+                    for(var i = 0; i < $scope.user.offeredcarpooling.length; ++i)
+                        $scope.user.offeredcarpooling[i].campusName = $scope.getCampuses($scope.user.offeredcarpooling[i].idCampus);
 
-    $scope.loadMyCarpooling().then(function(){
-            $scope.loadCampuses().then(function(){
-                console.log("Chargement ...");
-                console.log($scope.user);
-                for(var i = 0; i < $scope.user.offeredcarpooling.length; ++i){
-                    console.log(i);
-                    console.log($scope.user.offeredcarpooling[i]);
-                    $scope.user.offeredcarpooling[i].campusName = $scope.getCampuses($scope.user.offeredcarpooling[i].idCampus);
-                }
-                console.log($scope.campus);
-                console.log($scope.user);
-                $scope.loadPendCarpooling();
-                $scope.loadValidCarpooling();
-            });
-        }
-    );
+                    $scope.loadPendCarpooling();
+                    $scope.loadValidCarpooling();
+                });
+            }
+        );
+   };
 
     $scope.getCarPooling = function(id){
         for(var i = 0; i < $scope.user.offeredcarpooling.length; ++i)
@@ -206,11 +191,8 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
 
 
     $scope.selectCarPooling = function(){
-        console.log('hello');
-        console.log($scope.carpoolingSelected);
         $scope.carPoolingToModify = $scope.getCarPooling($scope.carpoolingSelected);
-        //$scope.carPoolingToModify.adrcampus = $scope.getCampuses($scope.carPoolingToModify.idCampus);
-        console.log($scope.carPoolingToModify);
+
         $scope.carPoolingToModify.form = "carPoolingForm.html";
         $scope.loadPPeople($scope.carPoolingToModify);
         $scope.loadVPeople($scope.carPoolingToModify)
@@ -235,39 +217,21 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
     $scope.loadPendCarpooling = function(){
         REST.REST('GET', 'carpoolings')
             .success(function(data){
-                console.log($scope.user.cpending);
-
                 $scope.user.cpending = data.waitingCarPoolings;
-                console.log('data');
-                console.log(data.waitingCarPoolings);
-                for(var i = 0; i < $scope.user.cpending.length; ++i){
-                    console.log(i);
-                    console.log($scope.user.cpending[i]);
+
+                for(var i = 0; i < $scope.user.cpending.length; ++i)
                     $scope.user.cpending[i].campusName = $scope.getCampuses($scope.user.cpending[i].idCampus);
-                }
-                console.log("lol");
-                console.log($scope.user.cpending);
             });
     };
-
-
 
     $scope.loadValidCarpooling = function(){
         REST.REST('GET', 'carpoolings')
             .success(function(data){
-                console.log($scope.user.cvalid);
-                console.log(data.joinedCarPoolings);
                 $scope.user.cvalid = data.joinedCarPoolings;
-                for(var i = 0; i < $scope.user.cvalid.length; ++i){
-                    console.log(i);
-                    console.log($scope.user.cvalid[i]);
+                for(var i = 0; i < $scope.user.cvalid.length; ++i)
                     $scope.user.cvalid[i].campusName = $scope.getCampuses($scope.user.cvalid[i].idCampus);
-                }
-                console.log($scope.user.cvalid);
             });
     };
-
-
 
     $scope.getPCarPooling = function(id){
         for(var i = 0; i < $scope.user.cpending.length; ++i)
@@ -345,11 +309,16 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
     };
 
     $scope.selectv = function(){
-        console.log('hello');
-        console.log($scope.carpooling2Selected);
         $scope.carPendingToModify = $scope.getVCarPooling($scope.carpooling2Selected);
-        console.log($scope.carPendingToModify);
-        if(new Date($scope.carPendingToModify.meetTime) < new Date()){
+
+        // Fixe Date() js :)
+        var carPoolingDate = new Date($scope.carPendingToModify.meetTime);
+        mt.setHours(mt.getHours() - 1);
+
+        var today = new Date();
+        today.setHours(today.getHours() - 1);
+
+        if(carPoolingDate < today){
             $scope.carPendingToModify.form = "comments.html";
             $scope.carPendingToModify.message = undefined;
             $scope.carPendingToModify.markc = 0;
@@ -357,6 +326,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
         }
         else
             alert('Vous ne pouvez commenter un co-voiturage non terminé');
+
     };
 
     $scope.comment = function(comment){
@@ -370,7 +340,6 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
 
     };
 
-    $scope.peding = undefined;
 
     $scope.validate = function(user)
     {
@@ -378,7 +347,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
         $scope.update.idClient = parseInt(user);
         $scope.update.idCarPooling = $scope.carPoolingToModify.idCarPooling;
         $scope.update.Accepted = true;
-        console.log( $scope.update);
+
         REST.REST('PUT','carPooling/join',$scope.update)
             .success(function (data) {
                 if(data.success === true)
@@ -388,12 +357,10 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
                     $scope.up.Room = $scope.carPoolingToModify.room - 1;
                     $scope.up.Luggage = $scope.carPoolingToModify.luggage;
 
-                    console.log('GG Dude :');
-                    console.log($scope.up);
                     REST.REST('PUT', 'carPoolings',$scope.up)
                         .success(function(data){
                             if(data.success === true){
-                                alert('Opération faite')
+                                alert('Opération effectué')
                                 window.location.reload();
                             }
                         })
