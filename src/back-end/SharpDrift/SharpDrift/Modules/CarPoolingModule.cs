@@ -223,7 +223,7 @@ namespace SharpDrift.Modules
                     j.Expand(new { OwnerId = Int32.Parse(Context.CurrentUser.UserName) });
 
                     await
-                        conn.ExecuteSqlAsync("INSERT INTO comment (idClient,idCarPooling,comment,drivermark,poolingmark) VALUES (@OwnerId,@IdCarPooling,@Message,@DriverMark,@PoolingMark)", j);
+                        conn.ExecuteSqlAsync("INSERT INTO comment (idClient,idCarPooling,comment,drivermark,poolingmark) VALUES (@OwnerId,@IdCarPooling,@Comment,@DriverMark,@PoolingMark)", j);
 
                     return new
                     {
