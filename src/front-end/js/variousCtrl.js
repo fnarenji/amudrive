@@ -370,7 +370,20 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
             .success(function (data) {
                 if(data.success === true)
                 {
-                    alert('Operation faite');
+                    $scope.up = {};
+                    $scope.up.idCarPooling = $scope.carPoolingToModify.idCarPooling;
+                    $scope.up.Room = $scope.carPoolingToModify.room - 1;
+                    $scope.up.Luggage = $scope.carPoolingToModify.luggage;
+
+                    console.log('GG Dude :');
+                    console.log($scope.up);
+                    REST.REST('PUT', 'carPoolings',$scope.up)
+                        .success(function(data){
+                            if(data.success === true){
+                                alert('Opération faite')
+                                window.location.reload();
+                            }
+                        })
                 }
             })
     }
