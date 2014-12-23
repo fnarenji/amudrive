@@ -123,8 +123,9 @@ namespace SharpDrift.Modules
                     {
                         success = true,
                         carPoolings = await conn.QuerySqlAsync<CarPooling>(string.Join(" ",
-                            "SELECT *",
+                            "SELECT carPooling.*, bv, animals, smoking, eat",
                             "FROM carPooling",
+                            "JOIN vehicle ON carPooling.idVehicle = vehicle.idVehicle AND carPooling.idClient = vehicle.idClient",
                             "WHERE pow(@long - long, 2) + pow(@lat - lat, 2) < pow(" + data.radius + ", 2)",
                             "AND idCampus = @idCampus",
                             "AND campusToAddress = @campusToAddress",

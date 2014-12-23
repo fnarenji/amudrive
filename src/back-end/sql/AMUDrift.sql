@@ -61,6 +61,7 @@ CREATE TABLE carPooling (
   campusToAddress BOOLEAN NOT NULL,
   room INT NOT NULL,
   luggage INT NOT NULL,
+  talks BOOLEAN NOT NULL DEFAULT false,
   meetTime timestamp  NOT NULL,
   price numeric(5,2) NOT NULL,
   CONSTRAINT fk_vehicle
@@ -68,9 +69,9 @@ CREATE TABLE carPooling (
     REFERENCES vehicle (idVehicle, idClient)
     ON DELETE RESTRICT);
   
-INSERT INTO carPooling VALUES (DEFAULT, 'Rue Borde, Marseille', 5.391744199999948, 43.2790537, 1, 2, 1, false, 4, 0, to_timestamp('2014-12-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
-INSERT INTO carPooling VALUES (DEFAULT, 'Rue Sainte-Famille, Marseille', 5.39393819999998, 43.27844049999999, 1, 2, 1, false, 4, 0, to_timestamp('2014-12-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
-INSERT INTO carPooling VALUES (DEFAULT, 'Rue Roger Renzo, Marseille', 5.394131000000016, 43.2779369, 1, 2, 1, false, 4, 0, to_timestamp('2014-12-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
+INSERT INTO carPooling VALUES (DEFAULT, 'Rue Borde, Marseille', 5.391744199999948, 43.2790537, 1, 2, 1, false, 4, 0, true, to_timestamp('2014-12-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
+INSERT INTO carPooling VALUES (DEFAULT, 'Rue Sainte-Famille, Marseille', 5.39393819999998, 43.27844049999999, 1, 2, 1, false, 4, 0, true, to_timestamp('2014-12-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
+INSERT INTO carPooling VALUES (DEFAULT, 'Rue Roger Renzo, Marseille', 5.394131000000016, 43.2779369, 1, 2, 1, false, 4, 0, true, to_timestamp('2014-12-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0);
 
 CREATE TABLE carPoolingJoin (
   idCarPooling  INT NOT NULL REFERENCES carPooling ON DELETE RESTRICT,

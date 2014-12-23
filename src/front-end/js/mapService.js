@@ -17,6 +17,8 @@ myApp.service('mapService', function(){
 
     MapService.gm = google.maps;
 
+    markerCallback = function () {};
+
     var markers = [];
 
     MapService.displayMap = function(){
@@ -53,11 +55,12 @@ myApp.service('mapService', function(){
     MapService.directionsService = new google.maps.DirectionsService();
 
     // Ajoute un marqueur à la liste des marqueurs courant
-    MapService.addMarker = function(content, loc){
+    MapService.addMarker = function(content, loc, json){
         var marker = new google.maps.Marker({
             map: MapService.map,
             position: loc,
-            title: "SWAG"
+            title: "SWAG",
+            json: json
         });
 
         var infoWindowContent = '<div class="infoWindow"><h1>' + content + '</h1>' + content + '</div>';
@@ -67,14 +70,14 @@ myApp.service('mapService', function(){
             content: infoWindowContent
         });
 
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        google.maps.event.addListener(marker, 'click', function (marker) {
             return function() {
-                infoWindow.setContent(infoWindowContent);
-                infoWindow.open(MapService.map, marker);
+                markerCallback(marker.json);
             }
-        })(marker, i));
+        }(marker));
 
         markers.push(marker);
+        markerCallback(null);
     };
 
     MapService.clearMarkers = function () {
@@ -82,6 +85,10 @@ myApp.service('mapService', function(){
             markers[i].setMap(null);
         }
         markers = [];
+    };
+
+    MapService.setMarkerCallback = function (callback) {
+        markerCallback = callback;
     };
 
     MapService.changeZoom = function(zoom){

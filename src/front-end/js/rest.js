@@ -114,7 +114,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
                 for (var i = 0; i < data.carPoolings.length; i++) {
                     var datum = data.carPoolings[i];
                     var loc = new MapService.gm.LatLng( datum.lat, datum.long);
-                    MapService.addMarker(datum.address,loc);
+                    MapService.addMarker(datum.address,loc,datum);
                 }
             }).then(function(){
                 $scope.carPoolingChoice = false;

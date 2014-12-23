@@ -14,6 +14,7 @@ namespace SharpDrift.DataModel
         public bool CampusToAddress { get; set; }
         public int Room { get; set; }
         public int Luggage { get; set; }
+        public bool Talks { get; set; }
         public DateTime MeetTime { get; set; }
         public int Price { get; set; }
     }

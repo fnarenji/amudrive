@@ -5,7 +5,7 @@ myApp.controller('MenuController', ['$scope','sessionService','REST', function($
     $scope.disconnect = function()
     {
        	REST.REST('DELETE','auth');
-        sessionService.disconnect();
+            sessionService.disconnect();
         window.location = '#/';
     };
 
