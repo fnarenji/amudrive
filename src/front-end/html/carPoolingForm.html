@@ -1,24 +1,22 @@
 
-<label for="luggage">Nombre de place disponible</label>
+<label for="luggage">Nombre de place(s) disponible(s)</label>
 <input type="number" name="luggage" id="luggage" ng-model="carPoolingToModify.luggage"/>
 
-<label for="room">Nombre de baggage disponible</label>
+<label for="room">Nombre de baggage(s) disponible(s)</label>
 <input type="number" name="room" id="room" ng-model="carPoolingToModify.room"/>
 
 <div class="user_valid">
+
 	<select name="validate" id="validate" ng-model="validate">
-
-	    <option value="" disabled >Personne validée</option>
+	    <option value="" selected disabled>Personne(s) validée(s)</option>
 	    <option ng-repeat="valid in user.validatedp"  value="{{valid.idClient}}">{{valid.userName}}</option>
-
 	</select ng-repeat-end>
 
 	<select name="pending" id="pending" ng-model="peding">
-
-	    <option value="" disabled >Personne en attente</option>
+	    <option value="" disabled >Personne(s) en attente</option>
 	    <option ng-repeat="pending in user.pendingp"  value="{{pending.idClient}}">{{pending.userName}}</option>
-
 	</select ng-repeat-end>
+
 	<button ng-click="validate(peding)">Valider</button>
 
 	

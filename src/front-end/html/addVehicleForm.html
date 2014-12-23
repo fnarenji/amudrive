@@ -2,8 +2,8 @@
     <label for="name">Le nom de votre vehicule</label>
     <input type="text" name="name" id="name" ng-model="vehicleToAdd.name"/>
 
-    <label for="BV">Quelle transmition</label>
     <select name="BV" id="BV" ng-model="vehicleToAdd.BV">
+        <option value="" selected disabled>Transmission</option>
         <option value="M">Manuelle</option>
         <option value="A">Auto</option>
     </select>

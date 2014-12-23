@@ -209,8 +209,6 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     };
 
     $scope.join = function(carPooling){
-        //INSERT INTO carPoolingJoin VALUES (@IdCarPooling, @IdClient, @Accepted)
-
         var req = {};
         sessionService.loadInfos().then(function(){
            req.IdClient = sessionService.getInfos().idClient;
