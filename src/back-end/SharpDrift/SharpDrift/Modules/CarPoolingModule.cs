@@ -219,7 +219,7 @@ namespace SharpDrift.Modules
             {
                 using (DbConnection conn = DAL.Conn)
                 {
-                    FastExpando j = this.Bind<Comment>().Expand();
+                    FastExpando j = this.Bind<Comment_>().Expand();
                     j.Expand(new { OwnerId = Int32.Parse(Context.CurrentUser.UserName) });
 
                     await
@@ -237,7 +237,7 @@ namespace SharpDrift.Modules
             {
                 using (DbConnection conn = DAL.Conn)
                 {
-                    FastExpando j = this.Bind<Comment>().Expand();
+                    FastExpando j = this.Bind<Comment_>().Expand();
                     j.Expand(new { OwnerId = Int32.Parse(Context.CurrentUser.UserName) });
 
                     await
@@ -261,10 +261,10 @@ namespace SharpDrift.Modules
                     return new
                     {
                         success = true,
-                        commentsByMe = await conn.QuerySqlAsync<Comment>(
+                        commentsByMe = await conn.QuerySqlAsync<Comment_>(
                             "SELECT * FROM comment WHERE idClient = @IdClient", user),
 
-                        commentsForMe = await conn.QuerySqlAsync<Comment>(
+                        commentsForMe = await conn.QuerySqlAsync<Comment_>(
                             "SELECT * FROM comment WHERE idcarpooling IN (SELECT idcarpooling FROM carpooling WHERE idclient = @IdClient)", user)
                     }.ToJson();
                 }

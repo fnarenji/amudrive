@@ -573,12 +573,12 @@ namespace SharpDrift.Testing
             }).Body.AsString();
 
 
-            var j = new Comment
+            var j = new Comment_
                             {
                                 IdCarPooling = 1,
                                 IdClient = 1,
                                 IdComment = 1,
-                                Message = "Op ce carpool",
+                                Comment = "Op ce carpool",
                                 PoolingMark = 4,
                                 DriverMark = 4
                             };
@@ -592,12 +592,12 @@ namespace SharpDrift.Testing
             var json = JsonConvert.DeserializeAnonymousType(response, new
             {
                 success = false,
-                Comment = null as Comment
+                Comment = null as Comment_
             });
 
             Assert.True(json.success);
             Assert.Equal(json.Comment.IdComment,1);
-            Assert.Equal(json.Comment.Message,j.Message);
+            Assert.Equal(json.Comment.Comment,j.Comment);
 
             response = browser.Delete("/carPooling/comment", with =>
             {
@@ -608,7 +608,7 @@ namespace SharpDrift.Testing
             json = JsonConvert.DeserializeAnonymousType(response, new
             {
                 success = false,
-                Comment = null as Comment
+                Comment = null as Comment_
             });
 
             Assert.True(json.success);

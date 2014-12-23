@@ -108,7 +108,7 @@
   <ItemGroup>
     <Compile Include="DataModel\Campus.cs" />
     <Compile Include="DataModel\CarPoolingJoin.cs" />
-    <Compile Include="DataModel\Comment.cs" />
+    <Compile Include="DataModel\Comment_.cs" />
     <Compile Include="DataModel\Vehicle.cs" />
     <Compile Include="DataModel\Client.cs" />
     <Compile Include="DataModel\CarPooling.cs" />
