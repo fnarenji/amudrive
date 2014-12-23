@@ -2,7 +2,7 @@
  * Created by thomasmunoz on 19/12/14.
  */
 
-myApp.controller('CarPoolingController', ['$scope', 'mapService', function($scope, mapService){
+myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', function($scope, REST, mapService){
     $scope.isPanelVisible = true;
     $scope.animal = false;
     $scope.smoke = false;
