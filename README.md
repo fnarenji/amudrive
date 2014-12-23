@@ -6,7 +6,7 @@
 
 ### URGENTS ###
 * **Fiche d'un trajet (commentaires, participants ...)**
-* **Recherche d'un covoiturage (Fonctionnelle mais il manque l'affichage des infos sur le panel)**
+* **Recherche d'un covoiturage (Fonctionnelle mais il manque l'affichage des infos sur le panel, manque overlapping sur la carte)**
 
 ### Moins urgents ###
 * *Proposer, sur la page d'accueil, une fois que l'utilisateur est connecté, un trajet "par défaut" de chez lui à son pôle favori,

@@ -41,7 +41,13 @@ namespace SharpDrift.Modules
                                     new { IdClient = int.Parse(Context.CurrentUser.UserName) }),
                         pendingPCarPoolings =
                             await conn.QuerySqlAsync<Client>("SELECT C.IdClient,C.userName FROM client as C WHERE C.idClient IN (SELECT idClient FROM carPoolingjoin  WHERE idcarpooling IN ( SELECT idCarPooling FROM carPooling WHERE  idClient = @IdClient ) AND accept = FALSE)",
+                                new { IdClient = int.Parse(Context.CurrentUser.UserName) }),
+
+                        validPCarPoolings =
+                         await conn.QuerySqlAsync<Client>("SELECT C.IdClient,C.userName FROM client as C WHERE C.idClient IN (SELECT idClient FROM carPoolingjoin  WHERE idcarpooling IN ( SELECT idCarPooling FROM carPooling WHERE  idClient = @IdClient ) AND accept = TRUE)",
                                 new { IdClient = int.Parse(Context.CurrentUser.UserName) })
+
+
                     }.ToJson();
                 }
             };

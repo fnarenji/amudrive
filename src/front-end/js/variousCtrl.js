@@ -213,6 +213,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
         console.log($scope.carPoolingToModify);
         $scope.carPoolingToModify.form = "carPoolingForm.html";
         $scope.loadPPeople($scope.carPoolingToModify);
+        $scope.loadVPeople($scope.carPoolingToModify)
     };
 
     $scope.modifyCarPooling = function (carpooling) {
@@ -330,6 +331,18 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
     };
 
     $scope.loadPPeople();
+
+
+    $scope.loadVPeople = function(carPoolingToModify){
+        return REST.REST('GET', 'carpoolings')
+            .success(function(data){
+                console.log('validatedp');
+                console.log(data.validPCarPoolings);
+                console.log(carPoolingToModify);
+                $scope.user.validatedp = $scope.getPPeople(data.validPCarPoolings,data.joinCarPoolings,carPoolingToModify);
+                console.log($scope.user.validatedp);
+            });
+    };
 
     $scope.selectv = function(){
         console.log('hello');
