@@ -265,7 +265,11 @@ namespace SharpDrift.Modules
                             "SELECT * FROM comment WHERE idClient = @IdClient", user),
 
                         commentsForMe = await conn.QuerySqlAsync<Comment_>(
-                            "SELECT * FROM comment WHERE idcarpooling IN (SELECT idcarpooling FROM carpooling WHERE idclient = @IdClient)", user)
+                            "SELECT * FROM comment WHERE idcarpooling IN (SELECT idcarpooling FROM carpooling WHERE idclient = @IdClient)", user),
+
+                        idAssoc = await conn.QuerySqlAsync<Client>(
+                        "SELECT idclient, username FROM client where idclient IN (SELECT idclient FROM comment WHERE idcarpooling IN (SELECT idcarpooling FROM carpooling" +
+                        " WHERE idclient = @IdClient))", user)
                     }.ToJson();
                 }
             };
