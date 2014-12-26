@@ -29,9 +29,9 @@
 <div class="comments">
 	<h3>Commentaire(s)</h3>
 <p ng-repeat="comment in comments">
-	<span class="line"><b>De : </b> {{comment.username}}</span>
-	<span class="line"><b>Note : </b> {{comment.driverMark}} (conduite)/{{comment.poolingMark}} (covoiturage)</span>
-	<span class="line"><b>Commentaire : </b>{{comment.comment}}</span>
+	<span class="comment_line"><b>De : </b> {{comment.username}}</span>
+	<span class="comment_line"><b>Note : </b> {{comment.driverMark}} (conduite) - {{comment.poolingMark}} (covoiturage)</span>
+	<span class="comment_line last"><b>Commentaire : </b>{{comment.comment}}</span>
 </p>
 
 </div>
