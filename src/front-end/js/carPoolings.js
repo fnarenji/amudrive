@@ -2,15 +2,16 @@
  * Created by thomasmunoz on 19/12/14.
  */
 
-myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', function($scope, REST, mapService){
+myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', 'sessionService', function($scope, REST, mapService, sessionService){
     $scope.isPanelVisible = true;
     $scope.animal = false;
     $scope.smoke = false;
     $scope.talk = false;
     $scope.radio = false;
     $scope.luggage = false;
-
+    $scope.carPoolingSelected = {};
     $scope.campus = {};
+
     REST.REST('GET','campuses')
             .success(function(data){
                 $scope.campus = data;
@@ -23,8 +24,30 @@ myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', functi
         }
     };
 
+    $scope.joinCarpooling = function(){
+      console.log($scope.carPoolingSelected);
+      sessionService.loadInfos().then(function(){
+          var join = {
+              'IdClient' : sessionService.getInfos().idClient,
+              'IdCarPooling' : $scope.carPoolingSelected.idcarpooling
+          };
+          REST.REST('POST', 'carpoolings/join', join, 'json')
+              .success(function(data){
+                 alert('succès');
+                  console.log(data);
+              });
+      });
+
+
+
+      //REST.REST('POST', 'carpooling/join', join, 'json')
+
+    };
+
     mapService.setMarkerCallback(function (json) {
         console.log(json);
+        $scope.carPoolingSelected = json;
+
         if (json === null)
         {
             $scope.isPanelVisible = true;
