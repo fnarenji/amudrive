@@ -423,7 +423,7 @@ input[type=radio]
 {
 	display:inline-block;
 	float:right;
-	width: 100px;
+	width: 120px;
 	height: 30px;
 	color: #FFFFFF;
 	line-height: 210%;
@@ -756,4 +756,28 @@ select
 	display:block;
 	margin-bottom:5px;
 	margin-top:10px;
+}
+.comments
+{
+	display: block;
+	text-align:justify;
+}
+
+.comments .last
+{
+	margin-bottom: 10px;
+}
+.comments b
+{
+	font-weight: bold;
+}
+.comments h3
+{
+	margin-bottom:10px;
+}
+.comment_line
+{
+	display: block;
+	max-width: 500px;
+	color:#FFF;
 }
