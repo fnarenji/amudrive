@@ -29,7 +29,9 @@ myApp.service('REST', function($http, $q, $timeout) {
         method = (method === 'GET' || method === 'POST' || method === 'PUT' || method === 'DELETE') ? method : 'GET';
         headers = (headers !== undefined) ? headers : "application/x-www-form-urlencoded";
         data = (headers === "application/x-www-form-urlencoded") ? $.param(data) : data;
-
+		console.log('YOLOLOLOLO ' + RestService.url + '/' + part);
+		
+		
         return $http({
             url: RestService.url + '/' + part,
             method: method,
