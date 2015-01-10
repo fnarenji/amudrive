@@ -22,6 +22,7 @@ namespace SharpDrift
                                                                             .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type")
                                                                             .WithHeader("Access-Control-Allow-Credentials", "true"));
 
+            
             pipelines.OnError.AddItemToEndOfPipeline((ctx, e) =>
             {
                 ctx.Response = new TextResponse(e.ToString());
