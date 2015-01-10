@@ -64,8 +64,10 @@ body
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 1rem;
 	width: 1180px;
-	margin:auto;
-	background-color: #E1E1E1;
+	margin: auto;
+	background: url("../img/bg.png");
+	background-repeat: no-repeat;
+	background-color: #D4EDFC;
 }
 
 h2
