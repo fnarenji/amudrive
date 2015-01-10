@@ -7,6 +7,7 @@ using Nancy.Responses;
 using Nancy.TinyIoc;
 using Fos;
 using Fos.Owin;
+using Insight.Database.Providers.PostgreSQL;
 using Nancy;
 using Nancy.Owin;
 using Owin;
@@ -50,6 +51,7 @@ namespace SharpDrift
 
         public static void Main(string[] args)
         {
+            PostgreSQLInsightDbProvider.RegisterProvider();
             using (var fosServer = new FosSelfHost(ConfigureOwin))
             {
                 fosServer.Bind(System.Net.IPAddress.Loopback, 3734);
