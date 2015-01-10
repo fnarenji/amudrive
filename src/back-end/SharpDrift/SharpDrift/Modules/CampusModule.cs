@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 using Insight.Database;
 using Nancy;
 using SharpDrift.DataModel;
@@ -15,11 +16,13 @@ namespace SharpDrift.Modules
             {
                 using (DbConnection conn = DAL.Conn)
                 {
-                    return new
+                    var a = new
                     {
                         success = true,
                         campuses = await conn.QuerySqlAsync<Campus>("SELECT * FROM CAMPUS")
                     }.ToJson();
+                    Console.WriteLine(a);
+                    return a;
                 }
             };
         }
