@@ -52,16 +52,16 @@ namespace SharpDrift
         public static void Main(string[] args)
         {
             PostgreSQLInsightDbProvider.RegisterProvider();
-            using (var fosServer = new FosSelfHost(ConfigureOwin))
-            {
-                fosServer.Bind(System.Net.IPAddress.Loopback, 3734);
-                fosServer.Start(false);
-            }
-            //using (var host = new NancyHost(new Uri("http://localhost:3734")))
+            //using (var fosServer = new FosSelfHost(ConfigureOwin))
             //{
-            //    host.Start();
-            //    Console.ReadLine();
+            //    fosServer.Bind(System.Net.IPAddress.Loopback, 3734);
+            //    fosServer.Start(false);
             //}
+            using (var host = new NancyHost(new Uri("http://127.0.0.1:3734")))
+            {
+                host.Start();
+                Console.ReadLine();
+            }
         }
     }
 }

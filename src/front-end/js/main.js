@@ -16,7 +16,7 @@ $(document).ready(function() {
 
     // Load all the images
     for(i = 0; i < img.length; ++i){
-        url = '../img/' + img[i] + '_off.png';
+        url = 'img//' + img[i] + '_off.png';
         $('#search-panel-select-' + img[i]).css('background-image', 'url("' + url + '")');
         $('#search-panel-select-' + img[i]).addClass('off');
     }
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
         var state =  $(this).attr('class') == 'on' ? 'off' : 'on';
 
-        $(this).css('background-image', 'url("../img/' + name + '_' + state + '.png")');
+        $(this).css('background-image', 'url("img//' + name + '_' + state + '.png")');
         $(this).attr('class', state);
 
 

@@ -56,6 +56,6 @@ F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\xun
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\xunit.runner.visualstudio.testadapter.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Owin.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Nancy.Owin.dll
-F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Fos.dll
-F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\FastCgiNet.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Nancy.Owin.xml
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Nancy.Hosting.Self.dll
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Nancy.Hosting.Self.xml
