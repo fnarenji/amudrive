@@ -8,7 +8,6 @@ $(document).ready(function() {
 	$('#search-panel').css('left', leftMargin);
 	$('#search-panel-date').css('left', (leftMargin + 5));
 
-
     // Put search-panel-select imgs
 
     // Create an array with the images we want to display
@@ -45,7 +44,6 @@ $(document).ready(function() {
 	  	var leftMargin = ($(window).width() - $('#search-panel').width()) / 2;
 	  	$('#search-panel').css('left', leftMargin);
 	  	$('#search-panel-date').css('left', (leftMargin + 5));
-
 	});
 
     $('#rayon').slider({

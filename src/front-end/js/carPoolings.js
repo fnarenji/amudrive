@@ -3,7 +3,7 @@
  */
 
 myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', 'sessionService', function($scope, REST, mapService, sessionService){
-    $scope.isPanelVisible = true;
+    $scope.isPanelVisible = false;
     $scope.animal = false;
     $scope.smoke = false;
     $scope.talk = false;
@@ -45,7 +45,6 @@ myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', 'sessi
     };
 
     mapService.setMarkerCallback(function (json) {
-        console.log(json);
         $scope.carPoolingSelected = json;
 
         if (json === null)
@@ -54,6 +53,7 @@ myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', 'sessi
             return;
         }
         $scope.isPanelVisible = true;
+
         $('#search-panel-select-animal').css('background-image', 'url(http://localhost/amudrive/img/animal_' + (json.animals ? 'on' : 'off') + '.png)');
         $('#search-panel-select-smoke').css('background-image', 'url(http://localhost/amudrive/img/smoke_' + (json.smoking ? 'on' : 'off') + '.png)');
         $('#search-panel-select-talk').css('background-image', 'url(http://localhost/amudrive/img/talk_' + (json.talks ? 'on' : 'off') + '.png)');
