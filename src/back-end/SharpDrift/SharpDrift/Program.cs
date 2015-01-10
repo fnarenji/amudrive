@@ -57,7 +57,7 @@ namespace SharpDrift
             //    fosServer.Bind(System.Net.IPAddress.Loopback, 3734);
             //    fosServer.Start(false);
             //}
-            using (var host = new NancyHost(new Uri("http://localhost:3734")))
+            using (var host = new NancyHost(new Uri("http://0.0.0.0:3734")))
             {
                 host.Start();
                 Console.ReadLine();
