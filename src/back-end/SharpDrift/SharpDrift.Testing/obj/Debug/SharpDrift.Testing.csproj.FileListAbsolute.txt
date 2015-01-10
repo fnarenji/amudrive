@@ -35,11 +35,9 @@ F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Ins
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Insight.Database.Providers.Default.xml
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\SharpDrift.exe
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\ImpromptuInterface.dll
-F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Nancy.Hosting.Self.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Nancy.Serialization.JsonNet.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\SharpDrift.pdb
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\ImpromptuInterface.xml
-F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Nancy.Hosting.Self.xml
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\MailKit.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\MimeKit.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\BouncyCastle.dll
@@ -56,3 +54,8 @@ F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Mon
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Npgsql.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\xunit.runner.utility.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\xunit.runner.visualstudio.testadapter.dll
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Owin.dll
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Nancy.Owin.dll
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Fos.dll
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\FastCgiNet.dll
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift.Testing\bin\Debug\Nancy.Owin.xml

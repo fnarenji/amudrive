@@ -5,6 +5,11 @@ using Nancy.Diagnostics;
 using Nancy.Hosting.Self;
 using Nancy.Responses;
 using Nancy.TinyIoc;
+using Fos;
+using Fos.Owin;
+using Nancy;
+using Nancy.Owin;
+using Owin;
 
 namespace SharpDrift
 {
@@ -37,13 +42,23 @@ namespace SharpDrift
     
     class Program
     {
+        private static void ConfigureOwin(IAppBuilder builder)
+        {
+            builder.UseNancy();
+        }
+
         public static void Main(string[] args)
         {
-            using (var host = new NancyHost(new Uri("http://localhost:3734")))
+            using (var fosServer = new FosSelfHost(ConfigureOwin))
             {
-                host.Start();
-                Console.ReadLine();
+                fosServer.Bind(System.Net.IPAddress.Loopback, 3734);
+                fosServer.Start(false);
             }
+            //using (var host = new NancyHost(new Uri("http://localhost:3734")))
+            //{
+            //    host.Start();
+            //    Console.ReadLine();
+            //}
         }
     }
 }

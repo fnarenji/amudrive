@@ -52,3 +52,8 @@ F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Dat
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.Providers.Default.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.Providers.PostgreSQL.dll
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\FastCgiNet.dll
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Fos.dll
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Nancy.Owin.dll
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Owin.dll
+F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Nancy.Owin.xml
