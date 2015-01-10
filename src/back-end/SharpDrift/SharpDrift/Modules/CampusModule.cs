@@ -16,13 +16,11 @@ namespace SharpDrift.Modules
             {
                 using (DbConnection conn = DAL.Conn)
                 {
-                    var a = new
+                    return new
                     {
                         success = true,
                         campuses = await conn.QuerySqlAsync<Campus>("SELECT * FROM CAMPUS")
                     }.ToJson();
-                    Console.WriteLine(a);
-                    return a;
                 }
             };
         }
