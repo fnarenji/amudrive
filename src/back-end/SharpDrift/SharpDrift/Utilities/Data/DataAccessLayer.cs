@@ -6,14 +6,14 @@ namespace SharpDrift.Utilities.Data
 {
     internal static class DAL
     {
-        private static readonly NpgsqlConnectionStringBuilder ConnectionBuilder
-            =
-            new NpgsqlConnectionStringBuilder(
-                "Server=127.0.0.1;Port=5432;Database=amudrive;User Id=postgres;Password=lol;Pooling=true;MinPoolSize=1;MaxPoolSize=20;ConnectionLifeTime=15");
+        //private static readonly NpgsqlConnectionStringBuilder ConnectionBuilder
+        //    =
+        //    new NpgsqlConnectionStringBuilder(
+        //        "Server=127.0.0.1;Port=5432;Database=amudrive;User Id=postgres;Password=lol;Pooling=true;MinPoolSize=1;MaxPoolSize=20;ConnectionLifeTime=15");
 
         public static NpgsqlConnection Conn
         {
-            get { return (NpgsqlConnection)ConnectionBuilder.Connection(); }
+            get { return new NpgsqlConnection("Server=127.0.0.1;Port=5432;Database=amudrive;User Id=postgres;Password=lol;Pooling=true;MinPoolSize=1;MaxPoolSize=20;ConnectionLifeTime=15"); }
         }
     }
 }
