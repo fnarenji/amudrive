@@ -39,7 +39,7 @@ namespace SharpDrift
     {
         public static void Main(string[] args)
         {
-            using (var host = new NancyHost(new Uri("http://localhost:8989")))
+            using (var host = new NancyHost(new Uri("http://localhost:3734")))
             {
                 host.Start();
                 Console.ReadLine();
