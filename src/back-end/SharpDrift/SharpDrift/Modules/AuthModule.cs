@@ -14,7 +14,6 @@ namespace SharpDrift.Modules
     {
         public AuthModule()
         {
-            // TODO: Add length to password_sha512 field
             Post["/auth", true] = async (x, ctx) =>
             {
                 using (DbConnection conn = DAL.Conn)
@@ -24,7 +23,10 @@ namespace SharpDrift.Modules
                             conn.SingleSqlAsync<int?>(
                                 "SELECT idclient FROM client WHERE username = @u AND password = @p",
                                 new {u = Request.Form.username, p = Request.Form.password_sha512});
- 
+
+                    Console.WriteLine(Request.Form.username);
+                    Console.WriteLine(Request.Form.password_sha512);
+
                     if (idClient == null || Request.UserHostAddress == null)
                         return new
                         {

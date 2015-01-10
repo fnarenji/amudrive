@@ -24,8 +24,6 @@ F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\ImpromptuIn
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Nancy.Serialization.JsonNet.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.Configuration.pdb
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.Configuration.xml
-F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.Providers.Default.pdb
-F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.Providers.Default.xml
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.Providers.PostgreSQL.pdb
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.Providers.PostgreSQL.xml
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\obj\Debug\SharpDrift.csprojResolveAssemblyReference.cache
@@ -50,7 +48,6 @@ F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\MimeKit.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Npgsql.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.Configuration.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.dll
-F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.Providers.Default.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Insight.Database.Providers.PostgreSQL.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\FastCgiNet.dll
 F:\Development\amudrive\src\back-end\SharpDrift\SharpDrift\bin\Debug\Fos.dll
