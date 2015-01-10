@@ -1,13 +1,13 @@
 myApp.config(function($routeProvider){
    $routeProvider
-       .when('/', {templateUrl: 'path.html'})
-       .when('/connection', {templateUrl: 'connection.html'})
-       .when('/mycarpoolings',{templateUrl: 'mycarpoolings.html'})
-       .when('/registration', {templateUrl: 'registration.html'})
-       .when('/registrationNext', {templateUrl: 'registration_next.html'})
-       .when('/path', {templateUrl: 'path.html'})
-       .when('/account', {templateUrl: 'account.html'})
-       .when('/manage', {templateUrl: 'carPoolingManage.html'})
-       .when('/participate', {templateUrl: 'carPoolingParticipate.html'})
+       .when('/', {templateUrl: 'html/path.html'})
+       .when('/connection', {templateUrl: 'html/connection.html'})
+       .when('/mycarpoolings',{templateUrl: 'html/mycarpoolings.html'})
+       .when('/registration', {templateUrl: 'html/registration.html'})
+       .when('/registrationNext', {templateUrl: 'html/registration_next.html'})
+       .when('/path', {templateUrl: 'html/path.html'})
+       .when('/account', {templateUrl: 'html/account.html'})
+       .when('/manage', {templateUrl: 'html/carPoolingManage.html'})
+       .when('/participate', {templateUrl: 'html/carPoolingParticipate.html'})
        .otherwise({redirectTo: '/'});
 });
