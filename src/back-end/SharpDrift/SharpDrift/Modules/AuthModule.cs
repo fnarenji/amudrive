@@ -31,7 +31,6 @@ namespace SharpDrift.Modules
                             authToken = string.Empty, 
                             Request.Form.username,
                             Request.Form.password_sha512,
-                            Request.Form
                         }.ToJson()
                          .WithCookie("authToken", string.Empty, DateTime.UtcNow.AddDays(-7));
 
