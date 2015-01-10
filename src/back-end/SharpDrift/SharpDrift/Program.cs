@@ -44,7 +44,7 @@ namespace SharpDrift
     {
         private static void ConfigureOwin(IAppBuilder builder)
         {
-            builder.UseNancy();
+            builder.UseNancy(new NancyOptions { Bootstrapper = new CustomBootstrapper() });
         }
 
         public static void Main(string[] args)
