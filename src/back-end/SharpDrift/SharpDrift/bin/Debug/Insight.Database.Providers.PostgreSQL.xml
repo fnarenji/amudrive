@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Insight.Database.Providers.PostgreSQL</name>
+    </assembly>
+    <members>
+        <member name="T:Insight.Database.Providers.PostgreSQL.NpgsqlConnectionWithSchema">
+            <summary>
+            A wrapped connection that automatically sets the schema when the connection is opened.
+            </summary>
+        </member>
+        <member name="F:Insight.Database.Providers.PostgreSQL.NpgsqlConnectionWithSchema._validPostgresIdentifier">
+            <summary>
+            A regex defining a valild Postgres identifier. Note that it doesn't support quoted identifiers.
+            </summary>
+        </member>
+        <member name="F:Insight.Database.Providers.PostgreSQL.NpgsqlConnectionWithSchema._switchSchemaSql">
+            <summary>
+            The sql to use to select the schema upon opening.
+            </summary>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.NpgsqlConnectionWithSchema.#ctor(Npgsql.NpgsqlConnectionStringBuilder,System.String)">
+            <summary>
+            Initializes a new instance of the NpgsqlConnectionWithSchema class.
+            </summary>
+            <param name="connectionString">The connection string to wrap.</param>
+            <param name="schema">The schema to select upon opening the connection.</param>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.NpgsqlConnectionWithSchema.Open">
+            <inheritdoc/>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.NpgsqlConnectionWithSchema.OpenAsync(System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Insight.Database.Providers.PostgreSQL.NpgsqlConnectionWithSchema.Schema">
+            <summary>
+            Gets the schema for this connection.
+            </summary>
+        </member>
+        <member name="T:Insight.Database.Providers.PostgreSQL.NpgsqlExtensions">
+            <summary>
+            Extension methods for Postgres.
+            </summary>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.NpgsqlExtensions.ConnectionWithSchema(Npgsql.NpgsqlConnectionStringBuilder,System.String)">
+            <summary>
+            Creates a connection wrapper that automatically sets the schema when the connection is opened.
+            </summary>
+            <param name="connectionString">The connection string for the connection.</param>
+            <param name="schema">The schema to select upon opening.</param>
+            <returns>A wrapped connection.</returns>
+        </member>
+        <member name="T:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider">
+            <summary>
+            Implements the Insight provider for PostgreSQL connections.
+            </summary>
+        </member>
+        <member name="F:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.CsvDelimiter">
+            <summary>
+            The delimiter for the CSV stream.
+            </summary>
+        </member>
+        <member name="F:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.CsvQuote">
+            <summary>
+            The Quote character for the CSV stream.
+            </summary>
+        </member>
+        <member name="F:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.CsvReplacement">
+            <summary>
+            The replacement pattern for the CSV stream.
+            </summary>
+        </member>
+        <member name="F:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider._csvRegex">
+            <summary>
+            The replacement regex for the CSV stream.
+            </summary>
+        </member>
+        <member name="F:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider._parameterPrefixRegex">
+            <summary>
+            The prefix used on parameter names.
+            </summary>
+        </member>
+        <member name="F:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider._supportedTypes">
+            <summary>
+            The list of types supported by this provider.
+            </summary>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.RegisterProvider">
+            <summary>
+            Registers this provider. This is generally not needed, unless you want to force an assembly reference to this provider.
+            </summary>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.GetSupportedBulkCopyOptions(System.Data.IDbConnection)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.CreateDbConnection">
+            <summary>
+            Creates a new DbConnection supported by this provider.
+            </summary>
+            <returns>A new DbConnection.</returns>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.DeriveParametersFromStoredProcedure(System.Data.IDbCommand)">
+            <summary>
+            Derives the parameter list from a stored procedure command.
+            </summary>
+            <param name="command">The command to derive.</param>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.CloneParameter(System.Data.IDbCommand,System.Data.IDataParameter)">
+            <summary>
+            Clones a parameter so that it can be used with another command.
+            </summary>
+            <param name="command">The command to use.</param>
+            <param name="parameter">The parameter to clone.</param>
+            <returns>The clone.</returns>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.IsXmlColumn(System.Data.DataTable,System.Int32)">
+            <summary>
+            Determines if the given column in the schema table is an XML column.
+            </summary>
+            <param name="schemaTable">The schema table to analyze.</param>
+            <param name="index">The index of the column.</param>
+            <returns>True if the column is an XML column.</returns>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.GetTableSchemaSql(System.Data.IDbConnection,System.String)">
+            <summary>
+            Returns SQL that queries a table for the schema only, no rows.
+            </summary>
+            <param name="connection">The connection to use.</param>
+            <param name="tableName">The name of the table to query.</param>
+            <returns>SQL that queries a table for the schema only, no rows.</returns>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.BulkCopy(System.Data.IDbConnection,System.String,System.Data.IDataReader,System.Action{Insight.Database.InsightBulkCopy},Insight.Database.InsightBulkCopyOptions,System.Data.IDbTransaction)">
+            <summary>
+            Bulk copies a set of objects to the server.
+            </summary>
+            <param name="connection">The connection to use.</param>
+            <param name="tableName">The name of the table.</param>
+            <param name="reader">The reader to read objects from.</param>
+            <param name="configure">A callback method to configure the bulk copy object.</param>
+            <param name="options">Options for initializing the bulk copy object.</param>
+            <param name="transaction">An optional transaction to participate in.</param>
+        </member>
+        <member name="M:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.IsTransientException(System.Exception)">
+            <summary>
+            Determines if a database exception is a transient exception and if the operation could be retried.
+            </summary>
+            <param name="exception">The exception to test.</param>
+            <returns>True if the exception is transient.</returns>
+        </member>
+        <member name="P:Insight.Database.Providers.PostgreSQL.PostgreSQLInsightDbProvider.SupportedTypes">
+            <summary>
+            Gets the types of objects that this provider supports.
+            Include connectionstrings, connections, commands, and readers.
+            </summary>
+        </member>
+    </members>
+</doc>
