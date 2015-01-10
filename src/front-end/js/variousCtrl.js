@@ -1,7 +1,7 @@
 myApp.controller('MenuController', ['$scope','sessionService','REST', function($scope, sessionService, REST) {
 
 
-    $scope.currentMenu = 'menu.html';
+    $scope.currentMenu = 'html/menu.html';
     $scope.disconnect = function()
     {
        	REST.REST('DELETE','auth');
