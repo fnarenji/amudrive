@@ -20,7 +20,12 @@ myApp.controller('MenuController', ['$scope','sessionService','REST', function($
             name: 'Deconnexion'};
     }
     else
+    {
         $scope.connectButton = {name: 'Connexion', url: '#/connection'}
+        $scope.isRegisterVisible = true;
+        $scope.registerButton = {name : 'Inscription', url: '#/registration'}
+    }
+
 
 }]);
 
