@@ -24,9 +24,6 @@ namespace SharpDrift.Modules
                                 "SELECT idclient FROM client WHERE username = @u AND password = @p",
                                 new {u = Request.Form.username, p = Request.Form.password_sha512});
 
-                    Console.WriteLine(Request.Form.username);
-                    Console.WriteLine(Request.Form.password_sha512);
-
                     if (idClient == null || Request.UserHostAddress == null)
                         return new
                         {
@@ -34,7 +31,6 @@ namespace SharpDrift.Modules
                             authToken = string.Empty, 
                             Request.Form.username,
                             Request.Form.password_sha512,
-                            Request.Form
                         }.ToJson()
                          .WithCookie("authToken", string.Empty, DateTime.UtcNow.AddDays(-7));
 
