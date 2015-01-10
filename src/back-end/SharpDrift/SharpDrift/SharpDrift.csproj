@@ -58,10 +58,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Insight.Database.5.1.1\lib\NET45\Insight.Database.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Insight.Database.Providers.Default, Version=5.1.1.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Insight.Database.5.1.1\lib\NET45\Insight.Database.Providers.Default.dll</HintPath>
-    </Reference>
     <Reference Include="Insight.Database.Providers.PostgreSQL, Version=5.1.1.0, Culture=neutral, PublicKeyToken=f35c6ef87e515afc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Insight.Database.Providers.PostgreSQL.5.1.1\lib\NET45\Insight.Database.Providers.PostgreSQL.dll</HintPath>
