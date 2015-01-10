@@ -65,7 +65,7 @@ body
 	font-size: 1rem;
 	width: 1180px;
 	margin: auto;
-	background: url("img/bg.png");
+	background: url("../img/bg.png");
 	background-repeat: no-repeat;
 	background-color: #D4EDFC;
 }
@@ -97,7 +97,7 @@ header .logo
 	height: 100%;
 	margin-left: 10%;
 	float:left;
-	background-image: url('img/logo.png');
+	background-image: url('../img/logo.png');
 	background-color: #FFFFFF;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -422,7 +422,7 @@ input[type=radio]
 #search-panel-photo
 {
 	display:inline-block;
-	background-image: url('img/profile-picture.png');
+	background-image: url('../img/profile-picture.png');
 	float:left;
 	width:86px;
 	height:70px;
