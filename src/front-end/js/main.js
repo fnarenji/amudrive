@@ -7,15 +7,20 @@ $(document).ready(function() {
 	$('#search-panel').css('left', leftMargin);
 	$('#search-panel-date').css('left', (leftMargin + 5));
 
-    $('header').on('click', '.menu_item', function(){
-        $('html, body').animate({
-            scrollTop: ($('#search').first().offset().top)
-        },500);
-    });
     $('#search').on('click', '.submit', function(){
         $('html, body').animate({
             scrollTop: ($('#search').first().offset().top)
         },500);
+    });
+
+    $('#search').on('click', '#larrow', function(){
+       $('#larrow').css('opacity', 1);
+       $('#rarrow').css('opacity', 0.2);
+    });
+
+    $('#search').on('click', '#rarrow', function(){
+        $('#larrow').css('opacity', 0.2);
+        $('#rarrow').css('opacity', 1);
     });
 
     // Put search-panel-select imgs
@@ -43,6 +48,8 @@ $(document).ready(function() {
 
 
     });
+
+
 
 
 	// Everytime you change the size of the window

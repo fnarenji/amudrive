@@ -254,6 +254,10 @@ section
 {
 	padding-right: 10px;
 }
+#rarrow, #larrow
+{
+	opacity: 0.2;
+}
 
 input
 {
