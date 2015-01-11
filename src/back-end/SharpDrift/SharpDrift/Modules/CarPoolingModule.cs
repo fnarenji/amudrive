@@ -59,7 +59,7 @@ namespace SharpDrift.Modules
                     var carPooling = this.Bind<CarPooling>();
                     carPooling.IdClient = Int32.Parse(Context.CurrentUser.UserName);
 
-                    await conn.ExecuteSqlAsync("INSERT INTO carPooling VALUES (DEFAULT, @Address, @Long, @Lat, @IdCampus, @IdClient, @IdVehicle, @CampusToAddress, @Room, @Luggage, @MeetTime, @Price)", carPooling);
+                    await conn.ExecuteSqlAsync("INSERT INTO carPooling VALUES (DEFAULT, @Address, @Long, @Lat, @IdCampus, @IdClient, @IdVehicle, @CampusToAddress, @Room, @Luggage, @Talks, @Radio, @MeetTime, @Price)", carPooling);
 
                     return new
                     {
