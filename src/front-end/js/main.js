@@ -35,7 +35,7 @@ $(document).ready(function() {
         $('#search-panel-select-' + img[i]).css('background-image', 'url("' + url + '")');
         $('#search-panel-select-' + img[i]).addClass('off');
     }
-    
+
 	// Everytime you change the size of the window
     $( window ).resize(function() {
 		// Change the google map size
