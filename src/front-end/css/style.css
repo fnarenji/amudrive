@@ -62,7 +62,7 @@ a
 
 body
 {
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: 'Lato', 'Didact Gothic', sans-serif;
 	font-size: 1rem;
 	width: 1180px;
 	margin: auto;
@@ -70,6 +70,7 @@ body
 	background-repeat: no-repeat;
 	background-color: #D4EDFC;
 }
+
 
 h2
 {
@@ -260,9 +261,13 @@ section
 {
 	padding-right: 10px;
 }
-#rarrow, #larrow
+#larrow
 {
-	opacity: 0.2;
+	opacity: 0.1;
+}
+#rarrow
+{
+	opacity: 1;
 }
 
 input

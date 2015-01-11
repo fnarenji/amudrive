@@ -98,7 +98,6 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
             return;
         }
 
-
         var loc = placesService.getLoc();
 
         if (loc === undefined){
@@ -122,7 +121,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         mapService.drawCircle(loc, $scope.path.radius);
         $scope.path.idCampus = path.CampusName.idCampus;
         mapService.clearMarkers();
-        console.log(JSON.stringify($scope.path));
+
         REST.REST('POST', 'carpoolings/search', JSON.stringify($scope.path), 'json')
             .success(function(data){
                 console.log(data);

@@ -15,11 +15,11 @@ $(document).ready(function() {
 
     $('#search').on('click', '#larrow', function(){
        $('#larrow').css('opacity', 1);
-       $('#rarrow').css('opacity', 0.2);
+       $('#rarrow').css('opacity', 0.1);
     });
 
     $('#search').on('click', '#rarrow', function(){
-        $('#larrow').css('opacity', 0.2);
+        $('#larrow').css('opacity', 0.1);
         $('#rarrow').css('opacity', 1);
     });
 
