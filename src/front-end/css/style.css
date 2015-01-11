@@ -545,11 +545,23 @@ a:visited, .form_line a
 {
     color: #FFF;
 }
+.error_block
+{
+	display: table;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+	background-color: #FFF;
+	border: 1px solid #686B6E;
+	border-radius: 2px;
+}
 .error
 {
-    display: block;
-    margin: auto;
-    color: #cd0a0a;
+    display: table;
+    margin-left: auto;
+	margin-right: auto;
+    color: #cd002a;
 }
 .form_line input:focus:invalid
 {

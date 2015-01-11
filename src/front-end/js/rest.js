@@ -31,7 +31,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         $scope.user.Lat = loc[1];
         $scope.user.Address = placesService.getAddress();
         $scope.user = user;
-        console.log($scope.user);
+
         // Radio buttons fix
         $scope.user.MailNotifications = $scope.user.PhoneNotifications = $scope.user.Newsletter = "true";
 
@@ -84,6 +84,13 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     };
 
     $scope.search = function(path) {
+        if(sessionService.getAuthToken() === undefined){
+            window.location = '#/connection';
+            $scope.message = 'Cette fonctionnalité requiert d\'etre connecté';
+            return;
+        }
+
+
         var loc = placesService.getLoc();
 
         if (loc === undefined){
@@ -157,10 +164,11 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     };
 
     $scope.propose = function(path){
-        //INSERT INTO carPooling VALUES (DEFAULT, @Address, @Long, @Lat,
-        // @IdCampus, @IdClient, @IdVehicle, @CampusToAddress, @Room,
-        // @Luggage, @MeetTime, @Price"
-
+        if(sessionService.getAuthToken() === undefined){
+            window.location = '#/connection';
+            $scope.message = 'Cette fonctionnalité requiert d\'etre connecté';
+            return;
+        }
         var loc = placesService.getLoc();
 
         if (loc === undefined){
