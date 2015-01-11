@@ -102,3 +102,19 @@ CREATE INDEX fk_campus_idx ON carPooling(idcampus ASC);
 CREATE INDEX fk_client_carPooling_idx ON carPooling(idClient ASC);
 
 CREATE INDEX fk_client_vehicule_idx ON vehicle(idClient ASC);
+
+-- Haversine Formula based geodistance in kilometers (copy/paste from https://gist.github.com/cypres/831833)
+CREATE OR REPLACE FUNCTION public.geodistance(a point, b point)
+  RETURNS double precision AS
+$BODY$
+SELECT asin(sqrt(
+  sin(radians($2[0]-$1[0])/2)^2 +
+  (
+    sin(radians($2[1]-$1[1])/2)^2 *
+    cos(radians($1[0])) *
+    cos(radians($2[0]))
+  )
+)) * 6371 * 2 AS distance;
+$BODY$
+  LANGUAGE sql IMMUTABLE
+  COST 100;
