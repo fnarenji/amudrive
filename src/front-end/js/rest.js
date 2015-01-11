@@ -12,7 +12,13 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     $scope.luggageChoice = true;
     $scope.carPoolingChoice = true;
     $scope.isErrorVisible = false;
-
+    $scope.placeholder = {};
+    sessionService.loadInfos().then(function(){
+        $scope.placeholder.address = sessionService.getInfos().address;
+        sessionService.loadCampus().then(function(){
+            $scope.placeholder.campus = sessionService.getCampus();
+        })
+    })
 
     $scope.authToken = sessionService.getAuthToken();
     $scope.user = {};
