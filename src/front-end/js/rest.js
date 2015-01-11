@@ -10,6 +10,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     $scope.roomChoice = true;
     $scope.luggageChoice = true;
     $scope.carPoolingChoice = true;
+    $scope.isErrorVisible = false;
 
 
     $scope.authToken = sessionService.getAuthToken();
@@ -56,12 +57,19 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
                 $scope.authToken = data.authToken;
                 alert('Connexion réussie ! ');
                 $scope.message = ''; // Clear previous error messages
+                $scope.isErrorVisible = false;
                 window.location = ''; // Call to $scope.goTo() doesn't reload the page
             }
-            else if(data.reasons != undefined)
+            else if(data.reasons != undefined) {
+                $scope.isErrorVisible = true;
                 $scope.message = data.reasons;
-            else
-                $scope.message = "Les identifiants saisis sont incorrects ou ce nom d'utilisateur n'existe pas";
+            }
+
+            else{
+                $scope.isErrorVisible = true;
+                $scope.message = "Les identifiants saisis sont incorrects ou ce nom d'utilisateur n'existe pas.";
+            }
+
 
         });
     };
@@ -79,14 +87,14 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
                 $scope.goTo();
                 return;
             }
-            alert(data.success + " " + data.reasons);
         });
     };
 
     $scope.search = function(path) {
         if(sessionService.getAuthToken() === undefined){
             window.location = '#/connection';
-            $scope.message = 'Cette fonctionnalité requiert d\'etre connecté';
+            $scope.isErrorVisible = true;
+            $scope.message = 'Cette fonctionnalité requiert d\'etre connecté.';
             return;
         }
 
@@ -166,7 +174,8 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     $scope.propose = function(path){
         if(sessionService.getAuthToken() === undefined){
             window.location = '#/connection';
-            $scope.message = 'Cette fonctionnalité requiert d\'etre connecté';
+            $scope.isErrorVisible = true;
+            $scope.message = 'Cette fonctionnalité requiert d\'etre connecté.';
             return;
         }
         var loc = placesService.getLoc();
