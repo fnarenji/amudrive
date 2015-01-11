@@ -132,8 +132,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
                     MapService.addMarker(datum.address,loc,datum);
                 }
             }).then(function(){
-                $scope.carPoolingChoice = false;
-                console.log($scope.carPoolingChoice);
+                //$scope.carPoolingChoice = false;
             });
     };
 

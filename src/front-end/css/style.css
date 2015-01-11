@@ -825,6 +825,7 @@ select
 	background-color: #FFF;
 	border: 1px solid #262626;
 	border-radius: 3px;
+	z-index: 999999;
 }
 .alert p
 {
