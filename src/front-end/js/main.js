@@ -43,7 +43,7 @@ $(document).ready(function() {
 
         var state =  $(this).attr('class') == 'on' ? 'off' : 'on';
 
-        $(this).css('background-image', 'url("img//' + name + '_' + state + '.png")');
+        $(this).css('background-image', 'url("img/' + name + '_' + state + '.png")');
         $(this).attr('class', state);
 
 
@@ -104,4 +104,8 @@ $(document).ready(function() {
         format: 'yyyy-mm-dd',
         min: true
     });
+
 });
+
+
+
