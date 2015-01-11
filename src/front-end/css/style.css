@@ -237,6 +237,12 @@ section
 	text-align: center;
 	font-size: 50px;
 }
+#search input[type=text]
+{
+	padding-left: 4px;
+	padding-right: 2px;
+}
+
 #adr
 {
 	display: table;
