@@ -126,7 +126,7 @@ namespace SharpDrift.Modules
                             "SELECT carPooling.*, bv, animals, smoking, eat",
                             "FROM carPooling",
                             "JOIN vehicle ON carPooling.idVehicle = vehicle.idVehicle AND carPooling.idClient = vehicle.idClient",
-                            "WHERE public.geodistance(point(@long,@lat), point(43.529742, 5.447427)) < " + data.radius + "",
+                            "WHERE public.geodistance(point(@long,@lat), point(43.529742, 5.447427)) < " + data.radius + " / 10",
                             "AND idCampus = @idCampus",
                             "AND campusToAddress = @campusToAddress",
                             "AND meetTime BETWEEN @minMeetTime AND @maxMeetTime"), data)
