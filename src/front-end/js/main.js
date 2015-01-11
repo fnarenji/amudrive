@@ -35,23 +35,7 @@ $(document).ready(function() {
         $('#search-panel-select-' + img[i]).css('background-image', 'url("' + url + '")');
         $('#search-panel-select-' + img[i]).addClass('off');
     }
-
-    // Change the button (red or green)
-    $('#search-panel-select').on('click', '[id^=search-panel-select-]', function(){
-        var id = $(this).attr('id');
-        var name = id.substr(20, id.length);
-
-        var state =  $(this).attr('class') == 'on' ? 'off' : 'on';
-
-        $(this).css('background-image', 'url("img/' + name + '_' + state + '.png")');
-        $(this).attr('class', state);
-
-
-    });
-
-
-
-
+    
 	// Everytime you change the size of the window
     $( window ).resize(function() {
 		// Change the google map size
