@@ -7,7 +7,12 @@ $(document).ready(function() {
 	$('#search-panel').css('left', leftMargin);
 	$('#search-panel-date').css('left', (leftMargin + 5));
 
-    $('header').on('click', '.menu_item',function(){
+    $('header').on('click', '.menu_item', function(){
+        $('html, body').animate({
+            scrollTop: ($('#search').first().offset().top)
+        },500);
+    });
+    $('#search').on('click', '.submit', function(){
         $('html, body').animate({
             scrollTop: ($('#search').first().offset().top)
         },500);
