@@ -1,11 +1,13 @@
 $(document).ready(function() {
-	
+
 	// Change the google map element take the width of the window
 	$('#map').width($('body').width() - 4);
 	// margin:auto for search-panel and search-panel-date
 	var leftMargin = ($(window).width() - $('#search-panel').width()) / 2;
 	$('#search-panel').css('left', leftMargin);
 	$('#search-panel-date').css('left', (leftMargin + 5));
+    $('#search-panel').css('display', 'none');
+    $('#search-panel-date').css('display', 'none');
 
     $('#search').on('click', '.submit', function(){
         $('html, body').animate({

@@ -73,6 +73,8 @@ myApp.service('mapService', function(){
         google.maps.event.addListener(marker, 'click', function (marker) {
             return function() {
                 markerCallback(marker.json);
+                $('#search-panel').css('display', 'block');
+                $('#search-panel-date').css('display', 'block');
             }
         }(marker));
 
