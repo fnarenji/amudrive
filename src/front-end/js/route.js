@@ -9,5 +9,6 @@ myApp.config(function($routeProvider){
        .when('/account', {templateUrl: 'html/account.html'})
        .when('/manage', {templateUrl: 'html/carPoolingManage.html'})
        .when('/participate', {templateUrl: 'html/carPoolingParticipate.html'})
+       .when('/mentions', {templateUrl: 'html/mentions.html'})
        .otherwise({redirectTo: '/'});
 });
