@@ -1,4 +1,4 @@
-myApp.service('REST', function($http, $q, $timeout) {
+myApp.service('REST', function($http, $q, $timeout, alertService) {
 
     RestService = new Object();
 
@@ -7,7 +7,7 @@ myApp.service('REST', function($http, $q, $timeout) {
     RestService.testConnect = function() {
         var timeoutPromise = $timeout(function() {
             canceler.resolve(); //aborts the request when timed out
-            alert("Le serveur n'a pas répondu à temps, veuillez recharger la page ou rééssayer plus tard.");
+            alertService.displayMessage("Le serveur n'a pas répondu à temps, veuillez recharger la page ou rééssayer plus tard.");
         }, 30000);
 
         var canceler = $q.defer();
