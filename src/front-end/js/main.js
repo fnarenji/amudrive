@@ -48,7 +48,7 @@ $(document).ready(function() {
 	// Everytime you change the size of the window
     $( window ).resize(function() {
 		// Change the google map size
-	  	$('#map').width($('body').width());
+	  	$('#map').width($('#search').width() - 4);
 
 	  	// margin:auto for search-panel and search-panel-date
 	  	var leftMargin = ($(window).width() - $('#search-panel').width()) / 2;
