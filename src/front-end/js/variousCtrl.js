@@ -13,8 +13,9 @@ myApp.controller('MenuController', ['$scope','sessionService','REST', function($
         $scope.menu =
             [
                 {name: 'Recherche', url: '#/path'},
-                {name: 'Mes trajets', url: '#/mycarpoolings'},
-                {name: 'Mon compte', url: '#/account'}
+                {name: 'Mon compte', url: '#/account'},
+                {name: 'Mes Covoiturages', url:'#/manage'},
+                {name: 'Mes Participations', url: '#/participate'}
             ]
         $scope.connectButton = {
             name: 'Deconnexion'};
@@ -89,7 +90,7 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
 
     $scope.selectVehicle = function(){
         $scope.vehicleToModify = $scope.getVehicles($scope.vehiculeSelected);
-        $scope.vehicleToModify.form = "vehicleForm.html";
+        $scope.vehicleToModify.form = "html/vehicleForm.html";
     };
 
     $scope.modifyVehicle = function(){
@@ -110,7 +111,7 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
     });
 
     $scope.addVehicle = function(){
-        $scope.vehicleToModify = { form: 'addVehicleForm.html'};
+        $scope.vehicleToModify = { form: 'html/addVehicleForm.html'};
     };
 
     $scope.insertInDB = function (vehicle) {
@@ -199,7 +200,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
     $scope.selectCarPooling = function(){
         $scope.carPoolingToModify = $scope.getCarPooling($scope.carpoolingSelected);
         $scope.loadComments($scope.carPoolingToModify);
-        $scope.carPoolingToModify.form = "carPoolingForm.html";
+        $scope.carPoolingToModify.form = "html/carPoolingForm.html";
         $scope.loadPPeople($scope.carPoolingToModify);
         $scope.loadVPeople($scope.carPoolingToModify)
     };
@@ -247,7 +248,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
 
     $scope.selectp = function(){
         $scope.carPendingToModify = $scope.getPCarPooling($scope.carpooling1Selected);
-        $scope.carPendingToModify.form = "deljoin.html";
+        $scope.carPendingToModify.form = "html/deljoin.html";
     };
 
     $scope.delv = function(carpooling){
@@ -308,7 +309,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
         today.setHours(today.getHours() - 1);
 
         if(carPoolingDate < today){
-            $scope.carPendingToModify.form = "comments.html";
+            $scope.carPendingToModify.form = "html/comments.html";
             $scope.carPendingToModify.message = undefined;
             $scope.carPendingToModify.markc = 0;
             $scope.carPendingToModify.markd = 0;
