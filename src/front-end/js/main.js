@@ -2,11 +2,26 @@ $(document).ready(function() {
 	
 	// Change the google map element take the width of the window
 	$('#map').width($('body').width() - 4);
-
 	// margin:auto for search-panel and search-panel-date
 	var leftMargin = ($(window).width() - $('#search-panel').width()) / 2;
 	$('#search-panel').css('left', leftMargin);
 	$('#search-panel-date').css('left', (leftMargin + 5));
+
+    $('#search').on('click', '.submit', function(){
+        $('html, body').animate({
+            scrollTop: ($('#search').first().offset().top)
+        },500);
+    });
+
+    $('#search').on('click', '#larrow', function(){
+       $('#larrow').css('opacity', 1);
+       $('#rarrow').css('opacity', 0.4);
+    });
+
+    $('#search').on('click', '#rarrow', function(){
+        $('#larrow').css('opacity', 0.4);
+        $('#rarrow').css('opacity', 1);
+    });
 
     // Put search-panel-select imgs
 
@@ -35,10 +50,12 @@ $(document).ready(function() {
     });
 
 
+
+
 	// Everytime you change the size of the window
     $( window ).resize(function() {
 		// Change the google map size
-	  	$('#map').width($('body').width());
+	  	$('#map').width($('#search').width() - 4);
 
 	  	// margin:auto for search-panel and search-panel-date
 	  	var leftMargin = ($(window).width() - $('#search-panel').width()) / 2;

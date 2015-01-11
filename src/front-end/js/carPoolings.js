@@ -34,7 +34,6 @@ myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', 'sessi
           REST.REST('POST', 'carpoolings/join', join, 'json')
               .success(function(data){
                  alert('succès');
-                  console.log(data);
               });
       });
 

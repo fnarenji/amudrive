@@ -55,13 +55,14 @@ table {
 a
 {
 	text-decoration: none;
+	color: #FFF;
 }
 
 /* BEGIN */
 
 body
 {
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: 'Lato', 'Didact Gothic', sans-serif;
 	font-size: 1rem;
 	width: 1180px;
 	margin: auto;
@@ -69,6 +70,7 @@ body
 	background-repeat: no-repeat;
 	background-color: #D4EDFC;
 }
+
 
 h2
 {
@@ -128,9 +130,7 @@ header a:hover
 
 nav
 {
-	/*height: 70px;*/
-	margin-left: 432px;
-	width: 450px;
+	margin-left: 230px;
 	float: left;
 	margin-top: 10px;
 	right: 0;
@@ -159,7 +159,7 @@ nav ul li a
 	color: #FFFFFF;
 }
 
-nav #connection_btn
+nav #connection_btn, nav #register_btn
 {
 	display: inline-block;
 	width: 120px;
@@ -168,7 +168,6 @@ nav #connection_btn
 	text-align: center;
 	margin-top: 3px;
 	line-height: 250%;
-	background-color: #FBBA00;
 	border-radius: 25px;
 } 
 #connection_btn a
@@ -177,6 +176,15 @@ nav #connection_btn
 	width: 100%;
 	height: 100%;
 	color: #FFFFFF;
+}
+nav #connection_btn
+{
+	background-color: #FBBA00;
+}
+
+nav #register_btn
+{
+	background-color: #4E8FB9;
 }
 
 /* SECTION SHORT BIO */
@@ -210,10 +218,8 @@ section
 	text-align:justify;
 	padding-top: 18px;
 	color: #686B6E;
-	font-size: 1.2em;
+	font-size: 1em;
 }
-
-
 
 /* SECTION CHERCHER TRAJET */
 
@@ -232,6 +238,12 @@ section
 	text-align: center;
 	font-size: 50px;
 }
+#search input[type=text]
+{
+	padding-left: 4px;
+	padding-right: 2px;
+}
+
 #adr
 {
 	display: table;
@@ -248,6 +260,14 @@ section
 #rarrow
 {
 	padding-right: 10px;
+}
+#larrow
+{
+	opacity: 0.4;
+}
+#rarrow
+{
+	opacity: 1;
 }
 
 input
@@ -535,15 +555,28 @@ footer .copyright
 {
     margin-right: 5px;
 }
-a:visited
+
+a:visited, .form_line a
 {
     color: #FFF;
 }
+.error_block
+{
+	display: table;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+	background-color: #FFF;
+	border: 1px solid #686B6E;
+	border-radius: 2px;
+}
 .error
 {
-    display: block;
-    margin: auto;
-    color: #cd0a0a;
+    display: table;
+    margin-left: auto;
+	margin-right: auto;
+    color: #cd002a;
 }
 .form_line input:focus:invalid
 {

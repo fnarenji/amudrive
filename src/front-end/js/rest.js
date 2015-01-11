@@ -10,6 +10,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     $scope.roomChoice = true;
     $scope.luggageChoice = true;
     $scope.carPoolingChoice = true;
+    $scope.isErrorVisible = false;
 
 
     $scope.authToken = sessionService.getAuthToken();
@@ -31,7 +32,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         $scope.user.Lat = loc[1];
         $scope.user.Address = placesService.getAddress();
         $scope.user = user;
-        console.log($scope.user);
+
         // Radio buttons fix
         $scope.user.MailNotifications = $scope.user.PhoneNotifications = $scope.user.Newsletter = "true";
 
@@ -56,12 +57,19 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
                 $scope.authToken = data.authToken;
                 alert('Connexion réussie ! ');
                 $scope.message = ''; // Clear previous error messages
+                $scope.isErrorVisible = false;
                 window.location = ''; // Call to $scope.goTo() doesn't reload the page
             }
-            else if(data.reasons != undefined)
+            else if(data.reasons != undefined) {
+                $scope.isErrorVisible = true;
                 $scope.message = data.reasons;
-            else
-                $scope.message = "Les identifiants saisis sont incorrects ou ce nom d'utilisateur n'existe pas";
+            }
+
+            else{
+                $scope.isErrorVisible = true;
+                $scope.message = "Les identifiants saisis sont incorrects ou ce nom d'utilisateur n'existe pas.";
+            }
+
 
         });
     };
@@ -79,11 +87,17 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
                 $scope.goTo();
                 return;
             }
-            alert(data.success + " " + data.reasons);
         });
     };
 
     $scope.search = function(path) {
+        if(sessionService.getAuthToken() === undefined){
+            window.location = '#/connection';
+            $scope.isErrorVisible = true;
+            $scope.message = 'Cette fonctionnalité requiert d\'etre connecté.';
+            return;
+        }
+
         var loc = placesService.getLoc();
 
         if (loc === undefined){
@@ -107,7 +121,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         mapService.drawCircle(loc, $scope.path.radius);
         $scope.path.idCampus = path.CampusName.idCampus;
         mapService.clearMarkers();
-        console.log(JSON.stringify($scope.path));
+
         REST.REST('POST', 'carpoolings/search', JSON.stringify($scope.path), 'json')
             .success(function(data){
                 console.log(data);
@@ -157,10 +171,12 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     };
 
     $scope.propose = function(path){
-        //INSERT INTO carPooling VALUES (DEFAULT, @Address, @Long, @Lat,
-        // @IdCampus, @IdClient, @IdVehicle, @CampusToAddress, @Room,
-        // @Luggage, @MeetTime, @Price"
-
+        if(sessionService.getAuthToken() === undefined){
+            window.location = '#/connection';
+            $scope.isErrorVisible = true;
+            $scope.message = 'Cette fonctionnalité requiert d\'etre connecté.';
+            return;
+        }
         var loc = placesService.getLoc();
 
         if (loc === undefined){

@@ -2,7 +2,10 @@
         <div class="form_box">
 
             <form novalidate>
-                <div class="error">{{message}}</div>
+                <div class="error_block" ng-show="isErrorVisible">
+                    <span class="error">{{message}}</span>
+                </div>
+
                 <div class="form_line">
                     <input type="text" ng-model="auth.username" placeholder="Nom d'utilisateur ..."/>
 
