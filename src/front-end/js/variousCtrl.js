@@ -165,7 +165,11 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService, a
        return REST.REST('GET', 'carpoolings')
             .success(function(data){
                $scope.user.offeredcarpooling = data.offeredCarPoolings;
-               $scope.user.offeredcarpooling.campus
+
+               for(var i = 0; i <= data.offeredCarPoolings.length; ++i){
+                   d = new Date(data.offeredCarPoolings[i].meetTime);
+                   $scope.user.offeredcarpooling[i].time = d.toString();
+               }
             });
     };
 
