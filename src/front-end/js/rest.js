@@ -148,7 +148,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
     };
 
     $scope.proposeNext = function(next){
-        $scope.path.IdVehicle = next.vehiculeSelected;
+        $scope.path.IdVehicle = (next.vehiculeSelected === undefined) ? $scope.path.IdVehicle : next.vehiculeSelected;
         $scope.path.Luggage = next.luggage;
         $scope.path.Room = next.room;
 
@@ -186,8 +186,6 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
             return;
         }
 
-        console.log(path);
-
         $scope.path.Price = 0;
 
         $scope.path.Long = loc[0];
@@ -211,13 +209,14 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         if($scope.path.CampusToAddress === undefined)
             $scope.path.CampusToAddress = "false";
 
-        console.log($scope.path);
-
         $scope.loadVehicles().then(function(){
-           if($scope.user.vehicles.length > 1)
-                $scope.vehicleChoice = false;
-           else
+           if($scope.user.vehicles.length > 1){
+               $scope.vehicleChoice = false;
+           }
+           else{
                $scope.path.IdVehicle = $scope.user.vehicles[0].idVehicle;
+           }
+
         });
 
         $scope.roomChoice = false;
