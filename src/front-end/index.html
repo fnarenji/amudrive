@@ -6,7 +6,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-        <link href='http://fonts.googleapis.com/css?family=Lato|Didact+Gothic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Lato|Didact+Gothic' rel='stylesheet' type='text/css'>
 	</head>
 	<body ng-app="Amudrive">
 		<header>
@@ -95,6 +95,8 @@
 		</footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/main.js"></script>
         <script src="//maps.google.com/maps/api/js?sensor=true&libraries=places&language=fr_FR"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
@@ -115,8 +117,21 @@
         <script src="js/rest.js"></script>
         <script src="js/carPoolings.js"></script>
         <script src="js/route.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/jquery-ui.js"></script>
         <script src="js/oms.min.js"></script>
+        <script>
+            window.alert = function(message){
+                $(document.createElement('div'))
+                        .attr({title: 'Alert', 'class': 'alert'})
+                        .html(message)
+                        .dialog({
+                            buttons: {OK: function(){$(this).dialog('close');}},
+                            close: function(){$(this).remove();},
+                            draggable: true,
+                            modal: true,
+                            resizable: false,
+                            width: 'auto'
+                        });
+            };
+        </script>
 	</body>
 </html>

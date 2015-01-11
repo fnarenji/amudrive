@@ -217,7 +217,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
         REST.REST('DELETE', 'carpoolings',carpooling, 'json')
             .success(function(data){
                 if(data.success === true)
-                    alert('Opération réussi');
+                   window.location.reload();
             });
     };
 

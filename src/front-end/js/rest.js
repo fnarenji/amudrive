@@ -127,7 +127,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
                 console.log(data);
                 for (var i = 0; i < data.carPoolings.length; i++) {
                     var datum = data.carPoolings[i];
-                    var loc = new MapService.gm.LatLng( datum.lat, datum.long);
+                    var loc = new MapService.gm.LatLng( datum.long, datum.lat);
                     MapService.addMarker(datum.address,loc,datum);
                 }
             }).then(function(){
