@@ -2,7 +2,7 @@
  * Created by thomasmunoz on 19/12/14.
  */
 
-myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', 'sessionService', function($scope, REST, mapService, sessionService){
+myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', 'sessionService', 'alertService', function($scope, REST, mapService, sessionService, alertService){
     $scope.isPanelVisible = false;
     $scope.animal = false;
     $scope.smoke = false;
@@ -33,7 +33,7 @@ myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', 'sessi
           };
           REST.REST('POST', 'carpoolings/join', join, 'json')
               .success(function(data){
-                 alert('succès');
+                 alertService.displayMessage('succès');
               });
       });
 

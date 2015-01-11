@@ -2,7 +2,8 @@
  * Created by Thomas on 29/11/2014.
  */
 
-myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionService', 'placesService', function($scope, REST, mapService, sessionService, placesService)
+myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionService', 'placesService', 'alertService',
+    function($scope, REST, mapService, sessionService, placesService, alertService)
 {
     // Carpooling creation menu
     $scope.confirm = true;
@@ -23,7 +24,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         var loc = placesService.getLoc();
 
         if (loc === undefined){
-            alert('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, ' +
+            alertService.displayMessage('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, ' +
                   'le service peut être temporairement indisponible.');
             return;
         }
@@ -55,7 +56,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
                 //$.cookie('authToken', data.authToken, { expires: 7 });
                 sessionService.setAuthToken(data.authToken);
                 $scope.authToken = data.authToken;
-                alert('Connexion réussie ! ');
+                alertService.displayMessage('Connexion réussie !');
                 $scope.message = ''; // Clear previous error messages
                 $scope.isErrorVisible = false;
                 window.location = ''; // Call to $scope.goTo() doesn't reload the page
@@ -82,7 +83,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
 
         REST.REST('POST', 'register', $scope.user, 'application/json').success(function(data){
             if (data.success){
-                alert('Inscription réussie, vous allez bientôt recevoir un mail de validation afin de ' +
+                alertService.displayMessage('Inscription réussie, vous allez bientôt recevoir un mail de validation afin de ' +
                       'valider votre compte et commencer à utiliser notre site');
                 $scope.goTo();
                 return;
@@ -101,7 +102,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         var loc = placesService.getLoc();
 
         if (loc === undefined){
-            alert('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, ' +
+            alertService.displayMessage('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, ' +
             'le service peut être temporairement indisponible.');
             return;
         }
@@ -155,10 +156,10 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         REST.REST('POST', 'carpoolings', $scope.path, 'json')
             .success(function(data){
                if(data.success == true){
-                   alert('Le trajet a bien été ajouté');
+                   alertService.displayMessage('Le trajet a bien été ajouté');
                    window.location.reload();
                }else
-                alert("Une erreur est survenue, veuillez rééssayer.");
+                alertService.displayMessage("Une erreur est survenue, veuillez rééssayer.");
             });
 
     };
@@ -180,7 +181,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
         var loc = placesService.getLoc();
 
         if (loc === undefined){
-            alert('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, ' +
+            alertService.displayMessage('Votre addresse n\'a pu être géolocalisée. Merci de préciser celle-ci. Si cela ne fonctionne pas, ' +
             'le service peut être temporairement indisponible.');
             return;
         }
@@ -232,7 +233,7 @@ myApp.controller('AccountController', ['$scope', 'REST', 'mapService', 'sessionS
            req.Accepted = false;
            REST.REST('POST', 'carpoolings/join', req, 'json')
                .success(function(){
-                    alert('Votre demande a bien été enregistré, vous serez prévenu une fois que votre participation a été' +
+                    alertService.displayMessage('Votre demande a bien été enregistré, vous serez prévenu une fois que votre participation a été' +
                             ' validée');
                     window.location.reload();
                });

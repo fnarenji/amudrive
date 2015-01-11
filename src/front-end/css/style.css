@@ -813,3 +813,23 @@ select
 	max-width: 500px;
 	color:#FFF;
 }
+
+.alert
+{
+	display: none;
+	position: fixed;
+	padding: 20px;
+	width: auto;
+	margin-left: 500px;
+	margin-top: 300px;
+	background-color: #FFF;
+	border: 1px solid #262626;
+	border-radius: 3px;
+}
+.alert p
+{
+	display: table;
+	margin-right: auto;
+	margin-left: auto;
+	color: #56C93F;
+}

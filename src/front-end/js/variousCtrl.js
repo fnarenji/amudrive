@@ -52,7 +52,7 @@ myApp.controller('autocompleteController', function($scope, REST, mapService) {
     }
 });
 
-myApp.controller('accountManagerController', function($scope, REST, sessionService){
+myApp.controller('accountManagerController', function($scope, REST, sessionService, alertService){
 
     $scope.checkconnection = function(){
         sessionService.checkConnection();
@@ -77,7 +77,7 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
         if(confirm("Êtes-vous bien sûr de vouloir effectuer ces modifications ?")){
             REST.REST('PUT', 'client', $scope.user, 'json')
                 .success(function(){
-                    alert('Les informations ont bien été modifiées');
+                    alertService.displayMessage('Les informations ont bien été modifiées');
                 })
         }
     };
@@ -98,7 +98,7 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
       if(confirm("Êtes-vous bien sûr de vouloir effectuer ces modifications ?")){
           REST.REST('PUT', 'vehicles', $scope.vehicleToModify, 'json')
               .success(function(){
-                 alert('Les informations ont bien été modifiées');
+                 alertService.displayMessage('Les informations ont bien été modifiées');
               });
       }
     };
@@ -118,11 +118,11 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
         REST.REST('POST','vehicles',vehicle,'json')
             .success(function(data){
                 if(data.success === true){
-                    alert('Véhicule inséré');
+                    alertService.displayMessage('Véhicule inséré');
                     window.location.reload();
                 }
                 else
-                    alert('Erreur : ' + data.reasons[0]);
+                    alertService.displayMessage('Erreur : ' + data.reasons[0]);
             })
     };
 
@@ -132,7 +132,7 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
             REST.REST('DELETE', 'vehicles', $scope.vehicleToModify, 'json')
                 .success(function(data){
                     if(data.success === true){
-                        alert('Véhicule supprimé');
+                        alertService.displayMessage('Véhicule supprimé');
                         window.location.reload();
                     }
                 }
@@ -142,8 +142,7 @@ myApp.controller('accountManagerController', function($scope, REST, sessionServi
 
 });
 
-myApp.controller('carpoolingController',function($scope, REST, sessionService)
-{
+myApp.controller('carpoolingController',function($scope, REST, sessionService, alertService) {
     $scope.checkconnection = function(){
         sessionService.checkConnection();
     };
@@ -209,7 +208,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
         REST.REST('PUT', 'carpoolings',carpooling, 'json')
             .success(function(data){
                 if(data.success === true)
-                    alert('Opération réussi');
+                    alertService.displayMessage('Opération réussi');
             });
     };
 
@@ -255,7 +254,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
         REST.REST('DELETE', 'carPoolings/join',carpooling, 'json')
             .success(function(data){
                 if(data.success === true)
-                    alert('Opération réussi');
+                    alertService.displayMessage('Opération réussi');
             });
     };
 
@@ -315,7 +314,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
             $scope.carPendingToModify.markd = 0;
         }
         else
-            alert('Vous ne pouvez commenter un co-voiturage non terminé');
+            alertService.displayMessage('Vous ne pouvez commenter un co-voiturage non terminé');
 
     };
 
@@ -331,7 +330,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
             REST.REST('POST', 'carPooling/comment', newComment, 'json')
                 .success(function(data){
                     if(data.success === true)
-                        alert('Opération réussi');
+                        alertService.displayMessage('Opération réussi');
                     });
         }
     };
@@ -356,7 +355,7 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService)
                     REST.REST('PUT', 'carPoolings',$scope.up)
                         .success(function(data){
                             if(data.success === true){
-                                alert('Opération effectué')
+                                alertService.displayMessage('Opération effectué')
                                 window.location.reload();
                             }
                         })
