@@ -151,8 +151,8 @@ namespace SharpDrift.Modules
                     }
                     catch (AggregateException aggregate)
                     {
-                        reasons.Add(aggregate.InnerException.InnerException.ToString().Contains("mail_unique")
-                            ? "Cette adresse mail est déjà utilisée."
+                        reasons.Add(aggregate.InnerException.InnerException.ToString().Contains("carpoolingjoin_pkey")
+                            ? "Vous avez déjà rejoint ce covoiturage."
                             : "Une erreur de données est survenue." + aggregate.ToString()); // @todo REMOVE EXCEPTION DUMPING TO CLIENT. FOR DEBUG PURPOSE ONLY
                     }
 
