@@ -28,6 +28,23 @@ myApp.service('sessionService', function ($cookies, REST) {
         return sessionService.infos;
     };
 
+    sessionService.loadCampus = function(){
+        return REST.REST('GET', 'campuses')
+            .success(function(data){
+                for(var i = 0; i < data.campuses.length; ++i){
+                    if(data.campuses[i].idCampus == sessionService.infos.favoriteCampus){
+                        sessionService.infos.campusName = data.campuses[i].name;
+                        break;
+                    }
+
+                }
+            });
+    };
+
+    sessionService.getCampus = function(){
+      return sessionService.infos.campusName;
+    };
+
     sessionService.loadInfos = function(){
         return REST.REST('GET', 'client')
             .success(function(data){
