@@ -5,7 +5,7 @@
         <select name="carpoolings" id="carpoolings" ng-model="carpoolingSelected">
 
             <option value="" disabled >Selectionner votre co-voiturage</option>
-            <option ng-repeat="carpooling in user.offeredcarpooling"  value="{{carpooling.idCarPooling}}">{{carpooling.address}} vers {{carpooling.campusName}}</option>
+            <option ng-repeat="carpooling in user.offeredcarpooling"  value="{{carpooling.idCarPooling}}">{{carpooling.address}} vers {{carpooling.campusName}} - {{carpooling.time}}</option>
 
         </select ng-repeat-end><br/>
 
