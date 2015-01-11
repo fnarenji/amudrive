@@ -33,7 +33,7 @@ myApp.service('sessionService', function ($cookies, REST) {
             .success(function(data){
                 for(var i = 0; i < data.campuses.length; ++i){
                     if(data.campuses[i].idCampus == sessionService.infos.favoriteCampus){
-                        sessionService.infos.campusName = data.campuses[i].name;
+                        sessionService.infos.campusName = data.campuses[i];
                         break;
                     }
 
