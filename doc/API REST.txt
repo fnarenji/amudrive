@@ -100,7 +100,7 @@ Tous les retours sont en JSON.
 	
 	/carpooling/{id}/comments/reply/{idcomment}/{reply}
 		{id}
-			Id du carpoolnigga
+			Id du carpooling
 		
 		{idcomment}
 			Id du commentaire
