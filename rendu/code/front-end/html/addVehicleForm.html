@@ -1,0 +1,24 @@
+<div  data-ng-model="vehicleToAdd">
+    <label for="name">Le nom de votre vehicule</label>
+    <input type="text" name="name" id="name" data-ng-model="vehicleToAdd.name"/>
+
+    <select name="BV" id="BV" data-ng-model="vehicleToAdd.BV">
+        <option value="" selected disabled>Transmission</option>
+        <option value="M">Manuelle</option>
+        <option value="A">Auto</option>
+    </select>
+
+    <label for="animals">Autorisez-vous les animaux à bord ?</label>
+    <input type="checkbox" name="animals"   id="animals" data-ng-model="vehicleToAdd.animals" data-ng-init="vehicleToAdd.animals=false"/>
+
+    <label for="smoking">Autorisez-vous les personnes à fumer à bord ?</label>
+    <input type="checkbox" name="smoking" id="smoking" data-ng-model="vehicleToAdd.smoking" data-ng-init="vehicleToAdd.smoking=false"/>
+
+    <label for="eat">Autorisez-vous les personnes à manger à bord ?</label>
+    <input type="checkbox" name="eat" id="eat" data-ng-model="vehicleToAdd.eat"data-ng-init="vehicleToAdd.eat=false" />
+
+    <div class="button_group">
+        <button data-ng-click="insertInDB(vehicleToAdd)">Confirmer</button>
+        <button data-ng-click="cancel()">Retour</button>
+    </div>
+</div>

@@ -1,0 +1,877 @@
+/* 
+	Reset by Eric Meyer
+
+http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+a
+{
+	text-decoration: none;
+	color: #FFF;
+}
+
+/* BEGIN */
+
+body
+{
+	font-family: 'Lato', 'Didact Gothic', sans-serif;
+	font-size: 1rem;
+	width: 1180px;
+	margin: auto;
+	background: url("../img/bg.png");
+	background-repeat: no-repeat;
+	background-color: #D4EDFC;
+}
+
+
+h2
+{
+	font-size: 2em;
+	color: #FFF;
+}
+h3
+{
+	font-size: 1.5em;
+	color: #FFF;
+}
+/* Top of the website */
+
+header
+{
+	height: 60px;
+	background-color: #45494D;
+}
+
+/* Logo in the navbar */
+
+header .logo 
+{
+	display: block;
+	width: 180px;
+	height: 100%;
+	margin-left: 10%;
+	float:left;
+	background-image: url('../img/logo.png');
+	background-color: #FFFFFF;
+	background-position: center;
+	background-repeat: no-repeat;
+
+}
+
+header .logo a
+{
+	display: block;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+}
+.picker
+{
+	position: absolute;
+	top: 190px;
+	left: 550px;
+}
+header a:hover
+{
+	text-decoration: none;
+	color: #FFF;
+	text-shadow: 0px 0px 4px rgba(255, 255, 255, 1);
+
+}
+
+/* Right of the navbar */
+
+nav
+{
+	margin-left: 230px;
+	float: left;
+	margin-top: 10px;
+	right: 0;
+
+}
+nav a
+{
+	text-transform: uppercase;
+	font-size: 0.8rem;
+}
+nav ul
+{
+	float:left;
+    padding-top: 15px;
+
+}
+
+nav ul li
+{
+	display: inline-block;
+	margin-right: 5px;
+}
+
+nav ul li a
+{
+	color: #FFFFFF;
+}
+
+nav #connection_btn, nav #register_btn
+{
+	display: inline-block;
+	width: 120px;
+	height: 40px;
+	margin-left: 20px;
+	text-align: center;
+	margin-top: 3px;
+	line-height: 250%;
+	border-radius: 25px;
+} 
+#connection_btn a
+{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	color: #FFFFFF;
+}
+nav #connection_btn
+{
+	background-color: #FBBA00;
+}
+
+nav #register_btn
+{
+	background-color: #4E8FB9;
+}
+
+/* SECTION SHORT BIO */
+
+section 
+{
+	display:table;
+	background-color: #FFFFFF;
+}
+
+#short_bio
+{
+	width: 100%;
+	height: 200px;	
+}
+
+#short_bio h1
+{
+	padding-top: 30px;
+	color: #0EBFDD;
+	text-align: center;
+	font-size: 50px;
+}
+
+#short_bio p
+{
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+	text-align:justify;
+	padding-top: 18px;
+	color: #686B6E;
+	font-size: 1em;
+}
+
+/* SECTION CHERCHER TRAJET */
+
+#search
+{
+	width: 100%;
+	height: 210px;	
+	background-color: #0EBFDD;
+}
+
+#search h1
+{
+	padding-top: 15px;
+    margin-bottom: 10px;
+	color: white;
+	text-align: center;
+	font-size: 50px;
+}
+#search input[type=text]
+{
+	padding-left: 4px;
+	padding-right: 2px;
+    border-radius: 5px;
+    color: #262626;
+}
+
+#adr
+{
+	display: table;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+ #adr img
+ {
+ 	vertical-align: middle;
+ 	padding-left: 10px;
+ }
+
+#rarrow
+{
+	padding-right: 10px;
+}
+#larrow
+{
+	opacity: 0.4;
+}
+#rarrow
+{
+	opacity: 1;
+}
+
+input
+{
+	color: #000;
+	font-size: 1.1rem;
+}
+
+input[type=text], input[type=date], input[type=password], input[type=email], input[type=tel]
+{
+	text-align: center;
+	height: 30px;
+    width: 250px;
+    border:0;
+}
+
+
+#date
+{
+	display:inline-block;
+	font-family: Helvetica, Arial, sans-serif;
+	-webkit-padding-start: 0;
+	padding: 1px;
+	margin-left: 5px;
+}
+
+.button
+{
+	display: table;
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+}
+
+#bcherche, #bpropose, .submit
+{
+	display: block;
+	margin-top: 15px;
+	width: 170px;
+	height: 40px;
+	border: 1px solid #FFFFFF;
+	border-radius: 30px;
+	text-align: center;
+	line-height: 280%;
+}
+
+#bcherche a, #bpropose a, .submit a
+{
+	display: inline-block;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	width: 100%;
+	height: 100%;
+}
+
+#bcherche
+{
+	float: left;
+	right: 0;
+	
+}
+#bpropose
+{
+	float: right;
+	left: 0;
+
+}
+
+
+/* MAPS SECTION */
+
+#maps
+{
+	width: 100%;
+}
+
+#perso
+{
+	/*text-align: center;*/
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 50px;
+	color: #FFFFFF;
+	background-color: #0EBFDD;
+}
+
+#perso label
+{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+#battement, #rayon
+{
+    display: inline-block;
+	margin-top: 20px;
+    width: 300px;
+}
+
+#rayon
+{
+	margin-left: 5px;
+}
+
+#afterR, #beforeB, #afterB
+{
+    width: 65px;
+    color: inherit;
+    background: transparent;
+}
+
+#beforeB, #afterB
+{
+	margin-left: 5px;
+}
+
+label
+{
+    font-weight: bold;
+    color: #FFF;
+}
+input[type=radio]
+{
+    color: #FFF;
+}
+
+/* Search Panel */
+#search-panel-date
+{
+	display:block;
+	position: absolute;
+	top: 957px;
+	padding: 3px;
+	color: #FFFFFF;
+	background-color: #0EBFDD;
+	border: 2px solid #0EBFDD;
+	font-size: 0.9rem;
+
+}
+
+#search-panel
+{
+	display: table;
+	position: absolute;
+	width: 650px;
+	background-color: #FFFFFF;
+	border: 3px solid #0EBFDD;
+	top: 977px;
+	padding: 3px;
+	font-size: 0.9rem;
+}
+#search-panel-info
+{
+    line-height: 150%;
+}
+#search-panel-photo
+{
+	display:inline-block;
+	background-image: url('../img/profile-picture.png');
+	float:left;
+	width:86px;
+	height:70px;
+	background-repeat: no-repeat;
+	background-position:center;
+	border-radius: 4px;
+}
+#search-panel-name
+{
+	display: block;
+}
+#search-panel-delete-btn
+{
+	display:inline-block;
+	float:right;
+	width: 120px;
+	height: 30px;
+	color: #FFFFFF;
+	line-height: 210%;
+	text-transform: uppercase;
+	margin-right: 5px;
+	margin-top: 20px;
+	text-align: center;
+	background-color: #F86E6E;
+}
+#search-panel-delete-btn a
+{
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #FFFFFF;
+}
+#map
+{
+    width:800px;
+    height: 600px;
+	border-right: 2px solid #0EBFDD;
+	border-left: 2px solid #0EBFDD;
+}
+/* Google Maps Markers */
+.infoWindow
+{
+    font-size:  1em;
+    display: block;
+    width: 150px;
+    height: 50px;
+}
+
+.infoWindow h1
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+#search-panel-select
+{
+    display: table;
+    width: 330px;
+    height: 60px;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top: -40px;
+    border-spacing:5px 0;
+}
+[id^=search-panel-select-]
+{
+    display: table-cell;
+    background-repeat: no-repeat;
+	background-position: center;
+    width: 60px;
+    height: 60px;
+}
+/*  Footer */
+footer
+{
+	display: table;
+	width: 100%;
+	padding-top: 50px;
+}
+
+footer hr 
+{ 
+	display: block; 
+	height: 1px;
+    border: 0;
+    border-top: 1px solid #666666;
+    width: 75%; 
+    padding: 0; 
+}
+
+footer .copyright
+{
+	display: table;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+footer .copyright a
+{
+	color: #222222;
+}
+
+.form_box
+{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form_box input
+{
+    display: inline-block;
+
+}
+
+.form_box .submit
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.form_line
+{
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    color: #FFF;
+}
+.form_line input:first-child, .form_line a:first-child
+{
+    margin-right: 5px;
+}
+
+a:visited, .form_line a
+{
+    color: #FFF;
+}
+.error_block
+{
+	display: table;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+	background-color: #FFF;
+	border: 1px solid #686B6E;
+	border-radius: 2px;
+}
+.error
+{
+    display: table;
+    margin-left: auto;
+	margin-right: auto;
+    color: #cd002a;
+}
+.form_line input:focus:invalid
+{
+    outline-style: none;
+    border:1px solid #FF0000;
+    -webkit-box-shadow:  0px 0px 3px  #FF0000;
+    box-shadow:  0px 0px 3px  #FF0000;
+}
+.form_line input:focus:valid
+{
+    outline-style: none;
+    border: 1px solid #56C93F;
+    -webkit-box-shadow:  0px 0px 5px  #56C93F;
+    box-shadow:  0px 0px 5px  #56C93F;
+}
+.form_radio
+{
+    width:100%;
+    color: #FFF;
+    margin-bottom: 10px;
+}
+.form_radio .radio
+{
+   float: right;
+   margin-right: -50px;
+}
+
+/* Page compte */
+.profil
+{
+	display: block;
+	width: 90%;
+	height: 100%;
+	margin: auto;
+}
+.panel
+{
+	display: table;
+	width: 100%;
+	height: 350px;
+}
+.profil h2, .profil h3
+{
+	margin-bottom: 20px;
+	margin-top: 25px;
+}
+.user
+{
+	display:block;
+	width: 50%;
+	float: left;
+	margin-left: 15px;
+}
+.user img
+{
+	display:inline-block;
+	width: 175px;
+	height: 175px;
+	float: left;
+	border: 5px solid #0c708a;
+	border-radius: 3px;
+	margin-right: 15px;
+	margin-bottom: 10px;
+}
+.profil label[for="firstname"], .profil label[for="lastname"], label[for="name"]
+{
+	display:block;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.profil label
+{
+	margin-right: 5px;
+}
+.user .username
+{
+	font-size: 2em;
+	color: #FFF;
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+.vehicles
+{
+	display: block;
+	width: 45%;
+	float: right;
+}
+.vehicles select
+{
+	margin-bottom:5px;
+}
+
+.vehicles label	
+{
+	display: inline-block;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+.vehicles button
+{
+	display: inline-block;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	cursor: default;
+
+}
+.submit_section
+{
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+	
+}
+.submit_button
+{
+	display: inline-block;
+	margin-top: 15px;
+	width: 170px;
+	height: 40px;
+	border: 1px solid #FFFFFF;
+	border-radius: 30px;
+	text-align: center;
+	line-height: 280%;
+	text-transform: uppercase;
+	margin-right: 10px;
+}
+
+#timepicker
+{
+	width: 80px;
+}
+
+#confirm_button
+{
+	margin:auto;
+	margin-bottom: 10px;
+}
+#roomChoice, #luggageChoice
+{
+	display: block;
+	margin-top: 10px;
+	width: 290px;
+}
+#carpooling form
+{
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+	font-weight: normal;
+}
+.form
+{
+	height:60px;
+}
+.form input[type="submit"]
+{
+	height:50px;
+	cursor: default;
+}
+
+.managingblock
+{
+	display:inline-block;
+	width: 70%;
+	padding-top:10px;
+	margin-left:20px;
+	margin-bottom:20px;
+}
+.managingblock h2
+{
+	margin-bottom: 10px;
+}
+.managingblock h3
+{
+	margin-top:10px;
+}
+
+select
+{
+	display:block;
+}
+.managingblock label, .managingblock input[type="number"]
+{
+	display:block;
+	margin-top: 5px;
+	margin-bottom:5px;
+}
+.user_valid
+{
+	display:inline-block;
+	float:right;
+	margin-top: -100px;
+}
+.user_valid select
+{
+	display:block;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+.comments
+{
+	display: block;
+	text-align:justify;
+}
+
+.comments .last
+{
+	margin-bottom: 10px;
+}
+.comments b
+{
+	font-weight: bold;
+}
+.comments h3
+{
+	margin-bottom:10px;
+}
+.comment_line
+{
+	display: block;
+	max-width: 500px;
+	color:#FFF;
+}
+
+.alert
+{
+	display: none;
+	position: fixed;
+	padding: 20px;
+	width: auto;
+	margin-left: 500px;
+	margin-top: 300px;
+	background-color: #FFF;
+	border: 1px solid #262626;
+	border-radius: 3px;
+	z-index: 999999;
+}
+.alert p
+{
+	display: table;
+	margin-right: auto;
+	margin-left: auto;
+	color: #56C93F;
+}
+article
+{
+	padding: 10px;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: justify;
+}
+
+article h2, h3
+{
+	margin-bottom: 10px;
+}
+
+article p
+{
+	margin-bottom: 10px;
+}
+
+article b
+{
+	font-weight: bold;
+
+}
+.cpliste
+{
+    margin-bottom: 10px;
+}
+.cpliste
+{
+    color: #FFF;
+}
+.cpliste a
+{
+    cursor: pointer;
+}
+.cpliste li
+{
+    list-style: circle inside;
+}
