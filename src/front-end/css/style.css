@@ -529,6 +529,11 @@ footer .copyright
 	margin-right:auto;
 }
 
+footer .copyright a
+{
+	color: #222222;
+}
+
 .form_box
 {
     width: 50%;
