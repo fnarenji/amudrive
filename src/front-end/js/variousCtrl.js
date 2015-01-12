@@ -168,7 +168,17 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService, a
 
                for(var i = 0; i <= data.offeredCarPoolings.length; ++i){
                    d = new Date(data.offeredCarPoolings[i].meetTime);
-                   $scope.user.offeredcarpooling[i].time = d.toString();
+
+                   var yyyy = d.getFullYear().toString();
+                   var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
+                   mm = (mm < 10) ? '0' + mm : mm;
+                   var dd  = d.getDate().toString();
+                   var hh = d.getHours().toString();
+                   var mmm = d.getMinutes().toString();
+                   mmm = (mmm < 10) ? '0' + mmm : mmm;
+                   var dateToString = dd + '/' + mm + '/' + yyyy + ' ' + hh + 'h' + mmm;
+
+                   $scope.user.offeredcarpooling[i].time = dateToString;
                }
             });
     };
@@ -228,9 +238,24 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService, a
         REST.REST('GET', 'carpoolings')
             .success(function(data){
                 $scope.user.cpending = data.waitingCarPoolings;
-
-                for(var i = 0; i < $scope.user.cpending.length; ++i)
+                console.log($scope.user.cpending);
+                for(var i = 0; i <= $scope.user.cpending.length; ++i){
                     $scope.user.cpending[i].campusName = $scope.getCampuses($scope.user.cpending[i].idCampus);
+                    var d = new Date($scope.user.cpending[i].meetTime);
+
+                    var yyyy = d.getFullYear().toString();
+                    var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
+                    mm = (mm < 10) ? '0' + mm : mm;
+                    var dd  = d.getDate().toString();
+                    var hh = d.getHours().toString();
+                    var mmm = d.getMinutes().toString();
+                    mmm = (mmm < 10) ? '0' + mmm : mmm;
+                    var dateToString = dd + '/' + mm + '/' + yyyy + ' ' + hh + 'h' + mmm;
+
+                    $scope.user.cpending[i].time = dateToString;
+
+                }
+
             });
     };
 
@@ -238,8 +263,23 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService, a
         REST.REST('GET', 'carpoolings')
             .success(function(data){
                 $scope.user.cvalid = data.joinedCarPoolings;
-                for(var i = 0; i < $scope.user.cvalid.length; ++i)
+
+                for(var i = 0; i <= $scope.user.cvalid.length; ++i) {
                     $scope.user.cvalid[i].campusName = $scope.getCampuses($scope.user.cvalid[i].idCampus);
+                    var d = new Date($scope.user.cvalid[i].meetTime);
+
+                    var yyyy = d.getFullYear().toString();
+                    var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
+                    mm = (mm < 10) ? '0' + mm : mm;
+                    var dd  = d.getDate().toString();
+                    var hh = d.getHours().toString();
+                    var mmm = d.getMinutes().toString();
+                    mmm = (mmm < 10) ? '0' + mmm : mmm;
+                    var dateToString = dd + '/' + mm + '/' + yyyy + ' ' + hh + 'h' + mmm;
+
+                    $scope.user.cvalid[i].time = dateToString;
+
+                }
             });
     };
 
