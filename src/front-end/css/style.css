@@ -435,8 +435,13 @@ input[type=radio]
 	width:86px;
 	height:70px;
 	background-repeat: no-repeat;
+	background-position:center;
+	border-radius: 4px;
 }
-
+#search-panel-name
+{
+	display: block;
+}
 #search-panel-delete-btn
 {
 	display:inline-block;

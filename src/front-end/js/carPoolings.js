@@ -52,7 +52,11 @@ myApp.controller('CarPoolingController', ['$scope', 'REST', 'mapService', 'sessi
             return;
         }
         $scope.isPanelVisible = true;
+        console.log(json);
+        var url = 'http://www.gravatar.com/avatar/';
 
+        $('#search-panel-photo').css('background-image', 'url(' + url + json.md5 + ')');
+        $('#search-panel-name').html(json.firstname + ' ' + json.lastname);
         $('#search-panel-select-animal').css('background-image', 'url(img/animal_' + (json.animals ? 'on' : 'off') + '.png)');
         $('#search-panel-select-smoke').css('background-image', 'url(img/smoke_' + (json.smoking ? 'on' : 'off') + '.png)');
         $('#search-panel-select-talk').css('background-image', 'url(img/talk_' + (json.talks ? 'on' : 'off') + '.png)');
