@@ -4,31 +4,31 @@
             <form novalidate>
 
                 <div class="form_line">
-                    <input type="text" ng-model="user.FirstName" placeholder="Prénom" required/>
-                    <input type="text" ng-model="user.LastName" placeholder="Nom" required/>
+                    <input type="text" data-ng-model="user.FirstName" placeholder="Prénom" required/>
+                    <input type="text" data-ng-model="user.LastName" placeholder="Nom" required/>
                 </div>
                 <div class="form_line">
                     <input google-places gp-path="registration" location=location/>
-                    <input type="email" ng-model="user.Mail" placeholder="Mail (*.univ-amu.fr)" pattern="(\W|^)[\w.+\-]*@[a-zA-Z0-9.]*univ\-amu\.fr(\W|$)" required/>
+                    <input type="email" data-ng-model="user.Mail" placeholder="Mail (*.univ-amu.fr)" pattern="(\W|^)[\w.+\-]*@[a-zA-Z0-9.]*univ\-amu\.fr(\W|$)" required/>
                 </div>
                 <div class="form_line">
-                    <input type="text" ng-model="user.UserName" placeholder="Nom d'utilisateur" required/>
-                    <input type="password" ng-model="user.PasswordNoHash" placeholder="Mot de passe" required/>
+                    <input type="text" data-ng-model="user.UserName" placeholder="Nom d'utilisateur" required/>
+                    <input type="password" data-ng-model="user.PasswordNoHash" placeholder="Mot de passe" required/>
 
                 </div>
                 <div class="form_line">
-                    <input type="tel" ng-model="user.PhoneNumber" placeholder="Téléphone" required/>
-                    <input type="text" ng-model="user.CentersOfInterest" placeholder="Centre d'intérêt" required/>
+                    <input type="tel" data-ng-model="user.PhoneNumber" placeholder="Téléphone" required/>
+                    <input type="text" data-ng-model="user.CentersOfInterest" placeholder="Centre d'intérêt" required/>
                 </div>
                 <div class="form_line">
-                    <span ng-controller="autocompleteController">
-                        <input type="text" ng-model="selected" typeahead="campus as campus.name for campus in campusesTab|
+                    <span data-ng-controller="autocompleteController">
+                        <input type="text" data-ng-model="selected" typeahead="campus as campus.name for campus in campusesTab|
                                filter:$viewValue | limitTo:8" class="form-control" placeholder="Campus favori"
                                typeahead-on-select="saveCampus($item, $model, user)">
-                        <i ng-show="loadingLocations">Chargement ...</i>
+                        <i data-ng-show="loadingLocations">Chargement ...</i>
                     </span>
                 </div>
-                <div class="submit"><a href="" ng-click="registrationNext(user)">Étape suivante</a></div>
+                <div class="submit"><a href="" data-ng-click="registrationNext(user)">Étape suivante</a></div>
 
             </form>
         </div>

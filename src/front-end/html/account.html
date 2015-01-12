@@ -1,31 +1,31 @@
 		<h1>Compte</h1>
 
-			<div class="profil" ng-controller="accountManagerController" ng-init="checkconnection()">
+			<div class="profil" data-ng-controller="accountManagerController" data-ng-init="checkconnection()">
 				<!-- Image utilisateur -->
 				<div class="panel">
-					<div class ="user" ng-cloak>
+					<div class ="user" data-ng-cloak>
 						<h2>Vos informations personnelles</h2>
-						<img src="http://www.gravatar.com/avatar/{{user.hash}}" alt="Avatar_Utilisateur" ng-cloak/>
+						<img src="http://www.gravatar.com/avatar/{{user.hash}}" alt="Avatar_Utilisateur" data-ng-cloak/>
 
 						<!-- Informations utilisateur -->
 						<div class="username">{{user.userName}}</div>
 						<label for="firstname">Prénom</label>
-						<input type="text" name="firstname" id="firstname" ng-model="user.firstName" placeholder="Votre prénom" value="{{user.firstname}}"/>
+						<input type="text" name="firstname" id="firstname" data-ng-model="user.firstName" placeholder="Votre prénom" value="{{user.firstname}}"/>
 
 						<label for="lastname">Nom</label>
-						<input type="text" name="lastname" id="lastname" ng-model="user.lastName" placeholder="Votre nom" value="{{user.lastname}}"/>
+						<input type="text" name="lastname" id="lastname" data-ng-model="user.lastName" placeholder="Votre nom" value="{{user.lastname}}"/>
                     </span>
 					<!-- Sections à cocher -->
 						<h3>Confidentialité :</h3>
 
 						<label for="mailnotifications">Notifications par mail</label>
-						<input type="checkbox" ng-model="user.mailNotifications" ng-true-value="true" ng-false-value="false" id="mailnotifications"/><br/>
+						<input type="checkbox" data-ng-model="user.mailNotifications" data-ng-true-value="true" data-ng-false-value="false" id="mailnotifications"/><br/>
 
 						<label for="phonenotifications">Notifications par téléphone</label>
-						<input type="checkbox" ng-model="user.phoneNotifications" ng-true-value="true" ng-false-value="false" id="phonenotifications"/><br/>
+						<input type="checkbox" data-ng-model="user.phoneNotifications" data-ng-true-value="true" data-ng-false-value="false" id="phonenotifications"/><br/>
 
 						<label for="newsletter">Newsletter</label>
-						<input type="checkbox" ng-model="user.newsletter" ng-true-value="true" ng-false-value="false" name="newsletter" id="newsletter"/><br/>
+						<input type="checkbox" data-ng-model="user.newsletter" data-ng-true-value="true" data-ng-false-value="false" name="newsletter" id="newsletter"/><br/>
 					</div>
 
 					<!-- Liste véhicules utilisateurs -->
@@ -33,21 +33,21 @@
 
 						<h2>Véhicules </h2>
 						
-						<select name="vehicules" id="vehicules" ng-model="vehiculeSelected">
+						<select name="vehicules" id="vehicules" data-ng-model="vehiculeSelected">
 
 								<option value="" disabled >Selectionner votre véhicule</option>
-								<option ng-repeat="vehicle in user.vehicles"  value="{{vehicle.idVehicle}}">{{vehicle.name}}</option>
+								<option data-ng-repeat="vehicle in user.vehicles"  value="{{vehicle.idVehicle}}">{{vehicle.name}}</option>
 
-						</select ng-repeat-end><br/>
+						</select data-ng-repeat-end><br/>
 
-						<button ng-click="selectVehicle()">Selectionner</button>
-						<button ng-click="addVehicle()">Ajouter</button>
+						<button data-ng-click="selectVehicle()">Selectionner</button>
+						<button data-ng-click="addVehicle()">Ajouter</button>
 
-						<div ng-include="vehicleToModify.form" ng-cloak>{{vehicleToModify.form}}</div>
+						<div data-ng-include="vehicleToModify.form" data-ng-cloak>{{vehicleToModify.form}}</div>
 					</div>
 				</div>
 				<!-- Boutons pour gérer les informations de l'utilisateur -->
 				<div class="submit_section">
-					<div class="submit_button"><a href="" ng-click="modify()">Mettre à jour</a></div>
+					<div class="submit_button"><a href="" data-ng-click="modify()">Mettre à jour</a></div>
 				</div>
 			</div>

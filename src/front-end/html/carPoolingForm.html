@@ -1,36 +1,36 @@
 
 <label for="luggage">Nombre de place(s) disponible(s)</label>
-<input type="number" name="luggage" id="luggage" ng-model="carPoolingToModify.luggage"/>
+<input type="number" name="luggage" id="luggage" data-ng-model="carPoolingToModify.luggage"/>
 
 <label for="room">Nombre de baggage(s) disponible(s)</label>
-<input type="number" name="room" id="room" ng-model="carPoolingToModify.room"/>
+<input type="number" name="room" id="room" data-ng-model="carPoolingToModify.room"/>
 
 <div class="user_valid">
 
         <h3>Personnes validées</h3>
         <ul class="cpliste">
-            <li ng-repeat="valid in user.validatedp">{{valid.userName}}</li>
-        </ul ng-repeat-end>
+            <li data-ng-repeat="valid in user.validatedp">{{valid.userName}}</li>
+        </ul data-ng-repeat-end>
 
 
     <h3>Personnes en attente</h3>
-	<select name="pending" id="pending" ng-model="peding">
+	<select name="pending" id="pending" data-ng-model="peding">
 	    <option value="" disabled >Personne(s) en attente</option>
-	    <option ng-repeat="pending in user.pendingp"  value="{{pending.idClient}}">{{pending.userName}}</option>
-	</select ng-repeat-end>
+	    <option data-ng-repeat="pending in user.pendingp"  value="{{pending.idClient}}">{{pending.userName}}</option>
+	</select data-ng-repeat-end>
 
-	<button ng-click="validate(peding)">Valider</button>
+	<button data-ng-click="validate(peding)">Valider</button>
 
 	
 </div>
 <div class="button_group">
-    <button ng-click="modifyCarPooling(carPoolingToModify)">Enregistrer</button>
-    <button ng-click="deleteCarPooling(carPoolingToModify)">Supprimer</button>
+    <button data-ng-click="modifyCarPooling(carPoolingToModify)">Enregistrer</button>
+    <button data-ng-click="deleteCarPooling(carPoolingToModify)">Supprimer</button>
 </div>
 
 <div class="comments">
 	<h3>Commentaire(s)</h3>
-<p ng-repeat="comment in comments">
+<p data-ng-repeat="comment in comments">
 	<span class="comment_line"><b>De : </b> {{comment.username}}</span>
 	<span class="comment_line"><b>Note : </b> {{comment.driverMark}} (conduite) - {{comment.poolingMark}} (covoiturage)</span>
 	<span class="comment_line last"><b>Commentaire : </b>{{comment.comment}}</span>

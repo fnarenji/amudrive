@@ -1,4 +1,4 @@
-<div class = "managingblock" ng-controller="carpoolingController" ng-init="loadFirst()">
+<div class = "managingblock" data-ng-controller="carpoolingController" data-ng-init="loadFirst()">
     <h2>Vos participation</h2>
     <!-- Liste carppoling utilisateurs -->
 
@@ -6,23 +6,23 @@
         <h3>En attente</h3>
         <ul class="cpliste">
 
-            <li ng-repeat="cpending in user.cpending">
-                <a ng-click="selectp(cpending.idCarPooling)" >
+            <li data-ng-repeat="cpending in user.cpending">
+                <a data-ng-click="selectp(cpending.idCarPooling)" >
                     {{cpending.address}} vers {{cpending.campusName}} - {{cpending.time}}
                 </a>
             </li>
-        </ul ng-repeat-end>
+        </ul data-ng-repeat-end>
     </div>
 
     <div>
         <h3>Validé</h3>
         <ul class="cpliste">
 
-            <li ng-repeat="cvalid in user.cvalid">
-                <a ng-click="selectv(cvalid.idCarPooling)" >
+            <li data-ng-repeat="cvalid in user.cvalid">
+                <a data-ng-click="selectv(cvalid.idCarPooling)" >
                     {{cvalid.address}} vers {{cvalid.campusName}} - {{cvalid.time}}
                 </a>
             </li>
-        </ul ng-repeat-end>
-        <div ng-include="carPendingToModify.form" ng-cloak>{{carPendingToModify.form}}</div>
+        </ul data-ng-repeat-end>
+        <div data-ng-include="carPendingToModify.form" data-ng-cloak>{{carPendingToModify.form}}</div>
 </div>

@@ -1,8 +1,8 @@
 <ul>
-    <li ng-repeat-start="elem in menu">
-        <a href="{{elem.url}}" class="menu_item"ng-cloak>{{elem.name}}</a>
+    <li data-ng-repeat-start="elem in menu">
+        <a href="{{elem.url}}" class="menu_item"data-ng-cloak>{{elem.name}}</a>
     </li>
-    <span ng-repeat-end></span>
+    <span data-ng-repeat-end></span>
 </ul>
-<span id="connection_btn" ng-click="disconnect()"><a href="{{connectButton.url}}" >{{connectButton.name}}</a></span>
-<span ng-show="isRegisterVisible" id="register_btn" ng-click="disconnect()"><a href="{{registerButton.url}}">{{registerButton.name}}</a></span>
+<span id="connection_btn" data-ng-click="disconnect()"><a href="{{connectButton.url}}" >{{connectButton.name}}</a></span>
+<span data-ng-show="isRegisterVisible" id="register_btn" data-ng-click="disconnect()"><a href="{{registerButton.url}}">{{registerButton.name}}</a></span>
