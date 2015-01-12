@@ -89,7 +89,7 @@ CREATE TABLE comment (
   driverMark INT NOT NULL,
   PRIMARY KEY (idClient, idCarPooling, idMessage),
   CONSTRAINT fk_carPoolingJoin
-    FOREIGN KEY (idClient , idCarPooling)
+    FOREIGN KEY (idCarPooling, idClient)
     REFERENCES carPoolingJoin (idCarPooling, idClient)
     ON DELETE RESTRICT);
 
