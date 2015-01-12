@@ -363,7 +363,6 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService, a
     };
 
     $scope.comment = function(comment){
-        console.log(comment);
         if(new Date(comment.meetTime) < new Date()){
             var newComment = {
                 'OwnerId': comment.idClient,
