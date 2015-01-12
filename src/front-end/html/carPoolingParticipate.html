@@ -1,29 +1,28 @@
-<div class = "managingblock" ng-controller="carpoolingController" ng-init="loadFirst()">
+<div class = "managingblock" data-ng-controller="carpoolingController" data-ng-init="loadFirst()">
     <h2>Vos participation</h2>
     <!-- Liste carppoling utilisateurs -->
 
     <div>
         <h3>En attente</h3>
-        <select name="carpoolingspending" id="carpoolingspending" ng-model="carpooling1Selected">
+        <ul class="cpliste">
 
-            <option value="" disabled >Selectionner votre co-voiturage</option>
-            <option ng-repeat="cpending in user.cpending"  value="{{cpending.idCarPooling}}">{{cpending.address}} vers {{cpending.campusName}} - {{cpending.time}}</option>
-
-        </select ng-repeat-end><br/>
-
-        <button ng-click="selectp()">Choisir</button>
+            <li data-ng-repeat="cpending in user.cpending">
+                <a data-ng-click="selectp(cpending.idCarPooling)" >
+                    {{cpending.address}} vers {{cpending.campusName}} - {{cpending.time}}
+                </a>
+            </li>
+        </ul data-ng-repeat-end>
     </div>
-
+    <hr/>
     <div>
         <h3>Validé</h3>
-        <select name="carpoolingspending" id="carpoolingsvalid" ng-model="carpooling2Selected">
+        <ul class="cpliste">
 
-            <option value="" disabled >Selectionner votre co-voiturage</option>
-            <option ng-repeat="cvalid in user.cvalid"  value="{{cvalid.idCarPooling}}">{{cvalid.address}} vers {{cvalid.campusName}} - {{cvalid.time}}</option>
-
-        </select ng-repeat-end><br/>
-
-        <button ng-click="selectv()">Choisir</button>
-    </div>
-    <div ng-include="carPendingToModify.form" ng-cloak>{{carPendingToModify.form}}</div>
+            <li data-ng-repeat="cvalid in user.cvalid">
+                <a data-ng-click="selectv(cvalid.idCarPooling)" >
+                    {{cvalid.address}} vers {{cvalid.campusName}} - {{cvalid.time}}
+                </a>
+            </li>
+        </ul data-ng-repeat-end>
+        <div data-ng-include="carPendingToModify.form" data-ng-cloak>{{carPendingToModify.form}}</div>
 </div>

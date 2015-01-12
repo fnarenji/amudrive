@@ -3,19 +3,20 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>AMUDrive</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-        <link href='//fonts.googleapis.com/css?family=Lato:400,700|Didact+Gothic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css" href="css/picker.css"/>
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700%7cDidact+Gothic' rel='stylesheet' type='text/css'>
 	</head>
-	<body ng-app="Amudrive">
+	<body data-ng-app="Amudrive">
 		<header>
 			<div class="logo">
 				<a href="#/">AMUDrive</a>
 			</div>
 
-            <div ng-controller="MenuController">
-                <nav ng-include="currentMenu">
+            <div data-ng-controller="MenuController">
+                <nav data-ng-include="currentMenu">
                 </nav>
             </div>
 
@@ -35,25 +36,25 @@
             </p>
 		
 		</section>
-        <div ng-controller="AccountController">
+        <div data-ng-controller="AccountController">
             <section id="search">
-                <div ng-view></div>
+                <div data-ng-view></div>
             </section>
         </div>
-		<section id="maps" ng-controller="CarPoolingController">
+		<section id="maps" data-ng-controller="CarPoolingController">
 
-            <div ng-controller="MapController">
+            <div data-ng-controller="MapController">
                 <div id="map"></div>
             </div>
 
-			<div ng-show="isPanelVisible" id="search-panel-date">
+			<div data-ng-show="isPanelVisible" id="search-panel-date">
 				30/10 10h10
 			</div>
 
-			<div ng-show="isPanelVisible" id="search-panel">
+			<div data-ng-show="isPanelVisible" id="search-panel">
 				<div id="search-panel-info">
                     <span id="search-panel-photo"></span>
-                    <span id="search-panel-delete-btn"><a href="" ng-click="joinCarpooling()">Sélectionner</a></span>
+                    <span id="search-panel-delete-btn"><a href="" data-ng-click="joinCarpooling()">Sélectionner</a></span>
                     <span id="search-panel-name"></span>
 
                     <span id="search-panel-depart">
@@ -79,11 +80,11 @@
 			
 			<div id="perso">
 				<form id="range">
-					<label for="rayon">Rayon de recherche : </label>
+					<label for="afterR">Rayon de recherche : </label>
                     <div id="rayon"></div>
                     <input type="text" id="afterR" readonly/>
 					
-					<label for="battement">Battement horaire : </label>
+					<label for="beforeB">Battement horaire : </label>
                     <input type="text" id="beforeB" readonly>
                     <div id="battement"></div>
                     <input type="text" id="afterB" readonly>
@@ -99,7 +100,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
         <script src="js/jquery-ui.js"></script>
         <script src="js/main.js"></script>
-        <script src="//maps.google.com/maps/api/js?sensor=true&libraries=places&language=fr_FR"></script>
+        <script src="//maps.google.com/maps/api/js?sensor=true&amp;libraries=places&amp;language=fr_FR"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-cookies.min.js"></script>

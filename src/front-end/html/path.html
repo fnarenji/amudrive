@@ -3,35 +3,35 @@
     <form name="path" id="adr">
         <input google-places gp-path="path" location=location value="{{placeholder.address}}" />
 
-        <a href="" ng-click="changeCTA(true)"><img src="img/l_arrow.png" id="larrow" alt="left arrow"></a>
-        <a href="" ng-click="changeCTA(false)"><img src="img/r_arrow.png" id="rarrow" alt="right arrow"></a>
+        <a href="" data-ng-click="changeCTA(true)"><img src="img/l_arrow.png" id="larrow" alt="left arrow"></a>
+        <a href="" data-ng-click="changeCTA(false)"><img src="img/r_arrow.png" id="rarrow" alt="right arrow"></a>
 
-        <span ng-controller="autocompleteController">
-            <input ng-model="path.CampusName" type="text" ng-model="selected" typeahead="campus as campus.name for campus in campusesTab|
+        <span data-ng-controller="autocompleteController">
+            <input data-ng-model="path.CampusName" type="text" data-ng-model="selected" typeahead="campus as campus.name for campus in campusesTab|
                    filter:$viewValue | limitTo:8" class="form-control" placeholder="Rechercher un pôle"
                    typeahead-on-select="createRoute($item, $model, $label)" value="{{placeholder.campus}}">
-            <i ng-show="loadingLocations">Chargement ...</i>
+            <i data-ng-show="loadingLocations">Chargement ...</i>
         </span>
 
         <span id="picker_group">
-            <input id="datepicker" ng-model="path.Date" type="text" pick-a-date="date" placeholder="Date" name="date" id="date">
-            <input id="timepicker" ng-model="path.Time" type="text" pick-a-time="time" pick-a-time-options="{ format: 'HH:i' }" placeholder="Heure" name="hour" id="hour">
+            <input id="datepicker" data-ng-model="path.Date" type="text" pick-a-date="date" placeholder="Date" name="date" id="date">
+            <input id="timepicker" data-ng-model="path.Time" type="text" pick-a-time="time" pick-a-time-options="{ format: 'HH:i' }" placeholder="Heure" name="hour" id="hour">
         </span>
 
         <div class="button">
-            <div id="bcherche" class="submit"><a href="" ng-click="search(path)">Rechercher</a></div>
-            <div id="bpropose" class="submit"><a href="" ng-click="propose(path)">Proposer</a></div>
+            <div id="bcherche" class="submit"><a href="" data-ng-click="search(path)">Rechercher</a></div>
+            <div id="bpropose" class="submit"><a href="" data-ng-click="propose(path)">Proposer</a></div>
         </div>
 
-        <select ng-hide="vehicleChoice" name="vehicules" id="vehicules" ng-model="next.vehiculeSelected">
+        <select data-ng-hide="vehicleChoice" name="vehicules" id="vehicules" data-ng-model="next.vehiculeSelected">
 
             <option value="" disabled>Selectionner votre véhicule</option>
-            <option ng-repeat="vehicle in user.vehicles"  value="{{vehicle.idVehicle}}">{{vehicle.name}}</option>
+            <option data-ng-repeat="vehicle in user.vehicles"  value="{{vehicle.idVehicle}}">{{vehicle.name}}</option>
 
-        </select ng-repeat-end><br/>
+        </select data-ng-repeat-end><br/>
 
-        <input ng-hide="roomChoice" type="number" ng-model="next.room" placeholder="Nombre de place(s)" id="roomChoice"/>
-        <input ng-hide="luggageChoice" type="number" ng-model="next.luggage" placeholder="Nombre de bagage(s) possible(s)" id="luggageChoice"/>
+        <input data-ng-hide="roomChoice" type="number" data-ng-model="next.room" placeholder="Nombre de place(s)" id="roomChoice"/>
+        <input data-ng-hide="luggageChoice" type="number" data-ng-model="next.luggage" placeholder="Nombre de bagage(s) possible(s)" id="luggageChoice"/>
 
-        <div class="submit" id="confirm_button" ng-hide="confirm"><a href="" ng-click="proposeNext(next)">Confirmer</a></div>
+        <div class="submit" id="confirm_button" data-ng-hide="confirm"><a href="" data-ng-click="proposeNext(next)">Confirmer</a></div>
     </form>

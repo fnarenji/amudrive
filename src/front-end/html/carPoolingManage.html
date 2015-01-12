@@ -1,16 +1,17 @@
-<div class="managingblock" ng-controller="carpoolingController" ng-init="loadFirst()">
+<div class="managingblock" data-ng-controller="carpoolingController" data-ng-init="loadFirst()">
     <h2>Vos co-voiturages</h2>
     <!-- Liste carppoling utilisateurs -->
 
-        <select name="carpoolings" id="carpoolings" ng-model="carpoolingSelected">
+            <ul class="cpliste">
 
-            <option value="" disabled >Selectionner votre co-voiturage</option>
-            <option ng-repeat="carpooling in user.offeredcarpooling"  value="{{carpooling.idCarPooling}}">{{carpooling.address}} vers {{carpooling.campusName}} - {{carpooling.time}}</option>
+                <li data-ng-repeat="carpooling in user.offeredcarpooling">
+                    <a data-ng-click="selectCarPooling(carpooling.idCarPooling)" >
+                        {{carpooling.address}} vers {{carpooling.campusName}} - {{carpooling.time}}
+                    </a>
+                </li>
 
-        </select ng-repeat-end><br/>
+            </ul data-ng-repeat-end>
 
-        <button ng-click="selectCarPooling()">Choisir</button>
-
-        <div ng-include="carPoolingToModify.form" ng-cloak>{{carPoolingToModify.form}}
+        <div data-ng-include="carPoolingToModify.form" data-ng-cloak>{{carPoolingToModify.form}}
     	</div>
 </div>

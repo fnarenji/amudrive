@@ -210,8 +210,8 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService, a
     };
 
 
-    $scope.selectCarPooling = function(){
-        $scope.carPoolingToModify = $scope.getCarPooling($scope.carpoolingSelected);
+    $scope.selectCarPooling = function(id){
+        $scope.carPoolingToModify = $scope.getCarPooling(id);
         $scope.loadComments($scope.carPoolingToModify);
         $scope.carPoolingToModify.form = "html/carPoolingForm.html";
         $scope.loadPPeople($scope.carPoolingToModify);
@@ -289,8 +289,8 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService, a
                 return $scope.user.cpending[i];
     };
 
-    $scope.selectp = function(){
-        $scope.carPendingToModify = $scope.getPCarPooling($scope.carpooling1Selected);
+    $scope.selectp = function(id){
+        $scope.carPendingToModify = $scope.getPCarPooling(id);
         $scope.carPendingToModify.form = "html/deljoin.html";
     };
 
@@ -341,8 +341,8 @@ myApp.controller('carpoolingController',function($scope, REST, sessionService, a
             });
     };
 
-    $scope.selectv = function(){
-        $scope.carPendingToModify = $scope.getVCarPooling($scope.carpooling2Selected);
+    $scope.selectv = function(id){
+        $scope.carPendingToModify = $scope.getVCarPooling(id);
 
         // Fixe Date() js :)
         var carPoolingDate = new Date($scope.carPendingToModify.meetTime);
