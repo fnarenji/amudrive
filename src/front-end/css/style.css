@@ -243,6 +243,8 @@ section
 {
 	padding-left: 4px;
 	padding-right: 2px;
+    border-radius: 5px;
+    color: #262626;
 }
 
 #adr
@@ -862,4 +864,20 @@ article b
 {
 	font-weight: bold;
 
+}
+.cpliste
+{
+    margin-bottom: 10px;
+}
+.cpliste
+{
+    color: #FFF;
+}
+.cpliste a
+{
+    cursor: pointer;
+}
+.cpliste li
+{
+    list-style: circle inside;
 }

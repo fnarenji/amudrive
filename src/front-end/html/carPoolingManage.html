@@ -2,14 +2,15 @@
     <h2>Vos co-voiturages</h2>
     <!-- Liste carppoling utilisateurs -->
 
-        <select name="carpoolings" id="carpoolings" ng-model="carpoolingSelected">
+            <ul class="cpliste">
 
-            <option value="" disabled >Selectionner votre co-voiturage</option>
-            <option ng-repeat="carpooling in user.offeredcarpooling"  value="{{carpooling.idCarPooling}}">{{carpooling.address}} vers {{carpooling.campusName}} - {{carpooling.time}}</option>
+                <li ng-repeat="carpooling in user.offeredcarpooling">
+                    <a ng-click="selectCarPooling(carpooling.idCarPooling)" >
+                        {{carpooling.address}} vers {{carpooling.campusName}} - {{carpooling.time}}
+                    </a>
+                </li>
 
-        </select ng-repeat-end><br/>
-
-        <button ng-click="selectCarPooling()">Choisir</button>
+            </ul ng-repeat-end>
 
         <div ng-include="carPoolingToModify.form" ng-cloak>{{carPoolingToModify.form}}
     	</div>

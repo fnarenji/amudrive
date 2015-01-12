@@ -7,11 +7,13 @@
 
 <div class="user_valid">
 
-	<select name="validate" id="validate" ng-model="validate">
-	    <option value="" selected disabled>Personne(s) validée(s)</option>
-	    <option ng-repeat="valid in user.validatedp"  value="{{valid.idClient}}">{{valid.userName}}</option>
-	</select ng-repeat-end>
+        <h3>Personnes validées</h3>
+        <ul class="cpliste">
+            <li ng-repeat="valid in user.validatedp">{{valid.userName}}</li>
+        </ul ng-repeat-end>
 
+
+    <h3>Personnes en attente</h3>
 	<select name="pending" id="pending" ng-model="peding">
 	    <option value="" disabled >Personne(s) en attente</option>
 	    <option ng-repeat="pending in user.pendingp"  value="{{pending.idClient}}">{{pending.userName}}</option>

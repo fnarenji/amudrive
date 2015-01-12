@@ -4,26 +4,25 @@
 
     <div>
         <h3>En attente</h3>
-        <select name="carpoolingspending" id="carpoolingspending" ng-model="carpooling1Selected">
+        <ul class="cpliste">
 
-            <option value="" disabled >Selectionner votre co-voiturage</option>
-            <option ng-repeat="cpending in user.cpending"  value="{{cpending.idCarPooling}}">{{cpending.address}} vers {{cpending.campusName}} - {{cpending.time}}</option>
-
-        </select ng-repeat-end><br/>
-
-        <button ng-click="selectp()">Choisir</button>
+            <li ng-repeat="cpending in user.cpending">
+                <a ng-click="selectp(cpending.idCarPooling)" >
+                    {{cpending.address}} vers {{cpending.campusName}} - {{cpending.time}}
+                </a>
+            </li>
+        </ul ng-repeat-end>
     </div>
 
     <div>
         <h3>Validé</h3>
-        <select name="carpoolingspending" id="carpoolingsvalid" ng-model="carpooling2Selected">
+        <ul class="cpliste">
 
-            <option value="" disabled >Selectionner votre co-voiturage</option>
-            <option ng-repeat="cvalid in user.cvalid"  value="{{cvalid.idCarPooling}}">{{cvalid.address}} vers {{cvalid.campusName}} - {{cvalid.time}}</option>
-
-        </select ng-repeat-end><br/>
-
-        <button ng-click="selectv()">Choisir</button>
-    </div>
-    <div ng-include="carPendingToModify.form" ng-cloak>{{carPendingToModify.form}}</div>
+            <li ng-repeat="cvalid in user.cvalid">
+                <a ng-click="selectv(cvalid.idCarPooling)" >
+                    {{cvalid.address}} vers {{cvalid.campusName}} - {{cvalid.time}}
+                </a>
+            </li>
+        </ul ng-repeat-end>
+        <div ng-include="carPendingToModify.form" ng-cloak>{{carPendingToModify.form}}</div>
 </div>
