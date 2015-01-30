@@ -1,0 +1,23 @@
+        <h1>Se connecter</h1>
+        <div class="form_box">
+
+            <form novalidate>
+                <div class="error_block" data-ng-show="isErrorVisible">
+                    <span class="error">{{message}}</span>
+                </div>
+
+                <div class="form_line">
+                    <input type="text" data-ng-model="auth.username" placeholder="Nom d'utilisateur ..."/>
+
+                    <input type="password" data-ng-model="auth.Password" placeholder="Mot de passe ..."/>
+                </div>
+
+                <div class="submit"><a href="" data-ng-click="connection(auth)">Se connecter</a></div>
+
+                <div class="form_line">
+                    <a href="">Mot de passe oublié ?</a>
+                    <a href="#/registration">Pas encore inscrit ?</a>
+                </div>
+
+            </form>
+        </div>

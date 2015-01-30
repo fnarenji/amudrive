@@ -1,0 +1,17 @@
+
+    <label for="name">Nom du vehicule : </label>
+    <input type="text" name="name" id="name" data-ng-model="vehicleToModify.name"/>
+
+    <label for="animals">Autorisez-vous les animaux à bord ?</label>
+    <input type="checkbox" name="animals" id="animals" data-ng-model="vehicleToModify.animals"/>
+
+    <label for="smoking">Autorisez-vous les personnes à fumer à bord ?</label>
+    <input type="checkbox" name="smoking" id="smoking" data-ng-model="vehicleToModify.smoking"/>
+
+    <label for="eat">Autorisez-vous les personnes à manger à bord ?</label>
+    <input type="checkbox" name="eat" id="eat" data-ng-model="vehicleToModify.eat"/>
+
+	<div class="button_group">
+	    <button data-ng-click="modifyVehicle()">Modifier</button>
+	    <button data-ng-click="deleteVehicle()">Supprimer</button>
+    </div>

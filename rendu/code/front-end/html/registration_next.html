@@ -1,0 +1,26 @@
+    <h1>Inscription</h1>
+    <div class="form_box">
+        <div class="form_radio">
+            <label for="mailnotifications">Souhaitez-vous recevoir des notifications par mail ?</label>
+            <span class="radio">
+                <input type="radio" data-ng-model="user.MailNotifications" value="true" checked="checked" id="mailnotifications"> Oui
+                <input type="radio" data-ng-model="user.MailNotifications" value="false" id="mailnotifications"> Non
+            </span>
+        </div>
+        <div class="form_radio">
+            <label for="phonenotifications">Souhaitez-vous recevoir des notifications sur votre téléphone ?</label>
+            <span class="radio">
+                <input type="radio" data-ng-model="user.PhoneNotifications" value="true" checked id="phonenotifications"> Oui
+                <input type="radio" data-ng-model="user.PhoneNotifications" value="false" id="phonenotifications"> Non
+            </span>
+        </div>
+        <div class="form_radio">
+            <label for="newsletter">Souhaitez-vous recevoir notre newsletter ?</label>
+            <span class="radio">
+                <input type="radio" data-ng-model="user.Newsletter" value="true" checked id="newsletter"> Oui
+                <input type="radio" data-ng-model="user.Newsletter" value="false" id="newsletter"> Non
+            </span>
+        </div>
+        <span class="submit"><a href="" data-ng-click="goTo('registration')">Précédent</a></span>
+        <span class="submit"><a href="" data-ng-click="registration(user)">Finaliser</a></span>
+    </div>
